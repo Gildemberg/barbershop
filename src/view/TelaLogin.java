@@ -7,7 +7,7 @@ package view;
 import dao.UsuarioDAO;
 import javax.swing.JOptionPane;
 import model.TransfCodUsr;
-import view.Agendamento.TelaAgendarJaneiro;
+import view.Barbearias.TelaAgendarJaneiro;
 
 /**
  *
@@ -233,7 +233,8 @@ public class TelaLogin extends javax.swing.JFrame {
 
             TelaAgendarJaneiro TAJ = new TelaAgendarJaneiro();
             TAJ.transferirCodUsr(TCU);
-            TAJ.setVisible(true);
+            //TAJ.setVisible(true);
+            new TelaPrincipal().setVisible(true);
             this.setVisible(false);
         }else{
             JOptionPane.showMessageDialog(null,"Dados inseridos incorretamente.");
@@ -241,7 +242,7 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void CadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroActionPerformed
-        new TelaCadastrarUsuario().setVisible(true);
+        new TelaCadastro().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_CadastroActionPerformed
 
