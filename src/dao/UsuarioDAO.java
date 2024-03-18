@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.TransfCodUsr;
+import model.ConsultarNome;
+import model.TransfCod;
 import model.Usuario;
 
 public class UsuarioDAO {
@@ -90,20 +91,47 @@ public class UsuarioDAO {
             return check;
         }
         
-        public TransfCodUsr retornoCodUsr(String login){
+        public TransfCod retornoCod(String login, String senha){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-            TransfCodUsr TCU = new TransfCodUsr();
+            TransfCod TCU = new TransfCod();
             
             try {
-                stmt = con.prepareStatement("SELECT * FROM usuario WHERE USR_LOGIN = ?");
+                stmt = con.prepareStatement("SELECT * FROM usuario WHERE USR_LOGIN = ? AND USR_SENHA = ?");
                 stmt.setString(1, login);
+                stmt.setString(2, senha);
                 rs = stmt.executeQuery();
                 
                 if(rs.next()){
-                    TCU.setCod_usr(rs.getInt(1));
+                    TCU.setCod(rs.getInt(1));
                     return TCU;
+                } else{
+                    return null;
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro: "+ex);
+                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+            return null;
+        }
+        
+        public ConsultarNome retornoNome(int cod_usr){
+            Connection con = ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            ConsultarNome CNU = new ConsultarNome();
+            
+            try {
+                stmt = con.prepareStatement("SELECT * FROM usuario WHERE USR_COD = ?");
+                stmt.setInt(1, cod_usr);
+                rs = stmt.executeQuery();
+                
+                if(rs.next()){
+                    CNU.setNome(rs.getString(3));
+                    return CNU;
                 } else{
                     return null;
                 }
