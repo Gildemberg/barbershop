@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import model.Agendamento;
 import model.Calendario;
+import css.FundoGradiente;
 import model.TransfCod;
 
 public class TelaAgendamento extends javax.swing.JFrame{
@@ -33,17 +34,17 @@ public class TelaAgendamento extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Esquerda = new javax.swing.JPanel();
+        Esquerda = new FundoGradiente(0, 51, 102, 0, 0, 0, 0, 0, 1500, 100);
         icon = new javax.swing.JLabel();
-        Direita = new javax.swing.JPanel();
+        Direita = new FundoGradiente(0, 191, 255, 65, 105, 255, 0, 0, 1500, 100);
         sair = new javax.swing.JLabel();
         Agendamento = new javax.swing.JLabel();
         Hora = new javax.swing.JLabel();
         Data = new javax.swing.JLabel();
         calendario = new com.raven.datechooser.DateChooser();
         Agendar5 = new javax.swing.JButton();
-        txtHora = new model.ArrendondarBordas();
-        txtMinuto = new model.ArrendondarBordas();
+        txtHora = new css.ArrendondarBordas();
+        txtMinuto = new css.ArrendondarBordas();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1920, 1080));
@@ -53,6 +54,23 @@ public class TelaAgendamento extends javax.swing.JFrame{
         Esquerda.setBackground(new java.awt.Color(0, 51, 102));
 
         icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_Barbeiro_valor.png"))); // NOI18N
+
+        javax.swing.GroupLayout EsquerdaLayout = new javax.swing.GroupLayout(Esquerda);
+        Esquerda.setLayout(EsquerdaLayout);
+        EsquerdaLayout.setHorizontalGroup(
+            EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EsquerdaLayout.createSequentialGroup()
+                .addGap(449, 449, 449)
+                .addComponent(icon)
+                .addContainerGap(551, Short.MAX_VALUE))
+        );
+        EsquerdaLayout.setVerticalGroup(
+            EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EsquerdaLayout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(icon)
+                .addContainerGap(851, Short.MAX_VALUE))
+        );
 
         Direita.setBackground(new java.awt.Color(0, 153, 255));
 
@@ -94,7 +112,7 @@ public class TelaAgendamento extends javax.swing.JFrame{
             }
         });
 
-        txtHora.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtHora.setBorder(null);
         txtHora.setForeground(new java.awt.Color(0, 51, 102));
         try {
             txtHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
@@ -104,6 +122,7 @@ public class TelaAgendamento extends javax.swing.JFrame{
         txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtHora.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
 
+        txtMinuto.setBorder(null);
         txtMinuto.setForeground(new java.awt.Color(0, 51, 102));
         try {
             txtMinuto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
@@ -141,7 +160,6 @@ public class TelaAgendamento extends javax.swing.JFrame{
                                 .addComponent(txtMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(74, 74, 74))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                                .addGap(150, 150, 150)
                                 .addComponent(Hora)
                                 .addGap(216, 216, 216)))
                         .addGap(84, 84, 84))
@@ -156,7 +174,7 @@ public class TelaAgendamento extends javax.swing.JFrame{
                 .addComponent(sair)
                 .addGap(87, 87, 87)
                 .addComponent(Agendamento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Hora)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -171,34 +189,19 @@ public class TelaAgendamento extends javax.swing.JFrame{
                 .addGap(103, 103, 103))
         );
 
-        javax.swing.GroupLayout EsquerdaLayout = new javax.swing.GroupLayout(Esquerda);
-        Esquerda.setLayout(EsquerdaLayout);
-        EsquerdaLayout.setHorizontalGroup(
-            EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addGap(449, 449, 449)
-                .addComponent(icon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 557, Short.MAX_VALUE)
-                .addComponent(Direita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        EsquerdaLayout.setVerticalGroup(
-            EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Direita, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(icon)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Esquerda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Esquerda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(Direita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Esquerda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Direita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         getAccessibleContext().setAccessibleName("Tela de Agendamento");

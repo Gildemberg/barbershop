@@ -64,21 +64,26 @@
           <Dimension value="[720, 1080]"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new css.FundoGradiente(0, 51, 102, 0, 0, 0, 0, 0, 1500, 100)"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace pref="110" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="Nome" max="32767" attributes="0"/>
-                          <Component id="Logo" alignment="1" max="32767" attributes="0"/>
-                          <Component id="Nome1" alignment="1" max="32767" attributes="0"/>
-                      </Group>
-                      <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="Nome" max="32767" attributes="0"/>
+                      <Component id="Logo" alignment="1" max="32767" attributes="0"/>
+                      <Component id="Nome1" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="110" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="164" max="-2" attributes="0"/>
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -166,6 +171,9 @@
         </Property>
         <Property name="requestFocusEnabled" type="boolean" value="false"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new css.FundoGradiente(0, 191, 255, 65, 105, 255, 0, 0, 1500, 100)"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
