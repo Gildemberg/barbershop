@@ -10,7 +10,7 @@ import model.ConsultarNome;
 import model.TransfCod;
 
 
-public class TelaPrincipal extends javax.swing.JFrame {
+public final class TelaPrincipal extends javax.swing.JFrame {
     
     int COD_USR;
     String NOME_USR;
@@ -467,15 +467,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Agendar;
     private javax.swing.JPanel Centro;
     private javax.swing.JPanel Cima;
     private javax.swing.JPanel Direita;
+    private javax.swing.JPanel Direita1;
+    private javax.swing.JPanel Esquerda;
     private javax.swing.JPanel barbearia01;
     private javax.swing.JPanel barbearia02;
     private javax.swing.JPanel barbearia03;
     private javax.swing.JPanel barbearia04;
     private javax.swing.JLabel dataAtual;
+    private javax.swing.JLabel icon;
     private javax.swing.JLabel img;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -491,5 +496,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel nome_usr;
     private javax.swing.JLabel ola;
     private javax.swing.JLabel sair;
+    private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }

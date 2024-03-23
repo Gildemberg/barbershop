@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 import model.Agendamento;
 import model.Calendario;
 import model.TransfCod;
-import view.TelaLogin;
 
 public class TelaAgendamento extends javax.swing.JFrame {
 
@@ -18,27 +17,12 @@ public class TelaAgendamento extends javax.swing.JFrame {
     
     public void receberCodEmp(TransfCod TCE){
         int cod = TCE.getCod();
-        consultarCalendario(cod);
     }
     public TelaAgendamento() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
     }
     
-    public void consultarCalendario(int cod){
-        CalendarioDAO cdao = new CalendarioDAO();
-        List<Calendario> listaCalendarios = cdao.read(cod);
-        String[] hora = new String[100];
-        int i=0;
-        for (Calendario calendario : listaCalendarios) {
-            cbxHora.addItem(calendario.getHora());
-            cbxDia.addItem(calendario.getDia());
-            cbxMes.addItem(calendario.getMes());
-            cbxAno.addItem(calendario.getAno());
-        }
-    }
-    
-
     public void transferirCodUsr(TransfCod TCU){
         COD_USR = TCU.getCod();
     }
@@ -51,14 +35,10 @@ public class TelaAgendamento extends javax.swing.JFrame {
         Esquerda = new javax.swing.JPanel();
         icon = new javax.swing.JLabel();
         Direita = new javax.swing.JPanel();
-        Sair = new javax.swing.JButton();
-        titulo = new javax.swing.JLabel();
-        Agendar = new javax.swing.JButton();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        cbxDia = new javax.swing.JComboBox<>();
-        cbxMes = new javax.swing.JComboBox<>();
-        cbxHora = new javax.swing.JComboBox<>();
-        cbxAno = new javax.swing.JComboBox<>();
+        titulo5 = new javax.swing.JLabel();
+        sair5 = new javax.swing.JLabel();
+        dateChooser6 = new com.raven.datechooser.DateChooser();
+        Agendar5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1920, 1080));
@@ -71,103 +51,68 @@ public class TelaAgendamento extends javax.swing.JFrame {
 
         Direita.setBackground(new java.awt.Color(0, 153, 255));
 
-        Sair.setBackground(new java.awt.Color(0, 51, 102));
-        Sair.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Sair.setForeground(new java.awt.Color(255, 255, 255));
-        Sair.setText("SAIR");
-        Sair.setBorderPainted(false);
-        Sair.setFocusable(false);
-        Sair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SairActionPerformed(evt);
+        titulo5.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
+        titulo5.setForeground(new java.awt.Color(255, 255, 255));
+        titulo5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titulo5.setText("AGENDAR HORÁRIO");
+
+        sair5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_sair2.png"))); // NOI18N
+        sair5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sair5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sair5MouseClicked(evt);
             }
         });
 
-        titulo.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
-        titulo.setForeground(new java.awt.Color(255, 255, 255));
-        titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("AGENDAR HORÁRIO");
+        dateChooser6.setForeground(new java.awt.Color(0, 51, 102));
+        dateChooser6.setPreferredSize(new java.awt.Dimension(500, 500));
 
-        Agendar.setBackground(new java.awt.Color(0, 51, 102));
-        Agendar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Agendar.setForeground(new java.awt.Color(255, 255, 255));
-        Agendar.setText("AGENDAR");
-        Agendar.setBorderPainted(false);
-        Agendar.addActionListener(new java.awt.event.ActionListener() {
+        Agendar5.setBackground(new java.awt.Color(0, 51, 102));
+        Agendar5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Agendar5.setForeground(new java.awt.Color(255, 255, 255));
+        Agendar5.setText("AGENDAR");
+        Agendar5.setBorderPainted(false);
+        Agendar5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AgendarActionPerformed(evt);
+                Agendar5ActionPerformed(evt);
             }
         });
-
-        try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField1ActionPerformed(evt);
-            }
-        });
-
-        cbxDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
-
-        cbxMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
-
-        cbxHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
-
-        cbxAno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
 
         javax.swing.GroupLayout DireitaLayout = new javax.swing.GroupLayout(Direita);
         Direita.setLayout(DireitaLayout);
         DireitaLayout.setHorizontalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DireitaLayout.createSequentialGroup()
-                .addContainerGap(423, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                .addContainerGap(115, Short.MAX_VALUE)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                        .addComponent(Agendar, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(523, 523, 523))
+                        .addComponent(sair5)
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                        .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(388, 388, 388)
-                        .addComponent(Sair)
-                        .addGap(28, 28, 28))))
-            .addGroup(DireitaLayout.createSequentialGroup()
-                .addGap(297, 297, 297)
+                        .addComponent(dateChooser6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(92, 92, 92))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DireitaLayout.createSequentialGroup()
-                        .addComponent(cbxHora, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxDia, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxAno, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                        .addComponent(titulo5)
+                        .addGap(220, 220, 220))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                        .addComponent(Agendar5, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(251, 251, 251))))
         );
         DireitaLayout.setVerticalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DireitaLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(Sair, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DireitaLayout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(titulo)))
-                .addGap(78, 78, 78)
-                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 549, Short.MAX_VALUE)
-                .addComponent(Agendar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(188, 188, 188))
+            .addGroup(DireitaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(sair5)
+                .addGap(46, 46, 46)
+                .addComponent(titulo5)
+                .addGap(42, 42, 42)
+                .addComponent(dateChooser6, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 609, Short.MAX_VALUE)
+                .addComponent(Agendar5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
         );
 
         javax.swing.GroupLayout EsquerdaLayout = new javax.swing.GroupLayout(Esquerda);
@@ -175,19 +120,18 @@ public class TelaAgendamento extends javax.swing.JFrame {
         EsquerdaLayout.setHorizontalGroup(
             EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addGap(0, 251, Short.MAX_VALUE)
+                .addGap(449, 449, 449)
                 .addComponent(icon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 256, Short.MAX_VALUE)
-                .addComponent(Direita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 557, Short.MAX_VALUE)
+                .addComponent(Direita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         EsquerdaLayout.setVerticalGroup(
             EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Direita, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(74, 74, 74)
                 .addComponent(icon)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(Direita, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,21 +151,17 @@ public class TelaAgendamento extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
-    private void AgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgendarActionPerformed
-        
-    }//GEN-LAST:event_AgendarActionPerformed
-
-    private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
+    private void sair5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sair5MouseClicked
         this.setVisible(false);
-        new TelaLogin().setVisible(true);
-    }//GEN-LAST:event_SairActionPerformed
+        new TelaPrincipal().setVisible(true);
+    }//GEN-LAST:event_sair5MouseClicked
 
-    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
+    private void Agendar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Agendar5ActionPerformed
 
+    }//GEN-LAST:event_Agendar5ActionPerformed
+
+    
+    
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -259,16 +199,40 @@ public class TelaAgendamento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Agendar;
+    private javax.swing.JButton Agendar1;
+    private javax.swing.JButton Agendar2;
+    private javax.swing.JButton Agendar3;
+    private javax.swing.JButton Agendar4;
+    private javax.swing.JButton Agendar5;
     private javax.swing.JPanel Direita;
+    private javax.swing.JPanel Direita2;
+    private javax.swing.JPanel Direita3;
+    private javax.swing.JPanel Direita4;
+    private javax.swing.JPanel Direita5;
     private javax.swing.JPanel Esquerda;
-    private javax.swing.JButton Sair;
-    private javax.swing.JComboBox<String> cbxAno;
-    private javax.swing.JComboBox<String> cbxDia;
-    private javax.swing.JComboBox<String> cbxHora;
-    private javax.swing.JComboBox<String> cbxMes;
+    private javax.swing.JPanel Esquerda1;
+    private javax.swing.JPanel Esquerda2;
+    private javax.swing.JPanel Esquerda3;
+    private javax.swing.JPanel Esquerda4;
+    private com.raven.datechooser.DateChooser dateChooser2;
+    private com.raven.datechooser.DateChooser dateChooser3;
+    private com.raven.datechooser.DateChooser dateChooser4;
+    private com.raven.datechooser.DateChooser dateChooser5;
+    private com.raven.datechooser.DateChooser dateChooser6;
     private javax.swing.JLabel icon;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JLabel titulo;
+    private javax.swing.JLabel icon1;
+    private javax.swing.JLabel icon2;
+    private javax.swing.JLabel icon3;
+    private javax.swing.JLabel icon4;
+    private javax.swing.JLabel sair1;
+    private javax.swing.JLabel sair2;
+    private javax.swing.JLabel sair3;
+    private javax.swing.JLabel sair4;
+    private javax.swing.JLabel sair5;
+    private javax.swing.JLabel titulo1;
+    private javax.swing.JLabel titulo2;
+    private javax.swing.JLabel titulo3;
+    private javax.swing.JLabel titulo4;
+    private javax.swing.JLabel titulo5;
     // End of variables declaration//GEN-END:variables
 }
