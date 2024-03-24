@@ -1,32 +1,27 @@
 
 package view;
 
-import controller.AgendamentoController;
-import dao.AgendamentoDAO;
-import dao.CalendarioDAO;
-import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.List;
+import com.raven.datechooser.SelectedDate;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import model.Agendamento;
-import model.Calendario;
-import css.FundoGradiente;
 import model.TransfCod;
+import view.TelaPrincipal;
+import model.Agendamento;
 
 public class TelaAgendamento extends javax.swing.JFrame{
 
     int COD_USR, COD_EMP;
     
-    public void receberCodEmp(TransfCod TCE){
-        int cod = TCE.getCod();
-    }
+    
     public TelaAgendamento() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
     }
     
-    public void transferirCodUsr(TransfCod TCU){
-        COD_USR = TCU.getCod();
+    public void receberCod(TransfCod TC){
+        this.COD_EMP = TC.getCod();
+        this.COD_USR = TC.getCod1();
     }
 
     
@@ -34,19 +29,20 @@ public class TelaAgendamento extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Esquerda = new FundoGradiente(0, 51, 102, 0, 0, 0, 0, 0, 1500, 100);
+        Esquerda = new css.FundoGradiente(0, 51, 102, 0, 0, 0, 0, 0, 1500, 100);
         icon = new javax.swing.JLabel();
-        Direita = new FundoGradiente(0, 191, 255, 65, 105, 255, 0, 0, 1500, 100);
+        Direita = new css.FundoGradiente(0, 191, 255, 65, 105, 255, 0, 0, 1500, 100);
         sair = new javax.swing.JLabel();
         Agendamento = new javax.swing.JLabel();
         Hora = new javax.swing.JLabel();
         Data = new javax.swing.JLabel();
         calendario = new com.raven.datechooser.DateChooser();
-        Agendar5 = new javax.swing.JButton();
+        btnAgendar = new javax.swing.JButton();
         txtHora = new css.ArrendondarBordas();
         txtMinuto = new css.ArrendondarBordas();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela de Agendamento");
         setMaximumSize(new java.awt.Dimension(1920, 1080));
         setMinimumSize(new java.awt.Dimension(1920, 1080));
         setPreferredSize(new java.awt.Dimension(1920, 1080));
@@ -101,14 +97,14 @@ public class TelaAgendamento extends javax.swing.JFrame{
         calendario.setToolTipText("");
         calendario.setPreferredSize(new java.awt.Dimension(500, 500));
 
-        Agendar5.setBackground(new java.awt.Color(0, 51, 102));
-        Agendar5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Agendar5.setForeground(new java.awt.Color(255, 255, 255));
-        Agendar5.setText("AGENDAR");
-        Agendar5.setBorderPainted(false);
-        Agendar5.addActionListener(new java.awt.event.ActionListener() {
+        btnAgendar.setBackground(new java.awt.Color(0, 51, 102));
+        btnAgendar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAgendar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgendar.setText("AGENDAR");
+        btnAgendar.setBorderPainted(false);
+        btnAgendar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Agendar5ActionPerformed(evt);
+                btnAgendarActionPerformed(evt);
             }
         });
 
@@ -164,7 +160,7 @@ public class TelaAgendamento extends javax.swing.JFrame{
                                 .addGap(216, 216, 216)))
                         .addGap(84, 84, 84))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                        .addComponent(Agendar5, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAgendar, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(237, 237, 237))))
         );
         DireitaLayout.setVerticalGroup(
@@ -185,7 +181,7 @@ public class TelaAgendamento extends javax.swing.JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(119, 119, 119)
-                .addComponent(Agendar5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAgendar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(103, 103, 103))
         );
 
@@ -211,23 +207,27 @@ public class TelaAgendamento extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
+        TelaPrincipal TP = new TelaPrincipal();
+        TransfCod TC = new TransfCod();
+        TC.setCod(COD_USR); //setando o cod usr
+        TP.receberCodUsr(TC); 
+        TP.setVisible(true);
         this.setVisible(false);
-        new TelaPrincipal().setVisible(true);
     }//GEN-LAST:event_sairMouseClicked
 
-    private void Agendar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Agendar5ActionPerformed
+    private void btnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarActionPerformed
+        String hora = txtHora.getText()+":"+txtMinuto.getText();
+        SelectedDate d = calendario.getSelectedDate();
+        String data = d.getDay()+"/"+d.getMonth()+"/"+d.getYear();
+        
+        Agendamento a = new Agendamento(COD_EMP, COD_USR, data, hora);
+        a.agendarHorario(a);
+        ImageIcon iconConfirmar = new ImageIcon(getToolkit().createImage(getClass().getResource("../images/confirm1.png"))); //criando um icone para alerta de mensagem
+        JOptionPane.showMessageDialog(null, "Agendamento realizado!", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
+    }//GEN-LAST:event_btnAgendarActionPerformed
 
-    }//GEN-LAST:event_Agendar5ActionPerformed
-
-    
-    
     
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -235,21 +235,13 @@ public class TelaAgendamento extends javax.swing.JFrame{
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaAgendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaAgendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaAgendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaAgendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+        
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaAgendamento().setVisible(true);
@@ -259,11 +251,11 @@ public class TelaAgendamento extends javax.swing.JFrame{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Agendamento;
-    private javax.swing.JButton Agendar5;
     private javax.swing.JLabel Data;
     private javax.swing.JPanel Direita;
     private javax.swing.JPanel Esquerda;
     private javax.swing.JLabel Hora;
+    private javax.swing.JButton btnAgendar;
     private com.raven.datechooser.DateChooser calendario;
     private javax.swing.JLabel icon;
     private javax.swing.JLabel sair;

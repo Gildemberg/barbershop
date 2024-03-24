@@ -1,9 +1,7 @@
 package view;
 
 import dao.UsuarioDAO;
-import java.awt.Color;
 import javax.swing.JOptionPane;
-import css.FundoGradiente;
 import model.TransfCod;
 
 public class TelaLogin extends javax.swing.JFrame {
@@ -30,7 +28,7 @@ public class TelaLogin extends javax.swing.JFrame {
         txtSenha = new javax.swing.JPasswordField();
         btnEntrar = new javax.swing.JButton();
         NaoPossuiConta = new javax.swing.JLabel();
-        Cadastro = new javax.swing.JButton();
+        btnCadastro = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de Login");
@@ -124,17 +122,17 @@ public class TelaLogin extends javax.swing.JFrame {
         NaoPossuiConta.setForeground(new java.awt.Color(255, 255, 255));
         NaoPossuiConta.setText("Ainda não possui uma conta? ");
 
-        Cadastro.setBackground(new java.awt.Color(0, 153, 255));
-        Cadastro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Cadastro.setForeground(new java.awt.Color(204, 204, 204));
-        Cadastro.setText("Cadastre-se aqui.");
-        Cadastro.setBorder(null);
-        Cadastro.setBorderPainted(false);
-        Cadastro.setContentAreaFilled(false);
-        Cadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Cadastro.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastro.setBackground(new java.awt.Color(0, 153, 255));
+        btnCadastro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnCadastro.setForeground(new java.awt.Color(204, 204, 204));
+        btnCadastro.setText("Cadastre-se aqui.");
+        btnCadastro.setBorder(null);
+        btnCadastro.setBorderPainted(false);
+        btnCadastro.setContentAreaFilled(false);
+        btnCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CadastroActionPerformed(evt);
+                btnCadastroActionPerformed(evt);
             }
         });
 
@@ -161,7 +159,7 @@ public class TelaLogin extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Cadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(243, 243, 243))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
                         .addComponent(Logo1)
@@ -185,7 +183,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NaoPossuiConta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Cadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(219, Short.MAX_VALUE))
         );
 
@@ -210,12 +208,12 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         UsuarioDAO UserDao = new UsuarioDAO(); //instanciando a classe USUARIO DAO
+        TelaPrincipal TP = new TelaPrincipal(); //instanciando a classe Tela Principal
+        TransfCod TCU = new TransfCod(); //instanciando a classe Transferencia de Cod
 
         if(UserDao.checkLogin(txtLogin.getText(), txtSenha.getText())){
-            TransfCod TCU = new TransfCod(); //instanciando a classe Transferencia de codigo do usuario
             TCU = UserDao.retornoCod(txtLogin.getText(), txtSenha.getText()); //Realizando a consulta do cod usr atravez do login e senha usr
-            TelaPrincipal TP = new TelaPrincipal(); //instanciando a tela principal
-            TP.consultarCodUsr(TCU); //transferindo o codigo usr pra tela principal
+            TP.receberCodUsr(TCU); //transferindo o codigo usr pra tela principal
             TP.setVisible(true);
             this.setVisible(false);
         }else{
@@ -223,10 +221,10 @@ public class TelaLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
-    private void CadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroActionPerformed
+    private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
         new TelaCadastro().setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_CadastroActionPerformed
+    }//GEN-LAST:event_btnCadastroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,7 +261,6 @@ public class TelaLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Cadastro;
     private javax.swing.JPanel Direita;
     private javax.swing.JPanel Esquerda;
     private javax.swing.JLabel Login;
@@ -273,6 +270,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel Nome;
     private javax.swing.JLabel Nome1;
     private javax.swing.JLabel Senha;
+    private javax.swing.JButton btnCadastro;
     private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtLogin;

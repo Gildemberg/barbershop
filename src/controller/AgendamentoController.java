@@ -5,13 +5,13 @@ import model.Agendamento;
 
 
 public class AgendamentoController {
-     public boolean agendarHorario(int dia, int mes, String hora, int cod_fun, int cod_usr){
-        if(dia!=0 && mes!=0 && hora!=null && hora.length()>0 && cod_fun>0 && cod_fun>0){
+     //public boolean agendarHorario(String data, String hora, int cod_usr, int cod_emp){
+        //if(data!=0 && hora!=null && hora.length()>0 && cod_us>=0 && cod_emp>=0){
            // Agendamento a = new Agendamento(dia, mes, hora, cod_fun, cod_usr);
            // a.agendarHorario(a);
-            return true;
-        }
+            //return true;
+        //}
         
-        return false;
-    }
+        //return false;
+    //}
 }

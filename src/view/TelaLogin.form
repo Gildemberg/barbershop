@@ -199,7 +199,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="btnEntrar" min="-2" pref="138" max="-2" attributes="0"/>
-                                          <Component id="Cadastro" alignment="0" min="-2" pref="136" max="-2" attributes="0"/>
+                                          <Component id="btnCadastro" alignment="0" min="-2" pref="136" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -234,7 +234,7 @@
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="NaoPossuiConta" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="Cadastro" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="btnCadastro" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="219" max="32767" attributes="0"/>
               </Group>
@@ -307,7 +307,7 @@
             <Property name="text" type="java.lang.String" value="Ainda n&#xe3;o possui uma conta? "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="Cadastro">
+        <Component class="javax.swing.JButton" name="btnCadastro">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
@@ -329,7 +329,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CadastroActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastroActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

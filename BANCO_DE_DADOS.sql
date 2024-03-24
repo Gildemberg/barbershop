@@ -26,34 +26,16 @@ DROP TABLE IF EXISTS `agendamento`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `agendamento` (
   `AGEND_COD` int NOT NULL AUTO_INCREMENT,
-  `AGEND_COD_USR` int NOT NULL,
-  `AGEND_COD_CAL` int NOT NULL,
+  `AGEND_USR_COD` int NOT NULL,
+  `AGEND_EMP_COD` int NOT NULL,
+  `AGEND_DATA` varchar(45) NOT NULL,
+  `AGEND_HORA` varchar(45) NOT NULL,
   PRIMARY KEY (`AGEND_COD`),
-  KEY `AGEND_COD_CAL_idx` (`AGEND_COD_CAL`),
-  KEY `AGEND_COD_USR_idx` (`AGEND_COD_USR`),
-  CONSTRAINT `AGEND_COD_CAL` FOREIGN KEY (`AGEND_COD_CAL`) REFERENCES `calendario` (`CAL_COD`),
-  CONSTRAINT `AGEND_COD_USR` FOREIGN KEY (`AGEND_COD_USR`) REFERENCES `usuario` (`USR_COD`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `calendario`
---
-
-DROP TABLE IF EXISTS `calendario`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `calendario` (
-  `CAL_COD` int NOT NULL AUTO_INCREMENT,
-  `CAL_COD_EMP` int NOT NULL,
-  `CAL_HORA` varchar(5) NOT NULL,
-  `CAL_DIA` varchar(2) NOT NULL,
-  `CAL_MES` varchar(2) NOT NULL,
-  `CAL_ANO` varchar(4) DEFAULT NULL,
-  PRIMARY KEY (`CAL_COD`),
-  KEY `idEmpresa_idx` (`CAL_COD_EMP`),
-  CONSTRAINT `idEmpresa` FOREIGN KEY (`CAL_COD_EMP`) REFERENCES `empresa` (`EMP_COD`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `AGEND_USR_COD_idx` (`AGEND_USR_COD`),
+  KEY `AGEND_EMP_COD_idx` (`AGEND_EMP_COD`),
+  CONSTRAINT `AGEND_EMP_COD` FOREIGN KEY (`AGEND_EMP_COD`) REFERENCES `empresa` (`EMP_COD`),
+  CONSTRAINT `AGEND_USR_COD` FOREIGN KEY (`AGEND_USR_COD`) REFERENCES `usuario` (`USR_COD`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,7 +57,7 @@ CREATE TABLE `empresa` (
   PRIMARY KEY (`EMP_COD`),
   UNIQUE KEY `EMP_CNPJ` (`EMP_CNPJ`),
   UNIQUE KEY `EMP_NOME` (`EMP_NOME`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,4 +89,4 @@ CREATE TABLE `usuario` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-18 20:38:32
+-- Dump completed on 2024-03-24 13:26:56

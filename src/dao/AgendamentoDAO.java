@@ -17,9 +17,11 @@ public class AgendamentoDAO {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("INSERT INTO agendamento (AGEND_COD_USR,AGEND_COD_CAL) VALUES(?,?)");
+            stmt = con.prepareStatement("INSERT INTO agendamento (AGEND_USR_COD,AGEND_EMP_COD,AGEND_DATA,AGEND_HORA) VALUES(?,?,?,?)");
             stmt.setInt(1, a.getCod_usr());
-            stmt.setInt(2, a.getCod_cal());
+            stmt.setInt(2, a.getCod_emp());
+            stmt.setString(3, a.getData());
+            stmt.setString(4, a.getHora());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: "+ex);
@@ -43,8 +45,10 @@ public class AgendamentoDAO {
             while (rs.next()) {
                 Agendamento agendamento = new Agendamento();
                 agendamento.setId(rs.getInt("AGEND_COD"));
-                agendamento.setCod_usr(rs.getInt("AGEND_COD_USR"));
-                agendamento.setCod_cal(rs.getInt("AGEND_COD_CAL"));
+                agendamento.setCod_usr(rs.getInt("AGEND_USR_COD"));
+                agendamento.setCod_emp(rs.getInt("AGEND_EMP_COD"));
+                agendamento.setData(rs.getString("AGEND_DATA"));
+                agendamento.setHora(rs.getString("AGEND_HORA"));
                 agendamentos.add(agendamento);
             }
         } catch (SQLException ex) {
