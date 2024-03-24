@@ -51,11 +51,16 @@ public class BarbeariaDAO {
                     barbearia.setId(rs.getInt(1));
                     barbearia.setCnpj(rs.getString(2));
                     barbearia.setNome(rs.getString(3));
-                    barbearia.setEndereco(rs.getString(5));
+                    barbearia.setEndereco(rs.getString(4));
                     barbearia.setEmail(rs.getString(5));
-                    barbearia.setTelefone(rs.getString(5));
-                    barbearia.setLogin(rs.getString(6));
-                    barbearia.setSenha(rs.getString(7));
+                    barbearia.setTelefone(rs.getString(6));
+                    barbearia.setLogin(rs.getString(7));
+                    barbearia.setSenha(rs.getString(8));
+                    barbearia.setDescricao(rs.getString(9));
+                    barbearia.setRegra1(rs.getString(10));
+                    barbearia.setRegra2(rs.getString(11));
+                    barbearia.setRegra3(rs.getString(12));
+                    barbearia.setRegra4(rs.getString(13));
                     barbearias.add(barbearia);
                 }
             } catch (SQLException ex) {

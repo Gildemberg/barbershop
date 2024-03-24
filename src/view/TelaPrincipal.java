@@ -51,7 +51,7 @@ public final class TelaPrincipal extends javax.swing.JFrame {
         nome_barbearia04.setText(NOME_BARBER[3]);
     }
     
-    public void receberCodUsr(TransfCod TCU){//consultando o cod usr
+    public void receberCodUsr(TransfCod TCU){//receber o cod USUÁRIO
         this.COD_USR = TCU.getCod(); //recebendo o cod usr
         UsuarioDAO UserDao = new UsuarioDAO();
         ConsultarNome CNU = new ConsultarNome();
@@ -59,7 +59,7 @@ public final class TelaPrincipal extends javax.swing.JFrame {
         consultarNomeUsr(CNU);
     }
 
-    public void consultarNomeUsr (ConsultarNome CNU){//consultando o nome usr
+    public void consultarNomeUsr (ConsultarNome CNU){//consultando o nome USUÁRIO
         NOME_USR = CNU.getNome(); //recebendo o nome usr
         nome_usr.setText(NOME_USR); //imprimendo o nome usr
       }

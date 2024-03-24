@@ -11,6 +11,11 @@ public class Barbearia {
     private String telefone;
     private String login;
     private String senha;
+    private String descricao;
+    private String regra1;
+    private String regra2;
+    private String regra3;
+    private String regra4;
 
     public int getId() {
         return id;
@@ -76,10 +81,50 @@ public class Barbearia {
         this.senha = senha;
     }
     
+    public String getDescricao(){
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+    
+    public String getRegra1(){
+        return regra1;
+    }
+
+    public void setRegra1(String regra1) {
+        this.regra1 = regra1;
+    }
+    
+    public String getRegra2(){
+        return regra2;
+    }
+
+    public void setRegra2(String regra2) {
+        this.regra2 = regra2;
+    }
+    
+    public String getRegra3(){
+        return regra3;
+    }
+
+    public void setRegra3(String regra3) {
+        this.regra3 = regra3;
+    }
+    
+    public String getRegra4(){
+        return regra4;
+    }
+
+    public void setRegra4(String regra4) {
+        this.regra4 = regra4;
+    }
+    
     public Barbearia(){
     }
 
-    public Barbearia(String cnpj, String nome, String endereco, String email, String telefone, String login, String senha) {
+    public Barbearia(String cnpj, String nome, String endereco, String email, String telefone, String login, String senha, String descricao, String regra1, String regra2, String regra3, String regra4) {
         this.cnpj = cnpj;
         this.nome = nome;
         this.endereco = endereco;
@@ -87,6 +132,11 @@ public class Barbearia {
         this.telefone = telefone;
         this.login = login;
         this.senha = senha;
+        this.descricao = descricao;
+        this.regra1 = regra1;
+        this.regra2 = regra2;
+        this.regra3 = regra3;
+        this.regra4 = regra4;
     }
      
     public void cadastrarBarbearia(Barbearia c){
