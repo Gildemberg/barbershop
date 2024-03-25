@@ -14,7 +14,7 @@ import model.Barbearia;
 
 public class TelaAgendamento extends javax.swing.JFrame{
 
-    int COD_USR, COD_EMP;
+    int COD_USR, COD_EMP, COD_AGEND;
     
     
     public TelaAgendamento() {
@@ -25,6 +25,13 @@ public class TelaAgendamento extends javax.swing.JFrame{
     public void receberCod(TransfCod TC){
         this.COD_EMP = TC.getCod();
         this.COD_USR = TC.getCod1();
+        consultarEmpresa(COD_EMP);
+    }
+    
+    public void receberCodReAgend(TransfCod TC){
+        this.COD_AGEND = TC.getCod();
+        this.COD_EMP = TC.getCod1();
+        this.COD_USR = TC.getCod2();
         consultarEmpresa(COD_EMP);
     }
     
@@ -335,11 +342,17 @@ public class TelaAgendamento extends javax.swing.JFrame{
         String hora = txtHora.getText()+":"+txtMinuto.getText();
         SelectedDate d = calendario.getSelectedDate();
         String data = d.getDay()+"/"+d.getMonth()+"/"+d.getYear();
+        ImageIcon iconConfirmar = new ImageIcon(getToolkit().createImage(getClass().getResource("../images/confirmar.png"))); //criando um icone para alerta de mensagem
         
-        Agendamento a = new Agendamento(COD_EMP, COD_USR, data, hora);
-        a.agendarHorario(a);
-        ImageIcon iconConfirmar = new ImageIcon(getToolkit().createImage(getClass().getResource("../images/confirm1.png"))); //criando um icone para alerta de mensagem
-        JOptionPane.showMessageDialog(null, "Agendamento realizado!", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
+        if(COD_AGEND != 0){// SERVE PARA ALTERAR O AGENDAMENTO
+            Agendamento a = new Agendamento(0, 0, data, hora, "", COD_AGEND);   
+            a.alterarAgendamento(a);
+            JOptionPane.showMessageDialog(null, "Agendamento Alterado!", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
+        }else{//SERVE PARA AGENDAR DO ZERO
+            Agendamento a = new Agendamento(COD_EMP, COD_USR, data, hora, "", 0);   
+            a.agendarHorario(a);
+            JOptionPane.showMessageDialog(null, "Agendamento Realizado!", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
+        }
     }//GEN-LAST:event_btnAgendarActionPerformed
 
     

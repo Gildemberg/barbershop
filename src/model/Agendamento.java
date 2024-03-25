@@ -8,6 +8,7 @@ public class Agendamento {
     private int cod_emp;
     private String data;
     private String hora;
+    private String nome_emp;
 
     public int getId() {
         return id;
@@ -48,15 +49,31 @@ public class Agendamento {
     public void setHora(String hora) {
         this.hora = hora;
     }
+
+    public String getNome_emp() {
+        return nome_emp;
+    }
+    
+    public void setNome_emp(String nome_emp) {
+        this.nome_emp = nome_emp;
+    }
+    
     
     public Agendamento(){
     }
     
-    public Agendamento(int cod_emp, int cod_usr, String data, String hora){
+    public Agendamento(int cod_emp, int cod_usr, String data, String hora, String nome_emp, int id){
+        this.id = id;
         this.cod_emp = cod_emp;
         this.cod_usr = cod_usr;
         this.data = data;
         this.hora = hora;
+        this.nome_emp = nome_emp;
+    }
+    
+    public void alterarAgendamento(Agendamento a){
+        AgendamentoDAO dao = new AgendamentoDAO();
+        dao.update(a);
     }
     
     public void agendarHorario(Agendamento a){

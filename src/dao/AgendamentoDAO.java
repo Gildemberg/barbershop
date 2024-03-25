@@ -31,24 +31,28 @@ public class AgendamentoDAO {
         }
     }
         
-    public List<Agendamento> read(int i){
+    public List<Agendamento> read(int cod_usr){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         List<Agendamento> agendamentos = new ArrayList();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM agendamento WHERE AGEND_COD_USR = ?");
-            stmt.setInt(1, i);
+            stmt = con.prepareStatement("SELECT agendamento.AGEND_EMP_COD, agendamento.AGEND_COD, agendamento.AGEND_USR_COD, agendamento.AGEND_DATA, agendamento.AGEND_HORA, empresa.EMP_NOME"
+                    + " FROM empresa"
+                    + " JOIN agendamento ON empresa.EMP_COD = agendamento.AGEND_EMP_COD"
+                    + " WHERE agendamento.AGEND_USR_COD=?");
+            stmt.setInt(1, cod_usr);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Agendamento agendamento = new Agendamento();
-                agendamento.setId(rs.getInt("AGEND_COD"));
-                agendamento.setCod_usr(rs.getInt("AGEND_USR_COD"));
-                agendamento.setCod_emp(rs.getInt("AGEND_EMP_COD"));
+                agendamento.setNome_emp(rs.getString("EMP_NOME"));
                 agendamento.setData(rs.getString("AGEND_DATA"));
                 agendamento.setHora(rs.getString("AGEND_HORA"));
+                agendamento.setCod_usr(rs.getInt("AGEND_USR_COD"));
+                agendamento.setCod_emp(rs.getInt("AGEND_EMP_COD"));
+                agendamento.setId(rs.getInt("AGEND_COD"));
                 agendamentos.add(agendamento);
             }
         } catch (SQLException ex) {
@@ -59,5 +63,39 @@ public class AgendamentoDAO {
         }
 
         return agendamentos;
+    }
+    
+    public void update(Agendamento a){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("UPDATE agendamento SET AGEND_DATA=?, AGEND_HORA=? WHERE AGEND_COD=?");
+            stmt.setString(1, a.getData());
+            stmt.setString(2, a.getHora());
+            stmt.setInt(3, a.getId()); 
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex);
+            Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    
+    public void delete(int AGEND_COD) {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("DELETE FROM agendamento WHERE AGEND_COD = ?");
+            stmt.setInt(1, AGEND_COD);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
+            Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
     }
 }
