@@ -35,7 +35,7 @@ CREATE TABLE `agendamento` (
   KEY `AGEND_EMP_COD_idx` (`AGEND_EMP_COD`),
   CONSTRAINT `AGEND_EMP_COD` FOREIGN KEY (`AGEND_EMP_COD`) REFERENCES `empresa` (`EMP_COD`),
   CONSTRAINT `AGEND_USR_COD` FOREIGN KEY (`AGEND_USR_COD`) REFERENCES `usuario` (`USR_COD`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,6 @@ CREATE TABLE `agendamento` (
 
 LOCK TABLES `agendamento` WRITE;
 /*!40000 ALTER TABLE `agendamento` DISABLE KEYS */;
-INSERT INTO `agendamento` VALUES (26,2,1,'4/3/2024','11:11'),(27,2,1,'4/3/2024','12:22'),(28,2,1,'7/3/2024','12:22');
 /*!40000 ALTER TABLE `agendamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -72,7 +71,7 @@ CREATE TABLE `empresa` (
   PRIMARY KEY (`EMP_COD`),
   UNIQUE KEY `EMP_CNPJ` (`EMP_CNPJ`),
   UNIQUE KEY `EMP_NOME` (`EMP_NOME`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,7 +80,7 @@ CREATE TABLE `empresa` (
 
 LOCK TABLES `empresa` WRITE;
 /*!40000 ALTER TABLE `empresa` DISABLE KEYS */;
-INSERT INTO `empresa` VALUES (1,'123','Barbearia Du\' Mário','Rua da Amora - Av. Castelo Branco - 263 - PA/BA','dumario@gmail.com','(75) 9 9999-0000','dumario','dumario','Inaugurada em 2023, A Barbearia Du\' Mário tem realizado diversos cortes em diversos clientes.','Proibido fumar','Proibido menores de 5','Proibido ofensas','Sem fiado');
+INSERT INTO `empresa` VALUES (1,'123','Barbearia Du\' Mário','Rua da Amora - Av. Castelo Branco - 263 - PA/BA','dumario@gmail.com','(75) 9 9999-0000','dumario','dumario','Inaugurada em 2023, A Barbearia Du\' Mário tem realizado diversos cortes em diversos clientes.','Proibido fumar','Proibido menores de 5','Proibido ofensas','Sem fiado'),(2,'456','Barbearia Brutus','Rua da Harmonia - Av. Juscelino Kubitheck - 543 - AL','brutus@gmail.com','(82) 9 8888-1111','brutus','brutus','Inaugurada em 2013, A Barbearia Brutus tem realizado diversos cortes em diversos clientes.','Proibido ficar sem camisa','Proibido entrar de capacete','Proibido xingar','Sem fiado'),(7,'789','Barbearia in1998','Rua da Independencia - 245 - Centro - Paulo Afonso/BA','in1998@gmail.com','(75) 9 0000-1111','in1998','in1998','Inaugurada em 1998, A Barbearia in 1998 tem realizado diversos cortes em diversos clientes.','Proibido fumar','Proibido beber','Proibido gritar','Sem fiado');
 /*!40000 ALTER TABLE `empresa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,7 +101,7 @@ CREATE TABLE `usuario` (
   `USR_SENHA` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`USR_COD`),
   UNIQUE KEY `USR_CPF` (`USR_CPF`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,7 +110,6 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (2,'123.123.123-12','Gildemberg Vieira Lopes','gildemberg@gmail.com','(75) 98881-3663','berg','berg');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -124,4 +122,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-24 18:46:25
+-- Dump completed on 2024-03-25 16:12:10
