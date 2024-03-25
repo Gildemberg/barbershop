@@ -28,7 +28,7 @@ public final class TelaPrincipal extends javax.swing.JFrame {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String horario = hoje.format(formato);
         dataAtual.setText(horario);
-        //Ocultando inicialmente todas as linhas de empresa
+        //Ocultando inicialmente todas as empresa e agendamentos
         barbearia01.setVisible(false);
         barbearia02.setVisible(false);
         barbearia03.setVisible(false);
@@ -42,21 +42,30 @@ public final class TelaPrincipal extends javax.swing.JFrame {
       
     public void consultarBarbearia(){
         BarbeariaDAO BarberDao = new BarbeariaDAO();
-        int i=0;
-        for(Barbearia b: BarberDao.read()){
-            NOME_BARBER[i]=b.getNome();
-            i++;
+        List<Barbearia> barbearias = new ArrayList();
+        barbearias = BarberDao.read();
+        if(!barbearias.isEmpty()){
+            if(barbearias.size()>=1){
+                barbearia01.setVisible(true);
+                nome_barbearia01.setText(barbearias.get(0).getNome());
+            }
+            if(barbearias.size()>=2){
+                barbearia02.setVisible(true);
+                nome_barbearia02.setText(barbearias.get(1).getNome());
+            }
+            if(barbearias.size()>=3){
+                barbearia03.setVisible(true);
+                nome_barbearia03.setText(barbearias.get(2).getNome());
+            }
+            if(barbearias.size()>=4){
+                barbearia04.setVisible(true);
+                nome_barbearia04.setText(barbearias.get(3).getNome());
+            }
+            if(barbearias.size()>=5){
+                barbearia05.setVisible(true);
+                nome_barbearia05.setText(barbearias.get(4).getNome());
+            }
         }
-        
-        //Imprimindo as barbearias disponiveis
-        barbearia01.setVisible(true);
-        nome_barbearia01.setText(NOME_BARBER[0]);
-        barbearia02.setVisible(true);
-        nome_barbearia02.setText(NOME_BARBER[1]);
-        /*barbearia03.setVisible(true);
-        nome_barbearia03.setText(NOME_BARBER[2]);
-        barbearia04.setVisible(true);
-        nome_barbearia04.setText(NOME_BARBER[3]);*/
     }
     
     public void consultarAgendamento(){
@@ -488,9 +497,8 @@ public final class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtCod_emp3, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                    .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtCod_emp2, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                        .addComponent(txtCod_emp1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(txtCod_emp2, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(txtCod_emp1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(img)
@@ -567,6 +575,7 @@ public final class TelaPrincipal extends javax.swing.JFrame {
 
         btnExcluir1.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
         btnExcluir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluir1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnExcluir1MouseClicked(evt);
@@ -625,6 +634,7 @@ public final class TelaPrincipal extends javax.swing.JFrame {
 
         btnExcluir2.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
         btnExcluir2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluir2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnExcluir2MouseClicked(evt);
@@ -682,6 +692,7 @@ public final class TelaPrincipal extends javax.swing.JFrame {
 
         btnExcluir3.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
         btnExcluir3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluir3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnExcluir3MouseClicked(evt);
