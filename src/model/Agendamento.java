@@ -71,13 +71,13 @@ public class Agendamento {
     public Agendamento(){
     }
     
-    public Agendamento(int codbarbearia, int codcliente, String data, String hora, String nomebarbearia, int id){
+    public Agendamento(String data, String hora, int codbarbearia, int codcliente, int id){
         this.id = id;
         this.codbarbearia = codbarbearia;
         this.codcliente = codcliente;
         this.data = data;
         this.hora = hora;
-        this.nomebarbearia = nomebarbearia;
+        //this.nomebarbearia = nomebarbearia;
     }
     
     public void alterarAgendamento(Agendamento a){

@@ -64,6 +64,31 @@ public class AgendamentoDAO {
         return agendamentos;
     }
     
+    public boolean checkInformacoes(String data, String hora){
+            Connection con = ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            boolean check = false;
+            
+            try {
+                stmt = con.prepareStatement("SELECT * FROM AGENDAMENTO WHERE (DATA=? AND HORARIO=?)");
+                stmt.setString(1, data);
+                stmt.setString(2, hora);
+                rs = stmt.executeQuery();
+                
+                if(rs.next()){
+                    check = true;
+                }
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro: "+ex);
+                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+            return check;  
+        }
+    
     public List<Agendamento> readEmp(int codbarbearia){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;

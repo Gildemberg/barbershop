@@ -4,8 +4,8 @@
  */
 package view;
 
-import view.cliente.TelaLogin;
-import view.admin.TelaLoginAdmin;
+import view.cliente.TelaLoginCliente;
+import view.barbearia.TelaLoginBarbearia;
 
 /**
  *
@@ -155,13 +155,13 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClienteMouseClicked
-        TelaLogin TL = new TelaLogin();
+        TelaLoginCliente TL = new TelaLoginCliente();
         TL.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnClienteMouseClicked
 
     private void btnBarbeiroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBarbeiroMouseClicked
-        TelaLoginAdmin TLA = new TelaLoginAdmin();
+        TelaLoginBarbearia TLA = new TelaLoginBarbearia();
         TLA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBarbeiroMouseClicked
