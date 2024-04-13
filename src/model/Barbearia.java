@@ -8,7 +8,8 @@ public class Barbearia {
     private String nome;
     private String endereco;
     private String email;
-    private String telefone;
+    private String telefone1;
+    private String telefone2;
     private String login;
     private String senha;
     private String descricao;
@@ -57,12 +58,20 @@ public class Barbearia {
         this.email = email;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getTelefone1() {
+        return telefone1;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setTelefone1(String telefone1) {
+        this.telefone1 = telefone1;
+    }
+    
+    public String getTelefone2() {
+        return telefone2;
+    }
+
+    public void setTelefone2(String telefone2) {
+        this.telefone2 = telefone2;
     }
 
     public String getLogin() {
@@ -124,12 +133,13 @@ public class Barbearia {
     public Barbearia(){
     }
 
-    public Barbearia(String cnpj, String nome, String endereco, String email, String telefone, String login, String senha, String descricao, String regra1, String regra2, String regra3, String regra4) {
+    public Barbearia(String nome, String cnpj, String endereco, String email, String telefone, String login, String senha, String descricao, String regra1, String regra2, String regra3, String regra4) {
         this.cnpj = cnpj;
         this.nome = nome;
         this.endereco = endereco;
         this.email = email;
-        this.telefone = telefone;
+        this.telefone1 = telefone1;
+        //this.telefone2 = telefone2;
         this.login = login;
         this.senha = senha;
         this.descricao = descricao;

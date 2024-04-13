@@ -9,6 +9,7 @@ public class Agendamento {
     private String data;
     private String hora;
     private String nome_emp;
+    private String nome_usr;
 
     public int getId() {
         return id;
@@ -56,6 +57,14 @@ public class Agendamento {
     
     public void setNome_emp(String nome_emp) {
         this.nome_emp = nome_emp;
+    }
+    
+    public String getNome_usr() {
+        return nome_usr;
+    }
+
+    public void setNome_usr(String nome_usr) {
+        this.nome_usr = nome_usr;
     }
     
     

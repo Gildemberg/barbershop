@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/gilde/OneDrive/Área%20de%20Trabalho/UNIRIOS/5º%20SEMESTRE%20-%20ATUAL/6%20-%20Projetos%20de%20Interface/barbershop/src/view/TelaPrincipal.java</file>
-            <file>file:/C:/Users/gilde/OneDrive/Área%20de%20Trabalho/UNIRIOS/5º%20SEMESTRE%20-%20ATUAL/6%20-%20Projetos%20de%20Interface/barbershop/src/model/TransfCod.java</file>
             <file>file:/C:/Users/gilde/OneDrive/Área%20de%20Trabalho/UNIRIOS/5º%20SEMESTRE%20-%20ATUAL/6%20-%20Projetos%20de%20Interface/barbershop/src/model/Agendamento.java</file>
-            <file>file:/C:/Users/gilde/OneDrive/Área%20de%20Trabalho/UNIRIOS/5º%20SEMESTRE%20-%20ATUAL/6%20-%20Projetos%20de%20Interface/barbershop/src/dao/UsuarioDAO.java</file>
             <file>file:/C:/Users/gilde/OneDrive/Área%20de%20Trabalho/UNIRIOS/5º%20SEMESTRE%20-%20ATUAL/6%20-%20Projetos%20de%20Interface/barbershop/src/dao/AgendamentoDAO.java</file>
-            <file>file:/C:/Users/gilde/OneDrive/Área%20de%20Trabalho/UNIRIOS/5º%20SEMESTRE%20-%20ATUAL/6%20-%20Projetos%20de%20Interface/barbershop/src/view/TelaAgendamento.java</file>
+            <file>file:/C:/Users/gilde/OneDrive/Área%20de%20Trabalho/UNIRIOS/5º%20SEMESTRE%20-%20ATUAL/6%20-%20Projetos%20de%20Interface/barbershop/src/view/admin/TelaAdmin.java</file>
+            <file>file:/C:/Users/gilde/OneDrive/Área%20de%20Trabalho/UNIRIOS/5º%20SEMESTRE%20-%20ATUAL/6%20-%20Projetos%20de%20Interface/barbershop/src/view/admin/TelaConsultarAgenda.java</file>
         </group>
     </open-files>
 </project-private>

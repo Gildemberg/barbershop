@@ -57,7 +57,40 @@ public class AgendamentoDAO {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: " + ex);
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+
+        return agendamentos;
+    }
+    
+    public List<Agendamento> readEmp(int cod_emp){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Agendamento> agendamentos = new ArrayList();
+
+        try {
+            stmt = con.prepareStatement("SELECT agendamento.AGEND_COD, agendamento.AGEND_USR_COD, agendamento.AGEND_DATA, agendamento.AGEND_HORA, usuario.USR_NOME"
+                    + " FROM usuario"
+                    + " JOIN agendamento ON usuario.USR_COD = agendamento.AGEND_USR_COD"
+                    + " WHERE agendamento.AGEND_EMP_COD=?");
+            stmt.setInt(1, cod_emp);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Agendamento agendamento = new Agendamento();
+                agendamento.setNome_usr(rs.getString("USR_NOME"));
+                agendamento.setData(rs.getString("AGEND_DATA"));
+                agendamento.setHora(rs.getString("AGEND_HORA"));
+                agendamento.setCod_usr(rs.getInt("AGEND_USR_COD"));
+                agendamento.setId(rs.getInt("AGEND_COD"));
+                agendamentos.add(agendamento);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }

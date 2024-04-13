@@ -18,14 +18,19 @@ public class BarbeariaDAO {
             PreparedStatement stmt = null;
             
             try {
-                stmt = con.prepareStatement("INSERT INTO empresa (EMP_CNPJ, EMP_NOME, EMP_END, EMP_EMAIL, EMP_TEL, EMP_LOGIN, USR_SENHA) VALUES(?,?,?,?,?,?,?)");
+                stmt = con.prepareStatement("INSERT INTO empresa (EMP_CNPJ, EMP_NOME, EMP_END, EMP_EMAIL, EMP_TEL, EMP_LOGIN, EMP_SENHA, EMP_DESC, EMP_REG1, EMP_REG2, EMP_REG3, EMP_REG4) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
                 stmt.setString(1, c.getCnpj());
                 stmt.setString(2, c.getNome());
                 stmt.setString(3, c.getEndereco());
                 stmt.setString(4, c.getEmail());
-                stmt.setString(5, c.getTelefone());
+                stmt.setString(5, c.getTelefone1());
                 stmt.setString(6, c.getLogin());
                 stmt.setString(7, c.getSenha());
+                stmt.setString(8, c.getDescricao());
+                stmt.setString(9, c.getRegra1());
+                stmt.setString(10, c.getRegra2());
+                stmt.setString(11, c.getRegra3());
+                stmt.setString(12, c.getRegra4());
                 
                 stmt.executeUpdate();
             } catch (SQLException ex) {
@@ -53,7 +58,7 @@ public class BarbeariaDAO {
                     barbearia.setNome(rs.getString(3));
                     barbearia.setEndereco(rs.getString(4));
                     barbearia.setEmail(rs.getString(5));
-                    barbearia.setTelefone(rs.getString(6));
+                    barbearia.setTelefone1(rs.getString(6));
                     barbearia.setLogin(rs.getString(7));
                     barbearia.setSenha(rs.getString(8));
                     barbearia.setDescricao(rs.getString(9));
@@ -73,7 +78,34 @@ public class BarbeariaDAO {
             return barbearias;
         }
     
-    public boolean checkLogin(String login, String senha){
+            public boolean checkInformacoes(String cnpj, String email, String telefone1, String login){
+            Connection con = ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            boolean check = false;
+            
+            try {
+                stmt = con.prepareStatement("SELECT * FROM empresa WHERE EMP_CNPJ=? OR EMP_EMAIL=? OR EMP_TEL=? OR EMP_LOGIN = ?");
+                stmt.setString(1, cnpj);
+                stmt.setString(2, email);
+                stmt.setString(3, telefone1);
+                stmt.setString(4, login);
+                rs = stmt.executeQuery();
+                
+                if(rs.next()){
+                    check = true;
+                }
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro: "+ex);
+                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+            return check;  
+        }
+        
+        public boolean checkLogin(String login, String senha){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
@@ -90,7 +122,7 @@ public class BarbeariaDAO {
                 }
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro: "+ex);
-                Logger.getLogger(BarbeariaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
             }finally{
                 ConnectionFactory.closeConnection(con, stmt, rs);
             }
@@ -106,7 +138,7 @@ public class BarbeariaDAO {
             TransfCod TCU = new TransfCod();
             
             try {
-                stmt = con.prepareStatement("SELECT * FROM usuario WHERE USR_LOGIN = ? AND USR_SENHA = ?");
+                stmt = con.prepareStatement("SELECT * FROM empresa WHERE EMP_LOGIN = ? AND EMP_SENHA = ?");
                 stmt.setString(1, login);
                 stmt.setString(2, senha);
                 rs = stmt.executeQuery();
@@ -120,6 +152,32 @@ public class BarbeariaDAO {
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro: "+ex);
                 Logger.getLogger(BarbeariaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+            return null;
+        }
+        
+        public ConsultarNome retornoNome(int cod_emp){
+            Connection con = ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            ConsultarNome CNE = new ConsultarNome();
+            
+            try {
+                stmt = con.prepareStatement("SELECT * FROM empresa WHERE EMP_COD = ?");
+                stmt.setInt(1, cod_emp);
+                rs = stmt.executeQuery();
+                
+                if(rs.next()){
+                    CNE.setNome(rs.getString(3));
+                    return CNE;
+                } else{
+                    return null;
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro: "+ex);
+                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
             }finally{
                 ConnectionFactory.closeConnection(con, stmt, rs);
             }
