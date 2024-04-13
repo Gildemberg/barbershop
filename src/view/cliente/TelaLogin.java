@@ -219,9 +219,9 @@ public class TelaLogin extends javax.swing.JFrame {
             TransfCod TCU = new TransfCod(); //instanciando a classe Transferencia de Cod
             ClienteDAO ClienteDao = new ClienteDAO(); //instanciando a classe ClienteDAO
             TCU = ClienteDao.retornoCod(login, senha); //Realizando a consulta do cod usr atravez do login e senha usr
-            TelaCliente TP = new TelaCliente(); //instanciando a classe Tela Principal
-            TP.receberCodUsr(TCU); //transferindo o codigo usr pra tela principal
-            TP.setVisible(true);
+            TelaCliente TC = new TelaCliente(); //instanciando a classe Tela Principal
+            TC.receberCodUsr(TCU); //transferindo o codigo usr pra tela principal
+            TC.setVisible(true);
             this.setVisible(false);
         }
     }//GEN-LAST:event_btnEntrarActionPerformed

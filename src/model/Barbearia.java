@@ -6,7 +6,11 @@ public class Barbearia {
     private int id;
     private String cnpj;
     private String nome;
-    private String endereco;
+    private String rua;
+    private String numero;
+    private String bairro;
+    private String cidade;
+    private String uf;
     private String email;
     private String telefone1;
     private String telefone2;
@@ -42,12 +46,44 @@ public class Barbearia {
         this.nome = nome;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getRua() {
+        return rua;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 
     public String getEmail() {
@@ -133,13 +169,17 @@ public class Barbearia {
     public Barbearia(){
     }
 
-    public Barbearia(String nome, String cnpj, String endereco, String email, String telefone, String login, String senha, String descricao, String regra1, String regra2, String regra3, String regra4) {
+    public Barbearia(String nome, String cnpj, String email, String telefone1, String telefone2, String login, String senha, String descricao, String rua, String numero, String bairro, String cidade, String uf, String regra1, String regra2, String regra3, String regra4) {
         this.cnpj = cnpj;
         this.nome = nome;
-        this.endereco = endereco;
+        this.rua = rua;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
         this.email = email;
         this.telefone1 = telefone1;
-        //this.telefone2 = telefone2;
+        this.telefone2 = telefone2;
         this.login = login;
         this.senha = senha;
         this.descricao = descricao;

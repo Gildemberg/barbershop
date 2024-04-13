@@ -18,9 +18,9 @@ public class ClienteDAO {
             PreparedStatement stmt = null;
             
             try {
-                stmt = con.prepareStatement("INSERT INTO usuario (USR_CPF, USR_NOME, USR_EMAIL, USR_CEL, USR_LOGIN, USR_SENHA) VALUES(?,?,?,?,?,?)");
-                stmt.setString(1, c.getCpf());
-                stmt.setString(2, c.getNome());
+                stmt = con.prepareStatement("INSERT INTO cliente (NOME, CPF, EMAIL, TELEFONE, LOGIN, SENHA) VALUES(?,?,?,?,?,?)");
+                stmt.setString(1, c.getNome());
+                stmt.setString(2, c.getCpf());
                 stmt.setString(3, c.getEmail());
                 stmt.setString(4, c.getTelefone());
                 stmt.setString(5, c.getLogin());
@@ -39,22 +39,22 @@ public class ClienteDAO {
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-            List<Cliente> usuarios = new ArrayList();
+            List<Cliente> clientes = new ArrayList();
             
             try {
-                stmt = con.prepareStatement("SELECT * FROM usuario");
+                stmt = con.prepareStatement("SELECT * FROM CLIENTE");
                 rs = stmt.executeQuery();
                 
                 while(rs.next()){
-                    Cliente usuario = new Cliente();
-                    usuario.setId(rs.getInt(1));
-                    usuario.setCpf(rs.getString(2));
-                    usuario.setNome(rs.getString(3));
-                    usuario.setEmail(rs.getString(4));
-                    usuario.setTelefone(rs.getString(5));
-                    usuario.setLogin(rs.getString(6));
-                    usuario.setSenha(rs.getString(7));
-                    usuarios.add(usuario);
+                    Cliente cliente = new Cliente();
+                    cliente.setId(rs.getInt(1));
+                    cliente.setCpf(rs.getString(2));
+                    cliente.setNome(rs.getString(3));
+                    cliente.setEmail(rs.getString(4));
+                    cliente.setTelefone(rs.getString(5));
+                    cliente.setLogin(rs.getString(6));
+                    cliente.setSenha(rs.getString(7));
+                    clientes.add(cliente);
                 }
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro: "+ex);
@@ -62,7 +62,7 @@ public class ClienteDAO {
             }finally{
                 ConnectionFactory.closeConnection(con, stmt, rs);
             }
-            return usuarios;
+            return clientes;
         }
         
         public boolean checkInformacoes(String cpf, String email, String telefone, String login){
@@ -72,7 +72,7 @@ public class ClienteDAO {
             boolean check = false;
             
             try {
-                stmt = con.prepareStatement("SELECT * FROM usuario WHERE USR_CPF=? OR USR_EMAIL=? OR USR_CEL=? OR USR_LOGIN = ?");
+                stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE CPF=? OR EMAIL=? OR TELEFONE=? OR LOGIN = ?");
                 stmt.setString(1, cpf);
                 stmt.setString(2, email);
                 stmt.setString(3, telefone);
@@ -99,7 +99,7 @@ public class ClienteDAO {
             boolean check = false;
             
             try {
-                stmt = con.prepareStatement("SELECT * FROM usuario WHERE USR_LOGIN = ? and USR_SENHA = ?");
+                stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE LOGIN=? AND SENHA=?");
                 stmt.setString(1, login);
                 stmt.setString(2, senha);
                 rs = stmt.executeQuery();
@@ -124,7 +124,7 @@ public class ClienteDAO {
             TransfCod TCU = new TransfCod();
             
             try {
-                stmt = con.prepareStatement("SELECT * FROM usuario WHERE USR_LOGIN = ? AND USR_SENHA = ?");
+                stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE LOGIN=? AND SENHA=?");
                 stmt.setString(1, login);
                 stmt.setString(2, senha);
                 rs = stmt.executeQuery();
@@ -144,19 +144,19 @@ public class ClienteDAO {
             return null;
         }
         
-        public ConsultarNome retornoNome(int cod_usr){
+        public ConsultarNome retornoNome(int codcliente){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
             ConsultarNome CNU = new ConsultarNome();
             
             try {
-                stmt = con.prepareStatement("SELECT * FROM usuario WHERE USR_COD = ?");
-                stmt.setInt(1, cod_usr);
+                stmt = con.prepareStatement("SELECT NOME FROM CLIENTE WHERE CODCLIENTE=?");
+                stmt.setInt(1, codcliente);
                 rs = stmt.executeQuery();
                 
                 if(rs.next()){
-                    CNU.setNome(rs.getString(3));
+                    CNU.setNome(rs.getString(1));
                     return CNU;
                 } else{
                     return null;

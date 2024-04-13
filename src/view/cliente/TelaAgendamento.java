@@ -43,7 +43,7 @@ public class TelaAgendamento extends javax.swing.JFrame{
         txtBarbearia.setText(barbearias.get(COD_EMP-1).getNome());
         txtDescricao.setText("<html>"+barbearias.get(COD_EMP-1).getDescricao()+"</html>"); //inserir a tag HTML server para qubrar a linha do JLabel
         txtEmail.setText("Email: "+barbearias.get(COD_EMP-1).getEmail());
-        txtEndereco.setText("Localização: "+barbearias.get(COD_EMP-1).getEndereco());
+        txtEndereco.setText("Localização: "+barbearias.get(COD_EMP-1).getRua()+", "+barbearias.get(COD_EMP-1).getNumero()+", "+barbearias.get(COD_EMP-1).getBairro()+", "+barbearias.get(COD_EMP-1).getCidade()+" - "+barbearias.get(COD_EMP-1).getUf());
         txtRegra1.setText("• "+barbearias.get(COD_EMP-1).getRegra1());
         txtRegra2.setText("• "+barbearias.get(COD_EMP-1).getRegra2());
         txtRegra3.setText("• "+barbearias.get(COD_EMP-1).getRegra3());
@@ -340,7 +340,7 @@ public class TelaAgendamento extends javax.swing.JFrame{
         String hora = txtHora.getText()+":"+txtMinuto.getText();
         SelectedDate d = calendario.getSelectedDate();
         String data = d.getDay()+"/"+d.getMonth()+"/"+d.getYear();
-        ImageIcon iconConfirmar = new ImageIcon(getToolkit().createImage(getClass().getResource("../images/confirmar.png"))); //criando um icone para alerta de mensagem
+        ImageIcon iconConfirmar = new ImageIcon(getToolkit().createImage(getClass().getResource("../../images/confirmar.png"))); //criando um icone para alerta de mensagem
         
         if(COD_AGEND != 0){// SERVE PARA ALTERAR O AGENDAMENTO
             Agendamento a = new Agendamento(0, 0, data, hora, "", COD_AGEND);   
@@ -369,10 +369,8 @@ public class TelaAgendamento extends javax.swing.JFrame{
         
         //</editor-fold>
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaAgendamento().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new TelaAgendamento().setVisible(true);
         });
     }
 

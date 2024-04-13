@@ -74,11 +74,11 @@ public final class TelaCliente extends javax.swing.JFrame {
         if(!agendamentos.isEmpty()){//so executa se a lista nao tiver vazia
             if(agendamentos.size() >= 1){  //so executa se tiver um item     
                 Agendamento01.setVisible(true);
-                txtBarbearia01.setText(agendamentos.get(0).getNome_emp());
+                txtBarbearia01.setText(agendamentos.get(0).getNomebarbearia());
                 txtHorario01.setText(agendamentos.get(0).getHora()+"h  "+ agendamentos.get(0).getData());
                 btnAlterar1.setText(String.valueOf(agendamentos.get(0).getId()));
                 btnExcluir1.setText(String.valueOf(agendamentos.get(0).getId()));
-                txtCod_emp1.setText(String.valueOf(agendamentos.get(0).getCod_emp()));
+                txtCod_emp1.setText(String.valueOf(agendamentos.get(0).getCodbarbearia()));
             }else{
                 Agendamento01.setVisible(false);
                 txtBarbearia01.setText("");
@@ -88,11 +88,11 @@ public final class TelaCliente extends javax.swing.JFrame {
                 txtCod_emp1.setText("");
             } if(agendamentos.size() >= 2){ //so executa se tiver dois item             
                 Agendamento02.setVisible(true);
-                txtBarbearia02.setText(agendamentos.get(1).getNome_emp());
+                txtBarbearia02.setText(agendamentos.get(1).getNomebarbearia());
                 txtHorario02.setText(agendamentos.get(1).getHora()+"h  "+ agendamentos.get(1).getData());
                 btnAlterar2.setText(String.valueOf(agendamentos.get(1).getId()));
                 btnExcluir2.setText(String.valueOf(agendamentos.get(1).getId()));
-                txtCod_emp2.setText(String.valueOf(agendamentos.get(1).getCod_emp()));
+                txtCod_emp2.setText(String.valueOf(agendamentos.get(1).getCodbarbearia()));
             }else{
                 Agendamento02.setVisible(false);
                 txtBarbearia02.setText("");
@@ -102,11 +102,11 @@ public final class TelaCliente extends javax.swing.JFrame {
                 txtCod_emp2.setText("");
             }if(agendamentos.size() >= 3){ //so executa se tiver tres item                    
                 Agendamento03.setVisible(true);
-                txtBarbearia03.setText(agendamentos.get(2).getNome_emp());
+                txtBarbearia03.setText(agendamentos.get(2).getNomebarbearia());
                 txtHorario03.setText(agendamentos.get(2).getHora()+"h  "+ agendamentos.get(2).getData());
                 btnAlterar3.setText(String.valueOf(agendamentos.get(2).getId()));
                 btnExcluir3.setText(String.valueOf(agendamentos.get(2).getId()));
-                txtCod_emp3.setText(String.valueOf(agendamentos.get(2).getCod_emp()));
+                txtCod_emp3.setText(String.valueOf(agendamentos.get(2).getCodbarbearia()));
             }else{
                 Agendamento03.setVisible(false);
                 txtBarbearia03.setText("");
@@ -120,9 +120,9 @@ public final class TelaCliente extends javax.swing.JFrame {
     
     public void receberCodUsr(TransfCod TCU){//receber o cod USUÁRIO
         this.COD_USR = TCU.getCod(); //recebendo o cod usr
-        ClienteDAO UserDao = new ClienteDAO();
+        ClienteDAO ClienteDao = new ClienteDAO();
         ConsultarNome CNU = new ConsultarNome();
-        CNU = UserDao.retornoNome(COD_USR); //consultando o nome usr
+        CNU = ClienteDao.retornoNome(COD_USR); //consultando o nome usr
         consultarNomeUsr(CNU);
         consultarAgendamento();
     }
@@ -919,11 +919,8 @@ public final class TelaCliente extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new TelaCliente().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new TelaCliente().setVisible(true);
         });
     }
 

@@ -4,12 +4,12 @@ import dao.AgendamentoDAO;
 
 public class Agendamento {
     private int id;
-    private int cod_usr;
-    private int cod_emp;
+    private int codcliente;
+    private int codbarbearia;
     private String data;
     private String hora;
-    private String nome_emp;
-    private String nome_usr;
+    private String nomebarbearia;
+    private String nomecliente;
 
     public int getId() {
         return id;
@@ -19,20 +19,20 @@ public class Agendamento {
         this.id = id;
     }
 
-    public int getCod_usr() {
-        return cod_usr;
+    public int getCodbarbearia() {
+        return codbarbearia;
     }
 
-    public void setCod_usr(int cod_usr) {
-        this.cod_usr = cod_usr;
+    public void setCodbarbearia(int codbarbearia) {
+        this.codbarbearia = codbarbearia;
     }
 
-    public int getCod_emp() {
-        return cod_emp;
+    public int getCodcliente() {
+        return codcliente;
     }
 
-    public void setCod_emp(int cod_emp) {
-        this.cod_emp = cod_emp;
+    public void setCodcliente(int codcliente) {
+        this.codcliente = codcliente;
     }
 
     public String getData() {
@@ -51,33 +51,33 @@ public class Agendamento {
         this.hora = hora;
     }
 
-    public String getNome_emp() {
-        return nome_emp;
-    }
-    
-    public void setNome_emp(String nome_emp) {
-        this.nome_emp = nome_emp;
-    }
-    
-    public String getNome_usr() {
-        return nome_usr;
+    public String getNomebarbearia() {
+        return nomebarbearia;
     }
 
-    public void setNome_usr(String nome_usr) {
-        this.nome_usr = nome_usr;
+    public void setNomebarbearia(String nomebarbearia) {
+        this.nomebarbearia = nomebarbearia;
+    }
+
+    public String getNomecliente() {
+        return nomecliente;
+    }
+
+    public void setNomecliente(String nomecliente) {
+        this.nomecliente = nomecliente;
     }
     
     
     public Agendamento(){
     }
     
-    public Agendamento(int cod_emp, int cod_usr, String data, String hora, String nome_emp, int id){
+    public Agendamento(int codbarbearia, int codcliente, String data, String hora, String nomebarbearia, int id){
         this.id = id;
-        this.cod_emp = cod_emp;
-        this.cod_usr = cod_usr;
+        this.codbarbearia = codbarbearia;
+        this.codcliente = codcliente;
         this.data = data;
         this.hora = hora;
-        this.nome_emp = nome_emp;
+        this.nomebarbearia = nomebarbearia;
     }
     
     public void alterarAgendamento(Agendamento a){
