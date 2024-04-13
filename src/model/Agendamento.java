@@ -1,13 +1,15 @@
 package model;
 
 import dao.AgendamentoDAO;
+import java.sql.Time;
+import java.sql.Date;
 
 public class Agendamento {
     private int id;
     private int codcliente;
     private int codbarbearia;
-    private String data;
-    private String hora;
+    private Date data;
+    private Time hora;
     private String nomebarbearia;
     private String nomecliente;
 
@@ -35,19 +37,19 @@ public class Agendamento {
         this.codcliente = codcliente;
     }
 
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
-    public String getHora() {
+    public Time getHora() {
         return hora;
     }
 
-    public void setHora(String hora) {
+    public void setHora(Time hora) {
         this.hora = hora;
     }
 
@@ -71,13 +73,12 @@ public class Agendamento {
     public Agendamento(){
     }
     
-    public Agendamento(String data, String hora, int codbarbearia, int codcliente, int id){
+    public Agendamento(Date data, Time hora, int codbarbearia, int codcliente, int id){
         this.id = id;
         this.codbarbearia = codbarbearia;
         this.codcliente = codcliente;
         this.data = data;
         this.hora = hora;
-        //this.nomebarbearia = nomebarbearia;
     }
     
     public void alterarAgendamento(Agendamento a){

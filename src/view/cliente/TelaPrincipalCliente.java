@@ -75,7 +75,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             if(agendamentos.size() >= 1){  //so executa se tiver um item     
                 Agendamento01.setVisible(true);
                 txtBarbearia01.setText(agendamentos.get(0).getNomebarbearia());
-                txtHorario01.setText(agendamentos.get(0).getHora()+"h  "+ agendamentos.get(0).getData());
+                txtHorario01.setText(agendamentos.get(0).getHora()+"h  "+ agendamentos.get(0).getData().toString());
                 btnAlterar1.setText(String.valueOf(agendamentos.get(0).getId()));
                 btnExcluir1.setText(String.valueOf(agendamentos.get(0).getId()));
                 txtCod_emp1.setText(String.valueOf(agendamentos.get(0).getCodbarbearia()));
@@ -89,7 +89,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             } if(agendamentos.size() >= 2){ //so executa se tiver dois item             
                 Agendamento02.setVisible(true);
                 txtBarbearia02.setText(agendamentos.get(1).getNomebarbearia());
-                txtHorario02.setText(agendamentos.get(1).getHora()+"h  "+ agendamentos.get(1).getData());
+                txtHorario02.setText(agendamentos.get(1).getHora()+"h  "+ agendamentos.get(1).getData().toString());
                 btnAlterar2.setText(String.valueOf(agendamentos.get(1).getId()));
                 btnExcluir2.setText(String.valueOf(agendamentos.get(1).getId()));
                 txtCod_emp2.setText(String.valueOf(agendamentos.get(1).getCodbarbearia()));
@@ -103,7 +103,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             }if(agendamentos.size() >= 3){ //so executa se tiver tres item                    
                 Agendamento03.setVisible(true);
                 txtBarbearia03.setText(agendamentos.get(2).getNomebarbearia());
-                txtHorario03.setText(agendamentos.get(2).getHora()+"h  "+ agendamentos.get(2).getData());
+                txtHorario03.setText(agendamentos.get(2).getHora()+"h  "+ agendamentos.get(2).getData().toString());
                 btnAlterar3.setText(String.valueOf(agendamentos.get(2).getId()));
                 btnExcluir3.setText(String.valueOf(agendamentos.get(2).getId()));
                 txtCod_emp3.setText(String.valueOf(agendamentos.get(2).getCodbarbearia()));

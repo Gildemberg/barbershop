@@ -9,6 +9,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Agendamento;
+import java.sql.Time;
+import java.sql.Date;
+//import java.util.Date;
 
 
 public class AgendamentoDAO {
@@ -18,8 +21,8 @@ public class AgendamentoDAO {
         
         try {
             stmt = con.prepareStatement("INSERT INTO agendamento (DATA, HORARIO, FK_CODBARBEARIA, FK_CODCLIENTE) VALUES(?,?,?,?)");
-            stmt.setString(1, a.getData());
-            stmt.setString(2, a.getHora());
+            stmt.setDate(1, a.getData());
+            stmt.setTime(2, a.getHora());
             stmt.setInt(3, a.getCodbarbearia());
             stmt.setInt(4, a.getCodcliente());
             stmt.executeUpdate();
@@ -48,8 +51,8 @@ public class AgendamentoDAO {
             while (rs.next()) {
                 Agendamento agendamento = new Agendamento();
                 agendamento.setNomebarbearia(rs.getString("NOMESOCIAL"));
-                agendamento.setData(rs.getString("DATA"));
-                agendamento.setHora(rs.getString("HORARIO"));
+                agendamento.setData(rs.getDate("DATA"));
+                agendamento.setHora(rs.getTime("HORARIO"));
                 agendamento.setCodcliente(rs.getInt("FK_CODCLIENTE"));
                 agendamento.setCodbarbearia(rs.getInt("FK_CODBARBEARIA"));
                 agendamento.setId(rs.getInt("CODAGENDAMENTO"));
@@ -64,7 +67,7 @@ public class AgendamentoDAO {
         return agendamentos;
     }
     
-    public boolean checkInformacoes(String data, String hora){
+    public boolean checkInformacoes(Date data, Time hora){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
@@ -72,8 +75,8 @@ public class AgendamentoDAO {
             
             try {
                 stmt = con.prepareStatement("SELECT * FROM AGENDAMENTO WHERE (DATA=? AND HORARIO=?)");
-                stmt.setString(1, data);
-                stmt.setString(2, hora);
+                stmt.setDate(1, data);
+                stmt.setTime(2, hora);
                 rs = stmt.executeQuery();
                 
                 if(rs.next()){
@@ -88,6 +91,36 @@ public class AgendamentoDAO {
             }
             return check;  
         }
+    
+    /*public boolean verificarHorarioBarbearia(String data, String hora, int CODBARBEARIA){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        boolean check=true;
+        
+        try {
+            stmt = con.prepareStatement("SELECT DATA, HORA, FK_CODBARBEARIA "
+                    + "FROM EXPEDIENTE  "
+                    + "WHERE DATA=? AND HORARIO=? AND FK_CODBARBEARIA=?");
+                stmt.setString(1, data);
+                stmt.setString(2, hora);
+                stmt.setInt(3, CODBARBEARIA);
+                rs = stmt.executeQuery();
+                
+                if(rs.next()){
+                    check = true;
+                }
+        } catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex);
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        
+        
+        
+        return check;
+    }*/
     
     public List<Agendamento> readEmp(int codbarbearia){
         Connection con = ConnectionFactory.getConnection();
@@ -105,11 +138,11 @@ public class AgendamentoDAO {
 
             while (rs.next()) {
                 Agendamento agendamento = new Agendamento();
-                agendamento.setNomecliente(rs.getString("USR_NOME"));
-                agendamento.setData(rs.getString("AGEND_DATA"));
-                agendamento.setHora(rs.getString("AGEND_HORA"));
-                agendamento.setCodcliente(rs.getInt("AGEND_USR_COD"));
-                agendamento.setId(rs.getInt("AGEND_COD"));
+                agendamento.setNomecliente(rs.getString("c.NOME"));
+                agendamento.setData(rs.getDate("a.DATA"));
+                agendamento.setHora(rs.getTime("a.HORARIO"));
+                agendamento.setCodcliente(rs.getInt("a.FK_CODCLIENTE"));
+                agendamento.setId(rs.getInt("a.CODAGENDAMENTO"));
                 agendamentos.add(agendamento);
             }
         } catch (SQLException ex) {
@@ -128,8 +161,8 @@ public class AgendamentoDAO {
 
         try {
             stmt = con.prepareStatement("UPDATE agendamento SET DATA=?, HORARIO=? WHERE CODAGENDAMENTO=?");
-            stmt.setString(1, a.getData());
-            stmt.setString(2, a.getHora());
+            stmt.setDate(1, a.getData());
+            stmt.setTime(2, a.getHora());
             stmt.setInt(3, a.getId()); 
             stmt.executeUpdate();
         } catch (SQLException ex) {

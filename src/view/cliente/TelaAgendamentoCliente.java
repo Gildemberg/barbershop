@@ -8,6 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import model.TransfCod;
 import model.Barbearia;
+import java.sql.Time;
+import java.sql.Date;
+import java.text.ParseException;
+//import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class TelaAgendamentoCliente extends javax.swing.JFrame{
 
@@ -333,17 +341,33 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     }//GEN-LAST:event_sairMouseClicked
 
     private void btnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarActionPerformed
-        boolean check;
-        String hora = txtHora.getText()+":"+txtMinuto.getText(); //Pegando a hora
-        SelectedDate d = calendario.getSelectedDate();
-        String data = d.getDay()+"/"+d.getMonth()+"/"+d.getYear(); //Pegando a data
-     
-        AgendamentoController agend = new AgendamentoController();
-        check = agend.verificarAgendamento(data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO);
-        
-        if(check){ // LIMPANDO OS CAMPOS EM CASO DE CADASTRO REALIZADO
-            txtHora.setText("");
-            txtMinuto.setText("");
+        try {
+            boolean check;
+            
+            
+            String horaString = txtHora.getText()+":"+txtMinuto.getText(); //Pegando a hora
+            SelectedDate d = calendario.getSelectedDate();
+            String dataString = d.getDay()+"-"+d.getMonth()+"-"+d.getYear(); //Pegando a data
+
+            //convertendo a Strin hora para TIME
+            SimpleDateFormat horaFormatada = new SimpleDateFormat("HH:mm");
+            Date Dhora = new Date(horaFormatada.parse(horaString).getTime());
+            Time hora = new Time(Dhora.getTime());
+            
+            //convertendo a String data para DATE
+            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd-MM-yyyy");
+            Date data = new Date(dataFormatada.parse(dataString).getTime());
+            
+
+            AgendamentoController agend = new AgendamentoController();
+            check = agend.verificarAgendamento(data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO);
+            
+            if(check){ // LIMPANDO OS CAMPOS EM CASO DE CADASTRO REALIZADO
+                txtHora.setText("");
+                txtMinuto.setText("");
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaAgendamentoCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAgendarActionPerformed
 
