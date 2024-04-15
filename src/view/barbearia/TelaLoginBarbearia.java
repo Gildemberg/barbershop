@@ -217,7 +217,7 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
             BarbeariaDAO BarbeariaDao = new BarbeariaDAO(); //instanciando a classe ClienteDAO
             TCU = BarbeariaDao.retornoCod(login, senha); //Realizando a consulta do cod usr atravez do login e senha usr
             TelaPrincipalBarbearia TA = new TelaPrincipalBarbearia(); //instanciando a classe Tela Principal
-            TA.receberCodUsr(TCU); //transferindo o codigo usr pra tela principal
+            TA.receberCodBarbearia(TCU); //transferindo o codigo usr pra tela principal
             TA.setVisible(true);
             this.setVisible(false);
         }

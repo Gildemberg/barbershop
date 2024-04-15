@@ -200,10 +200,7 @@
                                           </Group>
                                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="regra4" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="358" max="32767" attributes="0"/>
-                                              </Group>
+                                              <Component id="regra4" min="-2" max="-2" attributes="0"/>
                                               <Component id="txtRegra4" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>

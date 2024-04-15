@@ -2,6 +2,7 @@
 package controller;
 
 import dao.AgendamentoDAO;
+import dao.ExpedienteDAO;
 import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -9,6 +10,7 @@ import javax.swing.JOptionPane;
 import model.Agendamento;
 import java.sql.Time;
 import java.sql.Date;
+import java.util.Calendar;
 
 
 
@@ -16,10 +18,16 @@ public class AgendamentoController {
     public boolean verificarAgendamento(Date data, Time hora, int CODBARBEARIA, int CODCLIENTE, int CODAGENDAMENTO){
         boolean retorno;
         //VERIFICAR PREENCHIMENTO DOS CAMPOS
-        if(hora.getTime()!=0 && 
-                CODBARBEARIA>0 && CODCLIENTE>0
-                ){
-            retorno = verificarNoBanco(data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO);
+        if(hora.getTime()!=0 && CODBARBEARIA>0 && CODCLIENTE>0){
+            // Extraindo as horas, minutos e segundos da hora fornecida
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(hora);
+            int horario = cal.get(Calendar.HOUR_OF_DAY);
+            if(horario < 7 || horario > 18){ //verificando se o horario informado está dentro do range do expediente
+                JOptionPane.showMessageDialog(null, "Informe um horário valido. O Expediente é entre 07:00h e 18:00h", "Mensagem", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            retorno = verificarExpedienteNoBanco(data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO);
             return retorno;
         }else{
             JOptionPane.showMessageDialog(null, "Os campos não foram preenchidos corretamente", "Mensagem", JOptionPane.ERROR_MESSAGE);        
@@ -28,20 +36,20 @@ public class AgendamentoController {
         return retorno;
     }
     
-    /*public boolean verificarNoBancoBarbearia(String data, String hora, int CODBARBEARIA, int CODCLIENTE, int CODAGENDAMENTO){;;;;;;;
-        boolean verificacao, retorno=true;
-        AgendamentoDAO dao = new AgendamentoDAO();
+    public boolean verificarExpedienteNoBanco(Date data, Time hora, int CODBARBEARIA, int CODCLIENTE, int CODAGENDAMENTO){
+        boolean verificacao, retorno;
+        ExpedienteDAO dao = new ExpedienteDAO();
         
-        verificacao = dao.verificarHorarioBarbearia(data, hora, CODBARBEARIA);
+        verificacao = dao.verificarHorarioBarbearia(data, CODBARBEARIA);
         if(verificacao){
-            
+            JOptionPane.showMessageDialog(null, "A Barbearia não funcionará neste dia. Selecione outro.", "Mensagem", JOptionPane.ERROR_MESSAGE);
+            retorno = false;
         }else{
-            
             retorno = verificarNoBanco(data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO);
         }
         
         return retorno;
-    }*/
+    }
     
     public boolean verificarNoBanco(Date data, Time hora, int CODBARBEARIA, int CODCLIENTE, int CODAGENDAMENTO){
         ImageIcon iconConfirmar = AgendamentoController.createIcon("../images/confirmar.png");

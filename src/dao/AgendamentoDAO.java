@@ -92,36 +92,6 @@ public class AgendamentoDAO {
             return check;  
         }
     
-    /*public boolean verificarHorarioBarbearia(String data, String hora, int CODBARBEARIA){
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        boolean check=true;
-        
-        try {
-            stmt = con.prepareStatement("SELECT DATA, HORA, FK_CODBARBEARIA "
-                    + "FROM EXPEDIENTE  "
-                    + "WHERE DATA=? AND HORARIO=? AND FK_CODBARBEARIA=?");
-                stmt.setString(1, data);
-                stmt.setString(2, hora);
-                stmt.setInt(3, CODBARBEARIA);
-                rs = stmt.executeQuery();
-                
-                if(rs.next()){
-                    check = true;
-                }
-        } catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: "+ex);
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
-            ConnectionFactory.closeConnection(con, stmt, rs);
-        }
-        
-        
-        
-        return check;
-    }*/
-    
     public List<Agendamento> readEmp(int codbarbearia){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;

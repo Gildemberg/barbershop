@@ -351,13 +351,14 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
 
             //convertendo a Strin hora para TIME
             SimpleDateFormat horaFormatada = new SimpleDateFormat("HH:mm");
-            Date Dhora = new Date(horaFormatada.parse(horaString).getTime());
-            Time hora = new Time(Dhora.getTime());
+            Date Horario = new Date(horaFormatada.parse(horaString).getTime());
+            Time hora = new Time(Horario.getTime());
             
             //convertendo a String data para DATE
             SimpleDateFormat dataFormatada = new SimpleDateFormat("dd-MM-yyyy");
             Date data = new Date(dataFormatada.parse(dataString).getTime());
             
+            System.out.println(hora);
 
             AgendamentoController agend = new AgendamentoController();
             check = agend.verificarAgendamento(data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO);

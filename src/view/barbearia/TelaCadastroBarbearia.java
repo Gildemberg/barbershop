@@ -515,7 +515,18 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
             txtLogin.setText("");
             txtSenha.setText("");
             txtTelefone1.setText("");
+            txtTelefone2.setText("");
             txtEmail.setText("");
+            txtRua.setText("");
+            txtNumero.setText("");
+            txtBairro.setText("");
+            txtCidade.setText("");
+            txtUf.setText("");
+            txtRegra1.setText("");
+            txtRegra2.setText("");
+            txtRegra3.setText("");
+            txtRegra4.setText("");
+            txtDescricao.setText("");
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

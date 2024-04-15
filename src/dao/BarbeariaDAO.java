@@ -220,12 +220,12 @@ public class BarbeariaDAO {
             ConsultarNome CNE = new ConsultarNome();
             
             try {
-                stmt = con.prepareStatement("SELECT * FROM barbearia WHERE CODBARBEARIA = ?");
+                stmt = con.prepareStatement("SELECT NOMESOCIAL FROM barbearia WHERE CODBARBEARIA = ?");
                 stmt.setInt(1, codbarbearia);
                 rs = stmt.executeQuery();
                 
                 if(rs.next()){
-                    CNE.setNome(rs.getString(3));
+                    CNE.setNome(rs.getString(1));
                     return CNE;
                 } else{
                     return null;
