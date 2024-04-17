@@ -1,6 +1,7 @@
 package view.barbearia;
 
 import dao.AgendamentoDAO;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import model.Agendamento;
@@ -36,14 +37,16 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
     }
     
     public void consultarAgenda(){
+        SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat hora = new SimpleDateFormat("HH:mm");
         AgendamentoDAO agendDAO = new AgendamentoDAO();
         List<Agendamento> agendamentos = new ArrayList();
-        agendamentos = agendDAO.readEmp(CODBARBEARIA);
+        agendamentos = agendDAO.consultarAgendamentosBarbearia(CODBARBEARIA);
         if(!agendamentos.isEmpty()){//so executa se a lista nao tiver vazia
             if(agendamentos.size() >= 1){  //so executa se tiver um item     
                 Agendamento1.setVisible(true);
                 txtCliente1.setText(agendamentos.get(0).getNomecliente());
-                txtHorario1.setText(agendamentos.get(0).getHora()+"h  "+ agendamentos.get(0).getData());
+                txtHorario1.setText(hora.format(agendamentos.get(0).getHora())+"h  "+ data.format(agendamentos.get(0).getData()));
                 btnConfirmar1.setText(String.valueOf(agendamentos.get(0).getId()));
                 txtCod_usr1.setText(String.valueOf(agendamentos.get(0).getCodcliente()));
             }else{
@@ -55,7 +58,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             } if(agendamentos.size() >= 2){ //so executa se tiver dois item             
                 Agendamento2.setVisible(true);
                 txtCliente2.setText(agendamentos.get(1).getNomecliente());
-                txtHorario2.setText(agendamentos.get(1).getHora()+"h  "+ agendamentos.get(1).getData());
+                txtHorario2.setText(hora.format(agendamentos.get(1).getHora())+"h  "+ data.format(agendamentos.get(1).getData()));
                 btnConfirmar2.setText(String.valueOf(agendamentos.get(1).getId()));
                 txtCod_usr2.setText(String.valueOf(agendamentos.get(1).getCodcliente()));
             }else{
@@ -67,7 +70,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             }if(agendamentos.size() >= 3){ //so executa se tiver tres item                    
                 Agendamento3.setVisible(true);
                 txtCliente3.setText(agendamentos.get(2).getNomecliente());
-                txtHorario3.setText(agendamentos.get(2).getHora()+"h  "+ agendamentos.get(2).getData());
+                txtHorario3.setText(hora.format(agendamentos.get(2).getHora())+"h  "+ data.format(agendamentos.get(2).getData()));
                 btnConfirmar3.setText(String.valueOf(agendamentos.get(2).getId()));
                 txtCod_usr3.setText(String.valueOf(agendamentos.get(2).getCodcliente()));
             }else{
@@ -79,7 +82,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             } if(agendamentos.size() >= 4){ //so executa se tiver tres item                    
                 Agendamento4.setVisible(true);
                 txtCliente4.setText(agendamentos.get(3).getNomecliente());
-                txtHorario4.setText(agendamentos.get(3).getHora()+"h  "+ agendamentos.get(3).getData());
+                txtHorario4.setText(hora.format(agendamentos.get(3).getHora())+"h  "+ data.format(agendamentos.get(3).getData()));
                 btnConfirmar4.setText(String.valueOf(agendamentos.get(3).getId()));
                 txtCod_usr4.setText(String.valueOf(agendamentos.get(3).getCodcliente()));
             }else{
@@ -91,7 +94,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             }if(agendamentos.size() >= 5){ //so executa se tiver tres item                    
                 Agendamento5.setVisible(true);
                 txtCliente5.setText(agendamentos.get(4).getNomecliente());
-                txtHorario5.setText(agendamentos.get(4).getHora()+"h  "+ agendamentos.get(4).getData());
+                txtHorario5.setText(hora.format(agendamentos.get(4).getHora())+"h  "+ data.format(agendamentos.get(4).getData()));
                 btnConfirmar5.setText(String.valueOf(agendamentos.get(4).getId()));
                 txtCod_usr5.setText(String.valueOf(agendamentos.get(4).getCodcliente()));
             }else{
@@ -103,7 +106,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             }if(agendamentos.size() >= 6){ //so executa se tiver tres item                    
                 Agendamento6.setVisible(true);
                 txtCliente6.setText(agendamentos.get(5).getNomecliente());
-                txtHorario6.setText(agendamentos.get(5).getHora()+"h  "+ agendamentos.get(5).getData());
+                txtHorario6.setText(hora.format(agendamentos.get(5).getHora())+"h  "+ data.format(agendamentos.get(5).getData()));
                 btnConfirmar6.setText(String.valueOf(agendamentos.get(5).getId()));
                 txtCod_usr6.setText(String.valueOf(agendamentos.get(5).getCodcliente()));
             }else{
@@ -853,7 +856,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
     private void btnConfirmar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar1MouseClicked
         int AGEND_COD = Integer.parseInt(btnConfirmar1.getText());
         AgendamentoDAO agendDAO = new AgendamentoDAO();
-        //agendDAO.delete(AGEND_COD);
+        //agendDAO.deleteAgendamentoCliente(AGEND_COD);
     }//GEN-LAST:event_btnConfirmar1MouseClicked
 
     private void btnConfirmar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar2MouseClicked

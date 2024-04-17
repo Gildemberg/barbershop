@@ -2,6 +2,7 @@ package view.barbearia;
 
 import controller.BarbeariaController;
 import dao.BarbeariaDAO;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import model.TransfCod;
 import view.TelaInicial;
@@ -13,6 +14,25 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
     public TelaLoginBarbearia() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
+    }
+    
+    public void login(){
+        boolean check;
+        String login = txtLogin.getText();
+        String senha = txtSenha.getText();
+        
+        BarbeariaController barbeariaController = new BarbeariaController();
+        check = barbeariaController.validarLogin(login, senha);
+        
+        if(check){
+            TransfCod TCU = new TransfCod(); //instanciando a classe Transferencia de Cod
+            BarbeariaDAO BarbeariaDao = new BarbeariaDAO(); //instanciando a classe ClienteDAO
+            TCU = BarbeariaDao.retornoCod(login, senha); //Realizando a consulta do cod usr atravez do login e senha usr
+            TelaPrincipalBarbearia TA = new TelaPrincipalBarbearia(); //instanciando a classe Tela Principal
+            TA.receberCodBarbearia(TCU); //transferindo o codigo usr pra tela principal
+            TA.setVisible(true);
+            this.setVisible(false);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -102,9 +122,21 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
         Login.setForeground(new java.awt.Color(255, 255, 255));
         Login.setText("Login:");
 
+        txtLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtLoginKeyPressed(evt);
+            }
+        });
+
         Senha.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
         Senha.setForeground(new java.awt.Color(255, 255, 255));
         Senha.setText("Senha:");
+
+        txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSenhaKeyPressed(evt);
+            }
+        });
 
         btnEntrar.setBackground(new java.awt.Color(0, 51, 102));
         btnEntrar.setFont(new java.awt.Font("Malgun Gothic Semilight", 0, 18)); // NOI18N
@@ -220,22 +252,7 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        boolean check;
-        String login = txtLogin.getText();
-        String senha = txtSenha.getText();
-        
-        BarbeariaController barbeariaController = new BarbeariaController();
-        check = barbeariaController.validarLogin(login, senha);
-        
-        if(check){
-            TransfCod TCU = new TransfCod(); //instanciando a classe Transferencia de Cod
-            BarbeariaDAO BarbeariaDao = new BarbeariaDAO(); //instanciando a classe ClienteDAO
-            TCU = BarbeariaDao.retornoCod(login, senha); //Realizando a consulta do cod usr atravez do login e senha usr
-            TelaPrincipalBarbearia TA = new TelaPrincipalBarbearia(); //instanciando a classe Tela Principal
-            TA.receberCodBarbearia(TCU); //transferindo o codigo usr pra tela principal
-            TA.setVisible(true);
-            this.setVisible(false);
-        }
+        login();
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
@@ -247,6 +264,18 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
         this.setVisible(false);
         new TelaInicial().setVisible(true);
     }//GEN-LAST:event_sairMouseClicked
+
+    private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            login();
+        }
+    }//GEN-LAST:event_txtSenhaKeyPressed
+
+    private void txtLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLoginKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            login();
+        }
+    }//GEN-LAST:event_txtLoginKeyPressed
 
     public static void main(String args[]) {
 

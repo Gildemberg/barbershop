@@ -34,7 +34,7 @@ public class AgendamentoDAO {
         }
     }
         
-    public List<Agendamento> read(int codcliente){
+    public List<Agendamento> consultarAgendamentosCliente(int codcliente){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -92,7 +92,7 @@ public class AgendamentoDAO {
             return check;  
         }
     
-    public List<Agendamento> readEmp(int codbarbearia){
+    public List<Agendamento> consultarAgendamentosBarbearia(int codbarbearia){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -125,7 +125,7 @@ public class AgendamentoDAO {
         return agendamentos;
     }
     
-    public void update(Agendamento a){
+    public void updateAgendamentoCliente(Agendamento a){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
@@ -143,7 +143,7 @@ public class AgendamentoDAO {
         }
     }
     
-    public void delete(int CODAGENDAMENTO) {
+    public void deleteAgendamentoCliente(int CODAGENDAMENTO) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 

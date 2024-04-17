@@ -3,6 +3,7 @@ package view.cliente;
 import dao.AgendamentoDAO;
 import dao.BarbeariaDAO;
 import dao.ClienteDAO;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -69,41 +70,31 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     }
     
     public void consultarAgendamento(){
+        SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat hora = new SimpleDateFormat("HH:mm");
         AgendamentoDAO agendDAO = new AgendamentoDAO();
         List<Agendamento> agendamentos = new ArrayList();
-        agendamentos = agendDAO.read(CODCLIENTE);
+        agendamentos = agendDAO.consultarAgendamentosCliente(CODCLIENTE);
         if(!agendamentos.isEmpty()){//so executa se a lista nao tiver vazia
             if(agendamentos.size() >= 1){  //so executa se tiver um item     
                 Agendamento01.setVisible(true);
                 txtBarbearia01.setText(agendamentos.get(0).getNomebarbearia());
-                txtHorario01.setText(agendamentos.get(0).getHora()+"h  "+ agendamentos.get(0).getData().toString());
+                txtHorario01.setText(hora.format(agendamentos.get(0).getHora())+"h  "+data.format(agendamentos.get(0).getData()));
                 CODBARBEARIAS.add(agendamentos.get(0).getCodbarbearia());
                 CODAGENDAMENTOS.add(agendamentos.get(0).getId());
-            }else{
-                Agendamento01.setVisible(false);
-                txtBarbearia01.setText("");
-                txtHorario01.setText("");
-            } if(agendamentos.size() >= 2){ //so executa se tiver dois item             
+            }if(agendamentos.size() >= 2){ //so executa se tiver dois item             
                 Agendamento02.setVisible(true);
                 txtBarbearia02.setText(agendamentos.get(1).getNomebarbearia());
-                txtHorario02.setText(agendamentos.get(1).getHora()+"h  "+ agendamentos.get(1).getData().toString());
+                txtHorario02.setText(hora.format(agendamentos.get(1).getHora())+"h  "+ data.format(agendamentos.get(1).getData()));
                 CODBARBEARIAS.add(agendamentos.get(1).getCodbarbearia());
                 CODAGENDAMENTOS.add(agendamentos.get(1).getId());
-            }else{
-                Agendamento02.setVisible(false);
-                txtBarbearia02.setText("");
-                txtHorario02.setText("");
             }if(agendamentos.size() >= 3){ //so executa se tiver tres item                    
                 Agendamento03.setVisible(true);
                 txtBarbearia03.setText(agendamentos.get(2).getNomebarbearia());
-                txtHorario03.setText(agendamentos.get(2).getHora()+"h  "+ agendamentos.get(2).getData().toString());
+                txtHorario03.setText(hora.format(agendamentos.get(2).getHora())+"h  "+ data.format(agendamentos.get(2).getData()));
                 CODBARBEARIAS.add(agendamentos.get(2).getCodbarbearia());
                 CODAGENDAMENTOS.add(agendamentos.get(2).getId());
-            }else{
-                Agendamento03.setVisible(false);
-                txtBarbearia03.setText("");
-                txtHorario03.setText("");
-            } 
+            }
         }
     }
     
@@ -194,7 +185,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CimaLayout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addComponent(dataAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1395, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1154, Short.MAX_VALUE)
                 .addComponent(sair)
                 .addGap(23, 23, 23))
         );
@@ -448,7 +439,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(nome_usr, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(localizacao))))
-                .addContainerGap(418, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
         CentroLayout.setVerticalGroup(
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -463,7 +454,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                             .addComponent(ola, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(localizacao)))
-                .addGap(18, 75, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(barbearia01, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(barbearia02, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -473,7 +464,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addComponent(barbearia04, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(barbearia05, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1229, Short.MAX_VALUE))
+                .addContainerGap(527, Short.MAX_VALUE))
         );
 
         Direita.setBackground(new java.awt.Color(122, 188, 255));
@@ -541,7 +532,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         Agendamento01Layout.setHorizontalGroup(
             Agendamento01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Agendamento01Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(82, Short.MAX_VALUE)
                 .addGroup(Agendamento01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtBarbearia01, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtHorario01, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -690,22 +681,22 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(MeusAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(89, 89, 89))
-            .addGroup(DireitaLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(LogoMA)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addGap(74, 74, 74))
             .addGroup(DireitaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Agendamento01, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(DireitaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Agendamento02, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(DireitaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Agendamento03, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DireitaLayout.createSequentialGroup()
+                        .addComponent(Agendamento01, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(DireitaLayout.createSequentialGroup()
+                        .addComponent(Agendamento02, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(DireitaLayout.createSequentialGroup()
+                        .addComponent(Agendamento03, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         DireitaLayout.setVerticalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -714,22 +705,22 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addComponent(MeusAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(Agendamento01, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Agendamento02, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Agendamento03, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 823, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(LogoMA)
-                .addGap(114, 114, 114))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Cima, javax.swing.GroupLayout.DEFAULT_SIZE, 2161, Short.MAX_VALUE)
+            .addComponent(Cima, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(Centro, javax.swing.GroupLayout.DEFAULT_SIZE, 1661, Short.MAX_VALUE)
+                .addComponent(Centro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(Direita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -739,8 +730,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addComponent(Cima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Direita, javax.swing.GroupLayout.DEFAULT_SIZE, 1739, Short.MAX_VALUE)
-                    .addComponent(Centro, javax.swing.GroupLayout.DEFAULT_SIZE, 1739, Short.MAX_VALUE)))
+                    .addComponent(Direita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Centro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -844,21 +835,21 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private void btnExcluir1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir1MouseClicked
         int CODAGENDAMENTO = CODAGENDAMENTOS.get(1);
         AgendamentoDAO a = new AgendamentoDAO();
-        a.delete(CODAGENDAMENTO);
+        a.deleteAgendamentoCliente(CODAGENDAMENTO);
         consultarAgendamento();
     }//GEN-LAST:event_btnExcluir1MouseClicked
 
     private void btnExcluir2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir2MouseClicked
         int CODAGENDAMENTO = CODAGENDAMENTOS.get(1);
         AgendamentoDAO a = new AgendamentoDAO();
-        a.delete(CODAGENDAMENTO);
+        a.deleteAgendamentoCliente(CODAGENDAMENTO);
         consultarAgendamento();
     }//GEN-LAST:event_btnExcluir2MouseClicked
 
     private void btnExcluir3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir3MouseClicked
         int CODAGENDAMENTO = CODAGENDAMENTOS.get(1);
         AgendamentoDAO a = new AgendamentoDAO();
-        a.delete(CODAGENDAMENTO);
+        a.deleteAgendamentoCliente(CODAGENDAMENTO);
         consultarAgendamento();
     }//GEN-LAST:event_btnExcluir3MouseClicked
 

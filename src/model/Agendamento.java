@@ -83,7 +83,7 @@ public class Agendamento {
     
     public void alterarAgendamento(Agendamento a){
         AgendamentoDAO dao = new AgendamentoDAO();
-        dao.update(a);
+        dao.updateAgendamentoCliente(a);
     }
     
     public void agendarHorario(Agendamento a){
