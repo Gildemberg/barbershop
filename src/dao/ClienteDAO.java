@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.ConsultarNome;
 import model.TransfCod;
 import model.Cliente;
 
@@ -144,11 +143,11 @@ public class ClienteDAO {
             return null;
         }
         
-        public ConsultarNome retornoNome(int codcliente){
+        public String retornoNome(int codcliente){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-            ConsultarNome CNU = new ConsultarNome();
+            String nome;
             
             try {
                 stmt = con.prepareStatement("SELECT NOME FROM CLIENTE WHERE CODCLIENTE=?");
@@ -156,8 +155,8 @@ public class ClienteDAO {
                 rs = stmt.executeQuery();
                 
                 if(rs.next()){
-                    CNU.setNome(rs.getString(1));
-                    return CNU;
+                    nome=rs.getString(1);
+                    return nome;
                 } else{
                     return null;
                 }

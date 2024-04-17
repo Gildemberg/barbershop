@@ -9,14 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Agendamento;
 import model.Barbearia;
-import model.ConsultarNome;
 import model.TransfCod;
 
 
 public final class TelaPrincipalCliente extends javax.swing.JFrame {
     
-    int COD_USR;
-    String NOME_USR;
+    int CODCLIENTE;
+    String NOMECLIENTE;
     
     public TelaPrincipalCliente() {
         initComponents();
@@ -70,7 +69,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     public void consultarAgendamento(){
         AgendamentoDAO agendDAO = new AgendamentoDAO();
         List<Agendamento> agendamentos = new ArrayList();
-        agendamentos = agendDAO.read(COD_USR);
+        agendamentos = agendDAO.read(CODCLIENTE);
         if(!agendamentos.isEmpty()){//so executa se a lista nao tiver vazia
             if(agendamentos.size() >= 1){  //so executa se tiver um item     
                 Agendamento01.setVisible(true);
@@ -119,17 +118,15 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     }
     
     public void receberCodUsr(TransfCod TCU){//receber o cod USUÁRIO
-        this.COD_USR = TCU.getCod(); //recebendo o cod usr
-        ClienteDAO ClienteDao = new ClienteDAO();
-        ConsultarNome CNU = new ConsultarNome();
-        CNU = ClienteDao.retornoNome(COD_USR); //consultando o nome usr
-        consultarNomeUsr(CNU);
+        this.CODCLIENTE = TCU.getCod(); //recebendo o cod usr
+        imprimirNomeUsr(CODCLIENTE);
         consultarAgendamento();
     }
 
-    public void consultarNomeUsr (ConsultarNome CNU){//consultando o nome USUÁRIO
-        NOME_USR = CNU.getNome(); //recebendo o nome usr
-        nome_usr.setText(NOME_USR); //imprimendo o nome usr
+    public void imprimirNomeUsr (int CODCLIENTE){//consultando o nome USUÁRIO
+        ClienteDAO ClienteDao = new ClienteDAO();
+        this.NOMECLIENTE=ClienteDao.retornoNome(CODCLIENTE);
+        nome_usr.setText(NOMECLIENTE); //imprimendo o nome usr
       }
     
     @SuppressWarnings("unchecked")
@@ -800,7 +797,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private void barbearia01MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia01MouseClicked
         TransfCod TC = new TransfCod(); // Instanciando o model transfCod
         TC.setCod(1); //setando o valor do cod da EMP
-        TC.setCod1(COD_USR); //setando o valor do cod do USR
+        TC.setCod1(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente(); // Instanciando a View Agendamento
         TA.receberCodAgend(TC); // transferindo o cod da empresa
         TA.setVisible(true);
@@ -810,7 +807,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private void barbearia02MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia02MouseClicked
         TransfCod TC = new TransfCod();
         TC.setCod(2);
-        TC.setCod1(COD_USR); //setando o valor do cod do USR
+        TC.setCod1(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente();
         TA.receberCodAgend(TC);
         TA.setVisible(true);
@@ -820,7 +817,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private void barbearia03MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia03MouseClicked
         TransfCod TC = new TransfCod();
         TC.setCod(3);
-        TC.setCod1(COD_USR); //setando o valor do cod do USR
+        TC.setCod1(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente();
         TA.receberCodAgend(TC);
         TA.setVisible(true);
@@ -830,7 +827,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private void barbearia04MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia04MouseClicked
         TransfCod TC = new TransfCod();
         TC.setCod(4);
-        TC.setCod1(COD_USR); //setando o valor do cod do USR
+        TC.setCod1(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente();
         TA.receberCodAgend(TC);
         TA.setVisible(true);
@@ -840,7 +837,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private void barbearia05MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia05MouseClicked
         TransfCod TC = new TransfCod();
         TC.setCod(5);
-        TC.setCod1(COD_USR); //setando o valor do cod do USR
+        TC.setCod1(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente();
         TA.receberCodAgend(TC);
         TA.setVisible(true);
@@ -853,7 +850,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         TransfCod TC = new TransfCod(); // Instanciando o model transfCod
         TC.setCod(AGEND_COD); //setando o valor do cod do AGEND
         TC.setCod1(EMP_COD); //setando o valor do cod da EMP
-        TC.setCod2(COD_USR); //setando o valor do cod do USR
+        TC.setCod2(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente(); // Instanciando a View Agendamento
         TA.receberCodReAgend(TC); // transferindo o cod da empresa
         TA.setVisible(true);
@@ -866,7 +863,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         TransfCod TC = new TransfCod(); // Instanciando o model transfCod
         TC.setCod(AGEND_COD); //setando o valor do cod do AGEND
         TC.setCod1(EMP_COD); //setando o valor do cod da EMP
-        TC.setCod2(COD_USR); //setando o valor do cod do USR
+        TC.setCod2(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente(); // Instanciando a View Agendamento
         TA.receberCodReAgend(TC); // transferindo o cod da empresa
         TA.setVisible(true);
@@ -879,7 +876,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         TransfCod TC = new TransfCod(); // Instanciando o model transfCod
         TC.setCod(AGEND_COD); //setando o valor do cod do AGEND
         TC.setCod1(EMP_COD); //setando o valor do cod da EMP
-        TC.setCod2(COD_USR); //setando o valor do cod do USR
+        TC.setCod2(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente(); // Instanciando a View Agendamento
         TA.receberCodReAgend(TC); // transferindo o cod da empresa
         TA.setVisible(true);

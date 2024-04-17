@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.Barbearia;
-import model.ConsultarNome;
 import model.TransfCod;
 
 public class BarbeariaDAO {
@@ -213,11 +212,11 @@ public class BarbeariaDAO {
             return null;
         }
         
-        public ConsultarNome retornoNome(int codbarbearia){
+        public String retornoNome(int codbarbearia){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-            ConsultarNome CNE = new ConsultarNome();
+            String nome;
             
             try {
                 stmt = con.prepareStatement("SELECT NOMESOCIAL FROM barbearia WHERE CODBARBEARIA = ?");
@@ -225,8 +224,8 @@ public class BarbeariaDAO {
                 rs = stmt.executeQuery();
                 
                 if(rs.next()){
-                    CNE.setNome(rs.getString(1));
-                    return CNE;
+                    nome=rs.getString(1);
+                    return nome;
                 } else{
                     return null;
                 }

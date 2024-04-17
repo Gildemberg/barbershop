@@ -24,7 +24,7 @@ public class ClienteController {
             }
         }else{
             JOptionPane.showMessageDialog(null, "Os campos não foram preenchidos corretamente", "Mensagem", JOptionPane.ERROR_MESSAGE);        
-        check = false;
+            check = false;
         }
         return check;
     }

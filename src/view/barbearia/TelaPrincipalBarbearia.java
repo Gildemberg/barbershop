@@ -4,14 +4,12 @@ package view.barbearia;
 import dao.BarbeariaDAO;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import model.ConsultarNome;
 import model.TransfCod;
-import view.barbearia.TelaLoginBarbearia;
 
 public class TelaPrincipalBarbearia extends javax.swing.JFrame {
     
     int CODBARBEARIA;
-    String NOME_EMP, horario;
+    String NOMEBARBEARIA, horario;
 
     public TelaPrincipalBarbearia() {
         initComponents();
@@ -25,15 +23,13 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
     
     public void receberCodBarbearia(TransfCod TCE){//receber o cod EMPRESA
         this.CODBARBEARIA = TCE.getCod(); //recebendo o cod emp
-        BarbeariaDAO BarberDao = new BarbeariaDAO();
-        ConsultarNome CNE = new ConsultarNome();
-        CNE = BarberDao.retornoNome(CODBARBEARIA); //consultando o nome usr
-        consultarNomeEmp(CNE);
+        consultarNomeEmp(CODBARBEARIA);
     }
     
-    public void consultarNomeEmp (ConsultarNome CNE){//consultando o nome USUÁRIO
-        NOME_EMP = CNE.getNome(); //recebendo o nome usr
-        nome_emp.setText(NOME_EMP); //imprimendo o nome usr
+    public void consultarNomeEmp (int CODBARBEARIA){//consultando o nome USUÁRIO
+        BarbeariaDAO BarberDao = new BarbeariaDAO();
+        NOMEBARBEARIA = BarberDao.retornoNome(CODBARBEARIA); //consultando o nome usr
+        nome_emp.setText(NOMEBARBEARIA); //imprimendo o nome usr
       }
 
     @SuppressWarnings("unchecked")
@@ -220,7 +216,7 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
 
     private void btnConsultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMouseClicked
         TelaAgendamentoBarbearia TCA = new TelaAgendamentoBarbearia();
-        TCA.receberCodUsr(CODBARBEARIA, NOME_EMP, horario);
+        TCA.receberCodUsr(CODBARBEARIA, NOMEBARBEARIA, horario);
         TCA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnConsultarMouseClicked
