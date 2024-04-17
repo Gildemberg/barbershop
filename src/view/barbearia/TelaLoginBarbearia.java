@@ -3,11 +3,7 @@ package view.barbearia;
 import controller.BarbeariaController;
 import dao.BarbeariaDAO;
 import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
-import model.TransfCod;
 import view.TelaInicial;
-import view.barbearia.TelaPrincipalBarbearia;
-import view.barbearia.TelaCadastroBarbearia;
 
 public class TelaLoginBarbearia extends javax.swing.JFrame {
 
@@ -25,11 +21,10 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
         check = barbeariaController.validarLogin(login, senha);
         
         if(check){
-            TransfCod TCU = new TransfCod(); //instanciando a classe Transferencia de Cod
             BarbeariaDAO BarbeariaDao = new BarbeariaDAO(); //instanciando a classe ClienteDAO
-            TCU = BarbeariaDao.retornoCod(login, senha); //Realizando a consulta do cod usr atravez do login e senha usr
+            int CODBARBEARIA = BarbeariaDao.retornoCod(login, senha); //Realizando a consulta do cod usr atravez do login e senha usr
             TelaPrincipalBarbearia TA = new TelaPrincipalBarbearia(); //instanciando a classe Tela Principal
-            TA.receberCodBarbearia(TCU); //transferindo o codigo usr pra tela principal
+            TA.receberCodBarbearia(CODBARBEARIA); //transferindo o codigo usr pra tela principal
             TA.setVisible(true);
             this.setVisible(false);
         }

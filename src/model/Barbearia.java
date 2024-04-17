@@ -189,8 +189,13 @@ public class Barbearia {
         this.regra4 = regra4;
     }
      
-    public void cadastrarBarbearia(Barbearia c){
+    public void cadastrarBarbearia(Barbearia b){
         BarbeariaDAO dao = new BarbeariaDAO();
-        dao.create(c);
+        dao.create(b);
+    }
+    
+    public void atualizarCadastro(Barbearia b){
+        BarbeariaDAO dao = new BarbeariaDAO();
+        dao.updateCadastro(b);
     }
 }

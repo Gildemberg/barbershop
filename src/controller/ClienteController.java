@@ -56,4 +56,24 @@ public class ClienteController {
             return check;
         }
     }
+    
+    public boolean verificarUpdateCliente(Cliente c){
+        boolean check;
+        //VERIFICAR SE TODOS OS CAMPOS ESTÃO PREENCHIDOS
+        if(c.getNome()!=null && c.getNome().length()>0 && 
+                c.getCpf()!=null && c.getCpf().length()>0 && 
+                c.getEmail()!=null && c.getEmail().length()>0 &&
+                c.getTelefone()!=null && c.getTelefone().length()>0 && 
+                c.getLogin()!=null && c.getLogin().length()>0 && 
+                c.getSenha()!=null && c.getSenha().length()>0 
+                ){
+            c.atualizarCadastro(c);
+            JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!");
+            check = true;
+        }else{
+            JOptionPane.showMessageDialog(null, "Os campos não foram preenchidos corretamente", "Mensagem", JOptionPane.ERROR_MESSAGE);        
+            check = false;
+        }
+        return check;
+    }
 }

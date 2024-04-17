@@ -5,28 +5,28 @@ import javax.swing.JOptionPane;
 import model.Barbearia;
 
 public class BarbeariaController {
-    public boolean verificarBarbearia(String nome, String cnpj, String email, String telefone1, String telefone2, String login, String senha, String descricao, String rua, String numero, String bairro, String cidade, String uf, String regra1, String regra2, String regra3, String regra4){
+    public boolean verificarBarbearia(Barbearia b){
         boolean check;
         //VERIFICAR PREENCHIMENTO DOS CAMPOS
-        if(nome!=null && nome.length()>0 && 
-                cnpj!=null && cnpj.length()>0 && 
-                email!=null && email.length()>0 &&
-                telefone1!=null && telefone1.length()>0 && 
-                telefone2!=null && telefone2.length()>0 && 
-                login!=null && login.length()>0 && 
-                senha!=null && senha.length()>0 &&
-                descricao!=null && descricao.length()>0 && 
-                rua!=null && rua.length()>0 &&
-                numero!=null && numero.length()>0 && 
-                bairro!=null && bairro.length()>0 && 
-                cidade!=null && cidade.length()>0 && 
-                uf!=null && uf.length()>0 &&
-                regra1!=null && regra1.length()>0 && 
-                regra2!=null && regra2.length()>0 &&
-                regra3!=null && regra3.length()>0 && 
-                regra4!=null && regra4.length()>0 
+        if(b.getNome()!=null && b.getNome().length()>0 && 
+                b.getCnpj()!=null && b.getNome().length()>0 && 
+                b.getEmail()!=null && b.getEmail().length()>0 &&
+                b.getTelefone1()!=null && b.getTelefone1().length()>0 && 
+                b.getTelefone2()!=null && b.getTelefone2().length()>0 && 
+                b.getLogin()!=null && b.getLogin().length()>0 && 
+                b.getSenha()!=null && b.getSenha().length()>0 &&
+                b.getDescricao()!=null && b.getDescricao().length()>0 && 
+                b.getRua()!=null && b.getRua().length()>0 &&
+                b.getNumero()!=null && b.getNumero().length()>0 && 
+                b.getBairro()!=null && b.getBairro().length()>0 && 
+                b.getCidade()!=null && b.getCidade().length()>0 && 
+                b.getUf()!=null && b.getUf().length()>0 &&
+                b.getRegra1()!=null && b.getRegra1().length()>0 && 
+                b.getRegra2()!=null && b.getRegra2().length()>0 &&
+                b.getRegra3()!=null && b.getRegra3().length()>0 && 
+                b.getRegra4()!=null && b.getRegra4().length()>0 
                 ){
-            check = verificarNoBanco(nome, cnpj, email, telefone1, telefone2, login, senha, descricao, rua, numero, bairro, cidade, uf, regra1, regra2, regra3, regra4);
+            check = verificarNoBanco(b);
             return check;
         }else{
             JOptionPane.showMessageDialog(null, "Os campos não foram preenchidos corretamente", "Mensagem", JOptionPane.ERROR_MESSAGE);        
@@ -35,15 +35,15 @@ public class BarbeariaController {
         return check;
     }
     
-    public boolean verificarNoBanco(String nome, String cnpj, String email, String telefone1, String telefone2, String login, String senha, String descricao, String rua, String numero, String bairro, String cidade, String uf, String regra1, String regra2, String regra3, String regra4){
+    public boolean verificarNoBanco(Barbearia b){
         BarbeariaDAO dao = new BarbeariaDAO();
         boolean check, valor;
-        check = dao.checkInformacoes(cnpj, email, telefone1, telefone2, login);
+        check = dao.checkInformacoes(b);
         if(check){
             JOptionPane.showMessageDialog(null, "Já existe Barbearia com esse CNPJ/EMAIL/LOGIN", "Mensagem", JOptionPane.ERROR_MESSAGE);
             valor = false;
         }else{
-            Barbearia b = new Barbearia(nome, cnpj, email, telefone1, telefone2, login, senha, descricao, rua, numero, bairro, cidade, uf, regra1, regra2, regra3, regra4);
+            //Barbearia b = new Barbearia(b);
             b.cadastrarBarbearia(b);
             JOptionPane.showMessageDialog(null, "Barbearia cadastrado com sucesso!");
             valor = true;
@@ -61,5 +61,36 @@ public class BarbeariaController {
             JOptionPane.showMessageDialog(null, "Dados inseridos incorretamente!", "Mensagem", JOptionPane.ERROR_MESSAGE);
             return check;
         }
+    }
+    
+    public boolean verificarUpdateBarbearia(Barbearia b){
+        boolean check;
+        if(b.getId()>0 &&
+                b.getNome()!=null && b.getNome().length()>0 && 
+                b.getCnpj()!=null && b.getNome().length()>0 && 
+                b.getEmail()!=null && b.getEmail().length()>0 &&
+                b.getTelefone1()!=null && b.getTelefone1().length()>0 && 
+                b.getTelefone2()!=null && b.getTelefone2().length()>0 && 
+                b.getLogin()!=null && b.getLogin().length()>0 && 
+                b.getSenha()!=null && b.getSenha().length()>0 &&
+                b.getDescricao()!=null && b.getDescricao().length()>0 && 
+                b.getRua()!=null && b.getRua().length()>0 &&
+                b.getNumero()!=null && b.getNumero().length()>0 && 
+                b.getBairro()!=null && b.getBairro().length()>0 && 
+                b.getCidade()!=null && b.getCidade().length()>0 && 
+                b.getUf()!=null && b.getUf().length()>0 &&
+                b.getRegra1()!=null && b.getRegra1().length()>0 && 
+                b.getRegra2()!=null && b.getRegra2().length()>0 &&
+                b.getRegra3()!=null && b.getRegra3().length()>0 && 
+                b.getRegra4()!=null && b.getRegra4().length()>0 
+                ){
+            b.atualizarCadastro(b);
+            JOptionPane.showMessageDialog(null, "Cadastro atualizado com sucesso!");
+            check=true;
+        }else{
+            JOptionPane.showMessageDialog(null, "Os campos não foram preenchidos corretamente", "Mensagem", JOptionPane.ERROR_MESSAGE);        
+            check = false;
+        }
+        return check;
     }
 }

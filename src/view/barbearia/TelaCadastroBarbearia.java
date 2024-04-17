@@ -1,16 +1,122 @@
 package view.barbearia;
 
 import controller.BarbeariaController;
-import javax.swing.JOptionPane;
+import dao.BarbeariaDAO;
+import java.util.ArrayList;
+import java.util.List;
 import model.Barbearia;
 
 public class TelaCadastroBarbearia extends javax.swing.JFrame {
-
+    boolean update=false;
+    int CODBARBEARIA;
+    Barbearia b = new Barbearia();
+    BarbeariaController barbeariaController = new BarbeariaController();
+    BarbeariaDAO barbeariaDao = new BarbeariaDAO();
+    List<Barbearia> InfoBarbearia = new ArrayList();
+    
+    
     public TelaCadastroBarbearia() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
     }
+    
+    public void atualizarCadastro(int CODBARBEARIA){
+        update=true;
+        this.CODBARBEARIA = CODBARBEARIA;
+        InfoBarbearia = barbeariaDao.readUpdateCadastro(CODBARBEARIA);
+        
+        btnCadastrar.setText("ATUALIZAR");
+        titulo.setText("ATUALIZAR CADASTRO");
+        txtNome.setText(InfoBarbearia.get(0).getNome());
+        txtCNPJ.setText(InfoBarbearia.get(0).getCnpj());
+        txtLogin.setText(InfoBarbearia.get(0).getLogin());
+        txtSenha.setText(InfoBarbearia.get(0).getSenha());
+        txtEmail.setText(InfoBarbearia.get(0).getEmail());
+        txtTelefone1.setText(InfoBarbearia.get(0).getTelefone1());
+        txtTelefone2.setText(InfoBarbearia.get(0).getTelefone2());
+        txtRua.setText(InfoBarbearia.get(0).getRua());
+        txtNumero.setText(InfoBarbearia.get(0).getNumero());
+        txtBairro.setText(InfoBarbearia.get(0).getBairro());
+        txtCidade.setText(InfoBarbearia.get(0).getCidade());
+        txtUf.setText(InfoBarbearia.get(0).getUf());
+        txtRegra1.setText(InfoBarbearia.get(0).getRegra1());
+        txtRegra2.setText(InfoBarbearia.get(0).getRegra2());
+        txtRegra3.setText(InfoBarbearia.get(0).getRegra3());
+        txtRegra4.setText(InfoBarbearia.get(0).getRegra4());
+        txtDescricao.setText(InfoBarbearia.get(0).getDescricao());
+    }
+    
+    public void recadastrar(int CODBARBEARIA){
+        boolean check;
+        b.setId(CODBARBEARIA);
+        b.setNome(txtNome.getText());
+        b.setCnpj(txtCNPJ.getText());
+        b.setLogin(txtLogin.getText());
+        b.setSenha(txtSenha.getText());
+        b.setTelefone1(txtTelefone1.getText());
+        b.setTelefone2(txtTelefone2.getText());
+        b.setEmail(txtEmail.getText());
+        b.setRua(txtRua.getText());
+        b.setNumero(txtNumero.getText());
+        b.setBairro(txtBairro.getText());
+        b.setCidade(txtCidade.getText());
+        b.setUf(txtUf.getText());
+        b.setRegra1(txtRegra1.getText());
+        b.setRegra2(txtRegra2.getText());
+        b.setRegra3(txtRegra3.getText());
+        b.setRegra4(txtRegra4.getText());
+        b.setDescricao(txtDescricao.getText());
 
+        check = barbeariaController.verificarUpdateBarbearia(b);
+    }
+      
+    public void cadastrar(){
+        boolean check;
+        b.setNome(txtNome.getText());
+        b.setCnpj(txtCNPJ.getText());
+        b.setLogin(txtLogin.getText());
+        b.setSenha(txtSenha.getText());
+        b.setTelefone1(txtTelefone1.getText());
+        b.setTelefone2(txtTelefone2.getText());
+        b.setEmail(txtEmail.getText());
+        b.setRua(txtRua.getText());
+        b.setNumero(txtNumero.getText());
+        b.setBairro(txtBairro.getText());
+        b.setCidade(txtCidade.getText());
+        b.setUf(txtUf.getText());
+        b.setRegra1(txtRegra1.getText());
+        b.setRegra2(txtRegra2.getText());
+        b.setRegra3(txtRegra3.getText());
+        b.setRegra4(txtRegra4.getText());
+        b.setDescricao(txtDescricao.getText());
+
+        check = barbeariaController.verificarBarbearia(b);
+        if(check){ 
+            limparCampos();
+        }
+    }
+    
+    public void limparCampos(){
+        txtNome.setText("");
+        txtCNPJ.setText("");
+        txtLogin.setText("");
+        txtSenha.setText("");
+        txtTelefone1.setText("");
+        txtTelefone2.setText("");
+        txtEmail.setText("");
+        txtRua.setText("");
+        txtNumero.setText("");
+        txtBairro.setText("");
+        txtCidade.setText("");
+        txtUf.setText("");
+        txtRegra1.setText("");
+        txtRegra2.setText("");
+        txtRegra3.setText("");
+        txtRegra4.setText("");
+        txtDescricao.setText("");
+    }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -92,31 +198,34 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         EsquerdaLayout.setHorizontalGroup(
             EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Nome1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EsquerdaLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(Nome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addGap(164, 164, 164)
-                .addComponent(jLabel2)
-                .addContainerGap(169, Short.MAX_VALUE))
+                        .addContainerGap(110, Short.MAX_VALUE)
+                        .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(EsquerdaLayout.createSequentialGroup()
+                                .addGap(54, 54, 54)
+                                .addComponent(jLabel2))
+                            .addComponent(Logo))
+                        .addGap(0, 104, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EsquerdaLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Nome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Nome1, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         EsquerdaLayout.setVerticalGroup(
             EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addContainerGap(132, Short.MAX_VALUE)
+                .addContainerGap(133, Short.MAX_VALUE)
                 .addComponent(Logo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Nome1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addGap(259, 259, 259))
         );
 
         Direita.setBackground(new java.awt.Color(0, 153, 255));
@@ -256,11 +365,6 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         txtRegra4.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
 
         jRadioButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
 
         btnCadastrar.setBackground(new java.awt.Color(0, 51, 102));
         btnCadastrar.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
@@ -278,7 +382,11 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         descricao.setForeground(new java.awt.Color(255, 255, 255));
         descricao.setText("DESCRIÇÃO DA BARBEARIA:");
 
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
         txtDescricao.setColumns(20);
+        txtDescricao.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
+        txtDescricao.setLineWrap(true);
         txtDescricao.setRows(5);
         jScrollPane2.setViewportView(txtDescricao);
 
@@ -314,9 +422,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
                                             .addComponent(txtRegra3, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(12, 12, 12)
                                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(DireitaLayout.createSequentialGroup()
-                                                .addComponent(regra4)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(regra4)
                                             .addComponent(txtRegra4)))
                                     .addGroup(DireitaLayout.createSequentialGroup()
                                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -488,55 +594,23 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        boolean check;
-        String nome = txtNome.getText();
-        String cnpj = txtCNPJ.getText();
-        String login = txtLogin.getText();
-        String senha = txtSenha.getText();
-        String telefone1 = txtTelefone1.getText();
-        String telefone2 = txtTelefone2.getText();
-        String email = txtEmail.getText();
-        String rua = txtRua.getText();
-        String numero = txtNumero.getText();
-        String bairro = txtBairro.getText();
-        String cidade = txtCidade.getText();
-        String uf = txtUf.getText();
-        String regra1 = txtRegra1.getText();
-        String regra2 = txtRegra2.getText();
-        String regra3 = txtRegra3.getText();
-        String regra4 = txtRegra4.getText();
-        String descricao = txtDescricao.getText();
-
-        BarbeariaController barbeariaController = new BarbeariaController();
-        check = barbeariaController.verificarBarbearia(nome, cnpj, email, telefone1, telefone2, login, senha, descricao, rua, numero, bairro, cidade, uf, regra1, regra2, regra3, regra4);
-        if(check){ // LIMPANDO OS CAMPOS EM CASO DE CADASTRO REALIZADO
-            txtNome.setText("");
-            txtCNPJ.setText("");
-            txtLogin.setText("");
-            txtSenha.setText("");
-            txtTelefone1.setText("");
-            txtTelefone2.setText("");
-            txtEmail.setText("");
-            txtRua.setText("");
-            txtNumero.setText("");
-            txtBairro.setText("");
-            txtCidade.setText("");
-            txtUf.setText("");
-            txtRegra1.setText("");
-            txtRegra2.setText("");
-            txtRegra3.setText("");
-            txtRegra4.setText("");
-            txtDescricao.setText("");
+        if(update){
+            recadastrar(CODBARBEARIA);
+        }else{
+            cadastrar();
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
     private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
-        this.setVisible(false);
-        new TelaLoginBarbearia().setVisible(true);
+        if(update){
+            TelaPrincipalBarbearia TPB = new TelaPrincipalBarbearia();
+            TPB.receberCodBarbearia(CODBARBEARIA);
+            TPB.setVisible(true);
+            this.dispose();
+        }else{
+            this.setVisible(false);
+            new TelaLoginBarbearia().setVisible(true);
+        }
     }//GEN-LAST:event_sairMouseClicked
 
     public static void main(String args[]) {

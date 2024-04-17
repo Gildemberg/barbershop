@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.TransfCod;
 
 public class TelaDefinirExpedienteBarbearia extends javax.swing.JFrame {
     
@@ -194,9 +193,7 @@ public class TelaDefinirExpedienteBarbearia extends javax.swing.JFrame {
 
     private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
         TelaPrincipalBarbearia TP = new TelaPrincipalBarbearia();
-        TransfCod TC = new TransfCod();
-        TC.setCod(CODBARBEARIA);
-        TP.receberCodBarbearia(TC);
+        TP.receberCodBarbearia(CODBARBEARIA);
         TP.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_sairMouseClicked

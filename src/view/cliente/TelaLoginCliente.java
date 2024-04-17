@@ -5,7 +5,6 @@ import view.cliente.TelaCadastroCliente;
 import view.cliente.TelaPrincipalCliente;
 import dao.ClienteDAO;
 import java.awt.event.KeyEvent;
-import model.TransfCod;
 import view.TelaInicial;
 
 public class TelaLoginCliente extends javax.swing.JFrame {
@@ -23,11 +22,12 @@ public class TelaLoginCliente extends javax.swing.JFrame {
         check = clienteController.validarLogin(login, senha);
         
         if(check){
-            TransfCod TCU = new TransfCod(); //instanciando a classe Transferencia de Cod
             ClienteDAO ClienteDao = new ClienteDAO(); //instanciando a classe ClienteDAO
-            TCU = ClienteDao.retornoCod(login, senha); //Realizando a consulta do cod usr atravez do login e senha usr
+           
+            int CODCLIENTE = ClienteDao.retornoCod(login, senha); //Realizando a consulta do cod usr atravez do login e senha usr
+            
             TelaPrincipalCliente TC = new TelaPrincipalCliente(); //instanciando a classe Tela Principal
-            TC.receberCodUsr(TCU); //transferindo o codigo usr pra tela principal
+            TC.receberCodUsr(CODCLIENTE); //transferindo o codigo usr pra tela principal
             TC.setVisible(true);
             this.setVisible(false);
         }

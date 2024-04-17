@@ -6,7 +6,6 @@ import controller.AgendamentoController;
 import dao.BarbeariaDAO;
 import java.util.ArrayList;
 import java.util.List;
-import model.TransfCod;
 import model.Barbearia;
 import java.sql.Time;
 import java.sql.Date;
@@ -26,16 +25,18 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         setExtendedState (MAXIMIZED_BOTH);
     }
     
-    public void receberCodAgend(TransfCod TC){
-        this.CODBARBEARIA = TC.getCod();
-        this.CODCLIENTE = TC.getCod1();
+    public void receberCodAgend(int CODBARBEARIA, int CODCLIENTE){
+        this.CODBARBEARIA = CODBARBEARIA;
+        this.CODCLIENTE = CODCLIENTE;
         consultarEmpresa(CODBARBEARIA);
     }
     
-    public void receberCodReAgend(TransfCod TC){
-        this.CODAGENDAMENTO = TC.getCod();
-        this.CODBARBEARIA = TC.getCod1();
-        this.CODCLIENTE = TC.getCod2();
+    public void receberCodReAgend(int CODAGENDAMENTO, int CODBARBEARIA, int CODCLIENTE){
+        Agendamento.setText("REAGENDAMENTO");
+        btnAgendar.setText("REAGENDAR");
+        this.CODAGENDAMENTO = CODAGENDAMENTO;
+        this.CODBARBEARIA = CODBARBEARIA;
+        this.CODCLIENTE = CODCLIENTE;
         consultarEmpresa(CODBARBEARIA);
     }
     
@@ -260,34 +261,35 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         DireitaLayout.setHorizontalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DireitaLayout.createSequentialGroup()
-                .addContainerGap(123, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                        .addComponent(sair)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                    .addGroup(DireitaLayout.createSequentialGroup()
+                        .addGap(0, 117, Short.MAX_VALUE)
                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(calendario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                                .addComponent(Data, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(131, 131, 131))
+                                .addComponent(sair)
+                                .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(DireitaLayout.createSequentialGroup()
-                                        .addComponent(txtHora, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(Hora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(71, 71, 71)))
-                        .addGap(84, 84, 84))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                        .addComponent(btnAgendar, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(237, 237, 237))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                        .addComponent(Agendamento, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(149, 149, 149))))
+                                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(calendario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                                        .addComponent(Data, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(131, 131, 131))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(DireitaLayout.createSequentialGroup()
+                                                .addComponent(txtHora, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(Hora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(71, 71, 71)))
+                                .addGap(84, 84, 84))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                                .addComponent(btnAgendar, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(237, 237, 237))))
+                    .addComponent(Agendamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         DireitaLayout.setVerticalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,9 +336,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
 
     private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
         TelaPrincipalCliente TP = new TelaPrincipalCliente();
-        TransfCod TC = new TransfCod();
-        TC.setCod(CODCLIENTE); //setando o cod usr
-        TP.receberCodUsr(TC); 
+        TP.receberCodUsr(CODCLIENTE); 
         TP.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_sairMouseClicked

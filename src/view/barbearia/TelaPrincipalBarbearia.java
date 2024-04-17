@@ -4,12 +4,12 @@ package view.barbearia;
 import dao.BarbeariaDAO;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import model.TransfCod;
 
 public class TelaPrincipalBarbearia extends javax.swing.JFrame {
     
     int CODBARBEARIA;
     String NOMEBARBEARIA, horario;
+    TelaCadastroBarbearia TCB = new TelaCadastroBarbearia();
 
     public TelaPrincipalBarbearia() {
         initComponents();
@@ -21,8 +21,8 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
         dataAtual.setText(horario);
     }
     
-    public void receberCodBarbearia(TransfCod TCE){//receber o cod EMPRESA
-        this.CODBARBEARIA = TCE.getCod(); //recebendo o cod emp
+    public void receberCodBarbearia(int CODBARBEARIA){//receber o cod EMPRESA
+        this.CODBARBEARIA = CODBARBEARIA; //recebendo o cod emp
         consultarNomeEmp(CODBARBEARIA);
     }
     
@@ -40,6 +40,7 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
         sair = new javax.swing.JLabel();
         dataAtual = new javax.swing.JLabel();
         localizacao = new javax.swing.JLabel();
+        editarCadastro = new javax.swing.JLabel();
         Centro = new javax.swing.JPanel();
         ola = new javax.swing.JLabel();
         nome_emp = new javax.swing.JLabel();
@@ -73,6 +74,14 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
         localizacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icone_local.png"))); // NOI18N
         localizacao.setText("Paulo Afonso - BA");
 
+        editarCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/editarcadastro.png"))); // NOI18N
+        editarCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarCadastro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editarCadastroMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout CimaLayout = new javax.swing.GroupLayout(Cima);
         Cima.setLayout(CimaLayout);
         CimaLayout.setHorizontalGroup(
@@ -83,6 +92,8 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
                     .addComponent(dataAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(localizacao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(editarCadastro)
+                .addGap(18, 18, 18)
                 .addComponent(sair)
                 .addGap(23, 23, 23))
         );
@@ -91,13 +102,15 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
             .addGroup(CimaLayout.createSequentialGroup()
                 .addGroup(CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CimaLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(sair))
-                    .addGroup(CimaLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(dataAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(localizacao)))
+                        .addComponent(localizacao))
+                    .addGroup(CimaLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(editarCadastro)
+                            .addComponent(sair))))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
@@ -228,6 +241,12 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnDefinirMouseClicked
 
+    private void editarCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarCadastroMouseClicked
+        TCB.atualizarCadastro(CODBARBEARIA);
+        TCB.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_editarCadastroMouseClicked
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -251,6 +270,7 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
     private javax.swing.JLabel btnConsultar;
     private javax.swing.JLabel btnDefinir;
     private javax.swing.JLabel dataAtual;
+    private javax.swing.JLabel editarCadastro;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel localizacao;

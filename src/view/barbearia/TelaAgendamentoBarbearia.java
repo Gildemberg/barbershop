@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import model.Agendamento;
-import model.TransfCod;
 
 public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
 
@@ -846,9 +845,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
 
     private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
         TelaPrincipalBarbearia TP = new TelaPrincipalBarbearia();
-        TransfCod TC = new TransfCod();
-        TC.setCod(CODBARBEARIA);
-        TP.receberCodBarbearia(TC);
+        TP.receberCodBarbearia(CODBARBEARIA);
         TP.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_sairMouseClicked

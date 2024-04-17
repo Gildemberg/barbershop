@@ -83,4 +83,9 @@ public class Cliente {
         ClienteDAO dao = new ClienteDAO();
         dao.create(c);
     }
+    
+    public void atualizarCadastro(Cliente c){
+        ClienteDAO dao = new ClienteDAO();
+        dao.updateCadastroCliente(c);
+    }
 }

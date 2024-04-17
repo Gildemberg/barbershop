@@ -1,14 +1,80 @@
 package view.cliente;
 
 import controller.ClienteController;
+import dao.ClienteDAO;
+import java.util.ArrayList;
+import java.util.List;
+import model.Cliente;
 
 public class TelaCadastroCliente extends javax.swing.JFrame {
-
+    
+    boolean update = false;
+    List<Cliente> cliente = new ArrayList();
+    
     public TelaCadastroCliente() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
     }
 
+    public void alterarCadastro(int CODCLIENTE){        
+        ClienteDAO clientedao = new ClienteDAO();
+        List<Cliente> cliente = new ArrayList();
+        
+        cliente=clientedao.read(CODCLIENTE);
+        this.cliente = cliente;
+        this.update = true;
+        
+        titulo.setText("ATUALIZAÇÃO DE CADASTRO");
+        cadastrar.setText("ATUALIZAR");
+        txtCPF.setText(cliente.get(0).getCpf());
+        txtNome.setText(cliente.get(0).getNome());
+        txtEmail.setText(cliente.get(0).getEmail());
+        txtTel.setText(cliente.get(0).getTelefone());
+        txtLogin.setText(cliente.get(0).getLogin());
+        txtSenha.setText(cliente.get(0).getSenha());
+    }
+    
+    public void atualizarCadastroCliente(){
+        boolean check;
+        Cliente c = new Cliente();
+        ClienteController controller = new ClienteController();
+        
+        c.setId(cliente.get(0).getId());
+        c.setCpf(txtCPF.getText());
+        c.setNome(txtNome.getText());
+        c.setEmail(txtEmail.getText());
+        c.setTelefone(txtTel.getText());
+        c.setLogin(txtLogin.getText());
+        c.setSenha(txtSenha.getText());
+        check = controller.verificarUpdateCliente(c);
+    }
+    
+    public void cadastrarCliente(){
+        boolean check;
+        boolean confirmacaoDados = ConfirmacaoDados.isSelected();
+        String nome = txtNome.getText();
+        String cpf = txtCPF.getText();
+        String login = txtLogin.getText();
+        String senha = txtSenha.getText();
+        String telefone = txtTel.getText();
+        String email = txtEmail.getText();
+
+        ClienteController clienteController = new ClienteController();
+        check = clienteController.verificarCliente(nome, cpf, email, telefone, login, senha, confirmacaoDados);
+        if(check){
+            limparCampos();
+        }
+    }
+    
+    public void limparCampos(){
+        txtNome.setText("");
+        txtCPF.setText("");
+        txtLogin.setText("");
+        txtSenha.setText("");
+        txtTel.setText("");
+        txtEmail.setText("");
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -307,24 +373,10 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
-        boolean check;
-        boolean confirmacaoDados = ConfirmacaoDados.isSelected();
-        String nome = txtNome.getText();
-        String cpf = txtCPF.getText();
-        String login = txtLogin.getText();
-        String senha = txtSenha.getText();
-        String telefone = txtTel.getText();
-        String email = txtEmail.getText();
-
-        ClienteController clienteController = new ClienteController();
-        check = clienteController.verificarCliente(nome, cpf, email, telefone, login, senha, confirmacaoDados);
-        if(check){ // LIMPANDO OS CAMPOS EM CASO DE CADASTRO REALIZADO
-            txtNome.setText("");
-            txtCPF.setText("");
-            txtLogin.setText("");
-            txtSenha.setText("");
-            txtTel.setText("");
-            txtEmail.setText("");
+        if(update){
+            atualizarCadastroCliente();
+        }else{
+            cadastrarCliente();
         }
     }//GEN-LAST:event_cadastrarActionPerformed
 
@@ -337,8 +389,15 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
-        this.setVisible(false);
-        new TelaLoginCliente().setVisible(true);
+        if(update){
+            TelaPrincipalCliente TPC = new TelaPrincipalCliente();
+            TPC.receberCodUsr(cliente.get(0).getId());
+            TPC.setVisible(true);
+            this.dispose();
+        }else{   
+            this.setVisible(false);
+            new TelaLoginCliente().setVisible(true);
+        }
     }//GEN-LAST:event_sairMouseClicked
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
@@ -353,19 +412,9 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new TelaCadastroCliente().setVisible(true);
         });

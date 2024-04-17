@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.Barbearia;
-import model.TransfCod;
 
 public class BarbeariaDAO {
     public void create(Barbearia b){
@@ -83,6 +82,61 @@ public class BarbeariaDAO {
             }
         }
     }
+    public void updateCadastro(Barbearia b){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "UPDATE barbearia SET NOMESOCIAL=?, CNPJ=?, EMAIL=?, TELEFONE1=?, TELEFONE2=?, LOGIN=?, SENHA=?, DESCRICAO=? WHERE CODBARBEARIA=?";
+
+            // Obtém o ID gerado automaticamente
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, b.getNome());
+            stmt.setString(2, b.getCnpj());
+            stmt.setString(3, b.getEmail());
+            stmt.setString(4, b.getTelefone1());
+            stmt.setString(5, b.getTelefone2());
+            stmt.setString(6, b.getLogin());
+            stmt.setString(7, b.getSenha());
+            stmt.setString(8, b.getDescricao());
+            stmt.setInt(9, b.getId());
+            stmt.executeUpdate();
+            
+            String sql1 = "UPDATE endereco SET RUA=?, NUMERO=?, BAIRRO=?, CIDADE=?, ESTADO=? WHERE FK_CODBARBEARIA=?";
+            stmt = con.prepareStatement(sql1);
+            stmt.setString(1, b.getRua());
+            stmt.setString(2, b.getNumero());
+            stmt.setString(3, b.getBairro());
+            stmt.setString(4, b.getCidade());
+            stmt.setString(5, b.getUf());
+            stmt.setInt(6, b.getId()); // Usar o ID da barbearia
+            stmt.executeUpdate();
+            
+            // Inserir na tabela regra
+            String sql2 = "UPDATE regra SET REGRA1=?, REGRA2=?, REGRA3=?, REGRA4=? WHERE FK_CODBARBEARIA=?";
+            stmt = con.prepareStatement(sql2);
+            stmt.setString(1, b.getRegra1());
+            stmt.setString(2, b.getRegra2());
+            stmt.setString(3, b.getRegra3());
+            stmt.setString(4, b.getRegra4());
+            stmt.setInt(5, b.getId()); // Usar o ID da barbearia
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
+            Logger.getLogger(BarbeariaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            // Fechar ResultSet, Statement e conexão
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(BarbeariaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
     
     public List<Barbearia> read(){
             Connection con = ConnectionFactory.getConnection();
@@ -131,7 +185,7 @@ public class BarbeariaDAO {
             return barbearias;
         }
     
-            public boolean checkInformacoes(String cnpj, String email, String telefone1, String telefone2, String login){
+            public boolean checkInformacoes(Barbearia b){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
@@ -139,11 +193,11 @@ public class BarbeariaDAO {
             
             try {
                 stmt = con.prepareStatement("SELECT * FROM barbearia WHERE CNPJ=? OR EMAIL=? OR TELEFONE1=? OR TELEFONE2=? OR LOGIN = ?");
-                stmt.setString(1, cnpj);
-                stmt.setString(2, email);
-                stmt.setString(3, telefone1);
-                stmt.setString(4, telefone2);
-                stmt.setString(5, login);
+                stmt.setString(1, b.getCnpj());
+                stmt.setString(2, b.getEmail());
+                stmt.setString(3, b.getTelefone1());
+                stmt.setString(4, b.getTelefone2());
+                stmt.setString(5, b.getLogin());
                 rs = stmt.executeQuery();
                 
                 if(rs.next()){
@@ -157,6 +211,55 @@ public class BarbeariaDAO {
                 ConnectionFactory.closeConnection(con, stmt, rs);
             }
             return check;  
+        }
+    
+        public List<Barbearia> readUpdateCadastro(int CODBARBEARIA){
+            Connection con = ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            List<Barbearia> barbearias = new ArrayList();
+            
+            try {
+                stmt = con.prepareStatement("SELECT b.CODBARBEARIA, b.NOMESOCIAL, b.CNPJ, b.EMAIL, b.TELEFONE1, b.TELEFONE2, b.LOGIN, b.SENHA, b.DESCRICAO, "
+                                                + "e.RUA, e.NUMERO, e.BAIRRO, e.CIDADE, e.ESTADO, "
+                                                + "r.REGRA1, r.REGRA2, r.REGRA3, r.REGRA4 "
+                                                + "FROM barbearia b "
+                                                + "INNER JOIN endereco e ON b.CODBARBEARIA = e.FK_CODBARBEARIA "
+                                                + "INNER JOIN regra r ON b.CODBARBEARIA = r.FK_CODBARBEARIA "
+                                                + "WHERE b.CODBARBEARIA=?");
+                stmt.setInt(1, CODBARBEARIA);
+                rs = stmt.executeQuery();
+                
+                while(rs.next()){
+                    Barbearia barbearia = new Barbearia();
+                    barbearia.setId(rs.getInt(1));
+                    barbearia.setNome(rs.getString(2));
+                    barbearia.setCnpj(rs.getString(3));
+                    barbearia.setEmail(rs.getString(4));
+                    barbearia.setTelefone1(rs.getString(5));
+                    barbearia.setTelefone2(rs.getString(6));
+                    barbearia.setLogin(rs.getString(7));
+                    barbearia.setSenha(rs.getString(8));
+                    barbearia.setDescricao(rs.getString(9));
+                    barbearia.setRua(rs.getString(10));
+                    barbearia.setNumero(rs.getString(11));
+                    barbearia.setBairro(rs.getString(12));
+                    barbearia.setCidade(rs.getString(13));
+                    barbearia.setUf(rs.getString(14));
+                    barbearia.setRegra1(rs.getString(15));
+                    barbearia.setRegra2(rs.getString(16));
+                    barbearia.setRegra3(rs.getString(17));
+                    barbearia.setRegra4(rs.getString(18));
+                    barbearias.add(barbearia);
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro: "+ex);
+                Logger.getLogger(BarbeariaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+            
+            return barbearias;
         }
         
         public boolean checkLogin(String login, String senha){
@@ -185,11 +288,11 @@ public class BarbeariaDAO {
         }
     
     
-        public TransfCod retornoCod(String login, String senha){
+        public int retornoCod(String login, String senha){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-            TransfCod TCU = new TransfCod();
+            int CODBARBEARIA;
             
             try {
                 stmt = con.prepareStatement("SELECT * FROM barbearia WHERE LOGIN = ? AND SENHA = ?");
@@ -198,10 +301,10 @@ public class BarbeariaDAO {
                 rs = stmt.executeQuery();
                 
                 if(rs.next()){
-                    TCU.setCod(rs.getInt(1));
-                    return TCU;
+                    CODBARBEARIA = rs.getInt(1);
+                    return CODBARBEARIA;
                 } else{
-                    return null;
+                    return 0;
                 }
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro: "+ex);
@@ -209,7 +312,7 @@ public class BarbeariaDAO {
             }finally{
                 ConnectionFactory.closeConnection(con, stmt, rs);
             }
-            return null;
+            return 0;
         }
         
         public String retornoNome(int codbarbearia){

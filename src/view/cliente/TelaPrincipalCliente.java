@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Agendamento;
 import model.Barbearia;
-import model.TransfCod;
 
 
 public final class TelaPrincipalCliente extends javax.swing.JFrame {
@@ -41,6 +40,18 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         consultarBarbearia();
     }
       
+    public void receberCodUsr(int CODCLIENTE){//receber o cod USUÁRIO
+        this.CODCLIENTE = CODCLIENTE; //recebendo o cod usr
+        imprimirNomeCliente(CODCLIENTE);
+        consultarAgendamento();
+    }
+
+    public void imprimirNomeCliente (int CODCLIENTE){//consultando o nome USUÁRIO
+        ClienteDAO ClienteDao = new ClienteDAO();
+        this.NOMECLIENTE=ClienteDao.retornoNome(CODCLIENTE);
+        nome_usr.setText(NOMECLIENTE); //imprimendo o nome usr
+      }
+    
     public void consultarBarbearia(){
         BarbeariaDAO BarberDao = new BarbeariaDAO();
         List<Barbearia> barbearias = new ArrayList();
@@ -98,17 +109,6 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         }
     }
     
-    public void receberCodUsr(TransfCod TCU){//receber o cod USUÁRIO
-        this.CODCLIENTE = TCU.getCod(); //recebendo o cod usr
-        imprimirNomeCliente(CODCLIENTE);
-        consultarAgendamento();
-    }
-
-    public void imprimirNomeCliente (int CODCLIENTE){//consultando o nome USUÁRIO
-        ClienteDAO ClienteDao = new ClienteDAO();
-        this.NOMECLIENTE=ClienteDao.retornoNome(CODCLIENTE);
-        nome_usr.setText(NOMECLIENTE); //imprimendo o nome usr
-      }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -117,6 +117,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         Cima = new css.FundoGradiente(0, 255, 255, 30, 144, 255, 0, 0, 1500, 100);
         sair = new javax.swing.JLabel();
         dataAtual = new javax.swing.JLabel();
+        alterarCadastro = new javax.swing.JLabel();
         Centro = new javax.swing.JPanel();
         img = new javax.swing.JLabel();
         ola = new javax.swing.JLabel();
@@ -178,6 +179,14 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         dataAtual.setForeground(new java.awt.Color(0, 51, 204));
         dataAtual.setBorder(new javax.swing.border.MatteBorder(null));
 
+        alterarCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/editarcadastro.png"))); // NOI18N
+        alterarCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        alterarCadastro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                alterarCadastroMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout CimaLayout = new javax.swing.GroupLayout(Cima);
         Cima.setLayout(CimaLayout);
         CimaLayout.setHorizontalGroup(
@@ -185,7 +194,9 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CimaLayout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addComponent(dataAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1154, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(alterarCadastro)
+                .addGap(18, 18, 18)
                 .addComponent(sair)
                 .addGap(23, 23, 23))
         );
@@ -193,9 +204,11 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CimaLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(dataAtual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(alterarCadastro)
+                    .addGroup(CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(dataAtual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(sair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -677,26 +690,22 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         Direita.setLayout(DireitaLayout);
         DireitaLayout.setHorizontalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(MeusAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(LogoMA)
-                .addGap(74, 74, 74))
             .addGroup(DireitaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DireitaLayout.createSequentialGroup()
-                        .addComponent(Agendamento01, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(DireitaLayout.createSequentialGroup()
-                        .addComponent(Agendamento02, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(DireitaLayout.createSequentialGroup()
-                        .addComponent(Agendamento03, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                    .addComponent(Agendamento01, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Agendamento02, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Agendamento03, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                        .addComponent(MeusAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(89, 89, 89))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                        .addComponent(LogoMA)
+                        .addGap(74, 74, 74))))
         );
         DireitaLayout.setVerticalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -744,51 +753,36 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_sairMouseClicked
 
     private void barbearia01MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia01MouseClicked
-        TransfCod TC = new TransfCod(); // Instanciando o model transfCod
-        TC.setCod(1); //setando o valor do cod da EMP
-        TC.setCod1(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente(); // Instanciando a View Agendamento
-        TA.receberCodAgend(TC); // transferindo o cod da empresa
+        TA.receberCodAgend(1, CODCLIENTE); // transferindo o cod da empresa
         TA.setVisible(true);
         this.dispose(); 
     }//GEN-LAST:event_barbearia01MouseClicked
 
     private void barbearia02MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia02MouseClicked
-        TransfCod TC = new TransfCod();
-        TC.setCod(2);
-        TC.setCod1(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente();
-        TA.receberCodAgend(TC);
+        TA.receberCodAgend(2, CODCLIENTE);
         TA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_barbearia02MouseClicked
 
     private void barbearia03MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia03MouseClicked
-        TransfCod TC = new TransfCod();
-        TC.setCod(3);
-        TC.setCod1(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente();
-        TA.receberCodAgend(TC);
+        TA.receberCodAgend(3, CODCLIENTE);
         TA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_barbearia03MouseClicked
 
     private void barbearia04MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia04MouseClicked
-        TransfCod TC = new TransfCod();
-        TC.setCod(4);
-        TC.setCod1(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente();
-        TA.receberCodAgend(TC);
+        TA.receberCodAgend(4, CODCLIENTE);
         TA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_barbearia04MouseClicked
 
     private void barbearia05MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia05MouseClicked
-        TransfCod TC = new TransfCod();
-        TC.setCod(5);
-        TC.setCod1(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente();
-        TA.receberCodAgend(TC);
+        TA.receberCodAgend(5, CODCLIENTE);
         TA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_barbearia05MouseClicked
@@ -796,12 +790,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private void btnAlterar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterar1MouseClicked
         int CODAGENDAMENTO = CODAGENDAMENTOS.get(0);
         int CODBARBEARIA = CODBARBEARIAS.get(0);
-        TransfCod TC = new TransfCod(); // Instanciando o model transfCod
-        TC.setCod(CODAGENDAMENTO); //setando o valor do cod do AGEND
-        TC.setCod1(CODBARBEARIA); //setando o valor do cod da EMP
-        TC.setCod2(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente(); // Instanciando a View Agendamento
-        TA.receberCodReAgend(TC); // transferindo o cod da empresa
+        TA.receberCodReAgend(CODAGENDAMENTO, CODBARBEARIA, CODCLIENTE); // transferindo o cod da empresa
         TA.setVisible(true);
         this.dispose(); 
     }//GEN-LAST:event_btnAlterar1MouseClicked
@@ -809,12 +799,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private void btnAlterar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterar2MouseClicked
         int CODAGENDAMENTO = CODAGENDAMENTOS.get(1);
         int CODBARBEARIA = CODBARBEARIAS.get(1);
-        TransfCod TC = new TransfCod(); // Instanciando o model transfCod
-        TC.setCod(CODAGENDAMENTO); //setando o valor do cod do AGEND
-        TC.setCod1(CODBARBEARIA); //setando o valor do cod da EMP
-        TC.setCod2(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente(); // Instanciando a View Agendamento
-        TA.receberCodReAgend(TC); // transferindo o cod da empresa
+        TA.receberCodReAgend(CODAGENDAMENTO, CODBARBEARIA, CODCLIENTE); // transferindo o cod da empresa
         TA.setVisible(true);
         this.dispose(); 
     }//GEN-LAST:event_btnAlterar2MouseClicked
@@ -822,12 +808,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private void btnAlterar3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterar3MouseClicked
         int CODAGENDAMENTO = CODAGENDAMENTOS.get(1);
         int CODBARBEARIA = CODBARBEARIAS.get(2);
-        TransfCod TC = new TransfCod(); // Instanciando o model transfCod
-        TC.setCod(CODAGENDAMENTO); //setando o valor do cod do AGEND
-        TC.setCod1(CODBARBEARIA); //setando o valor do cod da EMP
-        TC.setCod2(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente(); // Instanciando a View Agendamento
-        TA.receberCodReAgend(TC); // transferindo o cod da empresa
+        TA.receberCodReAgend(CODAGENDAMENTO, CODBARBEARIA, CODCLIENTE); // transferindo o cod da empresa
         TA.setVisible(true);
         this.dispose(); 
     }//GEN-LAST:event_btnAlterar3MouseClicked
@@ -852,6 +834,13 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         a.deleteAgendamentoCliente(CODAGENDAMENTO);
         consultarAgendamento();
     }//GEN-LAST:event_btnExcluir3MouseClicked
+
+    private void alterarCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alterarCadastroMouseClicked
+        TelaCadastroCliente TCC = new TelaCadastroCliente();
+        TCC.alterarCadastro(CODCLIENTE);
+        TCC.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_alterarCadastroMouseClicked
 
     public static void main(String args[]) {
         try {
@@ -879,6 +868,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private javax.swing.JPanel Direita;
     private javax.swing.JLabel LogoMA;
     private javax.swing.JPanel MeusAgendamentos;
+    private javax.swing.JLabel alterarCadastro;
     private javax.swing.JPanel barbearia01;
     private javax.swing.JPanel barbearia02;
     private javax.swing.JPanel barbearia03;

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.TransfCod;
 import model.Cliente;
 
 public class ClienteDAO {
@@ -34,21 +33,22 @@ public class ClienteDAO {
             }
         }
         
-        public List<Cliente> read(){
+        public List<Cliente> read(int CODCLIENTE){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
             List<Cliente> clientes = new ArrayList();
             
             try {
-                stmt = con.prepareStatement("SELECT * FROM CLIENTE");
+                stmt = con.prepareStatement("SELECT CODCLIENTE, NOME, CPF, EMAIL, TELEFONE, LOGIN, SENHA FROM CLIENTE WHERE CODCLIENTE=?");
+                stmt.setInt(1, CODCLIENTE);
                 rs = stmt.executeQuery();
                 
                 while(rs.next()){
                     Cliente cliente = new Cliente();
                     cliente.setId(rs.getInt(1));
-                    cliente.setCpf(rs.getString(2));
-                    cliente.setNome(rs.getString(3));
+                    cliente.setNome(rs.getString(2));
+                    cliente.setCpf(rs.getString(3));
                     cliente.setEmail(rs.getString(4));
                     cliente.setTelefone(rs.getString(5));
                     cliente.setLogin(rs.getString(6));
@@ -62,6 +62,29 @@ public class ClienteDAO {
                 ConnectionFactory.closeConnection(con, stmt, rs);
             }
             return clientes;
+        }
+        
+        public void updateCadastroCliente(Cliente c){
+            Connection con = ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            
+            try {
+                stmt = con.prepareStatement("UPDATE cliente SET NOME=?, CPF=?, EMAIL=?, TELEFONE=?, LOGIN=?, SENHA=? WHERE CODCLIENTE=?");
+                stmt.setString(1, c.getNome());
+                stmt.setString(2, c.getCpf());
+                stmt.setString(3, c.getEmail());
+                stmt.setString(4, c.getTelefone());
+                stmt.setString(5, c.getLogin());
+                stmt.setString(6, c.getSenha());
+                stmt.setInt(7, c.getId());
+                
+                stmt.executeUpdate();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro: "+ex);
+                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } finally{
+                ConnectionFactory.closeConnection(con, stmt);
+            }
         }
         
         public boolean checkInformacoes(String cpf, String email, String telefone, String login){
@@ -116,11 +139,11 @@ public class ClienteDAO {
             return check;
         }
         
-        public TransfCod retornoCod(String login, String senha){
+        public int retornoCod(String login, String senha){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-            TransfCod TCU = new TransfCod();
+            int CODCLIENTE;
             
             try {
                 stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE LOGIN=? AND SENHA=?");
@@ -129,10 +152,10 @@ public class ClienteDAO {
                 rs = stmt.executeQuery();
                 
                 if(rs.next()){
-                    TCU.setCod(rs.getInt(1));
-                    return TCU;
+                    CODCLIENTE = rs.getInt(1);
+                    return CODCLIENTE;
                 } else{
-                    return null;
+                    return 0;
                 }
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro: "+ex);
@@ -140,7 +163,7 @@ public class ClienteDAO {
             }finally{
                 ConnectionFactory.closeConnection(con, stmt, rs);
             }
-            return null;
+            return 0;
         }
         
         public String retornoNome(int codcliente){
