@@ -34,7 +34,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         email = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         confirmarDados = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        ConfirmacaoDados = new javax.swing.JRadioButton();
         desejoReceber = new javax.swing.JLabel();
         jRadioButton2 = new javax.swing.JRadioButton();
         cadastrar = new javax.swing.JButton();
@@ -171,10 +171,10 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         confirmarDados.setForeground(new java.awt.Color(255, 255, 255));
         confirmarDados.setText("Confirmo que os dados fornecidos são confiáveis e verdadeiros.");
 
-        jRadioButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        ConfirmacaoDados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ConfirmacaoDados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                ConfirmacaoDadosActionPerformed(evt);
             }
         });
 
@@ -223,7 +223,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, DireitaLayout.createSequentialGroup()
                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jRadioButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButton1))
+                            .addComponent(ConfirmacaoDados))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(confirmarDados, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
@@ -273,7 +273,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(confirmarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton1))
+                    .addComponent(ConfirmacaoDados))
                 .addGap(18, 18, 18)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jRadioButton2)
@@ -308,6 +308,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
 
     private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
         boolean check;
+        boolean confirmacaoDados = ConfirmacaoDados.isSelected();
         String nome = txtNome.getText();
         String cpf = txtCPF.getText();
         String login = txtLogin.getText();
@@ -316,7 +317,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         String email = txtEmail.getText();
 
         ClienteController clienteController = new ClienteController();
-        check = clienteController.verificarCliente(nome, cpf, email, telefone, login, senha);
+        check = clienteController.verificarCliente(nome, cpf, email, telefone, login, senha, confirmacaoDados);
         if(check){ // LIMPANDO OS CAMPOS EM CASO DE CADASTRO REALIZADO
             txtNome.setText("");
             txtCPF.setText("");
@@ -327,9 +328,9 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cadastrarActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void ConfirmacaoDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmacaoDadosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_ConfirmacaoDadosActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
@@ -371,6 +372,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton ConfirmacaoDados;
     private javax.swing.JPanel Direita;
     private javax.swing.JPanel Esquerda;
     private javax.swing.JLabel Logo;
@@ -383,7 +385,6 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel desejoReceber;
     private javax.swing.JLabel email;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JLabel login;
     private javax.swing.JLabel nome;

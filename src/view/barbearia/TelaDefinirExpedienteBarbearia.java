@@ -16,6 +16,7 @@ public class TelaDefinirExpedienteBarbearia extends javax.swing.JFrame {
     
     public TelaDefinirExpedienteBarbearia() {
         initComponents();
+        setExtendedState (MAXIMIZED_BOTH);
     }
     
     public void receberCodBarbearia(int CODBARBEARIA){
@@ -67,25 +68,26 @@ public class TelaDefinirExpedienteBarbearia extends javax.swing.JFrame {
                 .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EsquerdaLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(icon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(icon, javax.swing.GroupLayout.DEFAULT_SIZE, 1201, Short.MAX_VALUE))
                     .addGroup(EsquerdaLayout.createSequentialGroup()
-                        .addGap(358, 358, 358)
-                        .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtRegra5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(txtRegra, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE))
-                        .addGap(0, 302, Short.MAX_VALUE)))
+                        .addContainerGap()
+                        .addComponent(txtRegra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EsquerdaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(txtRegra5, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(296, 296, 296))
         );
         EsquerdaLayout.setVerticalGroup(
             EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addGap(54, 54, 54)
                 .addComponent(icon)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addComponent(txtRegra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtRegra5, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(624, Short.MAX_VALUE))
         );
 
         Direita.setBackground(new java.awt.Color(0, 153, 255));
@@ -212,8 +214,7 @@ public class TelaDefinirExpedienteBarbearia extends javax.swing.JFrame {
             exped.verificarExpedienteNoBanco(data, CODBARBEARIA);
         } catch (ParseException ex) {
             Logger.getLogger(TelaDefinirExpedienteBarbearia.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        } 
     }//GEN-LAST:event_btnAgendarActionPerformed
 
 

@@ -5,9 +5,9 @@ import javax.swing.JOptionPane;
 import model.Cliente;
 
 public class ClienteController {
-    public boolean verificarCliente(String nome, String cpf, String email, String telefone, String login, String senha){
+    public boolean verificarCliente(String nome, String cpf, String email, String telefone, String login, String senha, boolean confirmacaoDados){
         boolean check;
-        //VERIFICAR PREENCHIMENTO DOS CAMPOS
+        //VERIFICAR SE TODOS OS CAMPOS ESTÃO PREENCHIDOS
         if(nome!=null && nome.length()>0 && 
                 cpf!=null && cpf.length()>0 && 
                 email!=null && email.length()>0 &&
@@ -15,8 +15,13 @@ public class ClienteController {
                 login!=null && login.length()>0 && 
                 senha!=null && senha.length()>0 
                 ){
-            check = verificarNoBanco(nome, cpf, email, telefone, login, senha);
-            return check;
+            if(confirmacaoDados == true){//VERIFICAR SE O CHECKBOX DE CONFIRMAR DADOS CONFIAVEIS ESTÁ SELECIONADO
+                check = verificarNoBanco(nome, cpf, email, telefone, login, senha);
+                return check;
+            }else{
+                JOptionPane.showMessageDialog(null, "Porfavor, confirme que os dados fornecidos são confiáveis e verdadeiros.", "Mensagem", JOptionPane.ERROR_MESSAGE);
+                check = false;
+            }
         }else{
             JOptionPane.showMessageDialog(null, "Os campos não foram preenchidos corretamente", "Mensagem", JOptionPane.ERROR_MESSAGE);        
         check = false;

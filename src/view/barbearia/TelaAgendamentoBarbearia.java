@@ -4,15 +4,16 @@ import dao.AgendamentoDAO;
 import java.util.ArrayList;
 import java.util.List;
 import model.Agendamento;
+import model.TransfCod;
 
 public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
 
-    int COD_EMP;
-    String NOME_EMP, horario;
+    int CODBARBEARIA;
+    String NOMEBARBEARIA, horario;
     
     public TelaAgendamentoBarbearia() {
         initComponents();
-        
+        setExtendedState (MAXIMIZED_BOTH);
         Agendamento1.setVisible(false);
         Agendamento2.setVisible(false);
         Agendamento3.setVisible(false);
@@ -24,10 +25,11 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         Agendamento9.setVisible(false);
     }
     
-    public void receberCodUsr(int TCE, String NOME_EMP, String horario){//receber o cod EMPRESA
-        this.COD_EMP = TCE; //recebendo o cod emp]
-        this.NOME_EMP = NOME_EMP;
-        nome_emp.setText(NOME_EMP);
+    public void receberCodUsr(int CODBARBEARIA, String NOMEBARBEARIA, String horario){//receber o cod EMPRESA
+        this.CODBARBEARIA = CODBARBEARIA;
+        this.NOMEBARBEARIA = NOMEBARBEARIA;
+        nome_barbearia.setText(NOMEBARBEARIA);
+        
         this.horario = horario;
         dataAtual.setText(horario);
         consultarAgenda();
@@ -36,7 +38,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
     public void consultarAgenda(){
         AgendamentoDAO agendDAO = new AgendamentoDAO();
         List<Agendamento> agendamentos = new ArrayList();
-        agendamentos = agendDAO.readEmp(COD_EMP);
+        agendamentos = agendDAO.readEmp(CODBARBEARIA);
         if(!agendamentos.isEmpty()){//so executa se a lista nao tiver vazia
             if(agendamentos.size() >= 1){  //so executa se tiver um item     
                 Agendamento1.setVisible(true);
@@ -124,7 +126,8 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         Centro = new javax.swing.JPanel();
         img = new javax.swing.JLabel();
         ola = new javax.swing.JLabel();
-        nome_emp = new javax.swing.JLabel();
+        nome_barbearia = new javax.swing.JLabel();
+        textinho = new javax.swing.JLabel();
         localizacao = new javax.swing.JLabel();
         Agendamento1 = new javax.swing.JPanel();
         txtCliente1 = new javax.swing.JLabel();
@@ -222,9 +225,13 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         ola.setForeground(new java.awt.Color(0, 51, 204));
         ola.setText("Olá,");
 
-        nome_emp.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
-        nome_emp.setForeground(new java.awt.Color(0, 51, 204));
-        nome_emp.setBorder(new javax.swing.border.MatteBorder(null));
+        nome_barbearia.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
+        nome_barbearia.setForeground(new java.awt.Color(0, 51, 204));
+        nome_barbearia.setBorder(new javax.swing.border.MatteBorder(null));
+
+        textinho.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
+        textinho.setForeground(new java.awt.Color(0, 51, 204));
+        textinho.setText(", esses são os seus agendamentos!");
 
         localizacao.setFont(new java.awt.Font("Mongolian Baiti", 0, 18)); // NOI18N
         localizacao.setForeground(new java.awt.Color(0, 51, 204));
@@ -266,7 +273,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             .addGroup(Agendamento1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Agendamento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
+                    .addComponent(txtCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtHorario1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(btnConfirmar1)
@@ -765,7 +772,9 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
                             .addGroup(CentroLayout.createSequentialGroup()
                                 .addComponent(ola)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nome_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(nome_barbearia)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(textinho))
                             .addComponent(localizacao)))
                     .addComponent(Agendamento1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Agendamento2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -776,7 +785,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
                     .addComponent(Agendamento7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Agendamento8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Agendamento9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1371, Short.MAX_VALUE))
         );
         CentroLayout.setVerticalGroup(
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -786,9 +795,11 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
                     .addComponent(img)
                     .addGroup(CentroLayout.createSequentialGroup()
                         .addGap(7, 7, 7)
-                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nome_emp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ola, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(nome_barbearia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ola, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(textinho, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(localizacao)))
                 .addGap(68, 68, 68)
@@ -831,8 +842,12 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
-        this.dispose();
-        new TelaPrincipalBarbearia().setVisible(true);
+        TelaPrincipalBarbearia TP = new TelaPrincipalBarbearia();
+        TransfCod TC = new TransfCod();
+        TC.setCod(CODBARBEARIA);
+        TP.receberCodBarbearia(TC);
+        TP.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_sairMouseClicked
 
     private void btnConfirmar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar1MouseClicked
@@ -917,9 +932,10 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
     private javax.swing.JLabel dataAtual;
     private javax.swing.JLabel img;
     private javax.swing.JLabel localizacao;
-    private javax.swing.JLabel nome_emp;
+    private javax.swing.JLabel nome_barbearia;
     private javax.swing.JLabel ola;
     private javax.swing.JLabel sair;
+    private javax.swing.JLabel textinho;
     private javax.swing.JLabel txtCliente1;
     private javax.swing.JLabel txtCliente2;
     private javax.swing.JLabel txtCliente3;
