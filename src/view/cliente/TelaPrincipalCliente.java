@@ -15,6 +15,8 @@ import model.TransfCod;
 public final class TelaPrincipalCliente extends javax.swing.JFrame {
     
     int CODCLIENTE;
+    ArrayList<Integer> CODBARBEARIAS = new ArrayList<>();
+    ArrayList<Integer> CODAGENDAMENTOS = new ArrayList<>();
     String NOMECLIENTE;
     
     public TelaPrincipalCliente() {
@@ -75,55 +77,43 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 Agendamento01.setVisible(true);
                 txtBarbearia01.setText(agendamentos.get(0).getNomebarbearia());
                 txtHorario01.setText(agendamentos.get(0).getHora()+"h  "+ agendamentos.get(0).getData().toString());
-                btnAlterar1.setText(String.valueOf(agendamentos.get(0).getId()));
-                btnExcluir1.setText(String.valueOf(agendamentos.get(0).getId()));
-                txtCod_emp1.setText(String.valueOf(agendamentos.get(0).getCodbarbearia()));
+                CODBARBEARIAS.add(agendamentos.get(0).getCodbarbearia());
+                CODAGENDAMENTOS.add(agendamentos.get(0).getId());
             }else{
                 Agendamento01.setVisible(false);
                 txtBarbearia01.setText("");
                 txtHorario01.setText("");
-                btnAlterar1.setText("");
-                btnExcluir1.setText("");
-                txtCod_emp1.setText("");
             } if(agendamentos.size() >= 2){ //so executa se tiver dois item             
                 Agendamento02.setVisible(true);
                 txtBarbearia02.setText(agendamentos.get(1).getNomebarbearia());
                 txtHorario02.setText(agendamentos.get(1).getHora()+"h  "+ agendamentos.get(1).getData().toString());
-                btnAlterar2.setText(String.valueOf(agendamentos.get(1).getId()));
-                btnExcluir2.setText(String.valueOf(agendamentos.get(1).getId()));
-                txtCod_emp2.setText(String.valueOf(agendamentos.get(1).getCodbarbearia()));
+                CODBARBEARIAS.add(agendamentos.get(1).getCodbarbearia());
+                CODAGENDAMENTOS.add(agendamentos.get(1).getId());
             }else{
                 Agendamento02.setVisible(false);
                 txtBarbearia02.setText("");
                 txtHorario02.setText("");
-                btnAlterar2.setText("");
-                btnExcluir2.setText("");
-                txtCod_emp2.setText("");
             }if(agendamentos.size() >= 3){ //so executa se tiver tres item                    
                 Agendamento03.setVisible(true);
                 txtBarbearia03.setText(agendamentos.get(2).getNomebarbearia());
                 txtHorario03.setText(agendamentos.get(2).getHora()+"h  "+ agendamentos.get(2).getData().toString());
-                btnAlterar3.setText(String.valueOf(agendamentos.get(2).getId()));
-                btnExcluir3.setText(String.valueOf(agendamentos.get(2).getId()));
-                txtCod_emp3.setText(String.valueOf(agendamentos.get(2).getCodbarbearia()));
+                CODBARBEARIAS.add(agendamentos.get(2).getCodbarbearia());
+                CODAGENDAMENTOS.add(agendamentos.get(2).getId());
             }else{
                 Agendamento03.setVisible(false);
                 txtBarbearia03.setText("");
                 txtHorario03.setText("");
-                btnAlterar3.setText("");
-                btnExcluir3.setText("");
-                txtCod_emp3.setText("");
             } 
         }
     }
     
     public void receberCodUsr(TransfCod TCU){//receber o cod USUÁRIO
         this.CODCLIENTE = TCU.getCod(); //recebendo o cod usr
-        imprimirNomeUsr(CODCLIENTE);
+        imprimirNomeCliente(CODCLIENTE);
         consultarAgendamento();
     }
 
-    public void imprimirNomeUsr (int CODCLIENTE){//consultando o nome USUÁRIO
+    public void imprimirNomeCliente (int CODCLIENTE){//consultando o nome USUÁRIO
         ClienteDAO ClienteDao = new ClienteDAO();
         this.NOMECLIENTE=ClienteDao.retornoNome(CODCLIENTE);
         nome_usr.setText(NOMECLIENTE); //imprimendo o nome usr
@@ -156,9 +146,6 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         barbearia05 = new javax.swing.JPanel();
         nome_barbearia05 = new javax.swing.JLabel();
         logo05 = new javax.swing.JLabel();
-        txtCod_emp1 = new javax.swing.JLabel();
-        txtCod_emp2 = new javax.swing.JLabel();
-        txtCod_emp3 = new javax.swing.JLabel();
         Direita = new javax.swing.JPanel();
         MeusAgendamentos = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -437,34 +424,10 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        txtCod_emp1.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        txtCod_emp1.setText("jLabel2");
-        txtCod_emp1.setBorder(new javax.swing.border.MatteBorder(null));
-        txtCod_emp1.setFocusable(false);
-        txtCod_emp1.setMaximumSize(new java.awt.Dimension(0, 0));
-        txtCod_emp1.setMinimumSize(new java.awt.Dimension(0, 0));
-        txtCod_emp1.setPreferredSize(new java.awt.Dimension(0, 0));
-
-        txtCod_emp2.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        txtCod_emp2.setText("jLabel2");
-        txtCod_emp2.setBorder(new javax.swing.border.MatteBorder(null));
-
-        txtCod_emp3.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        txtCod_emp3.setText("jLabel2");
-        txtCod_emp3.setBorder(new javax.swing.border.MatteBorder(null));
-
         javax.swing.GroupLayout CentroLayout = new javax.swing.GroupLayout(Centro);
         Centro.setLayout(CentroLayout);
         CentroLayout.setHorizontalGroup(
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CentroLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtCod_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtCod_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtCod_emp3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
             .addGroup(CentroLayout.createSequentialGroup()
                 .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CentroLayout.createSequentialGroup()
@@ -485,17 +448,12 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(nome_usr, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(localizacao))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(418, Short.MAX_VALUE))
         );
         CentroLayout.setVerticalGroup(
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CentroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtCod_emp3, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                    .addComponent(txtCod_emp2, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                    .addComponent(txtCod_emp1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(img)
                     .addGroup(CentroLayout.createSequentialGroup()
@@ -505,7 +463,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                             .addComponent(ola, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(localizacao)))
-                .addGap(18, 57, Short.MAX_VALUE)
+                .addGap(18, 75, Short.MAX_VALUE)
                 .addComponent(barbearia01, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(barbearia02, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -515,7 +473,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addComponent(barbearia04, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(barbearia05, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1212, Short.MAX_VALUE))
+                .addContainerGap(1229, Short.MAX_VALUE))
         );
 
         Direita.setBackground(new java.awt.Color(122, 188, 255));
@@ -845,11 +803,11 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_barbearia05MouseClicked
 
     private void btnAlterar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterar1MouseClicked
-        int AGEND_COD = Integer.parseInt(btnAlterar1.getText());
-        int EMP_COD = Integer.parseInt(txtCod_emp1.getText());
+        int CODAGENDAMENTO = CODAGENDAMENTOS.get(0);
+        int CODBARBEARIA = CODBARBEARIAS.get(0);
         TransfCod TC = new TransfCod(); // Instanciando o model transfCod
-        TC.setCod(AGEND_COD); //setando o valor do cod do AGEND
-        TC.setCod1(EMP_COD); //setando o valor do cod da EMP
+        TC.setCod(CODAGENDAMENTO); //setando o valor do cod do AGEND
+        TC.setCod1(CODBARBEARIA); //setando o valor do cod da EMP
         TC.setCod2(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente(); // Instanciando a View Agendamento
         TA.receberCodReAgend(TC); // transferindo o cod da empresa
@@ -858,11 +816,11 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAlterar1MouseClicked
 
     private void btnAlterar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterar2MouseClicked
-        int AGEND_COD = Integer.parseInt(btnAlterar2.getText());
-        int EMP_COD = Integer.parseInt(txtCod_emp2.getText());
+        int CODAGENDAMENTO = CODAGENDAMENTOS.get(1);
+        int CODBARBEARIA = CODBARBEARIAS.get(1);
         TransfCod TC = new TransfCod(); // Instanciando o model transfCod
-        TC.setCod(AGEND_COD); //setando o valor do cod do AGEND
-        TC.setCod1(EMP_COD); //setando o valor do cod da EMP
+        TC.setCod(CODAGENDAMENTO); //setando o valor do cod do AGEND
+        TC.setCod1(CODBARBEARIA); //setando o valor do cod da EMP
         TC.setCod2(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente(); // Instanciando a View Agendamento
         TA.receberCodReAgend(TC); // transferindo o cod da empresa
@@ -871,11 +829,11 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAlterar2MouseClicked
 
     private void btnAlterar3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterar3MouseClicked
-        int AGEND_COD = Integer.parseInt(btnAlterar2.getText());
-        int EMP_COD = Integer.parseInt(txtCod_emp3.getText());
+        int CODAGENDAMENTO = CODAGENDAMENTOS.get(1);
+        int CODBARBEARIA = CODBARBEARIAS.get(2);
         TransfCod TC = new TransfCod(); // Instanciando o model transfCod
-        TC.setCod(AGEND_COD); //setando o valor do cod do AGEND
-        TC.setCod1(EMP_COD); //setando o valor do cod da EMP
+        TC.setCod(CODAGENDAMENTO); //setando o valor do cod do AGEND
+        TC.setCod1(CODBARBEARIA); //setando o valor do cod da EMP
         TC.setCod2(CODCLIENTE); //setando o valor do cod do USR
         TelaAgendamentoCliente TA = new TelaAgendamentoCliente(); // Instanciando a View Agendamento
         TA.receberCodReAgend(TC); // transferindo o cod da empresa
@@ -884,23 +842,23 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAlterar3MouseClicked
 
     private void btnExcluir1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir1MouseClicked
-        int AGEND_COD = Integer.parseInt(btnAlterar1.getText());
+        int CODAGENDAMENTO = CODAGENDAMENTOS.get(1);
         AgendamentoDAO a = new AgendamentoDAO();
-        a.delete(AGEND_COD);
+        a.delete(CODAGENDAMENTO);
         consultarAgendamento();
     }//GEN-LAST:event_btnExcluir1MouseClicked
 
     private void btnExcluir2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir2MouseClicked
-        int AGEND_COD = Integer.parseInt(btnAlterar2.getText());
+        int CODAGENDAMENTO = CODAGENDAMENTOS.get(1);
         AgendamentoDAO a = new AgendamentoDAO();
-        a.delete(AGEND_COD);
+        a.delete(CODAGENDAMENTO);
         consultarAgendamento();
     }//GEN-LAST:event_btnExcluir2MouseClicked
 
     private void btnExcluir3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir3MouseClicked
-        int AGEND_COD = Integer.parseInt(btnAlterar3.getText());
+        int CODAGENDAMENTO = CODAGENDAMENTOS.get(1);
         AgendamentoDAO a = new AgendamentoDAO();
-        a.delete(AGEND_COD);
+        a.delete(CODAGENDAMENTO);
         consultarAgendamento();
     }//GEN-LAST:event_btnExcluir3MouseClicked
 
@@ -961,9 +919,6 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private javax.swing.JLabel txtBarbearia01;
     private javax.swing.JLabel txtBarbearia02;
     private javax.swing.JLabel txtBarbearia03;
-    private javax.swing.JLabel txtCod_emp1;
-    private javax.swing.JLabel txtCod_emp2;
-    private javax.swing.JLabel txtCod_emp3;
     private javax.swing.JLabel txtHorario01;
     private javax.swing.JLabel txtHorario02;
     private javax.swing.JLabel txtHorario03;
