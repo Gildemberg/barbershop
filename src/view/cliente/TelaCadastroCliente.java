@@ -120,7 +120,11 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         nome.setText("NOME:");
 
         txtNome.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
-        txtNome.setRequestFocusEnabled(false);
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeActionPerformed(evt);
+            }
+        });
 
         cpf.setBackground(new java.awt.Color(255, 255, 255));
         cpf.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
@@ -227,8 +231,8 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
                     .addComponent(cpf, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(login, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(senha, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCPF, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(txtCPF, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(0, 264, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -244,9 +248,9 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
                 .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,6 +339,10 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         this.setVisible(false);
         new TelaLoginCliente().setVisible(true);
     }//GEN-LAST:event_sairMouseClicked
+
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeActionPerformed
 
     public static void main(String args[]) {
         try {

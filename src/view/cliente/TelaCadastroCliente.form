@@ -204,8 +204,8 @@
                       <Component id="cpf" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="login" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="senha" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtCPF" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="264" max="32767" attributes="0"/>
               </Group>
@@ -225,9 +225,9 @@
                   <Component id="titulo" min="-2" pref="68" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="nome" min="-2" pref="38" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtNome" min="-2" pref="46" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Component id="cpf" min="-2" pref="38" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtCPF" min="-2" pref="46" max="-2" attributes="0"/>
@@ -309,8 +309,10 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Corbel Light" size="27" style="0"/>
             </Property>
-            <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomeActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="cpf">
           <Properties>

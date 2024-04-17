@@ -4,6 +4,7 @@ import controller.BarbeariaController;
 import dao.BarbeariaDAO;
 import javax.swing.JOptionPane;
 import model.TransfCod;
+import view.TelaInicial;
 import view.barbearia.TelaPrincipalBarbearia;
 import view.barbearia.TelaCadastroBarbearia;
 
@@ -32,6 +33,7 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
         btnEntrar = new javax.swing.JButton();
         NaoPossuiConta = new javax.swing.JLabel();
         btnCadastro = new javax.swing.JButton();
+        sair = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1920, 1080));
@@ -134,6 +136,14 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
             }
         });
 
+        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_sair2.png"))); // NOI18N
+        sair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sairMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout DireitaLayout = new javax.swing.GroupLayout(Direita);
         Direita.setLayout(DireitaLayout);
         DireitaLayout.setHorizontalGroup(
@@ -161,12 +171,17 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
                         .addGap(243, 243, 243))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
                         .addComponent(Logo1)
-                        .addGap(323, 323, 323))))
+                        .addGap(323, 323, 323))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                        .addComponent(sair)
+                        .addContainerGap())))
         );
         DireitaLayout.setVerticalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DireitaLayout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addContainerGap()
+                .addComponent(sair)
+                .addGap(13, 13, 13)
                 .addComponent(Logo1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(121, 121, 121)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -228,6 +243,11 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnCadastroActionPerformed
 
+    private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
+        this.setVisible(false);
+        new TelaInicial().setVisible(true);
+    }//GEN-LAST:event_sairMouseClicked
+
     public static void main(String args[]) {
 
         try {
@@ -259,6 +279,7 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastro;
     private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel sair;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables

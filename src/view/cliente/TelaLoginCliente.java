@@ -5,9 +5,10 @@ import view.cliente.TelaCadastroCliente;
 import view.cliente.TelaPrincipalCliente;
 import dao.ClienteDAO;
 import model.TransfCod;
+import view.TelaInicial;
 
 public class TelaLoginCliente extends javax.swing.JFrame {
-        public TelaLoginCliente() {
+    public TelaLoginCliente() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
     }
@@ -30,6 +31,7 @@ public class TelaLoginCliente extends javax.swing.JFrame {
         btnEntrar = new javax.swing.JButton();
         NaoPossuiConta = new javax.swing.JLabel();
         btnCadastro = new javax.swing.JButton();
+        sair = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de Login");
@@ -137,6 +139,14 @@ public class TelaLoginCliente extends javax.swing.JFrame {
             }
         });
 
+        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_sair2.png"))); // NOI18N
+        sair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sairMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout DireitaLayout = new javax.swing.GroupLayout(Direita);
         Direita.setLayout(DireitaLayout);
         DireitaLayout.setHorizontalGroup(
@@ -164,12 +174,17 @@ public class TelaLoginCliente extends javax.swing.JFrame {
                         .addGap(243, 243, 243))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
                         .addComponent(Logo1)
-                        .addGap(323, 323, 323))))
+                        .addGap(323, 323, 323))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                        .addComponent(sair)
+                        .addContainerGap())))
         );
         DireitaLayout.setVerticalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DireitaLayout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addGap(7, 7, 7)
+                .addComponent(sair)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Logo1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(121, 121, 121)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -231,6 +246,11 @@ public class TelaLoginCliente extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnCadastroActionPerformed
 
+    private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
+        this.setVisible(false);
+        new TelaInicial().setVisible(true);
+    }//GEN-LAST:event_sairMouseClicked
+
     public static void main(String args[]) {
 
         try {
@@ -262,6 +282,7 @@ public class TelaLoginCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastro;
     private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel sair;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
