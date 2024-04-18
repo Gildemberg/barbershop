@@ -13,11 +13,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 
 public class TelaAgendamentoCliente extends javax.swing.JFrame{
 
     int CODCLIENTE, CODBARBEARIA, CODAGENDAMENTO;
+    AgendamentoController agendamentoController = new AgendamentoController();
+    SimpleDateFormat horaFormatada = new SimpleDateFormat("HH:mm");
+    SimpleDateFormat dataFormatada = new SimpleDateFormat("dd-MM-yyyy");
     
     
     public TelaAgendamentoCliente() {
@@ -28,7 +34,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     public void receberCodAgend(int CODBARBEARIA, int CODCLIENTE){
         this.CODBARBEARIA = CODBARBEARIA;
         this.CODCLIENTE = CODCLIENTE;
-        consultarEmpresa(CODBARBEARIA);
+        consultarDadosBarbearia(CODBARBEARIA);
     }
     
     public void receberCodReAgend(int CODAGENDAMENTO, int CODBARBEARIA, int CODCLIENTE){
@@ -37,10 +43,10 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         this.CODAGENDAMENTO = CODAGENDAMENTO;
         this.CODBARBEARIA = CODBARBEARIA;
         this.CODCLIENTE = CODCLIENTE;
-        consultarEmpresa(CODBARBEARIA);
+        consultarDadosBarbearia(CODBARBEARIA);
     }
     
-    public void consultarEmpresa (int CODBARBEARIA){
+    public void consultarDadosBarbearia (int CODBARBEARIA){
         BarbeariaDAO bDAO = new BarbeariaDAO();
         List<Barbearia> barbearias = new ArrayList();
         barbearias=bDAO.read();
@@ -54,6 +60,30 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         txtRegra3.setText("<html><div style='text-align: justify;'>• "+barbearias.get(CODBARBEARIA-1).getRegra3()+"</div></html>");
         txtRegra4.setText("<html><div style='text-align: justify;'>• "+barbearias.get(CODBARBEARIA-1).getRegra4()+"</div></html>");
       }
+    
+    public void agendar(){
+        try {
+            boolean check;
+            
+            SelectedDate dataCalendar = calendario.getSelectedDate(); //Selecionando DATA no CALENDARIO
+            String dataString = dataCalendar.getDay()+"-"+dataCalendar.getMonth()+"-"+dataCalendar.getYear(); //Pegando a DATA em STRING
+            String horaString = txtHora.getText()+":"+txtMinuto.getText(); //Pegando a HORA em STRING
+
+            //convertendo do tipo STRING para DATE
+            Date data = new Date(dataFormatada.parse(dataString).getTime());
+            Date Horario = new Date(horaFormatada.parse(horaString).getTime()); //TIME DATE
+            Time hora = new Time(Horario.getTime()); //Pegando o TIME da DATE
+
+            check = agendamentoController.verificarAgendamento(data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO);
+            
+            if(check){ // LIMPANDO OS CAMPOS EM CASO DE CADASTRO REALIZADO
+                txtHora.setText("");
+                txtMinuto.setText("");
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaAgendamentoCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -336,58 +366,34 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
 
     private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
         TelaPrincipalCliente TP = new TelaPrincipalCliente();
-        TP.receberCodUsr(CODCLIENTE); 
+        TP.receberCodCliente(CODCLIENTE); 
         TP.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_sairMouseClicked
 
     private void btnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarActionPerformed
-        try {
-            boolean check;
-            
-            
-            String horaString = txtHora.getText()+":"+txtMinuto.getText(); //Pegando a hora
-            SelectedDate d = calendario.getSelectedDate();
-            String dataString = d.getDay()+"-"+d.getMonth()+"-"+d.getYear(); //Pegando a data
-
-            //convertendo a Strin hora para TIME
-            SimpleDateFormat horaFormatada = new SimpleDateFormat("HH:mm");
-            Date Horario = new Date(horaFormatada.parse(horaString).getTime());
-            Time hora = new Time(Horario.getTime());
-            
-            //convertendo a String data para DATE
-            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd-MM-yyyy");
-            Date data = new Date(dataFormatada.parse(dataString).getTime());
-            
-            System.out.println(hora);
-
-            AgendamentoController agend = new AgendamentoController();
-            check = agend.verificarAgendamento(data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO);
-            
-            if(check){ // LIMPANDO OS CAMPOS EM CASO DE CADASTRO REALIZADO
-                txtHora.setText("");
-                txtMinuto.setText("");
-            }
-        } catch (ParseException ex) {
-            Logger.getLogger(TelaAgendamentoCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        agendar();
     }//GEN-LAST:event_btnAgendarActionPerformed
 
-    
-    public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaAgendamentoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    public class LimitaNroCaracteres extends PlainDocument {
+        private final int iMaxLength;
+        public LimitaNroCaracteres(int maxlen) {
+            super();
+            iMaxLength = maxlen;
         }
-        java.awt.EventQueue.invokeLater(() -> {
-            new TelaAgendamentoCliente().setVisible(true);
-        });
+
+        @Override
+        public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+            if (iMaxLength <= 0){
+                super.insertString(offset, str.toUpperCase(), attr);
+                return;
+            }
+
+            int ilen = (getLength() + str.length());
+            if (ilen <= iMaxLength){
+                super.insertString(offset, str.toUpperCase(), attr);   // ...aceita str
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

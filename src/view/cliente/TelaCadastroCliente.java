@@ -9,19 +9,18 @@ import model.Cliente;
 public class TelaCadastroCliente extends javax.swing.JFrame {
     
     boolean update = false;
+    Cliente modelCliente = new Cliente();
     List<Cliente> cliente = new ArrayList();
+    ClienteController clienteController = new ClienteController();
+    ClienteDAO clientedao = new ClienteDAO();
     
     public TelaCadastroCliente() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
     }
 
-    public void alterarCadastro(int CODCLIENTE){        
-        ClienteDAO clientedao = new ClienteDAO();
-        List<Cliente> cliente = new ArrayList();
-        
+    public void alterarCadastro(int CODCLIENTE){              
         cliente=clientedao.read(CODCLIENTE);
-        this.cliente = cliente;
         this.update = true;
         
         titulo.setText("ATUALIZAÇÃO DE CADASTRO");
@@ -35,32 +34,28 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     }
     
     public void atualizarCadastroCliente(){
-        boolean check;
-        Cliente c = new Cliente();
-        ClienteController controller = new ClienteController();
-        
-        c.setId(cliente.get(0).getId());
-        c.setCpf(txtCPF.getText());
-        c.setNome(txtNome.getText());
-        c.setEmail(txtEmail.getText());
-        c.setTelefone(txtTel.getText());
-        c.setLogin(txtLogin.getText());
-        c.setSenha(txtSenha.getText());
-        check = controller.verificarUpdateCliente(c);
+        modelCliente.setId(cliente.get(0).getId());
+        modelCliente.setCpf(txtCPF.getText());
+        modelCliente.setNome(txtNome.getText());
+        modelCliente.setEmail(txtEmail.getText());
+        modelCliente.setTelefone(txtTel.getText());
+        modelCliente.setLogin(txtLogin.getText());
+        modelCliente.setSenha(txtSenha.getText());
+        clienteController.verificarUpdateCliente(modelCliente);
     }
     
     public void cadastrarCliente(){
         boolean check;
         boolean confirmacaoDados = ConfirmacaoDados.isSelected();
-        String nome = txtNome.getText();
-        String cpf = txtCPF.getText();
-        String login = txtLogin.getText();
-        String senha = txtSenha.getText();
-        String telefone = txtTel.getText();
-        String email = txtEmail.getText();
+        
+        modelCliente.setNome(txtNome.getText());
+        modelCliente.setCpf(txtCPF.getText());
+        modelCliente.setLogin(txtLogin.getText());
+        modelCliente.setSenha(txtSenha.getText());
+        modelCliente.setTelefone(txtTel.getText());
+        modelCliente.setEmail(txtEmail.getText());
 
-        ClienteController clienteController = new ClienteController();
-        check = clienteController.verificarCliente(nome, cpf, email, telefone, login, senha, confirmacaoDados);
+        check = clienteController.verificarCliente(modelCliente, confirmacaoDados);
         if(check){
             limparCampos();
         }
@@ -186,11 +181,6 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         nome.setText("NOME:");
 
         txtNome.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
-        txtNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeActionPerformed(evt);
-            }
-        });
 
         cpf.setBackground(new java.awt.Color(255, 255, 255));
         cpf.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
@@ -238,22 +228,12 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         confirmarDados.setText("Confirmo que os dados fornecidos são confiáveis e verdadeiros.");
 
         ConfirmacaoDados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ConfirmacaoDados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConfirmacaoDadosActionPerformed(evt);
-            }
-        });
 
         desejoReceber.setFont(new java.awt.Font("Microsoft JhengHei Light", 2, 18)); // NOI18N
         desejoReceber.setForeground(new java.awt.Color(255, 255, 255));
         desejoReceber.setText("Desejo receber e-mails sobre atualizações de conteúdo.");
 
         jRadioButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
-            }
-        });
 
         cadastrar.setBackground(new java.awt.Color(0, 51, 102));
         cadastrar.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
@@ -380,18 +360,10 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cadastrarActionPerformed
 
-    private void ConfirmacaoDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmacaoDadosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ConfirmacaoDadosActionPerformed
-
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
-
     private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
         if(update){
             TelaPrincipalCliente TPC = new TelaPrincipalCliente();
-            TPC.receberCodUsr(cliente.get(0).getId());
+            TPC.receberCodCliente(cliente.get(0).getId());
             TPC.setVisible(true);
             this.dispose();
         }else{   
@@ -399,10 +371,6 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
             new TelaLoginCliente().setVisible(true);
         }
     }//GEN-LAST:event_sairMouseClicked
-
-    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeActionPerformed
 
     public static void main(String args[]) {
         try {

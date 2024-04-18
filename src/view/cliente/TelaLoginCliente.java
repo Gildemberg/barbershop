@@ -27,7 +27,7 @@ public class TelaLoginCliente extends javax.swing.JFrame {
             int CODCLIENTE = ClienteDao.retornoCod(login, senha); //Realizando a consulta do cod usr atravez do login e senha usr
             
             TelaPrincipalCliente TC = new TelaPrincipalCliente(); //instanciando a classe Tela Principal
-            TC.receberCodUsr(CODCLIENTE); //transferindo o codigo usr pra tela principal
+            TC.receberCodCliente(CODCLIENTE); //transferindo o codigo usr pra tela principal
             TC.setVisible(true);
             this.setVisible(false);
         }
@@ -45,7 +45,7 @@ public class TelaLoginCliente extends javax.swing.JFrame {
         Direita = new css.FundoGradiente(0, 191, 255, 65, 105, 255, 0, 0, 1500, 100);
         Logo1 = new javax.swing.JLabel();
         Login = new javax.swing.JLabel();
-        txtLogin = new javax.swing.JTextField();
+        txtLogin = new css.ArrendondarBordas();
         Senha = new javax.swing.JLabel();
         txtSenha = new javax.swing.JPasswordField();
         btnEntrar = new javax.swing.JButton();
@@ -125,6 +125,8 @@ public class TelaLoginCliente extends javax.swing.JFrame {
         Login.setForeground(new java.awt.Color(255, 255, 255));
         Login.setText("Login:");
 
+        txtLogin.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        txtLogin.setBorder(null);
         txtLogin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtLoginKeyPressed(evt);
@@ -135,6 +137,7 @@ public class TelaLoginCliente extends javax.swing.JFrame {
         Senha.setForeground(new java.awt.Color(255, 255, 255));
         Senha.setText("Senha:");
 
+        txtSenha.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSenhaKeyPressed(evt);

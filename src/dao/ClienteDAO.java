@@ -87,7 +87,7 @@ public class ClienteDAO {
             }
         }
         
-        public boolean checkInformacoes(String cpf, String email, String telefone, String login){
+        public boolean checkInformacoes(Cliente c){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
@@ -95,10 +95,10 @@ public class ClienteDAO {
             
             try {
                 stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE CPF=? OR EMAIL=? OR TELEFONE=? OR LOGIN = ?");
-                stmt.setString(1, cpf);
-                stmt.setString(2, email);
-                stmt.setString(3, telefone);
-                stmt.setString(4, login);
+                stmt.setString(1, c.getCpf());
+                stmt.setString(2, c.getEmail());
+                stmt.setString(3, c.getTelefone());
+                stmt.setString(4, c.getLogin());
                 rs = stmt.executeQuery();
                 
                 if(rs.next()){

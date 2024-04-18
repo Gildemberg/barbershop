@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 import model.Agendamento;
 import java.sql.Time;
 import java.sql.Date;
-//import java.util.Date;
 
 
 public class AgendamentoDAO {
@@ -44,7 +43,8 @@ public class AgendamentoDAO {
             stmt = con.prepareStatement("SELECT a.FK_CODBARBEARIA, a.CODAGENDAMENTO, a.FK_CODCLIENTE, a.DATA, a.HORARIO, b.NOMESOCIAL"
                     + " FROM barbearia b"
                     + " JOIN agendamento a ON b.CODBARBEARIA = a.FK_CODBARBEARIA"
-                    + " WHERE a.FK_CODCLIENTE=?");
+                    + " WHERE a.FK_CODCLIENTE=?"
+                    + " ORDER BY a.DATA, a.HORARIO");
             stmt.setInt(1, codcliente);
             rs = stmt.executeQuery();
 

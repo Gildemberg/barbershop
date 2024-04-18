@@ -5,6 +5,7 @@ import dao.BarbeariaDAO;
 import java.util.ArrayList;
 import java.util.List;
 import model.Barbearia;
+import javax.swing.text.*;
 
 public class TelaCadastroBarbearia extends javax.swing.JFrame {
     boolean update=false;
@@ -252,6 +253,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         nome_social.setText("NOME SOCIAL:");
 
         txtNome.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
+        txtDescricao.setDocument(new LimitaNroCaracteres(100));
 
         cnpj.setBackground(new java.awt.Color(255, 255, 255));
         cnpj.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
@@ -270,12 +272,14 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         login.setText("LOGIN:");
 
         txtLogin.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
+        txtDescricao.setDocument(new LimitaNroCaracteres(10));
 
         senha.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
         senha.setForeground(new java.awt.Color(255, 255, 255));
         senha.setText("SENHA:");
 
         txtSenha.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
+        txtDescricao.setDocument(new LimitaNroCaracteres(15));
 
         telefone1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
         telefone1.setForeground(new java.awt.Color(255, 255, 255));
@@ -341,6 +345,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         regra1.setText("REGRA 1:");
 
         txtRegra1.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
+        txtDescricao.setDocument(new LimitaNroCaracteres(35));
 
         confirmarDados.setFont(new java.awt.Font("Microsoft JhengHei Light", 2, 18)); // NOI18N
         confirmarDados.setForeground(new java.awt.Color(255, 255, 255));
@@ -351,18 +356,21 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         regra2.setText("REGRA 2:");
 
         txtRegra2.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
+        txtDescricao.setDocument(new LimitaNroCaracteres(35));
 
         regra3.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
         regra3.setForeground(new java.awt.Color(255, 255, 255));
         regra3.setText("REGRA 3:");
 
         txtRegra3.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
+        txtDescricao.setDocument(new LimitaNroCaracteres(35));
 
         regra4.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
         regra4.setForeground(new java.awt.Color(255, 255, 255));
         regra4.setText("REGRA 4:");
 
         txtRegra4.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
+        txtDescricao.setDocument(new LimitaNroCaracteres(35));
 
         jRadioButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -388,6 +396,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         txtDescricao.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
         txtDescricao.setLineWrap(true);
         txtDescricao.setRows(5);
+        txtDescricao.setDocument(new LimitaNroCaracteres(300));
         jScrollPane2.setViewportView(txtDescricao);
 
         javax.swing.GroupLayout DireitaLayout = new javax.swing.GroupLayout(Direita);
@@ -629,6 +638,27 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> {
             new TelaCadastroBarbearia().setVisible(true);
         });
+    }
+    
+    public class LimitaNroCaracteres extends PlainDocument {
+        private final int iMaxLength;
+        public LimitaNroCaracteres(int maxlen) {
+            super();
+            iMaxLength = maxlen;
+        }
+
+        @Override
+        public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+            if (iMaxLength <= 0){
+                super.insertString(offset, str.toUpperCase(), attr);
+                return;
+            }
+
+            int ilen = (getLength() + str.length());
+            if (ilen <= iMaxLength){
+                super.insertString(offset, str.toUpperCase(), attr);   // ...aceita str
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
