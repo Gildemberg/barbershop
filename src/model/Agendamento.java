@@ -12,6 +12,8 @@ public class Agendamento {
     private Time hora;
     private String nomebarbearia;
     private String nomecliente;
+    private int servico;
+    private String nomeservico;
 
     public int getId() {
         return id;
@@ -20,6 +22,24 @@ public class Agendamento {
     public void setId(int id) {
         this.id = id;
     }
+
+    public int getServico() {
+        return servico;
+    }
+
+    public void setServico(int servico) {
+        this.servico = servico;
+    }
+
+    public String getNomeservico() {
+        return nomeservico;
+    }
+
+    public void setNomeservico(String nomeservico) {
+        this.nomeservico = nomeservico;
+    }
+    
+    
 
     public int getCodbarbearia() {
         return codbarbearia;
@@ -73,12 +93,13 @@ public class Agendamento {
     public Agendamento(){
     }
     
-    public Agendamento(Date data, Time hora, int codbarbearia, int codcliente, int id){
+    public Agendamento(int servico, Date data, Time hora, int codbarbearia, int codcliente, int id){
         this.id = id;
         this.codbarbearia = codbarbearia;
         this.codcliente = codcliente;
         this.data = data;
         this.hora = hora;
+        this.servico = servico;
     }
     
     public void alterarAgendamento(Agendamento a){

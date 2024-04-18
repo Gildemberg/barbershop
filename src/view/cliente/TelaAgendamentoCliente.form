@@ -65,7 +65,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtValores" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtServicos" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtEndereco" alignment="1" min="-2" pref="682" max="-2" attributes="0"/>
                                       <Component id="txtEmail" alignment="1" max="32767" attributes="0"/>
                                   </Group>
@@ -116,7 +116,7 @@
                   <EmptySpace type="separate" max="32767" attributes="0"/>
                   <Component id="txtEndereco" pref="115" max="32767" attributes="0"/>
                   <EmptySpace type="separate" max="32767" attributes="0"/>
-                  <Component id="txtValores" min="-2" pref="145" max="-2" attributes="0"/>
+                  <Component id="txtServicos" min="-2" pref="145" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -177,10 +177,10 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="txtValores">
+        <Component class="javax.swing.JLabel" name="txtServicos">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Impact" size="36" style="0"/>
+              <Font name="Impact" size="24" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -302,12 +302,17 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="0" pref="117" max="32767" attributes="0"/>
+                      <Component id="Agendamento" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="104" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="sair" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="btnAgendar" min="-2" pref="183" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="237" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -316,29 +321,25 @@
                                           <Component id="Data" min="-2" pref="229" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="txtHora" pref="167" max="32767" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="txtMinuto" min="-2" pref="167" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Component id="Hora" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                                      </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="btnAgendar" min="-2" pref="183" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="237" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="txtHora" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="txtMinuto" min="-2" pref="167" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="Hora" pref="357" max="32767" attributes="0"/>
+                                      <Component id="selectServicos" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="169" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <Component id="Agendamento" alignment="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -350,23 +351,21 @@
                   <Component id="sair" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                   <Component id="Agendamento" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="146" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="selectServicos" min="-2" pref="52" max="-2" attributes="0"/>
+                  <EmptySpace pref="144" max="32767" attributes="0"/>
                   <Component id="Hora" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="173" max="-2" attributes="0"/>
-                          <Component id="Data" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="calendario" min="-2" pref="212" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
-                          <Component id="btnAgendar" min="-2" pref="44" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="jLabel1" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
-                          <Component id="txtHora" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
-                          <Component id="txtMinuto" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel1" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
+                      <Component id="txtHora" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
+                      <Component id="txtMinuto" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="Data" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="calendario" min="-2" pref="212" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                  <Component id="btnAgendar" min="-2" pref="44" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -501,6 +500,18 @@
             </Property>
             <Property name="text" type="java.lang.String" value=":"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="selectServicos">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Servi&#xe7;o"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

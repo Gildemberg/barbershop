@@ -3,6 +3,7 @@ package controller;
 import dao.BarbeariaDAO;
 import javax.swing.JOptionPane;
 import model.Barbearia;
+import model.Servico;
 
 public class BarbeariaController {
     public boolean verificarBarbearia(Barbearia b){
@@ -92,5 +93,36 @@ public class BarbeariaController {
             check = false;
         }
         return check;
+    }
+    
+    public boolean verificarServico(Servico s){
+        boolean check;
+        //VERIFICAR PREENCHIMENTO DOS CAMPOS
+        if(s.getNome()!=null && s.getNome().length()>0 && 
+                s.getValor()!=null && s.getValor()>0 && 
+                s.getCODBARBEARIA()>0
+                ){
+            check = verificarNoBancoServico(s);
+            return check;
+        }else{
+            JOptionPane.showMessageDialog(null, "Os campos não foram preenchidos corretamente", "Mensagem", JOptionPane.ERROR_MESSAGE);        
+        check = false;
+        }
+        return check;
+    }
+    
+    public boolean verificarNoBancoServico(Servico s){
+        BarbeariaDAO dao = new BarbeariaDAO();
+        boolean check, valor;
+        check = dao.checkServico(s);
+        if(check){
+            JOptionPane.showMessageDialog(null, "Esse serviço já foi cadastrado", "Mensagem", JOptionPane.ERROR_MESSAGE);
+            valor = false;
+        }else{
+            s.cadastrarServico(s);
+            JOptionPane.showMessageDialog(null, "Serviço cadastrado com sucesso!");
+            valor = true;
+        }
+        return valor;
     }
 }

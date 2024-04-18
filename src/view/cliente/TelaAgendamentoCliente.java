@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
+import model.Servico;
 
 
 public class TelaAgendamentoCliente extends javax.swing.JFrame{
@@ -24,12 +25,13 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     AgendamentoController agendamentoController = new AgendamentoController();
     SimpleDateFormat horaFormatada = new SimpleDateFormat("HH:mm");
     SimpleDateFormat dataFormatada = new SimpleDateFormat("dd-MM-yyyy");
-    
+    List<Servico> servicos = new ArrayList();
     
     public TelaAgendamentoCliente() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
     }
+    
     
     public void receberCodAgend(int CODBARBEARIA, int CODCLIENTE){
         this.CODBARBEARIA = CODBARBEARIA;
@@ -59,11 +61,32 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         txtRegra2.setText("<html><div style='text-align: justify;'>• "+barbearias.get(CODBARBEARIA-1).getRegra2()+"</div></html>");
         txtRegra3.setText("<html><div style='text-align: justify;'>• "+barbearias.get(CODBARBEARIA-1).getRegra3()+"</div></html>");
         txtRegra4.setText("<html><div style='text-align: justify;'>• "+barbearias.get(CODBARBEARIA-1).getRegra4()+"</div></html>");
+        
+        
+        servicos = bDAO.readServico(CODBARBEARIA);
+        
+        for (Servico servico : servicos) { //adicionando os serviços á JComboBox
+            selectServicos.addItem(servico.getNome());
+        }
+        
+        StringBuilder textoServicos = new StringBuilder("<html><div style='text-align: justify;'>");
+        for (Servico servico : servicos) {
+            textoServicos.append("• ").append(servico.getNome()).append(" | R$").append(servico.getValor().toString()).append("<br>");
+        }
+        textoServicos.append("</div></html>");
+        txtServicos.setText(textoServicos.toString());
       }
     
     public void agendar(){
         try {
             boolean check;
+            int servicoSelecionado;
+            int servico = selectServicos.getSelectedIndex();
+            if(servico>0){
+                servicoSelecionado = servicos.get(servico-1).getId();
+            }else{
+                servicoSelecionado=0;
+            }
             
             SelectedDate dataCalendar = calendario.getSelectedDate(); //Selecionando DATA no CALENDARIO
             String dataString = dataCalendar.getDay()+"-"+dataCalendar.getMonth()+"-"+dataCalendar.getYear(); //Pegando a DATA em STRING
@@ -74,7 +97,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
             Date Horario = new Date(horaFormatada.parse(horaString).getTime()); //TIME DATE
             Time hora = new Time(Horario.getTime()); //Pegando o TIME da DATE
 
-            check = agendamentoController.verificarAgendamento(data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO);
+            check = agendamentoController.verificarAgendamento(servicoSelecionado, data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO);
             
             if(check){ // LIMPANDO OS CAMPOS EM CASO DE CADASTRO REALIZADO
                 txtHora.setText("");
@@ -94,7 +117,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         txtBarbearia = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JLabel();
         txtEmail = new javax.swing.JLabel();
-        txtValores = new javax.swing.JLabel();
+        txtServicos = new javax.swing.JLabel();
         txtEndereco = new javax.swing.JLabel();
         txtRegra = new javax.swing.JLabel();
         txtRegra1 = new javax.swing.JLabel();
@@ -111,6 +134,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         calendario = new com.raven.datechooser.DateChooser();
         btnAgendar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        selectServicos = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de Agendamento");
@@ -134,9 +158,9 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         txtEmail.setForeground(new java.awt.Color(255, 255, 255));
         txtEmail.setBorder(new javax.swing.border.MatteBorder(null));
 
-        txtValores.setFont(new java.awt.Font("Impact", 0, 36)); // NOI18N
-        txtValores.setForeground(new java.awt.Color(255, 255, 255));
-        txtValores.setBorder(new javax.swing.border.MatteBorder(null));
+        txtServicos.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        txtServicos.setForeground(new java.awt.Color(255, 255, 255));
+        txtServicos.setBorder(new javax.swing.border.MatteBorder(null));
 
         txtEndereco.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         txtEndereco.setForeground(new java.awt.Color(255, 255, 255));
@@ -178,7 +202,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
                         .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(EsquerdaLayout.createSequentialGroup()
                                 .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtValores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtServicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtEndereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(0, 0, Short.MAX_VALUE))
@@ -218,7 +242,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(txtEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(txtValores, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -286,6 +310,8 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText(":");
 
+        selectServicos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Serviço" }));
+
         javax.swing.GroupLayout DireitaLayout = new javax.swing.GroupLayout(Direita);
         Direita.setLayout(DireitaLayout);
         DireitaLayout.setHorizontalGroup(
@@ -293,33 +319,34 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
             .addGroup(DireitaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DireitaLayout.createSequentialGroup()
-                        .addGap(0, 117, Short.MAX_VALUE)
+                    .addComponent(Agendamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                        .addGap(0, 104, Short.MAX_VALUE)
                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
                                 .addComponent(sair)
                                 .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                                .addComponent(btnAgendar, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(237, 237, 237))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
                                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(calendario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
                                         .addComponent(Data, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(131, 131, 131))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(DireitaLayout.createSequentialGroup()
-                                                .addComponent(txtHora, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(Hora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(71, 71, 71)))
-                                .addGap(84, 84, 84))
+                                        .addGap(131, 131, 131)))
+                                .addGap(97, 97, 97))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                                .addComponent(btnAgendar, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(237, 237, 237))))
-                    .addComponent(Agendamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(DireitaLayout.createSequentialGroup()
+                                        .addComponent(txtHora)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Hora, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+                                    .addComponent(selectServicos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(169, 169, 169))))))
         );
         DireitaLayout.setVerticalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,20 +355,20 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
                 .addComponent(sair)
                 .addGap(87, 87, 87)
                 .addComponent(Agendamento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addComponent(selectServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
                 .addComponent(Hora)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DireitaLayout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(Data)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(119, 119, 119)
-                        .addComponent(btnAgendar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addComponent(Data)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(119, 119, 119)
+                .addComponent(btnAgendar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(103, 103, 103))
         );
 
@@ -396,6 +423,24 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         }
     }
 
+    public static void main(String args[]) {
+        
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TelaAgendamentoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+       
+        java.awt.EventQueue.invokeLater(() -> {
+            new TelaAgendamentoCliente().setVisible(true);
+        });
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Agendamento;
     private javax.swing.JLabel Data;
@@ -407,6 +452,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     private javax.swing.JLabel icon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel sair;
+    private javax.swing.JComboBox<String> selectServicos;
     private javax.swing.JLabel txtBarbearia;
     private javax.swing.JLabel txtDescricao;
     private javax.swing.JLabel txtEmail;
@@ -418,6 +464,6 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     private javax.swing.JLabel txtRegra2;
     private javax.swing.JLabel txtRegra3;
     private javax.swing.JLabel txtRegra4;
-    private javax.swing.JLabel txtValores;
+    private javax.swing.JLabel txtServicos;
     // End of variables declaration//GEN-END:variables
 }

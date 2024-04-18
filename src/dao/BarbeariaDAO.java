@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.Barbearia;
+import model.Servico;
 
 public class BarbeariaDAO {
     public void create(Barbearia b){
@@ -341,4 +342,99 @@ public class BarbeariaDAO {
             return null;
         }
         
+    public void cadastrarServico(Servico s){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "INSERT INTO servico (NOME, VALOR, TEMPO, FK_CODBARBEARIA) VALUES(?,?,?,?)";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, s.getNome());
+            stmt.setFloat(2, s.getValor());
+            stmt.setTime(3, s.getTempo());
+            stmt.setInt(4, s.getCODBARBEARIA());
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
+            Logger.getLogger(BarbeariaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+    }
+    public void alterarServico(Servico s){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "UPDATE servico SET NOME=?, VALOR=?, TEMPO=? WHERE CODSERVICO=?";
+            stmt = con.prepareStatement(sql);
+            
+            stmt.setString(1, s.getNome());
+            stmt.setFloat(2, s.getValor());
+            stmt.setTime(3, s.getTempo());
+            stmt.setInt(4, s.getId());
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
+            Logger.getLogger(BarbeariaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+    }
+    public boolean checkServico(Servico s){
+            Connection con = ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            boolean check = false;
+            
+            try {
+                stmt = con.prepareStatement("SELECT NOME, FK_CODBARBEARIA FROM servico WHERE NOME=? AND FK_CODBARBEARIA = ?");
+                stmt.setString(1, s.getNome());
+                stmt.setInt(2, s.getCODBARBEARIA());
+                rs = stmt.executeQuery();
+                
+                if(rs.next()){
+                    check = true;
+                }
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro: "+ex);
+                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+            return check;  
+        }
+    public List<Servico> readServico(int CODBARBEARIA){
+            Connection con = ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            List<Servico> servicos = new ArrayList();
+            
+            try {
+                stmt = con.prepareStatement("SELECT CODSERVICO, NOME, VALOR, TEMPO FROM servico WHERE FK_CODBARBEARIA=?");
+                stmt.setInt(1, CODBARBEARIA);
+                rs = stmt.executeQuery();
+                
+                while(rs.next()){
+                    Servico modelServico = new Servico();
+                    modelServico.setId(rs.getInt(1));
+                    modelServico.setNome(rs.getString(2));
+                    modelServico.setValor(rs.getFloat(3));
+                    modelServico.setTempo(rs.getTime(4));
+                    servicos.add(modelServico);
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro: "+ex);
+                Logger.getLogger(BarbeariaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+            
+            return servicos;
+        }
 }

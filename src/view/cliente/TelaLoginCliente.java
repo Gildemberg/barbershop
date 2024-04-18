@@ -45,7 +45,7 @@ public class TelaLoginCliente extends javax.swing.JFrame {
         Direita = new css.FundoGradiente(0, 191, 255, 65, 105, 255, 0, 0, 1500, 100);
         Logo1 = new javax.swing.JLabel();
         Login = new javax.swing.JLabel();
-        txtLogin = new css.ArrendondarBordas();
+        txtLogin = new javax.swing.JTextField();
         Senha = new javax.swing.JLabel();
         txtSenha = new javax.swing.JPasswordField();
         btnEntrar = new javax.swing.JButton();
@@ -125,8 +125,8 @@ public class TelaLoginCliente extends javax.swing.JFrame {
         Login.setForeground(new java.awt.Color(255, 255, 255));
         Login.setText("Login:");
 
-        txtLogin.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        txtLogin.setBorder(null);
+        txtLogin.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
+        txtLogin.setAlignmentX(3.0F);
         txtLogin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtLoginKeyPressed(evt);
@@ -137,7 +137,8 @@ public class TelaLoginCliente extends javax.swing.JFrame {
         Senha.setForeground(new java.awt.Color(255, 255, 255));
         Senha.setText("Senha:");
 
-        txtSenha.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        txtSenha.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
+        txtSenha.setAlignmentX(1.5F);
         txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSenhaKeyPressed(evt);

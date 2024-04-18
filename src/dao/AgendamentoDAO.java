@@ -19,11 +19,12 @@ public class AgendamentoDAO {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("INSERT INTO agendamento (DATA, HORARIO, FK_CODBARBEARIA, FK_CODCLIENTE) VALUES(?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO agendamento (DATA, HORARIO, FK_CODBARBEARIA, FK_CODCLIENTE, FK_CODSERVICO) VALUES(?,?,?,?,?)");
             stmt.setDate(1, a.getData());
             stmt.setTime(2, a.getHora());
             stmt.setInt(3, a.getCodbarbearia());
             stmt.setInt(4, a.getCodcliente());
+            stmt.setInt(5, a.getServico());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: "+ex);
@@ -40,9 +41,10 @@ public class AgendamentoDAO {
         List<Agendamento> agendamentos = new ArrayList();
 
         try {
-            stmt = con.prepareStatement("SELECT a.FK_CODBARBEARIA, a.CODAGENDAMENTO, a.FK_CODCLIENTE, a.DATA, a.HORARIO, b.NOMESOCIAL"
-                    + " FROM barbearia b"
-                    + " JOIN agendamento a ON b.CODBARBEARIA = a.FK_CODBARBEARIA"
+            stmt = con.prepareStatement("SELECT a.FK_CODBARBEARIA, a.CODAGENDAMENTO, a.FK_CODCLIENTE, a.DATA, a.HORARIO, b.NOMESOCIAL, s.NOME"
+                    + " FROM agendamento a"
+                    + " JOIN barbearia b ON a.FK_CODBARBEARIA = b.CODBARBEARIA"
+                    + " JOIN servico s ON a.FK_CODSERVICO = s.CODSERVICO"
                     + " WHERE a.FK_CODCLIENTE=?"
                     + " ORDER BY a.DATA, a.HORARIO");
             stmt.setInt(1, codcliente);
@@ -56,6 +58,7 @@ public class AgendamentoDAO {
                 agendamento.setCodcliente(rs.getInt("FK_CODCLIENTE"));
                 agendamento.setCodbarbearia(rs.getInt("FK_CODBARBEARIA"));
                 agendamento.setId(rs.getInt("CODAGENDAMENTO"));
+                agendamento.setNomeservico(rs.getString("s.NOME"));
                 agendamentos.add(agendamento);
             }
         } catch (SQLException ex) {
@@ -130,10 +133,11 @@ public class AgendamentoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE agendamento SET DATA=?, HORARIO=? WHERE CODAGENDAMENTO=?");
+            stmt = con.prepareStatement("UPDATE agendamento SET DATA=?, HORARIO=?, FK_CODSERVICO=? WHERE CODAGENDAMENTO=?");
             stmt.setDate(1, a.getData());
             stmt.setTime(2, a.getHora());
-            stmt.setInt(3, a.getId()); 
+            stmt.setInt(3, a.getServico());
+            stmt.setInt(4, a.getId()); 
             stmt.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: "+ex);
