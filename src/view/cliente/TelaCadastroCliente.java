@@ -162,7 +162,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         Direita.setPreferredSize(new java.awt.Dimension(1200, 1080));
         Direita.setRequestFocusEnabled(false);
 
-        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_sair2.png"))); // NOI18N
+        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/saida.png"))); // NOI18N
         sair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -290,7 +290,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
             .addGroup(DireitaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(sair)
-                .addGap(43, 43, 43)
+                .addGap(31, 31, 31)
                 .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)

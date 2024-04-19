@@ -11,7 +11,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import model.Agendamento;
 import model.Barbearia;
-import css.*;
 import java.awt.BorderLayout;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -23,12 +22,19 @@ import javax.swing.JPanel;
 
 
 public final class TelaPrincipalCliente extends javax.swing.JFrame {
-    TelaAgendamentoCliente TAC = new TelaAgendamentoCliente();
-    AgendamentoDAO agendamentoDao = new AgendamentoDAO();
+    //VARIAVEIS
     int CODCLIENTE;
+    String NOMECLIENTE;
     ArrayList<Integer> CODBARBEARIAS = new ArrayList<>();
     ArrayList<Integer> CODAGENDAMENTOS = new ArrayList<>();
-    String NOMECLIENTE;
+    
+    //FORMATOS
+    SimpleDateFormat dataFormat = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat horaFormat = new SimpleDateFormat("HH:mm");
+    
+    //INSTANCIAS
+    TelaAgendamentoCliente TAC = new TelaAgendamentoCliente();
+    AgendamentoDAO agendamentoDao = new AgendamentoDAO();
     
     public TelaPrincipalCliente() {
         initComponents();
@@ -128,8 +134,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     }
     
     public void consultarAgendamento(){
-    SimpleDateFormat dataFormat = new SimpleDateFormat("dd/MM/yyyy");
-    SimpleDateFormat horaFormat = new SimpleDateFormat("HH:mm");
+    
     AgendamentoDAO agendDAO = new AgendamentoDAO();
     List<Agendamento> agendamentos = agendDAO.consultarAgendamentosCliente(CODCLIENTE);
 
@@ -156,7 +161,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         
         // Adicionar os códigos de barbearia e agendamento às listas correspondentes
         CODBARBEARIAS.add(agendamento.getCodbarbearia());
-        CODAGENDAMENTOS.add(agendamento.getId());
+        CODAGENDAMENTOS.add(agendamento.getCodagendamento());
     }
     
     // Ocultar os painéis de agendamento restantes (caso o número de agendamentos seja menor que 4)
@@ -406,7 +411,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia02.setLayout(new BorderLayout());
         barbearia02.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia02.setBackground(new java.awt.Color(255, 102, 102));
+        barbearia02.setBackground(new java.awt.Color(122, 177, 255));
         barbearia02.setForeground(new java.awt.Color(0, 0, 0));
         barbearia02.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia02.setMaximumSize(new java.awt.Dimension(1150, 55));
@@ -419,7 +424,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         });
 
         nome_barbearia02.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia02.setForeground(new java.awt.Color(153, 0, 0));
+        nome_barbearia02.setForeground(new java.awt.Color(29, 93, 183));
         nome_barbearia02.setBorder(new javax.swing.border.MatteBorder(null));
         nome_barbearia02.setMaximumSize(new java.awt.Dimension(1000, 55));
         nome_barbearia02.setMinimumSize(new java.awt.Dimension(1000, 55));
@@ -504,7 +509,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia04.setLayout(new BorderLayout());
         barbearia04.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia04.setBackground(new java.awt.Color(255, 102, 102));
+        barbearia04.setBackground(new java.awt.Color(122, 177, 255));
         barbearia04.setForeground(new java.awt.Color(0, 0, 0));
         barbearia04.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia04.setMaximumSize(new java.awt.Dimension(1150, 55));
@@ -517,7 +522,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         });
 
         nome_barbearia04.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia04.setForeground(new java.awt.Color(153, 0, 0));
+        nome_barbearia04.setForeground(new java.awt.Color(29, 93, 183));
         nome_barbearia04.setBorder(new javax.swing.border.MatteBorder(null));
         nome_barbearia04.setMaximumSize(new java.awt.Dimension(1000, 55));
         nome_barbearia04.setMinimumSize(new java.awt.Dimension(1000, 55));
@@ -602,7 +607,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia06.setLayout(new BorderLayout());
         barbearia06.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia06.setBackground(new java.awt.Color(255, 102, 102));
+        barbearia06.setBackground(new java.awt.Color(122, 177, 255));
         barbearia06.setForeground(new java.awt.Color(0, 0, 0));
         barbearia06.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia06.setMaximumSize(new java.awt.Dimension(1150, 55));
@@ -614,7 +619,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         });
 
         nome_barbearia06.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia06.setForeground(new java.awt.Color(153, 0, 0));
+        nome_barbearia06.setForeground(new java.awt.Color(29, 93, 183));
         nome_barbearia06.setBorder(new javax.swing.border.MatteBorder(null));
         nome_barbearia06.setMaximumSize(new java.awt.Dimension(1000, 55));
         nome_barbearia06.setMinimumSize(new java.awt.Dimension(1000, 55));
@@ -699,7 +704,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia8.setLayout(new BorderLayout());
         barbearia8.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia8.setBackground(new java.awt.Color(255, 102, 102));
+        barbearia8.setBackground(new java.awt.Color(122, 177, 255));
         barbearia8.setForeground(new java.awt.Color(0, 0, 0));
         barbearia8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia8.setMaximumSize(new java.awt.Dimension(1150, 55));
@@ -711,7 +716,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         });
 
         nome_barbearia8.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia8.setForeground(new java.awt.Color(153, 0, 0));
+        nome_barbearia8.setForeground(new java.awt.Color(29, 93, 183));
         nome_barbearia8.setBorder(new javax.swing.border.MatteBorder(null));
         nome_barbearia8.setMaximumSize(new java.awt.Dimension(1000, 55));
         nome_barbearia8.setMinimumSize(new java.awt.Dimension(1000, 55));
@@ -796,7 +801,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia10.setLayout(new BorderLayout());
         barbearia10.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia10.setBackground(new java.awt.Color(255, 102, 102));
+        barbearia10.setBackground(new java.awt.Color(122, 177, 255));
         barbearia10.setForeground(new java.awt.Color(0, 0, 0));
         barbearia10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia10.setMaximumSize(new java.awt.Dimension(1150, 55));

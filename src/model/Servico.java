@@ -3,18 +3,18 @@ import dao.BarbeariaDAO;
 import java.sql.Time;
 
 public class Servico {
-    private int id;
+    private int codservico;
     private int CODBARBEARIA;
     private String nome;
     private Float valor;
     private Time tempo;
 
     public int getId() {
-        return id;
+        return codservico;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.codservico = id;
     }
 
     public int getCODBARBEARIA() {

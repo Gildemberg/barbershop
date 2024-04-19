@@ -3,7 +3,7 @@ package model;
 import dao.ClienteDAO;
 
 public class Cliente {
-    private int id;
+    private int codcliente;
     private String nome;
     private String login;
     private String senha;
@@ -52,11 +52,11 @@ public class Cliente {
     }
 
     public int getId() {
-        return id;
+        return codcliente;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.codcliente = id;
     }
 
     public String getCpf() {

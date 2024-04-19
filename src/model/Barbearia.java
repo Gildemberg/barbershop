@@ -3,7 +3,7 @@ package model;
 import dao.BarbeariaDAO;
 
 public class Barbearia {
-    private int id;
+    private int codbarbearia;
     private String cnpj;
     private String nome;
     private String rua;
@@ -23,11 +23,11 @@ public class Barbearia {
     private String regra4;
 
     public int getId() {
-        return id;
+        return codbarbearia;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.codbarbearia = id;
     }
 
     public String getCnpj() {

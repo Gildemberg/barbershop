@@ -339,7 +339,7 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
 
     private void btnConsultarAgendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarAgendaMouseClicked
         TelaAgendamentoBarbearia TCA = new TelaAgendamentoBarbearia();
-        TCA.receberCodUsr(CODBARBEARIA, NOMEBARBEARIA, horario);
+        TCA.receberCodUsr(CODBARBEARIA, NOMEBARBEARIA);
         TCA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnConsultarAgendaMouseClicked

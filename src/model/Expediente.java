@@ -3,7 +3,7 @@ import java.sql.Date;
 import dao.ExpedienteDAO;
 
 public class Expediente {
-    private int id;
+    private int codexpediente;
     private int codbarbearia;
     private Date data;
 
@@ -24,11 +24,11 @@ public class Expediente {
     }
 
     public int getId() {
-        return id;
+        return codexpediente;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.codexpediente = id;
     }
 
     public Expediente(){

@@ -5,7 +5,7 @@ import java.sql.Time;
 import java.sql.Date;
 
 public class Agendamento {
-    private int id;
+    private int codagendamento;
     private int codcliente;
     private int codbarbearia;
     private Date data;
@@ -14,13 +14,22 @@ public class Agendamento {
     private String nomecliente;
     private int servico;
     private String nomeservico;
+    private int status;
 
-    public int getId() {
-        return id;
+    public int getCodagendamento() {
+        return codagendamento;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCodagendamento(int codagendamento) {
+        this.codagendamento = codagendamento;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public int getServico() {
@@ -93,13 +102,14 @@ public class Agendamento {
     public Agendamento(){
     }
     
-    public Agendamento(int servico, Date data, Time hora, int codbarbearia, int codcliente, int id){
-        this.id = id;
+    public Agendamento(int servico, Date data, Time hora, int codbarbearia, int codcliente, int codagendamento, int status){
+        this.codagendamento = codagendamento;
         this.codbarbearia = codbarbearia;
         this.codcliente = codcliente;
         this.data = data;
         this.hora = hora;
         this.servico = servico;
+        this.status = status;
     }
     
     public void alterarAgendamento(Agendamento a){

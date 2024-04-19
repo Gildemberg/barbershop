@@ -2,119 +2,106 @@ package view.barbearia;
 
 import dao.AgendamentoDAO;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import model.Agendamento;
 
 public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
-
+    // VARIAVEIS
     int CODBARBEARIA;
-    String NOMEBARBEARIA, horario;
+    ArrayList<Integer> CODCLIENTES = new ArrayList<>();
+    ArrayList<Integer> CODAGENDAMENTOS = new ArrayList<>();
+    List<Agendamento> agendamentos = new ArrayList();
+    
+    //FORMATOS
+    SimpleDateFormat dataFormat = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat horaFormat = new SimpleDateFormat("HH:mm");
+    
+    //INSTANCIAS
+    AgendamentoDAO agendamentoDao = new AgendamentoDAO();
     
     public TelaAgendamentoBarbearia() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
-        Agendamento1.setVisible(false);
-        Agendamento2.setVisible(false);
-        Agendamento3.setVisible(false);
-        Agendamento4.setVisible(false);
-        Agendamento5.setVisible(false);
-        Agendamento6.setVisible(false);
-        Agendamento7.setVisible(false);
-        Agendamento8.setVisible(false);
-        Agendamento9.setVisible(false);
+        inserirDataHora();
     }
     
-    public void receberCodUsr(int CODBARBEARIA, String NOMEBARBEARIA, String horario){//receber o cod EMPRESA
+    public void inserirDataHora(){
+        LocalDate data = LocalDate.now();
+        LocalDateTime hora = LocalDateTime.now();
+        DayOfWeek dia = hora.getDayOfWeek();
+        DateTimeFormatter formatoDATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatoHORA = DateTimeFormatter.ofPattern("HH:mm a");
+        String DATA = data.format(formatoDATA);
+        String HORA = hora.format(formatoHORA);
+        String DIA = dia.getDisplayName(TextStyle.SHORT, Locale.getDefault());
+        DIA = DIA.replace(".", "");
+        DIA = DIA.toUpperCase();
+        dataAtual.setText(DIA+" - "+DATA +" - "+ HORA);
+    }
+    
+    public void receberCodUsr(int CODBARBEARIA, String NOMEBARBEARIA){//receber o cod EMPRESA
         this.CODBARBEARIA = CODBARBEARIA;
-        this.NOMEBARBEARIA = NOMEBARBEARIA;
         nome_barbearia.setText(NOMEBARBEARIA);
-        
-        this.horario = horario;
-        dataAtual.setText(horario);
         consultarAgenda();
     }
     
-    public void consultarAgenda(){
-        SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat hora = new SimpleDateFormat("HH:mm");
+    public void confirmarAgendamento(int CODAGENDAMENTO){
+        if(JOptionPane.showConfirmDialog(this, "Confirma a conclusão do serviço?", "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            agendamentoDao.confirmarAgendamentoCliente(CODAGENDAMENTO, 1);
+            consultarAgenda();
+        }
+    }
+    
+    public void consultarAgenda(){       
         AgendamentoDAO agendDAO = new AgendamentoDAO();
-        List<Agendamento> agendamentos = new ArrayList();
+        
         agendamentos = agendDAO.consultarAgendamentosBarbearia(CODBARBEARIA);
-        if(!agendamentos.isEmpty()){//so executa se a lista nao tiver vazia
-            if(agendamentos.size() >= 1){  //so executa se tiver um item     
-                Agendamento1.setVisible(true);
-                txtCliente1.setText(agendamentos.get(0).getNomecliente());
-                txtHorario1.setText(hora.format(agendamentos.get(0).getHora())+"h  "+ data.format(agendamentos.get(0).getData()));
-                btnConfirmar1.setText(String.valueOf(agendamentos.get(0).getId()));
-                txtCod_usr1.setText(String.valueOf(agendamentos.get(0).getCodcliente()));
-            }else{
-                Agendamento1.setVisible(false);
-                txtCliente1.setText("");
-                txtHorario1.setText("");
-                btnConfirmar1.setText("");
-                txtCod_usr1.setText("");
-            } if(agendamentos.size() >= 2){ //so executa se tiver dois item             
-                Agendamento2.setVisible(true);
-                txtCliente2.setText(agendamentos.get(1).getNomecliente());
-                txtHorario2.setText(hora.format(agendamentos.get(1).getHora())+"h  "+ data.format(agendamentos.get(1).getData()));
-                btnConfirmar2.setText(String.valueOf(agendamentos.get(1).getId()));
-                txtCod_usr2.setText(String.valueOf(agendamentos.get(1).getCodcliente()));
-            }else{
-                Agendamento2.setVisible(false);
-                txtCliente2.setText("");
-                txtHorario2.setText("");
-                btnConfirmar2.setText("");
-                txtCod_usr2.setText("");
-            }if(agendamentos.size() >= 3){ //so executa se tiver tres item                    
-                Agendamento3.setVisible(true);
-                txtCliente3.setText(agendamentos.get(2).getNomecliente());
-                txtHorario3.setText(hora.format(agendamentos.get(2).getHora())+"h  "+ data.format(agendamentos.get(2).getData()));
-                btnConfirmar3.setText(String.valueOf(agendamentos.get(2).getId()));
-                txtCod_usr3.setText(String.valueOf(agendamentos.get(2).getCodcliente()));
-            }else{
-                Agendamento3.setVisible(false);
-                txtCliente3.setText("");
-                txtHorario3.setText("");
-                btnConfirmar3.setText("");
-                txtCod_usr3.setText("");
-            } if(agendamentos.size() >= 4){ //so executa se tiver tres item                    
-                Agendamento4.setVisible(true);
-                txtCliente4.setText(agendamentos.get(3).getNomecliente());
-                txtHorario4.setText(hora.format(agendamentos.get(3).getHora())+"h  "+ data.format(agendamentos.get(3).getData()));
-                btnConfirmar4.setText(String.valueOf(agendamentos.get(3).getId()));
-                txtCod_usr4.setText(String.valueOf(agendamentos.get(3).getCodcliente()));
-            }else{
-                Agendamento4.setVisible(false);
-                txtCliente4.setText("");
-                txtHorario4.setText("");
-                btnConfirmar4.setText("");
-                txtCod_usr4.setText("");
-            }if(agendamentos.size() >= 5){ //so executa se tiver tres item                    
-                Agendamento5.setVisible(true);
-                txtCliente5.setText(agendamentos.get(4).getNomecliente());
-                txtHorario5.setText(hora.format(agendamentos.get(4).getHora())+"h  "+ data.format(agendamentos.get(4).getData()));
-                btnConfirmar5.setText(String.valueOf(agendamentos.get(4).getId()));
-                txtCod_usr5.setText(String.valueOf(agendamentos.get(4).getCodcliente()));
-            }else{
-                Agendamento5.setVisible(false);
-                txtCliente5.setText("");
-                txtHorario5.setText("");
-                btnConfirmar5.setText("");
-                txtCod_usr5.setText("");
-            }if(agendamentos.size() >= 6){ //so executa se tiver tres item                    
-                Agendamento6.setVisible(true);
-                txtCliente6.setText(agendamentos.get(5).getNomecliente());
-                txtHorario6.setText(hora.format(agendamentos.get(5).getHora())+"h  "+ data.format(agendamentos.get(5).getData()));
-                btnConfirmar6.setText(String.valueOf(agendamentos.get(5).getId()));
-                txtCod_usr6.setText(String.valueOf(agendamentos.get(5).getCodcliente()));
-            }else{
-                Agendamento6.setVisible(false);
-                txtCliente6.setText("");
-                txtHorario6.setText("");
-                btnConfirmar6.setText("");
-                txtCod_usr6.setText("");
+        
+
+        JPanel[] paineisAgendamento = {Agendamento1, Agendamento2, Agendamento3, Agendamento4, Agendamento5};
+        JLabel[] labelsCliente = {txtCliente1, txtCliente2, txtCliente3, txtCliente4, txtCliente5};
+        JLabel[] labelsHorario = {txtHorario1, txtHorario2, txtHorario3, txtHorario4, txtHorario5};
+        JLabel[] labelsServico = {txtServico1, txtServico2, txtServico3, txtServico4, txtServico5};
+        JLabel[] labelsConfirmar = {btnConfirmar1, btnConfirmar2, btnConfirmar3, btnConfirmar4, btnConfirmar5};
+
+        // Loop pelos agendamentos e configuração dos componentes
+        for (int i = 0; i < agendamentos.size() && i < paineisAgendamento.length; i++) {
+            Agendamento agendamento = agendamentos.get(i);
+            JPanel painelAgendamento = paineisAgendamento[i];
+            JLabel labelCliente = labelsCliente[i];
+            JLabel labelHorario = labelsHorario[i];
+            JLabel labelServico = labelsServico[i];
+            JLabel labelConfirmar = labelsConfirmar[i];
+
+            // Exibir o painel de agendamento correspondente
+            painelAgendamento.setVisible(true);
+
+            // Configurar os textos nos labels
+            labelCliente.setText(agendamento.getNomecliente());
+            labelHorario.setText(dataFormat.format(agendamento.getData()) +" às "+ horaFormat.format(agendamento.getHora()) + "h");
+            labelServico.setText("Serviço: "+agendamento.getNomeservico());
+            if(agendamento.getStatus()==1){
+                labelConfirmar.setVisible(false);
             }
+
+            // Adicionar os códigos de barbearia e agendamento às listas correspondentes
+            CODCLIENTES.add(agendamento.getCodcliente());
+            CODAGENDAMENTOS.add(agendamento.getCodagendamento());
+        }
+
+        // Ocultar os painéis de agendamento restantes (caso o número de agendamentos seja menor que 4)
+        for (int i = agendamentos.size(); i < paineisAgendamento.length; i++) {
+            paineisAgendamento[i].setVisible(false);
         }
     }
 
@@ -122,69 +109,56 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Cima = new css.FundoGradiente(0, 255, 255, 30, 144, 255, 0, 0, 1500, 100);
+        Cima = new css.FundoGradiente(70, 130, 180, 25, 25, 112, 0, 0, 1500, 100);
         sair = new javax.swing.JLabel();
-        dataAtual = new javax.swing.JLabel();
-        Centro = new javax.swing.JPanel();
-        img = new javax.swing.JLabel();
-        ola = new javax.swing.JLabel();
+        img1 = new javax.swing.JLabel();
+        ola1 = new javax.swing.JLabel();
+        localizacao1 = new javax.swing.JLabel();
         nome_barbearia = new javax.swing.JLabel();
-        textinho = new javax.swing.JLabel();
-        localizacao = new javax.swing.JLabel();
-        Agendamento1 = new javax.swing.JPanel();
+        Centro = new javax.swing.JPanel();
+        Agendamento1 = new css.JPanelArredondadoAgendamentos(30);
+        seta1 = new javax.swing.JLabel();
         txtCliente1 = new javax.swing.JLabel();
         txtHorario1 = new javax.swing.JLabel();
+        txtServico1 = new javax.swing.JLabel();
         btnConfirmar1 = new javax.swing.JLabel();
-        txtCod_usr1 = new javax.swing.JLabel();
-        Agendamento2 = new javax.swing.JPanel();
+        Agendamento2 = new css.JPanelArredondadoAgendamentos(30);
+        seta2 = new javax.swing.JLabel();
         txtCliente2 = new javax.swing.JLabel();
         txtHorario2 = new javax.swing.JLabel();
+        txtServico2 = new javax.swing.JLabel();
         btnConfirmar2 = new javax.swing.JLabel();
-        txtCod_usr2 = new javax.swing.JLabel();
-        Agendamento3 = new javax.swing.JPanel();
+        Agendamento3 = new css.JPanelArredondadoAgendamentos(30);
+        seta3 = new javax.swing.JLabel();
         txtCliente3 = new javax.swing.JLabel();
         txtHorario3 = new javax.swing.JLabel();
+        txtServico3 = new javax.swing.JLabel();
         btnConfirmar3 = new javax.swing.JLabel();
-        txtCod_usr3 = new javax.swing.JLabel();
-        Agendamento4 = new javax.swing.JPanel();
+        Agendamento4 = new css.JPanelArredondadoAgendamentos(30);
+        seta4 = new javax.swing.JLabel();
         txtCliente4 = new javax.swing.JLabel();
         txtHorario4 = new javax.swing.JLabel();
+        txtServico4 = new javax.swing.JLabel();
         btnConfirmar4 = new javax.swing.JLabel();
-        txtCod_usr4 = new javax.swing.JLabel();
-        Agendamento5 = new javax.swing.JPanel();
+        Agendamento5 = new css.JPanelArredondadoAgendamentos(30);
+        seta5 = new javax.swing.JLabel();
         txtCliente5 = new javax.swing.JLabel();
         txtHorario5 = new javax.swing.JLabel();
+        txtServico5 = new javax.swing.JLabel();
         btnConfirmar5 = new javax.swing.JLabel();
-        txtCod_usr5 = new javax.swing.JLabel();
-        Agendamento6 = new javax.swing.JPanel();
-        txtCliente6 = new javax.swing.JLabel();
-        txtHorario6 = new javax.swing.JLabel();
-        btnConfirmar6 = new javax.swing.JLabel();
-        txtCod_usr6 = new javax.swing.JLabel();
-        Agendamento7 = new javax.swing.JPanel();
-        txtCliente7 = new javax.swing.JLabel();
-        txtHorario7 = new javax.swing.JLabel();
-        btnConfirmar7 = new javax.swing.JLabel();
-        txtCod_usr7 = new javax.swing.JLabel();
-        Agendamento8 = new javax.swing.JPanel();
-        txtCliente8 = new javax.swing.JLabel();
-        txtHorario8 = new javax.swing.JLabel();
-        btnConfirmar8 = new javax.swing.JLabel();
-        txtCod_usr8 = new javax.swing.JLabel();
-        Agendamento9 = new javax.swing.JPanel();
-        txtCliente9 = new javax.swing.JLabel();
-        txtHorario9 = new javax.swing.JLabel();
-        btnConfirmar9 = new javax.swing.JLabel();
-        txtCod_usr9 = new javax.swing.JLabel();
+        Barbearias = new css.JPanelArredondadoBarbearias(60);
+        jLabel14 = new javax.swing.JLabel();
+        dataAtual = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1920, 1080));
 
         Cima.setBackground(new java.awt.Color(29, 93, 183));
-        Cima.setMaximumSize(new java.awt.Dimension(1920, 100));
-        Cima.setMinimumSize(new java.awt.Dimension(1920, 100));
+        Cima.setMaximumSize(new java.awt.Dimension(1920, 130));
+        Cima.setMinimumSize(new java.awt.Dimension(1920, 130));
+        Cima.setPreferredSize(new java.awt.Dimension(1920, 130));
 
-        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_sair2.png"))); // NOI18N
+        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/saida.png"))); // NOI18N
         sair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -192,66 +166,99 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             }
         });
 
-        dataAtual.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
-        dataAtual.setForeground(new java.awt.Color(0, 51, 204));
-        dataAtual.setBorder(new javax.swing.border.MatteBorder(null));
+        img1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
+
+        ola1.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 36)); // NOI18N
+        ola1.setForeground(new java.awt.Color(255, 255, 255));
+        ola1.setText("Olá,");
+
+        localizacao1.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 14)); // NOI18N
+        localizacao1.setForeground(new java.awt.Color(255, 255, 255));
+        localizacao1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/localizacao.png"))); // NOI18N
+        localizacao1.setText("Paulo Afonso - BA");
+        localizacao1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        nome_barbearia.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 36)); // NOI18N
+        nome_barbearia.setForeground(new java.awt.Color(255, 255, 255));
+        nome_barbearia.setBorder(new javax.swing.border.MatteBorder(null));
 
         javax.swing.GroupLayout CimaLayout = new javax.swing.GroupLayout(Cima);
         Cima.setLayout(CimaLayout);
         CimaLayout.setHorizontalGroup(
             CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CimaLayout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(dataAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1154, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
+                .addComponent(img1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CimaLayout.createSequentialGroup()
+                        .addComponent(ola1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nome_barbearia, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CimaLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(localizacao1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(sair)
                 .addGap(23, 23, 23))
         );
         CimaLayout.setVerticalGroup(
             CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CimaLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(dataAtual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(29, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CimaLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(img1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CimaLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(nome_barbearia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ola1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
+                        .addComponent(localizacao1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         Centro.setBackground(new java.awt.Color(206, 230, 255));
-        Centro.setMaximumSize(new java.awt.Dimension(1420, 980));
-        Centro.setMinimumSize(new java.awt.Dimension(1420, 980));
+        Centro.setMaximumSize(new java.awt.Dimension(1920, 950));
+        Centro.setMinimumSize(new java.awt.Dimension(1920, 950));
+        Centro.setPreferredSize(new java.awt.Dimension(1920, 950));
 
-        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_user.png"))); // NOI18N
-
-        ola.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
-        ola.setForeground(new java.awt.Color(0, 51, 204));
-        ola.setText("Olá,");
-
-        nome_barbearia.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
-        nome_barbearia.setForeground(new java.awt.Color(0, 51, 204));
-        nome_barbearia.setBorder(new javax.swing.border.MatteBorder(null));
-
-        textinho.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
-        textinho.setForeground(new java.awt.Color(0, 51, 204));
-        textinho.setText(", esses são os seus agendamentos!");
-
-        localizacao.setFont(new java.awt.Font("Mongolian Baiti", 0, 18)); // NOI18N
-        localizacao.setForeground(new java.awt.Color(0, 51, 204));
-        localizacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icone_local.png"))); // NOI18N
-        localizacao.setText("Paulo Afonso - BA");
-
-        Agendamento1.setBackground(new java.awt.Color(30, 144, 255));
+        Agendamento1.setBackground(new java.awt.Color(30, 113, 218));
         Agendamento1.setForeground(new java.awt.Color(255, 255, 255));
+        Agendamento1.setMaximumSize(new java.awt.Dimension(450, 70));
+        Agendamento1.setMinimumSize(new java.awt.Dimension(450, 70));
+        Agendamento1.setPreferredSize(new java.awt.Dimension(400, 100));
 
-        txtCliente1.setFont(new java.awt.Font("DialogInput", 0, 24)); // NOI18N
+        seta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        seta1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
+
+        txtCliente1.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
         txtCliente1.setForeground(new java.awt.Color(255, 255, 255));
+        txtCliente1.setToolTipText("");
         txtCliente1.setBorder(new javax.swing.border.MatteBorder(null));
+        txtCliente1.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtCliente1.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtCliente1.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorario1.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        txtHorario1.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         txtHorario1.setForeground(new java.awt.Color(255, 255, 255));
         txtHorario1.setBorder(new javax.swing.border.MatteBorder(null));
+        txtHorario1.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtHorario1.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtHorario1.setPreferredSize(new java.awt.Dimension(300, 30));
+        txtHorario1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        txtServico1.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        txtServico1.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico1.setBorder(new javax.swing.border.MatteBorder(null));
+        txtServico1.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtServico1.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtServico1.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnConfirmar1.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
+        btnConfirmar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnConfirmar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
         btnConfirmar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirmar1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -260,56 +267,73 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             }
         });
 
-        txtCod_usr1.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        txtCod_usr1.setText("jLabel2");
-        txtCod_usr1.setBorder(new javax.swing.border.MatteBorder(null));
-        txtCod_usr1.setFocusable(false);
-        txtCod_usr1.setMaximumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr1.setMinimumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr1.setPreferredSize(new java.awt.Dimension(0, 0));
-
         javax.swing.GroupLayout Agendamento1Layout = new javax.swing.GroupLayout(Agendamento1);
         Agendamento1.setLayout(Agendamento1Layout);
         Agendamento1Layout.setHorizontalGroup(
             Agendamento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Agendamento1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(seta1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(Agendamento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtHorario1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtHorario1, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+                    .addComponent(txtServico1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(btnConfirmar1)
-                .addGap(18, 18, 18)
-                .addComponent(txtCod_usr1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addComponent(btnConfirmar1, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addContainerGap())
         );
         Agendamento1Layout.setVerticalGroup(
             Agendamento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento1Layout.createSequentialGroup()
-                .addComponent(txtCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtHorario1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(Agendamento1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(Agendamento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCod_usr1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnConfirmar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(Agendamento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnConfirmar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(Agendamento1Layout.createSequentialGroup()
+                                .addComponent(txtCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtHorario1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtServico1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(seta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        Agendamento2.setBackground(new java.awt.Color(30, 144, 255));
+        Agendamento2.setBackground(new java.awt.Color(30, 113, 218));
         Agendamento2.setForeground(new java.awt.Color(255, 255, 255));
+        Agendamento2.setMaximumSize(new java.awt.Dimension(450, 70));
+        Agendamento2.setMinimumSize(new java.awt.Dimension(450, 70));
+        Agendamento2.setPreferredSize(new java.awt.Dimension(400, 100));
 
-        txtCliente2.setFont(new java.awt.Font("DialogInput", 0, 24)); // NOI18N
+        seta2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        seta2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
+
+        txtCliente2.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
         txtCliente2.setForeground(new java.awt.Color(255, 255, 255));
+        txtCliente2.setToolTipText("");
         txtCliente2.setBorder(new javax.swing.border.MatteBorder(null));
+        txtCliente2.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtCliente2.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtCliente2.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorario2.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        txtHorario2.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         txtHorario2.setForeground(new java.awt.Color(255, 255, 255));
         txtHorario2.setBorder(new javax.swing.border.MatteBorder(null));
+        txtHorario2.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtHorario2.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtHorario2.setPreferredSize(new java.awt.Dimension(300, 30));
+        txtHorario2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        txtServico2.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        txtServico2.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico2.setBorder(new javax.swing.border.MatteBorder(null));
+        txtServico2.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtServico2.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtServico2.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnConfirmar2.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
+        btnConfirmar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnConfirmar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
         btnConfirmar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirmar2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -318,55 +342,73 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             }
         });
 
-        txtCod_usr2.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        txtCod_usr2.setText("jLabel2");
-        txtCod_usr2.setBorder(new javax.swing.border.MatteBorder(null));
-        txtCod_usr2.setFocusable(false);
-        txtCod_usr2.setMaximumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr2.setMinimumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr2.setPreferredSize(new java.awt.Dimension(0, 0));
-
         javax.swing.GroupLayout Agendamento2Layout = new javax.swing.GroupLayout(Agendamento2);
         Agendamento2.setLayout(Agendamento2Layout);
         Agendamento2Layout.setHorizontalGroup(
             Agendamento2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Agendamento2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(seta2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(Agendamento2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCliente2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtHorario2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtHorario2, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+                    .addComponent(txtServico2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCliente2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(btnConfirmar2)
-                .addGap(18, 18, 18)
-                .addComponent(txtCod_usr2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addComponent(btnConfirmar2, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addContainerGap())
         );
         Agendamento2Layout.setVerticalGroup(
             Agendamento2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento2Layout.createSequentialGroup()
-                .addComponent(txtCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtHorario2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Agendamento2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCod_usr2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnConfirmar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(Agendamento2Layout.createSequentialGroup()
+                .addGroup(Agendamento2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(Agendamento2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnConfirmar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(Agendamento2Layout.createSequentialGroup()
+                                .addComponent(txtCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtHorario2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtServico2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(seta2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        Agendamento3.setBackground(new java.awt.Color(30, 144, 255));
+        Agendamento3.setBackground(new java.awt.Color(30, 113, 218));
         Agendamento3.setForeground(new java.awt.Color(255, 255, 255));
+        Agendamento3.setMaximumSize(new java.awt.Dimension(450, 70));
+        Agendamento3.setMinimumSize(new java.awt.Dimension(450, 70));
+        Agendamento3.setPreferredSize(new java.awt.Dimension(400, 100));
 
-        txtCliente3.setFont(new java.awt.Font("DialogInput", 0, 24)); // NOI18N
+        seta3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        seta3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
+
+        txtCliente3.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
         txtCliente3.setForeground(new java.awt.Color(255, 255, 255));
+        txtCliente3.setToolTipText("");
         txtCliente3.setBorder(new javax.swing.border.MatteBorder(null));
+        txtCliente3.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtCliente3.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtCliente3.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorario3.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        txtHorario3.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         txtHorario3.setForeground(new java.awt.Color(255, 255, 255));
         txtHorario3.setBorder(new javax.swing.border.MatteBorder(null));
+        txtHorario3.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtHorario3.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtHorario3.setPreferredSize(new java.awt.Dimension(300, 30));
+        txtHorario3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        txtServico3.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        txtServico3.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico3.setBorder(new javax.swing.border.MatteBorder(null));
+        txtServico3.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtServico3.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtServico3.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnConfirmar3.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
+        btnConfirmar3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnConfirmar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
         btnConfirmar3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirmar3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -375,55 +417,73 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             }
         });
 
-        txtCod_usr3.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        txtCod_usr3.setText("jLabel2");
-        txtCod_usr3.setBorder(new javax.swing.border.MatteBorder(null));
-        txtCod_usr3.setFocusable(false);
-        txtCod_usr3.setMaximumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr3.setMinimumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr3.setPreferredSize(new java.awt.Dimension(0, 0));
-
         javax.swing.GroupLayout Agendamento3Layout = new javax.swing.GroupLayout(Agendamento3);
         Agendamento3.setLayout(Agendamento3Layout);
         Agendamento3Layout.setHorizontalGroup(
             Agendamento3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Agendamento3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(seta3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(Agendamento3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCliente3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtHorario3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtHorario3, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+                    .addComponent(txtServico3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCliente3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(btnConfirmar3)
-                .addGap(18, 18, 18)
-                .addComponent(txtCod_usr3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addComponent(btnConfirmar3, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addContainerGap())
         );
         Agendamento3Layout.setVerticalGroup(
             Agendamento3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento3Layout.createSequentialGroup()
-                .addComponent(txtCliente3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtHorario3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(Agendamento3Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(Agendamento3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCod_usr3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnConfirmar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(Agendamento3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnConfirmar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(Agendamento3Layout.createSequentialGroup()
+                                .addComponent(txtCliente3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtHorario3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtServico3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(seta3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        Agendamento4.setBackground(new java.awt.Color(30, 144, 255));
+        Agendamento4.setBackground(new java.awt.Color(30, 113, 218));
         Agendamento4.setForeground(new java.awt.Color(255, 255, 255));
+        Agendamento4.setMaximumSize(new java.awt.Dimension(450, 70));
+        Agendamento4.setMinimumSize(new java.awt.Dimension(450, 70));
+        Agendamento4.setPreferredSize(new java.awt.Dimension(400, 100));
 
-        txtCliente4.setFont(new java.awt.Font("DialogInput", 0, 24)); // NOI18N
+        seta4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        seta4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
+
+        txtCliente4.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
         txtCliente4.setForeground(new java.awt.Color(255, 255, 255));
+        txtCliente4.setToolTipText("");
         txtCliente4.setBorder(new javax.swing.border.MatteBorder(null));
+        txtCliente4.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtCliente4.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtCliente4.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorario4.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        txtHorario4.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         txtHorario4.setForeground(new java.awt.Color(255, 255, 255));
         txtHorario4.setBorder(new javax.swing.border.MatteBorder(null));
+        txtHorario4.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtHorario4.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtHorario4.setPreferredSize(new java.awt.Dimension(300, 30));
+        txtHorario4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        txtServico4.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        txtServico4.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico4.setBorder(new javax.swing.border.MatteBorder(null));
+        txtServico4.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtServico4.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtServico4.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnConfirmar4.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
+        btnConfirmar4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnConfirmar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
         btnConfirmar4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirmar4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -432,56 +492,73 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             }
         });
 
-        txtCod_usr4.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        txtCod_usr4.setText("jLabel2");
-        txtCod_usr4.setBorder(new javax.swing.border.MatteBorder(null));
-        txtCod_usr4.setFocusable(false);
-        txtCod_usr4.setMaximumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr4.setMinimumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr4.setPreferredSize(new java.awt.Dimension(0, 0));
-
         javax.swing.GroupLayout Agendamento4Layout = new javax.swing.GroupLayout(Agendamento4);
         Agendamento4.setLayout(Agendamento4Layout);
         Agendamento4Layout.setHorizontalGroup(
             Agendamento4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Agendamento4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(seta4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(Agendamento4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCliente4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtHorario4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtHorario4, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+                    .addComponent(txtServico4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCliente4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(btnConfirmar4)
-                .addGap(18, 18, 18)
-                .addComponent(txtCod_usr4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addComponent(btnConfirmar4, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addContainerGap())
         );
         Agendamento4Layout.setVerticalGroup(
             Agendamento4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento4Layout.createSequentialGroup()
-                .addComponent(txtCliente4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtHorario4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(Agendamento4Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(Agendamento4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCod_usr4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnConfirmar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(Agendamento4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnConfirmar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(Agendamento4Layout.createSequentialGroup()
+                                .addComponent(txtCliente4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtHorario4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtServico4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(seta4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        Agendamento5.setBackground(new java.awt.Color(30, 144, 255));
+        Agendamento5.setBackground(new java.awt.Color(30, 113, 218));
         Agendamento5.setForeground(new java.awt.Color(255, 255, 255));
+        Agendamento5.setMaximumSize(new java.awt.Dimension(450, 70));
+        Agendamento5.setMinimumSize(new java.awt.Dimension(450, 70));
+        Agendamento5.setPreferredSize(new java.awt.Dimension(400, 100));
 
-        txtCliente5.setFont(new java.awt.Font("DialogInput", 0, 24)); // NOI18N
+        seta5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        seta5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
+
+        txtCliente5.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
         txtCliente5.setForeground(new java.awt.Color(255, 255, 255));
+        txtCliente5.setToolTipText("");
         txtCliente5.setBorder(new javax.swing.border.MatteBorder(null));
+        txtCliente5.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtCliente5.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtCliente5.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorario5.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        txtHorario5.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         txtHorario5.setForeground(new java.awt.Color(255, 255, 255));
         txtHorario5.setBorder(new javax.swing.border.MatteBorder(null));
+        txtHorario5.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtHorario5.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtHorario5.setPreferredSize(new java.awt.Dimension(300, 30));
+        txtHorario5.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        txtServico5.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        txtServico5.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico5.setBorder(new javax.swing.border.MatteBorder(null));
+        txtServico5.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtServico5.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtServico5.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnConfirmar5.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
+        btnConfirmar5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnConfirmar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
         btnConfirmar5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirmar5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -490,347 +567,112 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             }
         });
 
-        txtCod_usr5.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        txtCod_usr5.setText("jLabel2");
-        txtCod_usr5.setBorder(new javax.swing.border.MatteBorder(null));
-        txtCod_usr5.setFocusable(false);
-        txtCod_usr5.setMaximumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr5.setMinimumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr5.setPreferredSize(new java.awt.Dimension(0, 0));
-
         javax.swing.GroupLayout Agendamento5Layout = new javax.swing.GroupLayout(Agendamento5);
         Agendamento5.setLayout(Agendamento5Layout);
         Agendamento5Layout.setHorizontalGroup(
             Agendamento5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Agendamento5Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(seta5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(Agendamento5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCliente5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtHorario5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtHorario5, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+                    .addComponent(txtServico5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCliente5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(btnConfirmar5)
-                .addGap(18, 18, 18)
-                .addComponent(txtCod_usr5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addComponent(btnConfirmar5, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addContainerGap())
         );
         Agendamento5Layout.setVerticalGroup(
             Agendamento5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento5Layout.createSequentialGroup()
-                .addComponent(txtCliente5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtHorario5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Agendamento5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCod_usr5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnConfirmar5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(Agendamento5Layout.createSequentialGroup()
+                .addGroup(Agendamento5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(Agendamento5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnConfirmar5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(Agendamento5Layout.createSequentialGroup()
+                                .addComponent(txtCliente5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtHorario5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtServico5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(seta5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        Agendamento6.setBackground(new java.awt.Color(30, 144, 255));
-        Agendamento6.setForeground(new java.awt.Color(255, 255, 255));
+        Barbearias.setBackground(new java.awt.Color(30, 113, 218));
+        Barbearias.setMaximumSize(new java.awt.Dimension(500, 45));
+        Barbearias.setMinimumSize(new java.awt.Dimension(500, 45));
+        Barbearias.setPreferredSize(new java.awt.Dimension(500, 45));
 
-        txtCliente6.setFont(new java.awt.Font("DialogInput", 0, 24)); // NOI18N
-        txtCliente6.setForeground(new java.awt.Color(255, 255, 255));
-        txtCliente6.setBorder(new javax.swing.border.MatteBorder(null));
+        jLabel14.setBackground(new java.awt.Color(30, 113, 218));
+        jLabel14.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 28)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("AGENDAMENTOS");
 
-        txtHorario6.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
-        txtHorario6.setForeground(new java.awt.Color(255, 255, 255));
-        txtHorario6.setBorder(new javax.swing.border.MatteBorder(null));
-
-        btnConfirmar6.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        btnConfirmar6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
-        btnConfirmar6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnConfirmar6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnConfirmar6MouseClicked(evt);
-            }
-        });
-
-        txtCod_usr6.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        txtCod_usr6.setText("jLabel2");
-        txtCod_usr6.setBorder(new javax.swing.border.MatteBorder(null));
-        txtCod_usr6.setFocusable(false);
-        txtCod_usr6.setMaximumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr6.setMinimumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr6.setPreferredSize(new java.awt.Dimension(0, 0));
-
-        javax.swing.GroupLayout Agendamento6Layout = new javax.swing.GroupLayout(Agendamento6);
-        Agendamento6.setLayout(Agendamento6Layout);
-        Agendamento6Layout.setHorizontalGroup(
-            Agendamento6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Agendamento6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Agendamento6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCliente6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtHorario6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(btnConfirmar6)
-                .addGap(18, 18, 18)
-                .addComponent(txtCod_usr6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+        javax.swing.GroupLayout BarbeariasLayout = new javax.swing.GroupLayout(Barbearias);
+        Barbearias.setLayout(BarbeariasLayout);
+        BarbeariasLayout.setHorizontalGroup(
+            BarbeariasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
-        Agendamento6Layout.setVerticalGroup(
-            Agendamento6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento6Layout.createSequentialGroup()
-                .addComponent(txtCliente6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtHorario6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(Agendamento6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Agendamento6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCod_usr6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnConfirmar6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+        BarbeariasLayout.setVerticalGroup(
+            BarbeariasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
         );
 
-        Agendamento7.setBackground(new java.awt.Color(30, 144, 255));
-        Agendamento7.setForeground(new java.awt.Color(255, 255, 255));
-
-        txtCliente7.setFont(new java.awt.Font("DialogInput", 0, 24)); // NOI18N
-        txtCliente7.setForeground(new java.awt.Color(255, 255, 255));
-        txtCliente7.setBorder(new javax.swing.border.MatteBorder(null));
-
-        txtHorario7.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
-        txtHorario7.setForeground(new java.awt.Color(255, 255, 255));
-        txtHorario7.setBorder(new javax.swing.border.MatteBorder(null));
-
-        btnConfirmar7.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        btnConfirmar7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
-        btnConfirmar7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnConfirmar7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnConfirmar7MouseClicked(evt);
-            }
-        });
-
-        txtCod_usr7.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        txtCod_usr7.setText("jLabel2");
-        txtCod_usr7.setBorder(new javax.swing.border.MatteBorder(null));
-        txtCod_usr7.setFocusable(false);
-        txtCod_usr7.setMaximumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr7.setMinimumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr7.setPreferredSize(new java.awt.Dimension(0, 0));
-
-        javax.swing.GroupLayout Agendamento7Layout = new javax.swing.GroupLayout(Agendamento7);
-        Agendamento7.setLayout(Agendamento7Layout);
-        Agendamento7Layout.setHorizontalGroup(
-            Agendamento7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Agendamento7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Agendamento7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCliente7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtHorario7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(btnConfirmar7)
-                .addGap(18, 18, 18)
-                .addComponent(txtCod_usr7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
-        );
-        Agendamento7Layout.setVerticalGroup(
-            Agendamento7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento7Layout.createSequentialGroup()
-                .addComponent(txtCliente7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtHorario7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(Agendamento7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Agendamento7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCod_usr7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnConfirmar7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        Agendamento8.setBackground(new java.awt.Color(30, 144, 255));
-        Agendamento8.setForeground(new java.awt.Color(255, 255, 255));
-
-        txtCliente8.setFont(new java.awt.Font("DialogInput", 0, 24)); // NOI18N
-        txtCliente8.setForeground(new java.awt.Color(255, 255, 255));
-        txtCliente8.setBorder(new javax.swing.border.MatteBorder(null));
-
-        txtHorario8.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
-        txtHorario8.setForeground(new java.awt.Color(255, 255, 255));
-        txtHorario8.setBorder(new javax.swing.border.MatteBorder(null));
-
-        btnConfirmar8.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        btnConfirmar8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
-        btnConfirmar8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnConfirmar8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnConfirmar8MouseClicked(evt);
-            }
-        });
-
-        txtCod_usr8.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        txtCod_usr8.setText("jLabel2");
-        txtCod_usr8.setBorder(new javax.swing.border.MatteBorder(null));
-        txtCod_usr8.setFocusable(false);
-        txtCod_usr8.setMaximumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr8.setMinimumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr8.setPreferredSize(new java.awt.Dimension(0, 0));
-
-        javax.swing.GroupLayout Agendamento8Layout = new javax.swing.GroupLayout(Agendamento8);
-        Agendamento8.setLayout(Agendamento8Layout);
-        Agendamento8Layout.setHorizontalGroup(
-            Agendamento8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Agendamento8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Agendamento8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCliente8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtHorario8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(btnConfirmar8)
-                .addGap(18, 18, 18)
-                .addComponent(txtCod_usr8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
-        );
-        Agendamento8Layout.setVerticalGroup(
-            Agendamento8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento8Layout.createSequentialGroup()
-                .addComponent(txtCliente8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtHorario8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Agendamento8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCod_usr8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnConfirmar8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        Agendamento9.setBackground(new java.awt.Color(30, 144, 255));
-        Agendamento9.setForeground(new java.awt.Color(255, 255, 255));
-
-        txtCliente9.setFont(new java.awt.Font("DialogInput", 0, 24)); // NOI18N
-        txtCliente9.setForeground(new java.awt.Color(255, 255, 255));
-        txtCliente9.setBorder(new javax.swing.border.MatteBorder(null));
-
-        txtHorario9.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
-        txtHorario9.setForeground(new java.awt.Color(255, 255, 255));
-        txtHorario9.setBorder(new javax.swing.border.MatteBorder(null));
-
-        btnConfirmar9.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        btnConfirmar9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
-        btnConfirmar9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnConfirmar9.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnConfirmar9MouseClicked(evt);
-            }
-        });
-
-        txtCod_usr9.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        txtCod_usr9.setText("jLabel2");
-        txtCod_usr9.setBorder(new javax.swing.border.MatteBorder(null));
-        txtCod_usr9.setFocusable(false);
-        txtCod_usr9.setMaximumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr9.setMinimumSize(new java.awt.Dimension(0, 0));
-        txtCod_usr9.setPreferredSize(new java.awt.Dimension(0, 0));
-
-        javax.swing.GroupLayout Agendamento9Layout = new javax.swing.GroupLayout(Agendamento9);
-        Agendamento9.setLayout(Agendamento9Layout);
-        Agendamento9Layout.setHorizontalGroup(
-            Agendamento9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Agendamento9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Agendamento9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCliente9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtHorario9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(btnConfirmar9)
-                .addGap(18, 18, 18)
-                .addComponent(txtCod_usr9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
-        );
-        Agendamento9Layout.setVerticalGroup(
-            Agendamento9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento9Layout.createSequentialGroup()
-                .addComponent(txtCliente9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtHorario9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Agendamento9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Agendamento9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCod_usr9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnConfirmar9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        dataAtual.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+        dataAtual.setForeground(new java.awt.Color(0, 51, 204));
+        dataAtual.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        dataAtual.setBorder(new javax.swing.border.MatteBorder(null));
 
         javax.swing.GroupLayout CentroLayout = new javax.swing.GroupLayout(Centro);
         Centro.setLayout(CentroLayout);
         CentroLayout.setHorizontalGroup(
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CentroLayout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(CentroLayout.createSequentialGroup()
-                        .addComponent(img)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(CentroLayout.createSequentialGroup()
-                                .addComponent(ola)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nome_barbearia)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textinho))
-                            .addComponent(localizacao)))
-                    .addComponent(Agendamento1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Agendamento2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Agendamento3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Agendamento4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Agendamento5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Agendamento6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Agendamento7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Agendamento8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Agendamento9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(1371, Short.MAX_VALUE))
+                .addGap(91, 91, 91)
+                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Barbearias, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(Agendamento2, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Agendamento1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Agendamento3, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Agendamento4, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Agendamento5, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(1144, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CentroLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(dataAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         CentroLayout.setVerticalGroup(
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CentroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(img)
-                    .addGroup(CentroLayout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(nome_barbearia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ola, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(textinho, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(localizacao)))
-                .addGap(68, 68, 68)
-                .addComponent(Agendamento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
+                .addComponent(Barbearias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(Agendamento1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Agendamento2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Agendamento2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Agendamento3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Agendamento3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Agendamento4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Agendamento4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Agendamento5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Agendamento6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Agendamento7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Agendamento8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Agendamento9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addComponent(Agendamento5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
+                .addComponent(dataAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Cima, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Centro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Cima, javax.swing.GroupLayout.DEFAULT_SIZE, 1935, Short.MAX_VALUE)
+            .addComponent(Centro, javax.swing.GroupLayout.DEFAULT_SIZE, 1935, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -851,42 +693,24 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
     }//GEN-LAST:event_sairMouseClicked
 
     private void btnConfirmar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar1MouseClicked
-        int AGEND_COD = Integer.parseInt(btnConfirmar1.getText());
-        AgendamentoDAO agendDAO = new AgendamentoDAO();
-        //agendDAO.deleteAgendamentoCliente(AGEND_COD);
+        confirmarAgendamento(CODAGENDAMENTOS.get(0));
     }//GEN-LAST:event_btnConfirmar1MouseClicked
 
     private void btnConfirmar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar2MouseClicked
-
+        confirmarAgendamento(CODAGENDAMENTOS.get(1));
     }//GEN-LAST:event_btnConfirmar2MouseClicked
 
     private void btnConfirmar3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar3MouseClicked
-        
+        confirmarAgendamento(CODAGENDAMENTOS.get(2));
     }//GEN-LAST:event_btnConfirmar3MouseClicked
 
     private void btnConfirmar4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar4MouseClicked
-        // TODO add your handling code here:
+        confirmarAgendamento(CODAGENDAMENTOS.get(3));
     }//GEN-LAST:event_btnConfirmar4MouseClicked
 
     private void btnConfirmar5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar5MouseClicked
-        // TODO add your handling code here:
+        confirmarAgendamento(CODAGENDAMENTOS.get(4));
     }//GEN-LAST:event_btnConfirmar5MouseClicked
-
-    private void btnConfirmar6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar6MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnConfirmar6MouseClicked
-
-    private void btnConfirmar7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar7MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnConfirmar7MouseClicked
-
-    private void btnConfirmar8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar8MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnConfirmar8MouseClicked
-
-    private void btnConfirmar9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar9MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnConfirmar9MouseClicked
 
     public static void main(String args[]) {
 
@@ -901,10 +725,8 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaAgendamentoBarbearia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaAgendamentoBarbearia().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new TelaAgendamentoBarbearia().setVisible(true);
         });
     }
 
@@ -914,10 +736,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
     private javax.swing.JPanel Agendamento3;
     private javax.swing.JPanel Agendamento4;
     private javax.swing.JPanel Agendamento5;
-    private javax.swing.JPanel Agendamento6;
-    private javax.swing.JPanel Agendamento7;
-    private javax.swing.JPanel Agendamento8;
-    private javax.swing.JPanel Agendamento9;
+    private javax.swing.JPanel Barbearias;
     private javax.swing.JPanel Centro;
     private javax.swing.JPanel Cima;
     private javax.swing.JLabel btnConfirmar1;
@@ -925,43 +744,32 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
     private javax.swing.JLabel btnConfirmar3;
     private javax.swing.JLabel btnConfirmar4;
     private javax.swing.JLabel btnConfirmar5;
-    private javax.swing.JLabel btnConfirmar6;
-    private javax.swing.JLabel btnConfirmar7;
-    private javax.swing.JLabel btnConfirmar8;
-    private javax.swing.JLabel btnConfirmar9;
     private javax.swing.JLabel dataAtual;
-    private javax.swing.JLabel img;
-    private javax.swing.JLabel localizacao;
+    private javax.swing.JLabel img1;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel localizacao1;
     private javax.swing.JLabel nome_barbearia;
-    private javax.swing.JLabel ola;
+    private javax.swing.JLabel ola1;
     private javax.swing.JLabel sair;
-    private javax.swing.JLabel textinho;
+    private javax.swing.JLabel seta1;
+    private javax.swing.JLabel seta2;
+    private javax.swing.JLabel seta3;
+    private javax.swing.JLabel seta4;
+    private javax.swing.JLabel seta5;
     private javax.swing.JLabel txtCliente1;
     private javax.swing.JLabel txtCliente2;
     private javax.swing.JLabel txtCliente3;
     private javax.swing.JLabel txtCliente4;
     private javax.swing.JLabel txtCliente5;
-    private javax.swing.JLabel txtCliente6;
-    private javax.swing.JLabel txtCliente7;
-    private javax.swing.JLabel txtCliente8;
-    private javax.swing.JLabel txtCliente9;
-    private javax.swing.JLabel txtCod_usr1;
-    private javax.swing.JLabel txtCod_usr2;
-    private javax.swing.JLabel txtCod_usr3;
-    private javax.swing.JLabel txtCod_usr4;
-    private javax.swing.JLabel txtCod_usr5;
-    private javax.swing.JLabel txtCod_usr6;
-    private javax.swing.JLabel txtCod_usr7;
-    private javax.swing.JLabel txtCod_usr8;
-    private javax.swing.JLabel txtCod_usr9;
     private javax.swing.JLabel txtHorario1;
     private javax.swing.JLabel txtHorario2;
     private javax.swing.JLabel txtHorario3;
     private javax.swing.JLabel txtHorario4;
     private javax.swing.JLabel txtHorario5;
-    private javax.swing.JLabel txtHorario6;
-    private javax.swing.JLabel txtHorario7;
-    private javax.swing.JLabel txtHorario8;
-    private javax.swing.JLabel txtHorario9;
+    private javax.swing.JLabel txtServico1;
+    private javax.swing.JLabel txtServico2;
+    private javax.swing.JLabel txtServico3;
+    private javax.swing.JLabel txtServico4;
+    private javax.swing.JLabel txtServico5;
     // End of variables declaration//GEN-END:variables
 }

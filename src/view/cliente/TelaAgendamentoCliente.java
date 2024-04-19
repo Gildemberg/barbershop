@@ -80,6 +80,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     public void agendar(){
         try {
             boolean check;
+            int status=0;
             int servicoSelecionado;
             int servico = selectServicos.getSelectedIndex();
             if(servico>0){
@@ -96,8 +97,9 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
             Date data = new Date(dataFormatada.parse(dataString).getTime());
             Date Horario = new Date(horaFormatada.parse(horaString).getTime()); //TIME DATE
             Time hora = new Time(Horario.getTime()); //Pegando o TIME da DATE
+            
 
-            check = agendamentoController.verificarAgendamento(servicoSelecionado, data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO);
+            check = agendamentoController.verificarAgendamento(servicoSelecionado, data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO, status);
             
             if(check){ // LIMPANDO OS CAMPOS EM CASO DE CADASTRO REALIZADO
                 txtHora.setText("");
@@ -127,6 +129,8 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         Direita = new css.FundoGradiente(0, 191, 255, 65, 105, 255, 0, 0, 1500, 100);
         sair = new javax.swing.JLabel();
         Agendamento = new javax.swing.JLabel();
+        Servico = new javax.swing.JLabel();
+        selectServicos = new javax.swing.JComboBox<>();
         Hora = new javax.swing.JLabel();
         txtHora = new css.ArrendondarBordas();
         txtMinuto = new css.ArrendondarBordas();
@@ -134,7 +138,6 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         calendario = new com.raven.datechooser.DateChooser();
         btnAgendar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        selectServicos = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de Agendamento");
@@ -248,7 +251,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
 
         Direita.setBackground(new java.awt.Color(0, 153, 255));
 
-        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_sair2.png"))); // NOI18N
+        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/saida.png"))); // NOI18N
         sair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -260,6 +263,13 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         Agendamento.setForeground(new java.awt.Color(255, 255, 255));
         Agendamento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Agendamento.setText("AGENDAMENTO");
+
+        Servico.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
+        Servico.setForeground(new java.awt.Color(255, 255, 255));
+        Servico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Servico.setText("SERVIÇO");
+
+        selectServicos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Serviço" }));
 
         Hora.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         Hora.setForeground(new java.awt.Color(255, 255, 255));
@@ -310,8 +320,6 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText(":");
 
-        selectServicos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Serviço" }));
-
         javax.swing.GroupLayout DireitaLayout = new javax.swing.GroupLayout(Direita);
         Direita.setLayout(DireitaLayout);
         DireitaLayout.setHorizontalGroup(
@@ -345,7 +353,8 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(Hora, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
-                                    .addComponent(selectServicos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(selectServicos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(Servico, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
                                 .addGap(169, 169, 169))))))
         );
         DireitaLayout.setVerticalGroup(
@@ -355,9 +364,11 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
                 .addComponent(sair)
                 .addGap(87, 87, 87)
                 .addComponent(Agendamento)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(Servico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(selectServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                .addGap(64, 64, 64)
                 .addComponent(Hora)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -447,6 +458,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     private javax.swing.JPanel Direita;
     private javax.swing.JPanel Esquerda;
     private javax.swing.JLabel Hora;
+    private javax.swing.JLabel Servico;
     private javax.swing.JButton btnAgendar;
     private com.raven.datechooser.DateChooser calendario;
     private javax.swing.JLabel icon;

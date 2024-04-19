@@ -62,11 +62,10 @@ public class TelaDefinirServicos extends javax.swing.JFrame {
         inTempo = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         inValor = new javax.swing.JTextField();
+        sair = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1920, 1080));
         setMinimumSize(new java.awt.Dimension(1920, 1080));
-        setPreferredSize(new java.awt.Dimension(1920, 1080));
 
         Esquerda.setBackground(new java.awt.Color(0, 0, 102));
         Esquerda.setMaximumSize(new java.awt.Dimension(1320, 1080));
@@ -121,37 +120,47 @@ public class TelaDefinirServicos extends javax.swing.JFrame {
         inValor.setBackground(new java.awt.Color(255, 255, 255));
         inValor.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 24)); // NOI18N
 
+        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/saida.png"))); // NOI18N
+        sair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sairMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout DireitaLayout = new javax.swing.GroupLayout(Direita);
         Direita.setLayout(DireitaLayout);
         DireitaLayout.setHorizontalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DireitaLayout.createSequentialGroup()
+                .addGap(188, 188, 188)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(titulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DireitaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE))
-                    .addGroup(DireitaLayout.createSequentialGroup()
-                        .addGap(78, 78, 78)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(inTempo, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+                            .addComponent(inTempo)
                             .addComponent(inServico)
                             .addComponent(txtTempo, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtServico, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inValor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(DireitaLayout.createSequentialGroup()
-                .addGap(188, 188, 188)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(inValor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(77, 77, 77))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                        .addComponent(sair)
+                        .addContainerGap())))
         );
         DireitaLayout.setVerticalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DireitaLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addContainerGap()
+                .addComponent(sair)
+                .addGap(102, 102, 102)
                 .addComponent(titulo)
-                .addGap(69, 69, 69)
+                .addGap(42, 42, 42)
                 .addComponent(txtServico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(inServico, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,6 +202,13 @@ public class TelaDefinirServicos extends javax.swing.JFrame {
         cadastrar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
+        TelaPrincipalBarbearia TP = new TelaPrincipalBarbearia();
+        TP.receberCodBarbearia(CODBARBEARIA);
+        TP.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_sairMouseClicked
+
     public static void main(String args[]) {
         
         try {
@@ -218,6 +234,7 @@ public class TelaDefinirServicos extends javax.swing.JFrame {
     private javax.swing.JTextField inTempo;
     private javax.swing.JTextField inValor;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel sair;
     private javax.swing.JLabel titulo;
     private javax.swing.JLabel txtServico;
     private javax.swing.JLabel txtTempo;

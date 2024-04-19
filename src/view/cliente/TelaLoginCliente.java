@@ -52,6 +52,7 @@ public class TelaLoginCliente extends javax.swing.JFrame {
         NaoPossuiConta = new javax.swing.JLabel();
         btnCadastro = new javax.swing.JButton();
         sair = new javax.swing.JLabel();
+        Login1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de Login");
@@ -175,13 +176,18 @@ public class TelaLoginCliente extends javax.swing.JFrame {
             }
         });
 
-        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_sair2.png"))); // NOI18N
+        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/saida.png"))); // NOI18N
         sair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sairMouseClicked(evt);
             }
         });
+
+        Login1.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 48)); // NOI18N
+        Login1.setForeground(new java.awt.Color(255, 255, 255));
+        Login1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Login1.setText("CLIENTE");
 
         javax.swing.GroupLayout DireitaLayout = new javax.swing.GroupLayout(Direita);
         Direita.setLayout(DireitaLayout);
@@ -209,11 +215,13 @@ public class TelaLoginCliente extends javax.swing.JFrame {
                                         .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(243, 243, 243))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                        .addComponent(Logo1)
-                        .addGap(323, 323, 323))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
                         .addComponent(sair)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Login1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Logo1))
+                        .addGap(323, 323, 323))))
         );
         DireitaLayout.setVerticalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,7 +230,9 @@ public class TelaLoginCliente extends javax.swing.JFrame {
                 .addComponent(sair)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Logo1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(121, 121, 121)
+                .addGap(18, 18, 18)
+                .addComponent(Login1)
+                .addGap(46, 46, 46)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Login)
                     .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -236,7 +246,7 @@ public class TelaLoginCliente extends javax.swing.JFrame {
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NaoPossuiConta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -306,6 +316,7 @@ public class TelaLoginCliente extends javax.swing.JFrame {
     private javax.swing.JPanel Direita;
     private javax.swing.JPanel Esquerda;
     private javax.swing.JLabel Login;
+    private javax.swing.JLabel Login1;
     private javax.swing.JLabel Logo;
     private javax.swing.JLabel Logo1;
     private javax.swing.JLabel NaoPossuiConta;

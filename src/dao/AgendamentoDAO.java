@@ -19,12 +19,13 @@ public class AgendamentoDAO {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("INSERT INTO agendamento (DATA, HORARIO, FK_CODBARBEARIA, FK_CODCLIENTE, FK_CODSERVICO) VALUES(?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO agendamento (DATA, HORARIO, STATUS, FK_CODBARBEARIA, FK_CODCLIENTE, FK_CODSERVICO) VALUES(?,?,?,?,?,?)");
             stmt.setDate(1, a.getData());
             stmt.setTime(2, a.getHora());
-            stmt.setInt(3, a.getCodbarbearia());
-            stmt.setInt(4, a.getCodcliente());
-            stmt.setInt(5, a.getServico());
+            stmt.setInt(3, a.getStatus());
+            stmt.setInt(4, a.getCodbarbearia());
+            stmt.setInt(5, a.getCodcliente());
+            stmt.setInt(6, a.getServico());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: "+ex);
@@ -57,7 +58,7 @@ public class AgendamentoDAO {
                 agendamento.setHora(rs.getTime("HORARIO"));
                 agendamento.setCodcliente(rs.getInt("FK_CODCLIENTE"));
                 agendamento.setCodbarbearia(rs.getInt("FK_CODBARBEARIA"));
-                agendamento.setId(rs.getInt("CODAGENDAMENTO"));
+                agendamento.setCodagendamento(rs.getInt("CODAGENDAMENTO"));
                 agendamento.setNomeservico(rs.getString("s.NOME"));
                 agendamentos.add(agendamento);
             }
@@ -68,6 +69,95 @@ public class AgendamentoDAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return agendamentos;
+    }
+    
+    public List<Agendamento> consultarAgendamentosBarbearia(int codbarbearia){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Agendamento> agendamentos = new ArrayList();
+
+        try {
+            stmt = con.prepareStatement("SELECT a.CODAGENDAMENTO, a.FK_CODCLIENTE, a.DATA, a.HORARIO, c.NOME, s.NOME, a.STATUS"
+                    + " FROM agendamento a"
+                    + " JOIN cliente c ON a.FK_CODCLIENTE = c.CODCLIENTE"
+                    + " JOIN servico s ON a.FK_CODSERVICO = s.CODSERVICO"
+                    + " WHERE a.FK_CODBARBEARIA=?"
+                    + " ORDER BY a.STATUS ASC, a.DATA, a.HORARIO");
+            stmt.setInt(1, codbarbearia);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Agendamento agendamento = new Agendamento();
+                agendamento.setNomecliente(rs.getString("c.NOME"));
+                agendamento.setData(rs.getDate("a.DATA"));
+                agendamento.setHora(rs.getTime("a.HORARIO"));
+                agendamento.setCodcliente(rs.getInt("a.FK_CODCLIENTE"));
+                agendamento.setCodagendamento(rs.getInt("a.CODAGENDAMENTO"));
+                agendamento.setNomeservico(rs.getString("s.NOME"));
+                agendamento.setStatus(rs.getInt("a.STATUS"));
+                agendamentos.add(agendamento);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+
+        return agendamentos;
+    }
+    
+    public void updateAgendamentoCliente(Agendamento a){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("UPDATE agendamento SET DATA=?, HORARIO=?, FK_CODSERVICO=? WHERE CODAGENDAMENTO=?");
+            stmt.setDate(1, a.getData());
+            stmt.setTime(2, a.getHora());
+            stmt.setInt(3, a.getServico());
+            stmt.setInt(4, a.getCodagendamento()); 
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex);
+            Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    
+    public void deleteAgendamentoCliente(int CODAGENDAMENTO) {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("DELETE FROM agendamento WHERE CODAGENDAMENTO = ?");
+            stmt.setInt(1, CODAGENDAMENTO);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
+            Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    
+    public void confirmarAgendamentoCliente(int CODAGENDAMENTO, int status) {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("UPDATE agendamento SET STATUS=? WHERE CODAGENDAMENTO = ?");
+            stmt.setInt(1, status);
+            stmt.setInt(2, CODAGENDAMENTO);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
+            Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
     }
     
     public boolean checkInformacoes(Date data, Time hora){
@@ -94,72 +184,4 @@ public class AgendamentoDAO {
             }
             return check;  
         }
-    
-    public List<Agendamento> consultarAgendamentosBarbearia(int codbarbearia){
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        List<Agendamento> agendamentos = new ArrayList();
-
-        try {
-            stmt = con.prepareStatement("SELECT a.CODAGENDAMENTO, a.FK_CODCLIENTE, a.DATA, a.HORARIO, c.NOME"
-                    + " FROM cliente c"
-                    + " JOIN agendamento a ON c.CODCLIENTE = a.FK_CODCLIENTE"
-                    + " WHERE a.FK_CODBARBEARIA=?");
-            stmt.setInt(1, codbarbearia);
-            rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                Agendamento agendamento = new Agendamento();
-                agendamento.setNomecliente(rs.getString("c.NOME"));
-                agendamento.setData(rs.getDate("a.DATA"));
-                agendamento.setHora(rs.getTime("a.HORARIO"));
-                agendamento.setCodcliente(rs.getInt("a.FK_CODCLIENTE"));
-                agendamento.setId(rs.getInt("a.CODAGENDAMENTO"));
-                agendamentos.add(agendamento);
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex);
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt, rs);
-        }
-
-        return agendamentos;
-    }
-    
-    public void updateAgendamentoCliente(Agendamento a){
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-
-        try {
-            stmt = con.prepareStatement("UPDATE agendamento SET DATA=?, HORARIO=?, FK_CODSERVICO=? WHERE CODAGENDAMENTO=?");
-            stmt.setDate(1, a.getData());
-            stmt.setTime(2, a.getHora());
-            stmt.setInt(3, a.getServico());
-            stmt.setInt(4, a.getId()); 
-            stmt.executeUpdate();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: "+ex);
-            Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
-            ConnectionFactory.closeConnection(con, stmt);
-        }
-    }
-    
-    public void deleteAgendamentoCliente(int CODAGENDAMENTO) {
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-
-        try {
-            stmt = con.prepareStatement("DELETE FROM agendamento WHERE CODAGENDAMENTO = ?");
-            stmt.setInt(1, CODAGENDAMENTO);
-            stmt.executeUpdate();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex);
-            Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt);
-        }
-    }
 }

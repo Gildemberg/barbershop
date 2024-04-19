@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 
 public class AgendamentoController {
-    public boolean verificarAgendamento(int servico, Date data, Time hora, int CODBARBEARIA, int CODCLIENTE, int CODAGENDAMENTO){
+    public boolean verificarAgendamento(int servico, Date data, Time hora, int CODBARBEARIA, int CODCLIENTE, int CODAGENDAMENTO, int status){
         boolean retorno;
         //VERIFICAR PREENCHIMENTO DOS CAMPOS
         if(hora.getTime()!=0 && CODBARBEARIA>0 && CODCLIENTE>0){
@@ -34,7 +34,7 @@ public class AgendamentoController {
                 return false;
             }
             
-            retorno = verificarExpedienteNoBanco(servico, data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO);
+            retorno = verificarExpedienteNoBanco(servico, data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO, status);
             return retorno;
         }else{
             JOptionPane.showMessageDialog(null, "Os campos não foram preenchidos corretamente", "Mensagem", JOptionPane.ERROR_MESSAGE);        
@@ -43,7 +43,7 @@ public class AgendamentoController {
         return retorno;
     }
     
-    public boolean verificarExpedienteNoBanco(int servico, Date data, Time hora, int CODBARBEARIA, int CODCLIENTE, int CODAGENDAMENTO){
+    public boolean verificarExpedienteNoBanco(int servico, Date data, Time hora, int CODBARBEARIA, int CODCLIENTE, int CODAGENDAMENTO, int status){
         boolean verificacao, retorno;
         ExpedienteDAO dao = new ExpedienteDAO();
         
@@ -52,13 +52,13 @@ public class AgendamentoController {
             JOptionPane.showMessageDialog(null, "A Barbearia não funcionará neste dia. Selecione outro.", "Mensagem", JOptionPane.ERROR_MESSAGE);
             retorno = false;
         }else{
-            retorno = verificarNoBanco(servico, data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO);
+            retorno = verificarNoBanco(servico, data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO, status);
         }
         
         return retorno;
     }
     
-    public boolean verificarNoBanco(int servico, Date data, Time hora, int CODBARBEARIA, int CODCLIENTE, int CODAGENDAMENTO){
+    public boolean verificarNoBanco(int servico, Date data, Time hora, int CODBARBEARIA, int CODCLIENTE, int CODAGENDAMENTO, int status){
         ImageIcon iconConfirmar = AgendamentoController.createIcon("../images/confirmar.png");
         AgendamentoDAO dao = new AgendamentoDAO();
         boolean verificacao, retorno;
@@ -68,12 +68,12 @@ public class AgendamentoController {
             retorno = false;
         }else{
             if(CODAGENDAMENTO != 0){// ALTERARANDO O AGENDAMENTO
-                Agendamento a = new Agendamento(servico, data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO);   
+                Agendamento a = new Agendamento(servico, data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO, status);   
                 a.alterarAgendamento(a);
                 JOptionPane.showMessageDialog(null, "Agendamento Alterado!", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
                 retorno = true;
             }else{ //AGENDANDO PELA PRIMEIRA VEZ
-                Agendamento a = new Agendamento(servico, data, hora, CODBARBEARIA, CODCLIENTE, 0);   
+                Agendamento a = new Agendamento(servico, data, hora, CODBARBEARIA, CODCLIENTE, 0, status);   
                 a.agendarHorario(a);
                 JOptionPane.showMessageDialog(null, "Agendamento Realizado!", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
                 retorno = true;
