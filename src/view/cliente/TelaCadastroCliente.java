@@ -31,9 +31,13 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         txtTel.setText(cliente.get(0).getTelefone());
         txtLogin.setText(cliente.get(0).getLogin());
         txtSenha.setText(cliente.get(0).getSenha());
+        txtRSenha.setText(cliente.get(0).getRsenha());
     }
     
-    public void atualizarCadastroCliente(){
+    public void recadastrarCliente(){
+        boolean check;
+        boolean confirmacaoDados = ConfirmacaoDados.isSelected();
+        
         modelCliente.setId(cliente.get(0).getId());
         modelCliente.setCpf(txtCPF.getText());
         modelCliente.setNome(txtNome.getText());
@@ -41,7 +45,8 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         modelCliente.setTelefone(txtTel.getText());
         modelCliente.setLogin(txtLogin.getText());
         modelCliente.setSenha(txtSenha.getText());
-        clienteController.verificarUpdateCliente(modelCliente);
+        modelCliente.setRsenha(txtRSenha.getText());
+        clienteController.verificarUpdateCliente(modelCliente, confirmacaoDados);
     }
     
     public void cadastrarCliente(){
@@ -52,6 +57,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         modelCliente.setCpf(txtCPF.getText());
         modelCliente.setLogin(txtLogin.getText());
         modelCliente.setSenha(txtSenha.getText());
+        modelCliente.setRsenha(txtRSenha.getText());
         modelCliente.setTelefone(txtTel.getText());
         modelCliente.setEmail(txtEmail.getText());
 
@@ -66,6 +72,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         txtCPF.setText("");
         txtLogin.setText("");
         txtSenha.setText("");
+        txtRSenha.setText("");
         txtTel.setText("");
         txtEmail.setText("");
     }
@@ -90,14 +97,14 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         txtLogin = new javax.swing.JTextField();
         senha = new javax.swing.JLabel();
         txtSenha = new javax.swing.JPasswordField();
+        rsenha = new javax.swing.JLabel();
+        txtRSenha = new javax.swing.JPasswordField();
         celular = new javax.swing.JLabel();
         txtTel = new javax.swing.JFormattedTextField();
         email = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         confirmarDados = new javax.swing.JLabel();
         ConfirmacaoDados = new javax.swing.JRadioButton();
-        desejoReceber = new javax.swing.JLabel();
-        jRadioButton2 = new javax.swing.JRadioButton();
         cadastrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -206,6 +213,12 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
 
         txtSenha.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
 
+        rsenha.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        rsenha.setForeground(new java.awt.Color(255, 255, 255));
+        rsenha.setText("REPITA A SENHA:");
+
+        txtRSenha.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
+
         celular.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
         celular.setForeground(new java.awt.Color(255, 255, 255));
         celular.setText("CELULAR:");
@@ -229,12 +242,6 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
 
         ConfirmacaoDados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        desejoReceber.setFont(new java.awt.Font("Microsoft JhengHei Light", 2, 18)); // NOI18N
-        desejoReceber.setForeground(new java.awt.Color(255, 255, 255));
-        desejoReceber.setText("Desejo receber e-mails sobre atualizações de conteúdo.");
-
-        jRadioButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         cadastrar.setBackground(new java.awt.Color(0, 51, 102));
         cadastrar.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         cadastrar.setForeground(new java.awt.Color(255, 255, 255));
@@ -251,48 +258,52 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         Direita.setLayout(DireitaLayout);
         DireitaLayout.setHorizontalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(DireitaLayout.createSequentialGroup()
-                .addContainerGap(341, Short.MAX_VALUE)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(email, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(celular, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nome, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtLogin, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, DireitaLayout.createSequentialGroup()
-                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jRadioButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ConfirmacaoDados))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
+                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DireitaLayout.createSequentialGroup()
+                        .addGap(0, 334, Short.MAX_VALUE)
                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(confirmarDados, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
-                            .addComponent(desejoReceber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(cpf, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(login, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(senha, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCPF, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(0, 264, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(sair)
-                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                                .addComponent(sair)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(rsenha)
+                                    .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(email, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(celular, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtTel, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, DireitaLayout.createSequentialGroup()
+                                                .addComponent(ConfirmacaoDados)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(confirmarDados, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE))
+                                            .addComponent(senha, javax.swing.GroupLayout.Alignment.LEADING)))
+                                    .addComponent(nome)
+                                    .addComponent(txtLogin)
+                                    .addComponent(cpf)
+                                    .addComponent(login)
+                                    .addComponent(txtCPF)
+                                    .addComponent(txtNome)
+                                    .addComponent(txtRSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(265, 265, 265))))
+                    .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         DireitaLayout.setVerticalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DireitaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(sair)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -304,10 +315,14 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
                 .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rsenha, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtRSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(celular, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -316,17 +331,13 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
                 .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(confirmarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ConfirmacaoDados))
                 .addGap(18, 18, 18)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton2)
-                    .addComponent(desejoReceber, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addComponent(cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -354,7 +365,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
 
     private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
         if(update){
-            atualizarCadastroCliente();
+            recadastrarCliente();
         }else{
             cadastrarCliente();
         }
@@ -399,12 +410,11 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel celular;
     private javax.swing.JLabel confirmarDados;
     private javax.swing.JLabel cpf;
-    private javax.swing.JLabel desejoReceber;
     private javax.swing.JLabel email;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JLabel login;
     private javax.swing.JLabel nome;
+    private javax.swing.JLabel rsenha;
     private javax.swing.JLabel sair;
     private javax.swing.JLabel senha;
     private javax.swing.JLabel titulo;
@@ -412,6 +422,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JPasswordField txtRSenha;
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JFormattedTextField txtTel;
     // End of variables declaration//GEN-END:variables

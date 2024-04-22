@@ -23,9 +23,11 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
 
     int CODCLIENTE, CODBARBEARIA, CODAGENDAMENTO;
     AgendamentoController agendamentoController = new AgendamentoController();
+    SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
     SimpleDateFormat horaFormatada = new SimpleDateFormat("HH:mm");
-    SimpleDateFormat dataFormatada = new SimpleDateFormat("dd-MM-yyyy");
+    BarbeariaDAO barbeariaDao = new BarbeariaDAO();
     List<Servico> servicos = new ArrayList();
+    List<Barbearia> barbearias = new ArrayList();
     
     public TelaAgendamentoCliente() {
         initComponents();
@@ -49,32 +51,33 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     }
     
     public void consultarDadosBarbearia (int CODBARBEARIA){
-        BarbeariaDAO bDAO = new BarbeariaDAO();
-        List<Barbearia> barbearias = new ArrayList();
-        barbearias=bDAO.read();
+        barbearias=barbeariaDao.read();
+        StringBuilder textHtml = new StringBuilder("<html><div style='text-align: justify;'>");
         
         txtBarbearia.setText(barbearias.get(CODBARBEARIA-1).getNome());
-        txtDescricao.setText("<html><div style='text-align: justify;'>"+barbearias.get(CODBARBEARIA-1).getDescricao()+"</div></html>"); //inserir a tag HTML server para qubrar a linha do JLabel
-        txtEmail.setText("Email: "+barbearias.get(CODBARBEARIA-1).getEmail());
-        txtEndereco.setText("<html><div style='text-align: justify;'>Localização: "+barbearias.get(CODBARBEARIA-1).getRua()+", "+barbearias.get(CODBARBEARIA-1).getNumero()+", "+barbearias.get(CODBARBEARIA-1).getBairro()+", "+barbearias.get(CODBARBEARIA-1).getCidade()+" - "+barbearias.get(CODBARBEARIA-1).getUf()+"</div></html>");
-        txtRegra1.setText("<html><div style='text-align: justify;'>• "+barbearias.get(CODBARBEARIA-1).getRegra1()+"</div></html>");
-        txtRegra2.setText("<html><div style='text-align: justify;'>• "+barbearias.get(CODBARBEARIA-1).getRegra2()+"</div></html>");
-        txtRegra3.setText("<html><div style='text-align: justify;'>• "+barbearias.get(CODBARBEARIA-1).getRegra3()+"</div></html>");
-        txtRegra4.setText("<html><div style='text-align: justify;'>• "+barbearias.get(CODBARBEARIA-1).getRegra4()+"</div></html>");
+        txtDescricao.setText(textHtml+"    "+barbearias.get(CODBARBEARIA-1).getDescricao()+"</div></html>"); //inserir a tag HTML server para qubrar a linha do JLabel
+        txtEmail.setText(textHtml+barbearias.get(CODBARBEARIA-1).getEmail()+"</div></html>");
+        txtEndereco.setText(textHtml+barbearias.get(CODBARBEARIA-1).getRua()+", "
+                                                    +barbearias.get(CODBARBEARIA-1).getNumero()+", "
+                                                    +barbearias.get(CODBARBEARIA-1).getBairro()+", "
+                                                    +barbearias.get(CODBARBEARIA-1).getCidade()+"/"
+                                                    +barbearias.get(CODBARBEARIA-1).getUf()+"</div></html>");
+        txtRegra1.setText(textHtml+"• "+barbearias.get(CODBARBEARIA-1).getRegra1()+"</div></html>");
+        txtRegra2.setText(textHtml+"• "+barbearias.get(CODBARBEARIA-1).getRegra2()+"</div></html>");
+        txtRegra3.setText(textHtml+"• "+barbearias.get(CODBARBEARIA-1).getRegra3()+"</div></html>");
+        txtRegra4.setText(textHtml+"• "+barbearias.get(CODBARBEARIA-1).getRegra4()+"</div></html>");
         
         
-        servicos = bDAO.readServico(CODBARBEARIA);
-        
+        servicos = barbeariaDao.readServico(CODBARBEARIA);
         for (Servico servico : servicos) { //adicionando os serviços á JComboBox
             selectServicos.addItem(servico.getNome());
         }
         
-        StringBuilder textoServicos = new StringBuilder("<html><div style='text-align: justify;'>");
         for (Servico servico : servicos) {
-            textoServicos.append("• ").append(servico.getNome()).append(" | R$").append(servico.getValor().toString()).append("<br>");
+            textHtml.append("• ").append(servico.getNome()).append(" | R$").append(servico.getValor().toString()).append("<br>");
         }
-        textoServicos.append("</div></html>");
-        txtServicos.setText(textoServicos.toString());
+        textHtml.append("</div></html>");
+        txtServicos.setText(textHtml.toString());
       }
     
     public void agendar(){
@@ -155,18 +158,23 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
 
         txtDescricao.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         txtDescricao.setForeground(new java.awt.Color(255, 255, 255));
+        txtDescricao.setToolTipText("");
+        txtDescricao.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         txtDescricao.setBorder(new javax.swing.border.MatteBorder(null));
 
         txtEmail.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         txtEmail.setForeground(new java.awt.Color(255, 255, 255));
+        txtEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/email.png"))); // NOI18N
         txtEmail.setBorder(new javax.swing.border.MatteBorder(null));
 
         txtServicos.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         txtServicos.setForeground(new java.awt.Color(255, 255, 255));
+        txtServicos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/tesoura.png"))); // NOI18N
         txtServicos.setBorder(new javax.swing.border.MatteBorder(null));
 
         txtEndereco.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         txtEndereco.setForeground(new java.awt.Color(255, 255, 255));
+        txtEndereco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/localizacao.png"))); // NOI18N
         txtEndereco.setBorder(new javax.swing.border.MatteBorder(null));
 
         txtRegra.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N

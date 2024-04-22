@@ -1,34 +1,29 @@
 package view.cliente;
 
 import controller.ClienteController;
-import view.cliente.TelaCadastroCliente;
-import view.cliente.TelaPrincipalCliente;
 import dao.ClienteDAO;
 import java.awt.event.KeyEvent;
 import view.TelaInicial;
 
 public class TelaLoginCliente extends javax.swing.JFrame {
+    ClienteDAO ClienteDao = new ClienteDAO();
+    ClienteController clienteController = new ClienteController();
+    TelaPrincipalCliente TPC = new TelaPrincipalCliente(); //instanciando a classe Tela Principal
+    
     public TelaLoginCliente() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
     }
     
     public void login(){
-        boolean check;
         String login = txtLogin.getText();
         String senha = txtSenha.getText();
-        
-        ClienteController clienteController = new ClienteController();
-        check = clienteController.validarLogin(login, senha);
+        boolean check = clienteController.validarLogin(login, senha);
+        int CODCLIENTE = ClienteDao.retornoCod(login, senha);
         
         if(check){
-            ClienteDAO ClienteDao = new ClienteDAO(); //instanciando a classe ClienteDAO
-           
-            int CODCLIENTE = ClienteDao.retornoCod(login, senha); //Realizando a consulta do cod usr atravez do login e senha usr
-            
-            TelaPrincipalCliente TC = new TelaPrincipalCliente(); //instanciando a classe Tela Principal
-            TC.receberCodCliente(CODCLIENTE); //transferindo o codigo usr pra tela principal
-            TC.setVisible(true);
+            TPC.receberCodCliente(CODCLIENTE);
+            TPC.setVisible(true);
             this.setVisible(false);
         }
     }
@@ -155,6 +150,11 @@ public class TelaLoginCliente extends javax.swing.JFrame {
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntrarActionPerformed(evt);
+            }
+        });
+        btnEntrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnEntrarKeyPressed(evt);
             }
         });
 
@@ -293,6 +293,12 @@ public class TelaLoginCliente extends javax.swing.JFrame {
             login();
         }
     }//GEN-LAST:event_txtLoginKeyPressed
+
+    private void btnEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnEntrarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            login();
+        }
+    }//GEN-LAST:event_btnEntrarKeyPressed
 
     public static void main(String args[]) {
 

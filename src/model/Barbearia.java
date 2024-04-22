@@ -16,6 +16,7 @@ public class Barbearia {
     private String telefone2;
     private String login;
     private String senha;
+    private String rsenha;
     private String descricao;
     private String regra1;
     private String regra2;
@@ -124,6 +125,14 @@ public class Barbearia {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getRsenha() {
+        return rsenha;
+    }
+
+    public void setRsenha(String rsenha) {
+        this.rsenha = rsenha;
     }
     
     public String getDescricao(){

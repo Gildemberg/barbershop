@@ -7,6 +7,7 @@ public class Cliente {
     private String nome;
     private String login;
     private String senha;
+    private String rsenha;
     private String telefone;
     private String email;
     private String cpf;
@@ -51,6 +52,14 @@ public class Cliente {
         this.senha = senha;
     }
 
+    public String getRsenha() {
+        return rsenha;
+    }
+
+    public void setRsenha(String rsenha) {
+        this.rsenha = rsenha;
+    }
+    
     public int getId() {
         return codcliente;
     }

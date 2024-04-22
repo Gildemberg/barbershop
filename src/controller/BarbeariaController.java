@@ -16,6 +16,7 @@ public class BarbeariaController {
                 b.getTelefone2()!=null && b.getTelefone2().length()>0 && 
                 b.getLogin()!=null && b.getLogin().length()>0 && 
                 b.getSenha()!=null && b.getSenha().length()>0 &&
+                b.getRsenha()!=null && b.getRsenha().length()>0 &&
                 b.getDescricao()!=null && b.getDescricao().length()>0 && 
                 b.getRua()!=null && b.getRua().length()>0 &&
                 b.getNumero()!=null && b.getNumero().length()>0 && 
@@ -27,8 +28,13 @@ public class BarbeariaController {
                 b.getRegra3()!=null && b.getRegra3().length()>0 && 
                 b.getRegra4()!=null && b.getRegra4().length()>0 
                 ){
-            check = verificarNoBanco(b);
-            return check;
+            if(b.getSenha().equals(b.getRsenha())){
+                check = verificarNoBanco(b);
+                return check;
+            }else{
+                JOptionPane.showMessageDialog(null, "As senhas estão diferentes.", "Mensagem", JOptionPane.ERROR_MESSAGE);
+                check = false;
+            }
         }else{
             JOptionPane.showMessageDialog(null, "Os campos não foram preenchidos corretamente", "Mensagem", JOptionPane.ERROR_MESSAGE);        
         check = false;
@@ -74,6 +80,7 @@ public class BarbeariaController {
                 b.getTelefone2()!=null && b.getTelefone2().length()>0 && 
                 b.getLogin()!=null && b.getLogin().length()>0 && 
                 b.getSenha()!=null && b.getSenha().length()>0 &&
+                b.getRsenha()!=null && b.getRsenha().length()>0 &&
                 b.getDescricao()!=null && b.getDescricao().length()>0 && 
                 b.getRua()!=null && b.getRua().length()>0 &&
                 b.getNumero()!=null && b.getNumero().length()>0 && 
@@ -85,9 +92,15 @@ public class BarbeariaController {
                 b.getRegra3()!=null && b.getRegra3().length()>0 && 
                 b.getRegra4()!=null && b.getRegra4().length()>0 
                 ){
-            b.atualizarCadastro(b);
-            JOptionPane.showMessageDialog(null, "Cadastro atualizado com sucesso!");
-            check=true;
+            
+            if(b.getSenha().equals(b.getRsenha())){
+                b.atualizarCadastro(b);
+                JOptionPane.showMessageDialog(null, "Cadastro atualizado com sucesso!");
+                check=true;
+            }else{
+                JOptionPane.showMessageDialog(null, "As senhas estão diferentes.", "Mensagem", JOptionPane.ERROR_MESSAGE);
+                check = false;
+            }
         }else{
             JOptionPane.showMessageDialog(null, "Os campos não foram preenchidos corretamente", "Mensagem", JOptionPane.ERROR_MESSAGE);        
             check = false;

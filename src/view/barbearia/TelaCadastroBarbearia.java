@@ -54,6 +54,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         b.setCnpj(txtCNPJ.getText());
         b.setLogin(txtLogin.getText());
         b.setSenha(txtSenha.getText());
+        b.setRsenha(txtRSenha.getText());
         b.setTelefone1(txtTelefone1.getText());
         b.setTelefone2(txtTelefone2.getText());
         b.setEmail(txtEmail.getText());
@@ -68,7 +69,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         b.setRegra4(txtRegra4.getText());
         b.setDescricao(txtDescricao.getText());
 
-        check = barbeariaController.verificarUpdateBarbearia(b);
+        barbeariaController.verificarUpdateBarbearia(b);
     }
       
     public void cadastrar(){
@@ -77,6 +78,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         b.setCnpj(txtCNPJ.getText());
         b.setLogin(txtLogin.getText());
         b.setSenha(txtSenha.getText());
+        b.setRsenha(txtRSenha.getText());
         b.setTelefone1(txtTelefone1.getText());
         b.setTelefone2(txtTelefone2.getText());
         b.setEmail(txtEmail.getText());
@@ -138,6 +140,8 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         txtLogin = new javax.swing.JTextField();
         senha = new javax.swing.JLabel();
         txtSenha = new javax.swing.JPasswordField();
+        rsenha = new javax.swing.JLabel();
+        txtRSenha = new javax.swing.JPasswordField();
         telefone1 = new javax.swing.JLabel();
         txtTelefone1 = new javax.swing.JFormattedTextField();
         telefone2 = new javax.swing.JLabel();
@@ -279,6 +283,13 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         senha.setText("SENHA:");
 
         txtSenha.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
+        txtDescricao.setDocument(new LimitaNroCaracteres(15));
+
+        rsenha.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        rsenha.setForeground(new java.awt.Color(255, 255, 255));
+        rsenha.setText("REPITA A SENHA:");
+
+        txtRSenha.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
         txtDescricao.setDocument(new LimitaNroCaracteres(15));
 
         telefone1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
@@ -471,19 +482,11 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
                                         .addGroup(DireitaLayout.createSequentialGroup()
                                             .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(nome_social)
-                                                .addGroup(DireitaLayout.createSequentialGroup()
-                                                    .addComponent(login)
-                                                    .addGap(365, 365, 365)
-                                                    .addComponent(senha))
                                                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addComponent(cnpj)
                                                 .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(DireitaLayout.createSequentialGroup()
-                                            .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(DireitaLayout.createSequentialGroup()
                                             .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(txtTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -495,7 +498,22 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(email)
-                                                .addComponent(txtEmail)))))
+                                                .addComponent(txtEmail)))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(DireitaLayout.createSequentialGroup()
+                                                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(txtSenha)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                                .addGroup(DireitaLayout.createSequentialGroup()
+                                                    .addComponent(login)
+                                                    .addGap(192, 192, 192)
+                                                    .addComponent(senha)
+                                                    .addGap(222, 222, 222)))
+                                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(rsenha)
+                                                .addComponent(txtRSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                 .addGap(131, 131, 131)))
                         .addContainerGap())
                     .addGroup(DireitaLayout.createSequentialGroup()
@@ -522,13 +540,15 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
                     .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rsenha, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -650,13 +670,13 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         @Override
         public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
             if (iMaxLength <= 0){
-                super.insertString(offset, str.toUpperCase(), attr);
+                super.insertString(offset, str, attr);
                 return;
             }
 
             int ilen = (getLength() + str.length());
             if (ilen <= iMaxLength){
-                super.insertString(offset, str.toUpperCase(), attr);   // ...aceita str
+                super.insertString(offset, str, attr);   // ...aceita str
             }
         }
     }
@@ -684,6 +704,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
     private javax.swing.JLabel regra2;
     private javax.swing.JLabel regra3;
     private javax.swing.JLabel regra4;
+    private javax.swing.JLabel rsenha;
     private javax.swing.JLabel rua;
     private javax.swing.JLabel sair;
     private javax.swing.JLabel senha;
@@ -698,6 +719,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
     private javax.swing.JTextField txtLogin;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
+    private javax.swing.JPasswordField txtRSenha;
     private javax.swing.JTextField txtRegra1;
     private javax.swing.JTextField txtRegra2;
     private javax.swing.JTextField txtRegra3;

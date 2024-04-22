@@ -24,9 +24,9 @@ import javax.swing.JPanel;
 public final class TelaPrincipalCliente extends javax.swing.JFrame {
     //VARIAVEIS
     int CODCLIENTE;
-    String NOMECLIENTE;
-    ArrayList<Integer> CODBARBEARIAS = new ArrayList<>();
+    ArrayList<Integer> AGEND_CODBARBEARIAS = new ArrayList<>();
     ArrayList<Integer> CODAGENDAMENTOS = new ArrayList<>();
+    ArrayList<Integer> CODBARBEARIAS = new ArrayList<>();
     
     //FORMATOS
     SimpleDateFormat dataFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -34,15 +34,23 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     
     //INSTANCIAS
     TelaAgendamentoCliente TAC = new TelaAgendamentoCliente();
-    AgendamentoDAO agendamentoDao = new AgendamentoDAO();
+    AgendamentoDAO AgendamentoDao = new AgendamentoDAO();
+    ClienteDAO ClienteDao = new ClienteDAO();
+    BarbeariaDAO BarberDao = new BarbeariaDAO();
     
     public TelaPrincipalCliente() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
+    }
+      
+    public void receberCodCliente(int CODCLIENTE){
+        this.CODCLIENTE = CODCLIENTE;
+        exibirNomeCliente();
+        consultarAgendamento();
         consultarBarbearia();
         inserirDataHora();
     }
-    
+
     public void inserirDataHora(){
         LocalDate data = LocalDate.now();
         LocalDateTime hora = LocalDateTime.now();
@@ -56,80 +64,30 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         DIA = DIA.toUpperCase();
         dataAtual.setText(DIA+" - "+DATA +" - "+ HORA);
     }
-      
-    public void receberCodCliente(int CODCLIENTE){//receber o cod USUÁRIO
-        this.CODCLIENTE = CODCLIENTE; //recebendo o cod usr
-        exibirNomeCliente(CODCLIENTE);
-        consultarAgendamento();
-    }
-
-    public void exibirNomeCliente (int CODCLIENTE){//consultando o nome USUÁRIO
-        ClienteDAO ClienteDao = new ClienteDAO();
-        this.NOMECLIENTE=ClienteDao.retornoNome(CODCLIENTE);
-        nome_usr.setText(NOMECLIENTE); //imprimendo o nome usr
+    
+    public void exibirNomeCliente (){
+        nome_usr.setText(ClienteDao.retornoNome(CODCLIENTE));
       }
     
     public void consultarBarbearia(){
-        barbearia01.setVisible(false);
-        barbearia02.setVisible(false);
-        barbearia03.setVisible(false);
-        barbearia04.setVisible(false);
-        barbearia05.setVisible(false);
-        barbearia06.setVisible(false);
-        barbearia7.setVisible(false);
-        barbearia8.setVisible(false);
-        barbearia9.setVisible(false);
-        barbearia10.setVisible(false);
-        barbearia11.setVisible(false);
+        List<Barbearia> barbearias = BarberDao.read();
         
-        BarbeariaDAO BarberDao = new BarbeariaDAO();
-        List<Barbearia> barbearias = new ArrayList();
-        barbearias = BarberDao.read();
-        if(!barbearias.isEmpty()){
-            if(barbearias.size()>=1){
-                barbearia01.setVisible(true);
-                nome_barbearia01.setText(barbearias.get(0).getNome());
-            }
-            if(barbearias.size()>=2){
-                barbearia02.setVisible(true);
-                nome_barbearia02.setText(barbearias.get(1).getNome());
-            }
-            if(barbearias.size()>=3){
-                barbearia03.setVisible(true);
-                nome_barbearia03.setText(barbearias.get(2).getNome());
-            }
-            if(barbearias.size()>=4){
-                barbearia04.setVisible(true);
-                nome_barbearia04.setText(barbearias.get(3).getNome());
-            }
-            if(barbearias.size()>=5){
-                barbearia05.setVisible(true);
-                nome_barbearia05.setText(barbearias.get(4).getNome());
-            }
-            if(barbearias.size()>=6){
-                barbearia06.setVisible(true);
-                nome_barbearia06.setText(barbearias.get(5).getNome());
-            }
-            if(barbearias.size()>=7){
-                barbearia7.setVisible(true);
-                nome_barbearia7.setText(barbearias.get(6).getNome());
-            }
-            if(barbearias.size()>=8){
-                barbearia8.setVisible(true);
-                nome_barbearia8.setText(barbearias.get(7).getNome());
-            }
-            if(barbearias.size()>=9){
-                barbearia9.setVisible(true);
-                nome_barbearia9.setText(barbearias.get(8).getNome());
-            }
-            if(barbearias.size()>=10){
-                barbearia10.setVisible(true);
-                nome_barbearia10.setText(barbearias.get(9).getNome());
-            }
-            if(barbearias.size()>=11){
-                barbearia11.setVisible(true);
-                nome_barbearia11.setText(barbearias.get(10).getNome());
-            }
+        JPanel[] paineisBarbearia = {barbearia1, barbearia2, barbearia3, barbearia4, barbearia5, barbearia6, barbearia7, barbearia8, barbearia9, barbearia10, barbearia11};
+        JLabel[] labelsNomeBarbearia = {nome_barbearia1, nome_barbearia2, nome_barbearia3, nome_barbearia4, nome_barbearia5, nome_barbearia6, nome_barbearia7, nome_barbearia8, nome_barbearia9, nome_barbearia10, nome_barbearia11};
+        
+        for(int i=0; i<barbearias.size() && i<paineisBarbearia.length; i++){
+            Barbearia barbearia = barbearias.get(i);
+            
+            JPanel painelBarbearia = paineisBarbearia[i];
+            JLabel labelNomeBarbearia = labelsNomeBarbearia[i];
+            
+            painelBarbearia.setVisible(true);
+            
+            labelNomeBarbearia.setText(barbearia.getNome());   
+            CODBARBEARIAS.add(barbearia.getId());
+        }
+        for (int i = barbearias.size(); i < paineisBarbearia.length; i++) {
+            paineisBarbearia[i].setVisible(false);
         }
     }
     
@@ -160,7 +118,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         labelServico.setText("Serviço: "+agendamento.getNomeservico());
         
         // Adicionar os códigos de barbearia e agendamento às listas correspondentes
-        CODBARBEARIAS.add(agendamento.getCodbarbearia());
+        AGEND_CODBARBEARIAS.add(agendamento.getCodbarbearia());
         CODAGENDAMENTOS.add(agendamento.getCodagendamento());
     }
     
@@ -184,9 +142,16 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     
     public void excluirAgendamento(int CODAGENDAMENTO){
         if(JOptionPane.showConfirmDialog(this, "Você deseja realmente deletar o agendamento?", "Remover", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-            agendamentoDao.deleteAgendamentoCliente(CODAGENDAMENTO);
+            AgendamentoDao.deleteAgendamentoCliente(CODAGENDAMENTO);
             consultarAgendamento();
         }
+    }
+    
+    public void alterarCadastroCliente(){
+        TelaCadastroCliente TCC = new TelaCadastroCliente();
+        TCC.alterarCadastro(CODCLIENTE);
+        TCC.setVisible(true);
+        this.dispose();
     }
     
     @SuppressWarnings("unchecked")
@@ -201,28 +166,28 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         localizacao = new javax.swing.JLabel();
         nome_usr = new javax.swing.JLabel();
         Centro = new javax.swing.JPanel();
-        barbearia01 = new css.JPanelArredondadoBarbearias(30);
-        nome_barbearia01 = new javax.swing.JLabel();
+        barbearia1 = new css.JPanelArredondadoBarbearias(30);
+        nome_barbearia1 = new javax.swing.JLabel();
         logo01 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        barbearia02 = new css.JPanelArredondadoBarbearias(30);
-        nome_barbearia02 = new javax.swing.JLabel();
+        barbearia2 = new css.JPanelArredondadoBarbearias(30);
+        nome_barbearia2 = new javax.swing.JLabel();
         logo02 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        barbearia03 = new css.JPanelArredondadoBarbearias(30);
-        nome_barbearia03 = new javax.swing.JLabel();
+        barbearia3 = new css.JPanelArredondadoBarbearias(30);
+        nome_barbearia3 = new javax.swing.JLabel();
         logo03 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        barbearia04 = new css.JPanelArredondadoBarbearias(30);
-        nome_barbearia04 = new javax.swing.JLabel();
+        barbearia4 = new css.JPanelArredondadoBarbearias(30);
+        nome_barbearia4 = new javax.swing.JLabel();
         logo04 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        barbearia05 = new css.JPanelArredondadoBarbearias(30);
-        nome_barbearia05 = new javax.swing.JLabel();
+        barbearia5 = new css.JPanelArredondadoBarbearias(30);
+        nome_barbearia5 = new javax.swing.JLabel();
         logo05 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        barbearia06 = new css.JPanelArredondadoBarbearias(30);
-        nome_barbearia06 = new javax.swing.JLabel();
+        barbearia6 = new css.JPanelArredondadoBarbearias(30);
+        nome_barbearia6 = new javax.swing.JLabel();
         logo06 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         barbearia7 = new css.JPanelArredondadoBarbearias(30);
@@ -364,291 +329,291 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         Centro.setMaximumSize(new java.awt.Dimension(1320, 950));
         Centro.setMinimumSize(new java.awt.Dimension(1320, 950));
 
-        barbearia01.setLayout(new BorderLayout());
-        barbearia01.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia01.setBackground(new java.awt.Color(122, 177, 255));
-        barbearia01.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        barbearia01.setMaximumSize(new java.awt.Dimension(1150, 55));
-        barbearia01.setMinimumSize(new java.awt.Dimension(1150, 55));
-        barbearia01.setPreferredSize(new java.awt.Dimension(1150, 55));
-        barbearia01.addMouseListener(new java.awt.event.MouseAdapter() {
+        barbearia1.setLayout(new BorderLayout());
+        barbearia1.add(new JButton("Meu Botão"), BorderLayout.CENTER);
+        barbearia1.setBackground(new java.awt.Color(122, 177, 255));
+        barbearia1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        barbearia1.setMaximumSize(new java.awt.Dimension(1150, 55));
+        barbearia1.setMinimumSize(new java.awt.Dimension(1150, 55));
+        barbearia1.setPreferredSize(new java.awt.Dimension(1150, 55));
+        barbearia1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                barbearia01MouseClicked(evt);
+                barbearia1MouseClicked(evt);
             }
         });
 
-        nome_barbearia01.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia01.setForeground(new java.awt.Color(29, 93, 183));
-        nome_barbearia01.setBorder(new javax.swing.border.MatteBorder(null));
-        nome_barbearia01.setMaximumSize(new java.awt.Dimension(1000, 55));
-        nome_barbearia01.setMinimumSize(new java.awt.Dimension(1000, 55));
-        nome_barbearia01.setPreferredSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia1.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        nome_barbearia1.setForeground(new java.awt.Color(29, 93, 183));
+        nome_barbearia1.setBorder(new javax.swing.border.MatteBorder(null));
+        nome_barbearia1.setMaximumSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia1.setMinimumSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia1.setPreferredSize(new java.awt.Dimension(1000, 55));
 
         logo01.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_barbearia_men_space.png"))); // NOI18N
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/info.png"))); // NOI18N
 
-        javax.swing.GroupLayout barbearia01Layout = new javax.swing.GroupLayout(barbearia01);
-        barbearia01.setLayout(barbearia01Layout);
-        barbearia01Layout.setHorizontalGroup(
-            barbearia01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(barbearia01Layout.createSequentialGroup()
+        javax.swing.GroupLayout barbearia1Layout = new javax.swing.GroupLayout(barbearia1);
+        barbearia1.setLayout(barbearia1Layout);
+        barbearia1Layout.setHorizontalGroup(
+            barbearia1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barbearia1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(nome_barbearia01, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nome_barbearia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logo01)
                 .addContainerGap())
         );
-        barbearia01Layout.setVerticalGroup(
-            barbearia01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(nome_barbearia01, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        barbearia1Layout.setVerticalGroup(
+            barbearia1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(nome_barbearia1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(logo01, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        barbearia02.setLayout(new BorderLayout());
-        barbearia02.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia02.setBackground(new java.awt.Color(122, 177, 255));
-        barbearia02.setForeground(new java.awt.Color(0, 0, 0));
-        barbearia02.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        barbearia02.setMaximumSize(new java.awt.Dimension(1150, 55));
-        barbearia02.setMinimumSize(new java.awt.Dimension(1150, 55));
-        barbearia02.setPreferredSize(new java.awt.Dimension(1150, 55));
-        barbearia02.addMouseListener(new java.awt.event.MouseAdapter() {
+        barbearia2.setLayout(new BorderLayout());
+        barbearia2.add(new JButton("Meu Botão"), BorderLayout.CENTER);
+        barbearia2.setBackground(new java.awt.Color(122, 177, 255));
+        barbearia2.setForeground(new java.awt.Color(0, 0, 0));
+        barbearia2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        barbearia2.setMaximumSize(new java.awt.Dimension(1150, 55));
+        barbearia2.setMinimumSize(new java.awt.Dimension(1150, 55));
+        barbearia2.setPreferredSize(new java.awt.Dimension(1150, 55));
+        barbearia2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                barbearia02MouseClicked(evt);
+                barbearia2MouseClicked(evt);
             }
         });
 
-        nome_barbearia02.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia02.setForeground(new java.awt.Color(29, 93, 183));
-        nome_barbearia02.setBorder(new javax.swing.border.MatteBorder(null));
-        nome_barbearia02.setMaximumSize(new java.awt.Dimension(1000, 55));
-        nome_barbearia02.setMinimumSize(new java.awt.Dimension(1000, 55));
-        nome_barbearia02.setPreferredSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia2.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        nome_barbearia2.setForeground(new java.awt.Color(29, 93, 183));
+        nome_barbearia2.setBorder(new javax.swing.border.MatteBorder(null));
+        nome_barbearia2.setMaximumSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia2.setMinimumSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia2.setPreferredSize(new java.awt.Dimension(1000, 55));
 
         logo02.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_barbearia_men_space.png"))); // NOI18N
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/info.png"))); // NOI18N
 
-        javax.swing.GroupLayout barbearia02Layout = new javax.swing.GroupLayout(barbearia02);
-        barbearia02.setLayout(barbearia02Layout);
-        barbearia02Layout.setHorizontalGroup(
-            barbearia02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(barbearia02Layout.createSequentialGroup()
+        javax.swing.GroupLayout barbearia2Layout = new javax.swing.GroupLayout(barbearia2);
+        barbearia2.setLayout(barbearia2Layout);
+        barbearia2Layout.setHorizontalGroup(
+            barbearia2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barbearia2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(nome_barbearia02, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nome_barbearia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logo02)
                 .addContainerGap())
         );
-        barbearia02Layout.setVerticalGroup(
-            barbearia02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(barbearia02Layout.createSequentialGroup()
-                .addGroup(barbearia02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(nome_barbearia02, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        barbearia2Layout.setVerticalGroup(
+            barbearia2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barbearia2Layout.createSequentialGroup()
+                .addGroup(barbearia2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(nome_barbearia2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logo02, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        barbearia03.setLayout(new BorderLayout());
-        barbearia03.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia03.setBackground(new java.awt.Color(122, 177, 255));
-        barbearia03.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        barbearia03.setMaximumSize(new java.awt.Dimension(1150, 55));
-        barbearia03.setMinimumSize(new java.awt.Dimension(1150, 55));
-        barbearia03.setPreferredSize(new java.awt.Dimension(1150, 55));
-        barbearia03.addMouseListener(new java.awt.event.MouseAdapter() {
+        barbearia3.setLayout(new BorderLayout());
+        barbearia3.add(new JButton("Meu Botão"), BorderLayout.CENTER);
+        barbearia3.setBackground(new java.awt.Color(122, 177, 255));
+        barbearia3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        barbearia3.setMaximumSize(new java.awt.Dimension(1150, 55));
+        barbearia3.setMinimumSize(new java.awt.Dimension(1150, 55));
+        barbearia3.setPreferredSize(new java.awt.Dimension(1150, 55));
+        barbearia3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                barbearia03MouseClicked(evt);
+                barbearia3MouseClicked(evt);
             }
         });
 
-        nome_barbearia03.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia03.setForeground(new java.awt.Color(29, 93, 183));
-        nome_barbearia03.setBorder(new javax.swing.border.MatteBorder(null));
-        nome_barbearia03.setMaximumSize(new java.awt.Dimension(1000, 55));
-        nome_barbearia03.setMinimumSize(new java.awt.Dimension(1000, 55));
-        nome_barbearia03.setName(""); // NOI18N
-        nome_barbearia03.setPreferredSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia3.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        nome_barbearia3.setForeground(new java.awt.Color(29, 93, 183));
+        nome_barbearia3.setBorder(new javax.swing.border.MatteBorder(null));
+        nome_barbearia3.setMaximumSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia3.setMinimumSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia3.setName(""); // NOI18N
+        nome_barbearia3.setPreferredSize(new java.awt.Dimension(1000, 55));
 
         logo03.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_barbearia_men_space.png"))); // NOI18N
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/info.png"))); // NOI18N
 
-        javax.swing.GroupLayout barbearia03Layout = new javax.swing.GroupLayout(barbearia03);
-        barbearia03.setLayout(barbearia03Layout);
-        barbearia03Layout.setHorizontalGroup(
-            barbearia03Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(barbearia03Layout.createSequentialGroup()
+        javax.swing.GroupLayout barbearia3Layout = new javax.swing.GroupLayout(barbearia3);
+        barbearia3.setLayout(barbearia3Layout);
+        barbearia3Layout.setHorizontalGroup(
+            barbearia3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barbearia3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(nome_barbearia03, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nome_barbearia3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logo03)
                 .addContainerGap())
         );
-        barbearia03Layout.setVerticalGroup(
-            barbearia03Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(barbearia03Layout.createSequentialGroup()
-                .addGroup(barbearia03Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(nome_barbearia03, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        barbearia3Layout.setVerticalGroup(
+            barbearia3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barbearia3Layout.createSequentialGroup()
+                .addGroup(barbearia3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(nome_barbearia3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logo03, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        barbearia04.setLayout(new BorderLayout());
-        barbearia04.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia04.setBackground(new java.awt.Color(122, 177, 255));
-        barbearia04.setForeground(new java.awt.Color(0, 0, 0));
-        barbearia04.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        barbearia04.setMaximumSize(new java.awt.Dimension(1150, 55));
-        barbearia04.setMinimumSize(new java.awt.Dimension(1150, 55));
-        barbearia04.setPreferredSize(new java.awt.Dimension(1150, 55));
-        barbearia04.addMouseListener(new java.awt.event.MouseAdapter() {
+        barbearia4.setLayout(new BorderLayout());
+        barbearia4.add(new JButton("Meu Botão"), BorderLayout.CENTER);
+        barbearia4.setBackground(new java.awt.Color(122, 177, 255));
+        barbearia4.setForeground(new java.awt.Color(0, 0, 0));
+        barbearia4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        barbearia4.setMaximumSize(new java.awt.Dimension(1150, 55));
+        barbearia4.setMinimumSize(new java.awt.Dimension(1150, 55));
+        barbearia4.setPreferredSize(new java.awt.Dimension(1150, 55));
+        barbearia4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                barbearia04MouseClicked(evt);
+                barbearia4MouseClicked(evt);
             }
         });
 
-        nome_barbearia04.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia04.setForeground(new java.awt.Color(29, 93, 183));
-        nome_barbearia04.setBorder(new javax.swing.border.MatteBorder(null));
-        nome_barbearia04.setMaximumSize(new java.awt.Dimension(1000, 55));
-        nome_barbearia04.setMinimumSize(new java.awt.Dimension(1000, 55));
-        nome_barbearia04.setName(""); // NOI18N
-        nome_barbearia04.setPreferredSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia4.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        nome_barbearia4.setForeground(new java.awt.Color(29, 93, 183));
+        nome_barbearia4.setBorder(new javax.swing.border.MatteBorder(null));
+        nome_barbearia4.setMaximumSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia4.setMinimumSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia4.setName(""); // NOI18N
+        nome_barbearia4.setPreferredSize(new java.awt.Dimension(1000, 55));
 
         logo04.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_barbearia_men_space.png"))); // NOI18N
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/info.png"))); // NOI18N
 
-        javax.swing.GroupLayout barbearia04Layout = new javax.swing.GroupLayout(barbearia04);
-        barbearia04.setLayout(barbearia04Layout);
-        barbearia04Layout.setHorizontalGroup(
-            barbearia04Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(barbearia04Layout.createSequentialGroup()
+        javax.swing.GroupLayout barbearia4Layout = new javax.swing.GroupLayout(barbearia4);
+        barbearia4.setLayout(barbearia4Layout);
+        barbearia4Layout.setHorizontalGroup(
+            barbearia4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barbearia4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(nome_barbearia04, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nome_barbearia4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logo04)
                 .addContainerGap())
         );
-        barbearia04Layout.setVerticalGroup(
-            barbearia04Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(barbearia04Layout.createSequentialGroup()
-                .addGroup(barbearia04Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(nome_barbearia04, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        barbearia4Layout.setVerticalGroup(
+            barbearia4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barbearia4Layout.createSequentialGroup()
+                .addGroup(barbearia4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(nome_barbearia4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logo04, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        barbearia05.setLayout(new BorderLayout());
-        barbearia05.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia05.setBackground(new java.awt.Color(122, 177, 255));
-        barbearia05.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        barbearia05.setMaximumSize(new java.awt.Dimension(1150, 55));
-        barbearia05.setMinimumSize(new java.awt.Dimension(1150, 55));
-        barbearia05.addMouseListener(new java.awt.event.MouseAdapter() {
+        barbearia5.setLayout(new BorderLayout());
+        barbearia5.add(new JButton("Meu Botão"), BorderLayout.CENTER);
+        barbearia5.setBackground(new java.awt.Color(122, 177, 255));
+        barbearia5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        barbearia5.setMaximumSize(new java.awt.Dimension(1150, 55));
+        barbearia5.setMinimumSize(new java.awt.Dimension(1150, 55));
+        barbearia5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                barbearia05MouseClicked(evt);
+                barbearia5MouseClicked(evt);
             }
         });
 
-        nome_barbearia05.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia05.setForeground(new java.awt.Color(29, 93, 183));
-        nome_barbearia05.setBorder(new javax.swing.border.MatteBorder(null));
-        nome_barbearia05.setMaximumSize(new java.awt.Dimension(1000, 55));
-        nome_barbearia05.setMinimumSize(new java.awt.Dimension(1000, 55));
-        nome_barbearia05.setName(""); // NOI18N
-        nome_barbearia05.setPreferredSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia5.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        nome_barbearia5.setForeground(new java.awt.Color(29, 93, 183));
+        nome_barbearia5.setBorder(new javax.swing.border.MatteBorder(null));
+        nome_barbearia5.setMaximumSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia5.setMinimumSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia5.setName(""); // NOI18N
+        nome_barbearia5.setPreferredSize(new java.awt.Dimension(1000, 55));
 
         logo05.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_barbearia_men_space.png"))); // NOI18N
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/info.png"))); // NOI18N
 
-        javax.swing.GroupLayout barbearia05Layout = new javax.swing.GroupLayout(barbearia05);
-        barbearia05.setLayout(barbearia05Layout);
-        barbearia05Layout.setHorizontalGroup(
-            barbearia05Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(barbearia05Layout.createSequentialGroup()
+        javax.swing.GroupLayout barbearia5Layout = new javax.swing.GroupLayout(barbearia5);
+        barbearia5.setLayout(barbearia5Layout);
+        barbearia5Layout.setHorizontalGroup(
+            barbearia5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barbearia5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addComponent(nome_barbearia05, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nome_barbearia5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logo05)
                 .addContainerGap())
         );
-        barbearia05Layout.setVerticalGroup(
-            barbearia05Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(barbearia05Layout.createSequentialGroup()
-                .addGroup(barbearia05Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(nome_barbearia05, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        barbearia5Layout.setVerticalGroup(
+            barbearia5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barbearia5Layout.createSequentialGroup()
+                .addGroup(barbearia5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(nome_barbearia5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logo05, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        barbearia06.setLayout(new BorderLayout());
-        barbearia06.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia06.setBackground(new java.awt.Color(122, 177, 255));
-        barbearia06.setForeground(new java.awt.Color(0, 0, 0));
-        barbearia06.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        barbearia06.setMaximumSize(new java.awt.Dimension(1150, 55));
-        barbearia06.setMinimumSize(new java.awt.Dimension(1150, 55));
-        barbearia06.addMouseListener(new java.awt.event.MouseAdapter() {
+        barbearia6.setLayout(new BorderLayout());
+        barbearia6.add(new JButton("Meu Botão"), BorderLayout.CENTER);
+        barbearia6.setBackground(new java.awt.Color(122, 177, 255));
+        barbearia6.setForeground(new java.awt.Color(0, 0, 0));
+        barbearia6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        barbearia6.setMaximumSize(new java.awt.Dimension(1150, 55));
+        barbearia6.setMinimumSize(new java.awt.Dimension(1150, 55));
+        barbearia6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                barbearia06MouseClicked(evt);
+                barbearia6MouseClicked(evt);
             }
         });
 
-        nome_barbearia06.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia06.setForeground(new java.awt.Color(29, 93, 183));
-        nome_barbearia06.setBorder(new javax.swing.border.MatteBorder(null));
-        nome_barbearia06.setMaximumSize(new java.awt.Dimension(1000, 55));
-        nome_barbearia06.setMinimumSize(new java.awt.Dimension(1000, 55));
-        nome_barbearia06.setName(""); // NOI18N
-        nome_barbearia06.setPreferredSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia6.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        nome_barbearia6.setForeground(new java.awt.Color(29, 93, 183));
+        nome_barbearia6.setBorder(new javax.swing.border.MatteBorder(null));
+        nome_barbearia6.setMaximumSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia6.setMinimumSize(new java.awt.Dimension(1000, 55));
+        nome_barbearia6.setName(""); // NOI18N
+        nome_barbearia6.setPreferredSize(new java.awt.Dimension(1000, 55));
 
         logo06.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_barbearia_men_space.png"))); // NOI18N
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/info.png"))); // NOI18N
 
-        javax.swing.GroupLayout barbearia06Layout = new javax.swing.GroupLayout(barbearia06);
-        barbearia06.setLayout(barbearia06Layout);
-        barbearia06Layout.setHorizontalGroup(
-            barbearia06Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(barbearia06Layout.createSequentialGroup()
+        javax.swing.GroupLayout barbearia6Layout = new javax.swing.GroupLayout(barbearia6);
+        barbearia6.setLayout(barbearia6Layout);
+        barbearia6Layout.setHorizontalGroup(
+            barbearia6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barbearia6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
-                .addComponent(nome_barbearia06, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nome_barbearia6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logo06)
                 .addContainerGap())
         );
-        barbearia06Layout.setVerticalGroup(
-            barbearia06Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(barbearia06Layout.createSequentialGroup()
-                .addGroup(barbearia06Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(nome_barbearia06, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        barbearia6Layout.setVerticalGroup(
+            barbearia6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barbearia6Layout.createSequentialGroup()
+                .addGroup(barbearia6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(nome_barbearia6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logo06, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
@@ -927,12 +892,12 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CentroLayout.createSequentialGroup()
                         .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(barbearia02, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(barbearia03, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(barbearia04, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(barbearia01, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(barbearia05, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(barbearia06, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(barbearia2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(barbearia3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(barbearia4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(barbearia1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(barbearia5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(barbearia6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(barbearia7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(barbearia8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(barbearia9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -949,17 +914,17 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addGap(57, 57, 57)
                 .addComponent(Barbearias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(barbearia01, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(barbearia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(barbearia02, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(barbearia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(barbearia03, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(barbearia3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(barbearia04, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(barbearia4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(barbearia05, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(barbearia5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(barbearia06, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(barbearia6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(barbearia7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -1398,10 +1363,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void alterarCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alterarCadastroMouseClicked
-        TelaCadastroCliente TCC = new TelaCadastroCliente();
-        TCC.alterarCadastro(CODCLIENTE);
-        TCC.setVisible(true);
-        this.dispose();
+        alterarCadastroCliente();
     }//GEN-LAST:event_alterarCadastroMouseClicked
 
     private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
@@ -1409,60 +1371,60 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         new TelaLoginCliente().setVisible(true);
     }//GEN-LAST:event_sairMouseClicked
 
-    private void barbearia01MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia01MouseClicked
-        abrirBarbearia(1);
-    }//GEN-LAST:event_barbearia01MouseClicked
+    private void barbearia1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia1MouseClicked
+        abrirBarbearia(CODBARBEARIAS.get(0));
+    }//GEN-LAST:event_barbearia1MouseClicked
 
-    private void barbearia02MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia02MouseClicked
-        abrirBarbearia(2);
-    }//GEN-LAST:event_barbearia02MouseClicked
+    private void barbearia2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia2MouseClicked
+        abrirBarbearia(CODBARBEARIAS.get(1));
+    }//GEN-LAST:event_barbearia2MouseClicked
 
-    private void barbearia03MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia03MouseClicked
-        abrirBarbearia(3);
-    }//GEN-LAST:event_barbearia03MouseClicked
+    private void barbearia3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia3MouseClicked
+        abrirBarbearia(CODBARBEARIAS.get(2));
+    }//GEN-LAST:event_barbearia3MouseClicked
 
-    private void barbearia04MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia04MouseClicked
-        abrirBarbearia(4);
-    }//GEN-LAST:event_barbearia04MouseClicked
+    private void barbearia4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia4MouseClicked
+        abrirBarbearia(CODBARBEARIAS.get(3));
+    }//GEN-LAST:event_barbearia4MouseClicked
 
-    private void barbearia05MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia05MouseClicked
-        abrirBarbearia(5);
-    }//GEN-LAST:event_barbearia05MouseClicked
+    private void barbearia5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia5MouseClicked
+        abrirBarbearia(CODBARBEARIAS.get(4));
+    }//GEN-LAST:event_barbearia5MouseClicked
 
-    private void barbearia06MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia06MouseClicked
-        abrirBarbearia(6);
-    }//GEN-LAST:event_barbearia06MouseClicked
+    private void barbearia6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia6MouseClicked
+        abrirBarbearia(CODBARBEARIAS.get(5));
+    }//GEN-LAST:event_barbearia6MouseClicked
 
     private void barbearia7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia7MouseClicked
-        abrirBarbearia(7);
+        abrirBarbearia(CODBARBEARIAS.get(6));
     }//GEN-LAST:event_barbearia7MouseClicked
 
     private void barbearia8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia8MouseClicked
-        abrirBarbearia(8);
+        abrirBarbearia(CODBARBEARIAS.get(7));
     }//GEN-LAST:event_barbearia8MouseClicked
 
     private void barbearia9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia9MouseClicked
-        abrirBarbearia(9);
+        abrirBarbearia(CODBARBEARIAS.get(8));
     }//GEN-LAST:event_barbearia9MouseClicked
 
     private void barbearia10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia10MouseClicked
-        abrirBarbearia(10);
+        abrirBarbearia(CODBARBEARIAS.get(9));
     }//GEN-LAST:event_barbearia10MouseClicked
 
     private void barbearia11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia11MouseClicked
-        abrirBarbearia(11);
+        abrirBarbearia(CODBARBEARIAS.get(10));
     }//GEN-LAST:event_barbearia11MouseClicked
 
     private void btnAlterar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterar1MouseClicked
-        alterarAgendamento(CODAGENDAMENTOS.get(0), CODBARBEARIAS.get(0));
+        alterarAgendamento(CODAGENDAMENTOS.get(0), AGEND_CODBARBEARIAS.get(0));
     }//GEN-LAST:event_btnAlterar1MouseClicked
 
     private void btnAlterar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterar2MouseClicked
-        alterarAgendamento(CODAGENDAMENTOS.get(1), CODBARBEARIAS.get(1));
+        alterarAgendamento(CODAGENDAMENTOS.get(1), AGEND_CODBARBEARIAS.get(1));
     }//GEN-LAST:event_btnAlterar2MouseClicked
 
     private void btnAlterar3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterar3MouseClicked
-        alterarAgendamento(CODAGENDAMENTOS.get(2), CODBARBEARIAS.get(2)); 
+        alterarAgendamento(CODAGENDAMENTOS.get(2), AGEND_CODBARBEARIAS.get(2)); 
     }//GEN-LAST:event_btnAlterar3MouseClicked
 
     private void btnExcluir1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir1MouseClicked
@@ -1482,7 +1444,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluir4MouseClicked
 
     private void btnAlterar4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterar4MouseClicked
-        alterarAgendamento(CODAGENDAMENTOS.get(3), CODBARBEARIAS.get(3));
+        alterarAgendamento(CODAGENDAMENTOS.get(3), AGEND_CODBARBEARIAS.get(3));
     }//GEN-LAST:event_btnAlterar4MouseClicked
 
     public static void main(String args[]) {
@@ -1513,14 +1475,14 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private javax.swing.JPanel Direita;
     private javax.swing.JPanel MeusAgendamentos;
     private javax.swing.JLabel alterarCadastro;
-    private javax.swing.JPanel barbearia01;
-    private javax.swing.JPanel barbearia02;
-    private javax.swing.JPanel barbearia03;
-    private javax.swing.JPanel barbearia04;
-    private javax.swing.JPanel barbearia05;
-    private javax.swing.JPanel barbearia06;
+    private javax.swing.JPanel barbearia1;
     private javax.swing.JPanel barbearia10;
     private javax.swing.JPanel barbearia11;
+    private javax.swing.JPanel barbearia2;
+    private javax.swing.JPanel barbearia3;
+    private javax.swing.JPanel barbearia4;
+    private javax.swing.JPanel barbearia5;
+    private javax.swing.JPanel barbearia6;
     private javax.swing.JPanel barbearia7;
     private javax.swing.JPanel barbearia8;
     private javax.swing.JPanel barbearia9;
@@ -1559,14 +1521,14 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private javax.swing.JLabel logo7;
     private javax.swing.JLabel logo8;
     private javax.swing.JLabel logo9;
-    private javax.swing.JLabel nome_barbearia01;
-    private javax.swing.JLabel nome_barbearia02;
-    private javax.swing.JLabel nome_barbearia03;
-    private javax.swing.JLabel nome_barbearia04;
-    private javax.swing.JLabel nome_barbearia05;
-    private javax.swing.JLabel nome_barbearia06;
+    private javax.swing.JLabel nome_barbearia1;
     private javax.swing.JLabel nome_barbearia10;
     private javax.swing.JLabel nome_barbearia11;
+    private javax.swing.JLabel nome_barbearia2;
+    private javax.swing.JLabel nome_barbearia3;
+    private javax.swing.JLabel nome_barbearia4;
+    private javax.swing.JLabel nome_barbearia5;
+    private javax.swing.JLabel nome_barbearia6;
     private javax.swing.JLabel nome_barbearia7;
     private javax.swing.JLabel nome_barbearia8;
     private javax.swing.JLabel nome_barbearia9;

@@ -174,45 +174,53 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="cadastrar" min="-2" pref="242" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="341" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="titulo" max="32767" attributes="0"/>
-                      <Component id="email" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="celular" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="nome" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtTel" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtLogin" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtSenha" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jRadioButton2" max="32767" attributes="0"/>
-                              <Component id="ConfirmacaoDados" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="334" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="confirmarDados" pref="555" max="32767" attributes="0"/>
-                              <Component id="desejoReceber" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="sair" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="rsenha" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <EmptySpace pref="138" max="-2" attributes="0"/>
+                                              <Component id="cadastrar" min="-2" pref="242" max="-2" attributes="0"/>
+                                              <EmptySpace pref="215" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="email" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="celular" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtTel" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtSenha" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="ConfirmacaoDados" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="confirmarDados" pref="555" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Component id="senha" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="nome" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtLogin" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="cpf" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="login" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtCPF" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtRSenha" alignment="0" min="-2" pref="595" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="265" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
-                      <Component id="cpf" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="login" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="senha" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtCPF" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
+                      <Component id="titulo" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="0" pref="264" max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="sair" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -221,9 +229,9 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="sair" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="titulo" min="-2" pref="68" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="nome" min="-2" pref="38" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtNome" min="-2" pref="46" max="-2" attributes="0"/>
@@ -235,10 +243,14 @@
                   <Component id="login" min="-2" pref="38" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtLogin" min="-2" pref="46" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="senha" min="-2" pref="38" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtSenha" min="-2" pref="46" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="rsenha" min="-2" pref="38" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="txtRSenha" min="-2" pref="46" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="celular" min="-2" pref="38" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -247,19 +259,14 @@
                   <Component id="email" min="-2" pref="38" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtEmail" min="-2" pref="46" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="confirmarDados" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="ConfirmacaoDados" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
-                      <Component id="desejoReceber" min="-2" pref="30" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="cadastrar" min="-2" pref="50" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace pref="88" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -371,6 +378,24 @@
             </Property>
           </Properties>
         </Component>
+        <Component class="javax.swing.JLabel" name="rsenha">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Microsoft JhengHei Light" size="36" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="REPITA A SENHA:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="txtRSenha">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Corbel Light" size="27" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
         <Component class="javax.swing.JLabel" name="celular">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -422,24 +447,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="ConfirmacaoDados">
-          <Properties>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="desejoReceber">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Microsoft JhengHei Light" size="18" style="2"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Desejo receber e-mails sobre atualiza&#xe7;&#xf5;es de conte&#xfa;do."/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton2">
           <Properties>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>

@@ -16,8 +16,13 @@ public class ClienteController {
                 c.getSenha()!=null && c.getSenha().length()>0 
                 ){
             if(confirmacaoDados == true){//VERIFICAR SE O CHECKBOX DE CONFIRMAR DADOS CONFIAVEIS ESTÁ SELECIONADO
-                check = verificarNoBanco(c);
-                return check;
+                if(c.getRsenha().equals(c.getSenha())){//VERIFICAR SE AS SENHAS ESTÃO COMPATIVEIS
+                    check = verificarNoBanco(c);
+                    return check;
+                }else{
+                    JOptionPane.showMessageDialog(null, "As senhas estão diferentes.", "Mensagem", JOptionPane.ERROR_MESSAGE);
+                    check = false;
+                }
             }else{
                 JOptionPane.showMessageDialog(null, "Porfavor, confirme que os dados fornecidos são confiáveis e verdadeiros.", "Mensagem", JOptionPane.ERROR_MESSAGE);
                 check = false;
@@ -56,7 +61,7 @@ public class ClienteController {
         }
     }
     
-    public boolean verificarUpdateCliente(Cliente c){
+    public boolean verificarUpdateCliente(Cliente c, boolean confirmacaoDados){
         boolean check;
         //VERIFICAR SE TODOS OS CAMPOS ESTÃO PREENCHIDOS
         if(c.getNome()!=null && c.getNome().length()>0 && 
@@ -64,11 +69,23 @@ public class ClienteController {
                 c.getEmail()!=null && c.getEmail().length()>0 &&
                 c.getTelefone()!=null && c.getTelefone().length()>0 && 
                 c.getLogin()!=null && c.getLogin().length()>0 && 
-                c.getSenha()!=null && c.getSenha().length()>0 
+                c.getSenha()!=null && c.getSenha().length()>0 && 
+                c.getRsenha()!=null && c.getRsenha().length()>0 
                 ){
-            c.atualizarCadastro(c);
-            JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!");
-            check = true;
+            
+            if(confirmacaoDados == true){//VERIFICAR SE O CHECKBOX DE CONFIRMAR DADOS CONFIAVEIS ESTÁ SELECIONADO
+                if(c.getRsenha().equals(c.getSenha())){//VERIFICAR SE AS SENHAS ESTÃO COMPATIVEIS
+                    c.atualizarCadastro(c);
+                    JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!");
+                    check = true;
+                }else{
+                    JOptionPane.showMessageDialog(null, "As senhas estão diferentes.", "Mensagem", JOptionPane.ERROR_MESSAGE);
+                    check = false;
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Porfavor, confirme que os dados fornecidos são confiáveis e verdadeiros.", "Mensagem", JOptionPane.ERROR_MESSAGE);
+                check = false;
+            }     
         }else{
             JOptionPane.showMessageDialog(null, "Os campos não foram preenchidos corretamente", "Mensagem", JOptionPane.ERROR_MESSAGE);        
             check = false;
