@@ -3,6 +3,7 @@ package view.barbearia;
 
 import com.raven.datechooser.SelectedDate;
 import controller.ExpedienteController;
+import java.awt.Toolkit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
@@ -16,6 +17,7 @@ public class TelaDefinirExpedienteBarbearia extends javax.swing.JFrame {
     public TelaDefinirExpedienteBarbearia() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
+        setIcon();
     }
     
     public void receberCodBarbearia(int CODBARBEARIA){
@@ -242,4 +244,8 @@ public class TelaDefinirExpedienteBarbearia extends javax.swing.JFrame {
     private javax.swing.JLabel txtRegra;
     private javax.swing.JLabel txtRegra5;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+       setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../images/icone.png")));
+    }
 }

@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Toolkit;
 import view.cliente.TelaLoginCliente;
 import view.barbearia.TelaLoginBarbearia;
 
@@ -8,6 +9,7 @@ public class TelaInicial extends javax.swing.JFrame {
     public TelaInicial() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
+        setIcon();
     }
 
     @SuppressWarnings("unchecked")
@@ -28,6 +30,7 @@ public class TelaInicial extends javax.swing.JFrame {
         ola3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela Inicial");
         setMinimumSize(new java.awt.Dimension(1920, 1080));
 
         Esquerda.setBackground(new java.awt.Color(0, 51, 102));
@@ -255,4 +258,8 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel ola2;
     private javax.swing.JLabel ola3;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/icone.png")));
+    }
 }

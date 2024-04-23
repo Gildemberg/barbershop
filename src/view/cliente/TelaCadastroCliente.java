@@ -2,6 +2,7 @@ package view.cliente;
 
 import controller.ClienteController;
 import dao.ClienteDAO;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import model.Cliente;
@@ -17,6 +18,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     public TelaCadastroCliente() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
+        setIcon();
     }
 
     public void alterarCadastro(int CODCLIENTE){              
@@ -108,7 +110,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         cadastrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Tela de Cadastro");
+        setTitle("Tela Cadastro de Cliente");
         setMinimumSize(new java.awt.Dimension(1920, 1080));
 
         Esquerda.setBackground(new java.awt.Color(0, 51, 102));
@@ -426,4 +428,8 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JFormattedTextField txtTel;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../images/icone.png")));
+    }
 }

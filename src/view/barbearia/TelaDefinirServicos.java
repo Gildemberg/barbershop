@@ -1,6 +1,7 @@
 package view.barbearia;
 
 import controller.BarbeariaController;
+import java.awt.Toolkit;
 import java.sql.Date;
 import java.sql.Time;
 import java.text.ParseException;
@@ -19,6 +20,7 @@ public class TelaDefinirServicos extends javax.swing.JFrame {
     public TelaDefinirServicos() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
+        setIcon();
     }
     
     public void receberCodBarbearia(int CODBARBEARIA){
@@ -65,6 +67,7 @@ public class TelaDefinirServicos extends javax.swing.JFrame {
         sair = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela Cadastro de Serviços");
         setMinimumSize(new java.awt.Dimension(1920, 1080));
 
         Esquerda.setBackground(new java.awt.Color(0, 0, 102));
@@ -240,4 +243,8 @@ public class TelaDefinirServicos extends javax.swing.JFrame {
     private javax.swing.JLabel txtTempo;
     private javax.swing.JLabel txtValor;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../images/icone.png")));
+    }
 }

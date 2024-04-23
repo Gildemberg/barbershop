@@ -2,6 +2,7 @@ package view.cliente;
 
 import controller.ClienteController;
 import dao.ClienteDAO;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import view.TelaInicial;
 
@@ -13,6 +14,7 @@ public class TelaLoginCliente extends javax.swing.JFrame {
     public TelaLoginCliente() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
+        setIcon();
     }
     
     public void login(){
@@ -50,7 +52,7 @@ public class TelaLoginCliente extends javax.swing.JFrame {
         Login1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Tela de Login");
+        setTitle("Tela Login do Cliente");
         setBackground(new java.awt.Color(0, 153, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(1920, 1080));
@@ -336,4 +338,8 @@ public class TelaLoginCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../images/icone.png")));
+    }
 }

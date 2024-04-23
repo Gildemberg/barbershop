@@ -4,6 +4,7 @@ package view.cliente;
 import com.raven.datechooser.SelectedDate;
 import controller.AgendamentoController;
 import dao.BarbeariaDAO;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import model.Barbearia;
@@ -32,6 +33,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     public TelaAgendamentoCliente() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
+        setIcon();
     }
     
     
@@ -53,19 +55,19 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     public void consultarDadosBarbearia (int CODBARBEARIA){
         barbearias=barbeariaDao.read();
         StringBuilder textHtml = new StringBuilder("<html><div style='text-align: justify;'>");
+        StringBuilder textHtmlfim = new StringBuilder("</div></html>");
         
         txtBarbearia.setText(barbearias.get(CODBARBEARIA-1).getNome());
-        txtDescricao.setText(textHtml+"    "+barbearias.get(CODBARBEARIA-1).getDescricao()+"</div></html>"); //inserir a tag HTML server para qubrar a linha do JLabel
-        txtEmail.setText(textHtml+barbearias.get(CODBARBEARIA-1).getEmail()+"</div></html>");
+        txtDescricao.setText(textHtml+barbearias.get(CODBARBEARIA-1).getDescricao()+textHtmlfim); //inserir a tag HTML server para qubrar a linha do JLabel
         txtEndereco.setText(textHtml+barbearias.get(CODBARBEARIA-1).getRua()+", "
                                                     +barbearias.get(CODBARBEARIA-1).getNumero()+", "
                                                     +barbearias.get(CODBARBEARIA-1).getBairro()+", "
                                                     +barbearias.get(CODBARBEARIA-1).getCidade()+"/"
-                                                    +barbearias.get(CODBARBEARIA-1).getUf()+"</div></html>");
-        txtRegra1.setText(textHtml+"• "+barbearias.get(CODBARBEARIA-1).getRegra1()+"</div></html>");
-        txtRegra2.setText(textHtml+"• "+barbearias.get(CODBARBEARIA-1).getRegra2()+"</div></html>");
-        txtRegra3.setText(textHtml+"• "+barbearias.get(CODBARBEARIA-1).getRegra3()+"</div></html>");
-        txtRegra4.setText(textHtml+"• "+barbearias.get(CODBARBEARIA-1).getRegra4()+"</div></html>");
+                                                    +barbearias.get(CODBARBEARIA-1).getUf()+textHtmlfim);
+        txtRegra1.setText(textHtml+"• "+barbearias.get(CODBARBEARIA-1).getRegra1()+textHtmlfim);
+        txtRegra2.setText(textHtml+"• "+barbearias.get(CODBARBEARIA-1).getRegra2()+textHtmlfim);
+        txtRegra3.setText(textHtml+"• "+barbearias.get(CODBARBEARIA-1).getRegra3()+textHtmlfim);
+        txtRegra4.setText(textHtml+"• "+barbearias.get(CODBARBEARIA-1).getRegra4()+textHtmlfim);
         
         
         servicos = barbeariaDao.readServico(CODBARBEARIA);
@@ -74,7 +76,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         }
         
         for (Servico servico : servicos) {
-            textHtml.append("• ").append(servico.getNome()).append(" | R$").append(servico.getValor().toString()).append("<br>");
+            textHtml.append(servico.getNome()).append(" | R$").append(servico.getValor().toString()).append("<br>");
         }
         textHtml.append("</div></html>");
         txtServicos.setText(textHtml.toString());
@@ -121,7 +123,6 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         icon = new javax.swing.JLabel();
         txtBarbearia = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JLabel();
         txtServicos = new javax.swing.JLabel();
         txtEndereco = new javax.swing.JLabel();
         txtRegra = new javax.swing.JLabel();
@@ -129,6 +130,8 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         txtRegra2 = new javax.swing.JLabel();
         txtRegra3 = new javax.swing.JLabel();
         txtRegra4 = new javax.swing.JLabel();
+        txtRegra5 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
         Direita = new css.FundoGradiente(0, 191, 255, 65, 105, 255, 0, 0, 1500, 100);
         sair = new javax.swing.JLabel();
         Agendamento = new javax.swing.JLabel();
@@ -144,7 +147,8 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de Agendamento");
-        setMinimumSize(new java.awt.Dimension(1920, 1080));
+        setMaximumSize(new java.awt.Dimension(1920, 1080));
+        setMinimumSize(new java.awt.Dimension(1280, 960));
 
         Esquerda.setBackground(new java.awt.Color(0, 51, 102));
 
@@ -154,27 +158,25 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         txtBarbearia.setFont(new java.awt.Font("Impact", 0, 48)); // NOI18N
         txtBarbearia.setForeground(new java.awt.Color(255, 255, 255));
         txtBarbearia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtBarbearia.setText("NOME DA BARBERAIA");
         txtBarbearia.setBorder(new javax.swing.border.MatteBorder(null));
 
         txtDescricao.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         txtDescricao.setForeground(new java.awt.Color(255, 255, 255));
+        txtDescricao.setText("Descrição da Barbearia");
         txtDescricao.setToolTipText("");
         txtDescricao.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         txtDescricao.setBorder(new javax.swing.border.MatteBorder(null));
 
-        txtEmail.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
-        txtEmail.setForeground(new java.awt.Color(255, 255, 255));
-        txtEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/email.png"))); // NOI18N
-        txtEmail.setBorder(new javax.swing.border.MatteBorder(null));
-
         txtServicos.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         txtServicos.setForeground(new java.awt.Color(255, 255, 255));
-        txtServicos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/tesoura.png"))); // NOI18N
+        txtServicos.setText("serviços");
         txtServicos.setBorder(new javax.swing.border.MatteBorder(null));
 
         txtEndereco.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         txtEndereco.setForeground(new java.awt.Color(255, 255, 255));
         txtEndereco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/localizacao.png"))); // NOI18N
+        txtEndereco.setText("Localização da Barbearia");
         txtEndereco.setBorder(new javax.swing.border.MatteBorder(null));
 
         txtRegra.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
@@ -185,76 +187,93 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
 
         txtRegra1.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         txtRegra1.setForeground(new java.awt.Color(255, 255, 255));
+        txtRegra1.setText("r1");
         txtRegra1.setBorder(new javax.swing.border.MatteBorder(null));
 
         txtRegra2.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         txtRegra2.setForeground(new java.awt.Color(255, 255, 255));
+        txtRegra2.setText("r2");
         txtRegra2.setBorder(new javax.swing.border.MatteBorder(null));
 
         txtRegra3.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         txtRegra3.setForeground(new java.awt.Color(255, 255, 255));
+        txtRegra3.setText("r3");
         txtRegra3.setBorder(new javax.swing.border.MatteBorder(null));
 
         txtRegra4.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         txtRegra4.setForeground(new java.awt.Color(255, 255, 255));
+        txtRegra4.setText("r4");
         txtRegra4.setBorder(new javax.swing.border.MatteBorder(null));
+
+        txtRegra5.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        txtRegra5.setForeground(new java.awt.Color(255, 255, 255));
+        txtRegra5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtRegra5.setText("SERVIÇOS OFERECIDOS:");
+        txtRegra5.setBorder(new javax.swing.border.MatteBorder(null));
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         javax.swing.GroupLayout EsquerdaLayout = new javax.swing.GroupLayout(Esquerda);
         Esquerda.setLayout(EsquerdaLayout);
         EsquerdaLayout.setHorizontalGroup(
             EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EsquerdaLayout.createSequentialGroup()
+            .addComponent(txtBarbearia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EsquerdaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(icon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtBarbearia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EsquerdaLayout.createSequentialGroup()
-                        .addGap(0, 17, Short.MAX_VALUE)
+                        .addComponent(icon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EsquerdaLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
                         .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDescricao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtEndereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(EsquerdaLayout.createSequentialGroup()
-                                .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtServicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtEndereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EsquerdaLayout.createSequentialGroup()
-                                .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtRegra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtRegra1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtRegra2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtRegra3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtRegra4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap())
+                                    .addComponent(txtRegra5, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtRegra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                                    .addComponent(txtRegra1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtRegra2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtRegra3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtRegra4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(60, 60, 60))))
         );
         EsquerdaLayout.setVerticalGroup(
             EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(icon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(txtBarbearia, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtBarbearia, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(66, 66, 66)
+                .addComponent(txtEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(66, 66, 66)
                 .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EsquerdaLayout.createSequentialGroup()
-                        .addComponent(txtRegra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtRegra1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtRegra2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13)
-                        .addComponent(txtRegra3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
-                        .addComponent(txtRegra4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(txtEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(txtServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtRegra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRegra5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(EsquerdaLayout.createSequentialGroup()
+                                .addComponent(txtRegra1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtRegra2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtRegra3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtRegra4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(333, 333, 333))
         );
 
         Direita.setBackground(new java.awt.Color(0, 153, 255));
@@ -372,7 +391,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
                 .addComponent(sair)
                 .addGap(87, 87, 87)
                 .addComponent(Agendamento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(Servico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(selectServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -403,7 +422,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Esquerda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Direita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Direita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -420,6 +439,10 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     private void btnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarActionPerformed
         agendar();
     }//GEN-LAST:event_btnAgendarActionPerformed
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../images/icone.png")));
+    }
 
     public class LimitaNroCaracteres extends PlainDocument {
         private final int iMaxLength;
@@ -471,11 +494,11 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     private com.raven.datechooser.DateChooser calendario;
     private javax.swing.JLabel icon;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel sair;
     private javax.swing.JComboBox<String> selectServicos;
     private javax.swing.JLabel txtBarbearia;
     private javax.swing.JLabel txtDescricao;
-    private javax.swing.JLabel txtEmail;
     private javax.swing.JLabel txtEndereco;
     private javax.swing.JFormattedTextField txtHora;
     private javax.swing.JFormattedTextField txtMinuto;
@@ -484,6 +507,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     private javax.swing.JLabel txtRegra2;
     private javax.swing.JLabel txtRegra3;
     private javax.swing.JLabel txtRegra4;
+    private javax.swing.JLabel txtRegra5;
     private javax.swing.JLabel txtServicos;
     // End of variables declaration//GEN-END:variables
 }

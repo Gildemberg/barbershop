@@ -2,6 +2,7 @@
 package view.barbearia;
 
 import dao.BarbeariaDAO;
+import java.awt.Toolkit;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
     public TelaPrincipalBarbearia() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
+        setIcon();
         inserirDataHora();
     }
     
@@ -69,7 +71,7 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
         ola3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Tela Gestor");
+        setTitle("Tela Principal Barbearia");
         setMinimumSize(new java.awt.Dimension(1920, 1080));
 
         Cima.setBackground(new java.awt.Color(29, 93, 183));
@@ -387,4 +389,8 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
     private javax.swing.JLabel sair;
     private javax.swing.JLabel servico;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../images/icone.png")));
+    }
 }

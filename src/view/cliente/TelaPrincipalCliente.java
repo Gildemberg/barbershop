@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import model.Agendamento;
 import model.Barbearia;
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
@@ -41,6 +42,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     public TelaPrincipalCliente() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
+        setIcon();
     }
       
     public void receberCodCliente(int CODCLIENTE){
@@ -246,7 +248,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         dataAtual = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Tela Principal");
+        setTitle("Tela Principal Cliente");
         setMinimumSize(new java.awt.Dimension(1920, 1080));
 
         Cima.setBackground(new java.awt.Color(29, 93, 183));
@@ -1552,4 +1554,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private javax.swing.JLabel txtServico03;
     private javax.swing.JLabel txtServico4;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../images/icone.png")));
+    }
 }

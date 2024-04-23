@@ -2,6 +2,7 @@ package view.barbearia;
 
 import controller.BarbeariaController;
 import dao.BarbeariaDAO;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import model.Barbearia;
@@ -19,6 +20,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
     public TelaCadastroBarbearia() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
+        setIcon();
     }
     
     public void atualizarCadastro(int CODBARBEARIA){
@@ -174,6 +176,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         txtDescricao = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela Cadastro de Barbearia");
         setMinimumSize(new java.awt.Dimension(1920, 1080));
 
         Esquerda.setBackground(new java.awt.Color(0, 51, 102));
@@ -238,7 +241,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         Direita.setPreferredSize(new java.awt.Dimension(1200, 1080));
         Direita.setRequestFocusEnabled(false);
 
-        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_sair2.png"))); // NOI18N
+        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/saida.png"))); // NOI18N
         sair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -658,6 +661,10 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> {
             new TelaCadastroBarbearia().setVisible(true);
         });
+    }
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../images/icone.png")));
     }
     
     public class LimitaNroCaracteres extends PlainDocument {

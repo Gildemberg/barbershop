@@ -2,6 +2,7 @@ package view.barbearia;
 
 import controller.BarbeariaController;
 import dao.BarbeariaDAO;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import view.TelaInicial;
 
@@ -10,6 +11,7 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
     public TelaLoginBarbearia() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
+        setIcon();
     }
     
     public void login(){
@@ -52,6 +54,7 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
         Login1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela Login da Barbearia");
         setMinimumSize(new java.awt.Dimension(1920, 1080));
 
         Esquerda.setBackground(new java.awt.Color(0, 51, 102));
@@ -318,4 +321,8 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../images/icone.png")));
+    }
 }

@@ -1,6 +1,7 @@
 package view.barbearia;
 
 import dao.AgendamentoDAO;
+import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -32,6 +33,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
     public TelaAgendamentoBarbearia() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
+        setIcon();
         inserirDataHora();
     }
     
@@ -151,6 +153,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         dataAtual = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela Principal Barbearia");
         setMinimumSize(new java.awt.Dimension(1920, 1080));
 
         Cima.setBackground(new java.awt.Color(29, 93, 183));
@@ -772,4 +775,8 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
     private javax.swing.JLabel txtServico4;
     private javax.swing.JLabel txtServico5;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../images/icone.png")));
+    }
 }
