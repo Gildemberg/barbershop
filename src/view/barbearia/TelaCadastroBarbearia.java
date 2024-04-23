@@ -1,12 +1,16 @@
 package view.barbearia;
 
+import API.ViaCEP;
 import controller.BarbeariaController;
 import dao.BarbeariaDAO;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Barbearia;
 import javax.swing.text.*;
+import API.Endereco;
 
 public class TelaCadastroBarbearia extends javax.swing.JFrame {
     boolean update=false;
@@ -151,6 +155,8 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         email = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         rua = new javax.swing.JLabel();
+        cep = new javax.swing.JLabel();
+        txtCep = new javax.swing.JTextField();
         txtRua = new javax.swing.JTextField();
         numero = new javax.swing.JLabel();
         txtNumero = new javax.swing.JTextField();
@@ -225,7 +231,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         EsquerdaLayout.setVerticalGroup(
             EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addContainerGap(133, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Logo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Nome1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,7 +261,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         titulo.setText("CADASTRE SUA BARBEARIA");
 
         nome_social.setBackground(new java.awt.Color(255, 255, 255));
-        nome_social.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        nome_social.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         nome_social.setForeground(new java.awt.Color(255, 255, 255));
         nome_social.setText("NOME SOCIAL:");
 
@@ -263,7 +269,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         txtDescricao.setDocument(new LimitaNroCaracteres(100));
 
         cnpj.setBackground(new java.awt.Color(255, 255, 255));
-        cnpj.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        cnpj.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         cnpj.setForeground(new java.awt.Color(255, 255, 255));
         cnpj.setText("CNPJ:");
 
@@ -274,28 +280,28 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         }
         txtCNPJ.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
 
-        login.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        login.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         login.setForeground(new java.awt.Color(255, 255, 255));
         login.setText("LOGIN:");
 
         txtLogin.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
         txtDescricao.setDocument(new LimitaNroCaracteres(10));
 
-        senha.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        senha.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         senha.setForeground(new java.awt.Color(255, 255, 255));
         senha.setText("SENHA:");
 
         txtSenha.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
         txtDescricao.setDocument(new LimitaNroCaracteres(15));
 
-        rsenha.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        rsenha.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         rsenha.setForeground(new java.awt.Color(255, 255, 255));
         rsenha.setText("REPITA A SENHA:");
 
         txtRSenha.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
         txtDescricao.setDocument(new LimitaNroCaracteres(15));
 
-        telefone1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        telefone1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         telefone1.setForeground(new java.awt.Color(255, 255, 255));
         telefone1.setText("CELULAR:");
 
@@ -306,7 +312,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         }
         txtTelefone1.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
 
-        telefone2.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        telefone2.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         telefone2.setForeground(new java.awt.Color(255, 255, 255));
         telefone2.setText("TELEFONE:");
 
@@ -317,44 +323,57 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         }
         txtTelefone2.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
 
-        email.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        email.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         email.setForeground(new java.awt.Color(255, 255, 255));
         email.setText("EMAIL:");
 
         txtEmail.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
 
         rua.setBackground(new java.awt.Color(255, 255, 255));
-        rua.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        rua.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         rua.setForeground(new java.awt.Color(255, 255, 255));
         rua.setText("RUA:");
 
+        cep.setBackground(new java.awt.Color(255, 255, 255));
+        cep.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
+        cep.setForeground(new java.awt.Color(255, 255, 255));
+        cep.setText("CEP:");
+
+        txtCep.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
+        txtCep.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCepFocusLost(evt);
+            }
+        });
+        txtCep.setDocument(new LimitaNroCaracteres(8));
+
         txtRua.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
 
-        numero.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        numero.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         numero.setForeground(new java.awt.Color(255, 255, 255));
         numero.setText("Nº:");
 
         txtNumero.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
 
-        bairro.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        bairro.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         bairro.setForeground(new java.awt.Color(255, 255, 255));
         bairro.setText("BAIRRO:");
 
         txtBairro.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
 
-        cidade.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        cidade.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         cidade.setForeground(new java.awt.Color(255, 255, 255));
         cidade.setText("CIDADE:");
 
         txtCidade.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
 
-        uf.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        uf.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         uf.setForeground(new java.awt.Color(255, 255, 255));
         uf.setText("UF:");
 
         txtUf.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
 
-        regra1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        regra1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         regra1.setForeground(new java.awt.Color(255, 255, 255));
         regra1.setText("REGRA 1:");
 
@@ -365,21 +384,21 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         confirmarDados.setForeground(new java.awt.Color(255, 255, 255));
         confirmarDados.setText("Confirmo que os dados fornecidos são confiáveis e verdadeiros.");
 
-        regra2.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        regra2.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         regra2.setForeground(new java.awt.Color(255, 255, 255));
         regra2.setText("REGRA 2:");
 
         txtRegra2.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
         txtDescricao.setDocument(new LimitaNroCaracteres(35));
 
-        regra3.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        regra3.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         regra3.setForeground(new java.awt.Color(255, 255, 255));
         regra3.setText("REGRA 3:");
 
         txtRegra3.setFont(new java.awt.Font("Corbel Light", 0, 27)); // NOI18N
         txtDescricao.setDocument(new LimitaNroCaracteres(35));
 
-        regra4.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        regra4.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         regra4.setForeground(new java.awt.Color(255, 255, 255));
         regra4.setText("REGRA 4:");
 
@@ -400,7 +419,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
             }
         });
 
-        descricao.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
+        descricao.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         descricao.setForeground(new java.awt.Color(255, 255, 255));
         descricao.setText("DESCRIÇÃO DA BARBEARIA:");
 
@@ -418,28 +437,26 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         DireitaLayout.setHorizontalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DireitaLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DireitaLayout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(confirmarDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(DireitaLayout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 998, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(sair))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                        .addGap(68, 68, 68)
                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(DireitaLayout.createSequentialGroup()
-                                .addComponent(descricao)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(137, 137, 137))
-                    .addGroup(DireitaLayout.createSequentialGroup()
-                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jRadioButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(confirmarDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(DireitaLayout.createSequentialGroup()
-                                .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 998, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(sair))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(DireitaLayout.createSequentialGroup()
+                                        .addComponent(descricao)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
                                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(regra3)
                                             .addComponent(txtRegra3, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -447,82 +464,86 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
                                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(regra4)
                                             .addComponent(txtRegra4)))
-                                    .addGroup(DireitaLayout.createSequentialGroup()
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
                                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(regra1)
                                             .addComponent(txtRegra1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(12, 12, 12)
                                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(regra2)
+                                            .addComponent(txtRegra2))))
+                                .addGap(137, 137, 137))
+                            .addGroup(DireitaLayout.createSequentialGroup()
+                                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(DireitaLayout.createSequentialGroup()
+                                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(rua)
+                                            .addComponent(txtRua))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(numero)
+                                            .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(bairro)
+                                            .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cidade)
+                                            .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(DireitaLayout.createSequentialGroup()
-                                                .addComponent(regra2)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                            .addComponent(txtRegra2)))
-                                    .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(DireitaLayout.createSequentialGroup()
-                                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(DireitaLayout.createSequentialGroup()
-                                                    .addComponent(rua)
-                                                    .addGap(0, 0, Short.MAX_VALUE))
-                                                .addComponent(txtRua))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(numero)
-                                                .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(bairro)
-                                                .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(cidade)
-                                                .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(DireitaLayout.createSequentialGroup()
-                                                    .addComponent(uf)
-                                                    .addGap(19, 19, 19))
-                                                .addComponent(txtUf)))
-                                        .addGroup(DireitaLayout.createSequentialGroup()
-                                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(nome_social)
-                                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(cnpj)
-                                                .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(DireitaLayout.createSequentialGroup()
-                                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(telefone1))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtTelefone2, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(telefone2))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(email)
-                                                .addComponent(txtEmail)))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(DireitaLayout.createSequentialGroup()
-                                                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(txtSenha)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                                .addGroup(DireitaLayout.createSequentialGroup()
-                                                    .addComponent(login)
-                                                    .addGap(192, 192, 192)
-                                                    .addComponent(senha)
-                                                    .addGap(222, 222, 222)))
-                                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(rsenha)
-                                                .addComponent(txtRSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGap(131, 131, 131)))
-                        .addContainerGap())
-                    .addGroup(DireitaLayout.createSequentialGroup()
-                        .addGap(362, 362, 362)
-                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                                                .addComponent(uf)
+                                                .addGap(19, 19, 19))
+                                            .addComponent(txtUf, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(DireitaLayout.createSequentialGroup()
+                                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(nome_social)
+                                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(cnpj)
+                                            .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(DireitaLayout.createSequentialGroup()
+                                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(telefone1))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtTelefone2, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(telefone2))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(email)
+                                            .addComponent(txtEmail)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(DireitaLayout.createSequentialGroup()
+                                                .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                            .addGroup(DireitaLayout.createSequentialGroup()
+                                                .addComponent(login)
+                                                .addGap(192, 192, 192)
+                                                .addComponent(senha)
+                                                .addGap(222, 222, 222)))
+                                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(rsenha)
+                                            .addComponent(txtRSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(128, 128, 128))
+                            .addGroup(DireitaLayout.createSequentialGroup()
+                                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cep)
+                                    .addGroup(DireitaLayout.createSequentialGroup()
+                                        .addGap(362, 362, 362)
+                                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(DireitaLayout.createSequentialGroup()
+                                .addComponent(txtCep, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                                .addGap(844, 844, 844)))))
+                .addContainerGap())
         );
         DireitaLayout.setVerticalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -536,13 +557,12 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
                         .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nome_social, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
+                    .addComponent(nome_social)
+                    .addComponent(cnpj))
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -552,7 +572,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
                     .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtRSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -564,7 +584,11 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
                     .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtTelefone2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
+                .addComponent(cep, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(bairro, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -578,7 +602,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
                     .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtUf, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(0, 0, 0)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(regra1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(regra2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -586,7 +610,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRegra1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtRegra2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                .addGap(0, 0, 0)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(regra3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(regra4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -594,17 +618,17 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRegra3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtRegra4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(0, 0, 0)
                 .addComponent(descricao, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGap(0, 0, 0)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jRadioButton1)
                     .addComponent(confirmarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -618,8 +642,8 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Esquerda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Direita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Esquerda, javax.swing.GroupLayout.DEFAULT_SIZE, 1089, Short.MAX_VALUE)
+            .addComponent(Direita, javax.swing.GroupLayout.DEFAULT_SIZE, 1089, Short.MAX_VALUE)
         );
 
         pack();
@@ -644,6 +668,18 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
             new TelaLoginBarbearia().setVisible(true);
         }
     }//GEN-LAST:event_sairMouseClicked
+
+    private void txtCepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCepFocusLost
+        try {
+            Endereco endereco = ViaCEP.buscaEnderecoPelo(txtCep.getText());
+            txtRua.setText(endereco.getLogradouro());
+            txtBairro.setText(endereco.getBairro());
+            txtCidade.setText(endereco.getLocalidade());
+            txtUf.setText(endereco.getUf());
+        } catch (Exception ex) {
+            Logger.getLogger(TelaCadastroBarbearia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtCepFocusLost
 
     public static void main(String args[]) {
 
@@ -696,6 +732,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
     private javax.swing.JLabel Nome1;
     private javax.swing.JLabel bairro;
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JLabel cep;
     private javax.swing.JLabel cidade;
     private javax.swing.JLabel cnpj;
     private javax.swing.JLabel confirmarDados;
@@ -720,6 +757,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
     private javax.swing.JLabel titulo;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCNPJ;
+    private javax.swing.JTextField txtCep;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextArea txtDescricao;
     private javax.swing.JTextField txtEmail;

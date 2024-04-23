@@ -32,8 +32,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="Esquerda" max="32767" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="Direita" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+              <Component id="Direita" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -58,7 +58,6 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="txtBarbearia" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -69,24 +68,25 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtDescricao" alignment="1" max="32767" attributes="0"/>
-                              <Component id="txtEndereco" alignment="1" max="32767" attributes="0"/>
+                              <Component id="txtDescricao" alignment="1" pref="1095" max="32767" attributes="0"/>
+                              <Component id="txtEndereco" alignment="1" pref="1095" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="txtServicos" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="txtServicos" pref="530" max="32767" attributes="0"/>
                                       <Component id="txtRegra5" pref="530" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="7" max="32767" attributes="0"/>
-                                  <Component id="jSeparator2" min="-2" pref="16" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jSeparator2" min="-2" pref="23" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="txtRegra" alignment="1" pref="530" max="32767" attributes="0"/>
-                                      <Component id="txtRegra1" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="txtRegra2" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="txtRegra3" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="txtRegra4" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="txtRegra1" alignment="1" pref="530" max="32767" attributes="0"/>
+                                      <Component id="txtRegra2" alignment="1" pref="530" max="32767" attributes="0"/>
+                                      <Component id="txtRegra3" alignment="1" pref="530" max="32767" attributes="0"/>
+                                      <Component id="txtRegra4" alignment="1" pref="530" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
+                              <Component id="txtBarbearia" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                       </Group>
@@ -331,42 +331,46 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="Agendamento" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="104" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="sair" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace min="527" pref="527" max="-2" attributes="0"/>
+                                  <Component id="sair" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="btnAgendar" min="-2" pref="183" max="-2" attributes="0"/>
+                                  <EmptySpace min="177" pref="177" max="-2" attributes="0"/>
+                                  <Component id="btnAgendar" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="237" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="calendario" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="calendario" alignment="1" max="32767" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <Component id="Data" min="-2" pref="229" max="-2" attributes="0"/>
+                                          <EmptySpace min="140" pref="140" max="-2" attributes="0"/>
+                                          <Component id="Data" max="32767" attributes="0"/>
                                           <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="txtHora" max="32767" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtMinuto" min="-2" pref="167" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtMinuto" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="Hora" pref="357" max="32767" attributes="0"/>
+                                      <Component id="Hora" max="32767" attributes="0"/>
                                       <Component id="selectServicos" max="32767" attributes="0"/>
-                                      <Component id="Servico" alignment="1" pref="357" max="32767" attributes="0"/>
+                                      <Component id="Servico" alignment="1" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="169" max="-2" attributes="0"/>
                               </Group>
