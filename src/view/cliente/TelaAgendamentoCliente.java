@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
+import model.Agendamento;
 import model.Servico;
 
 
@@ -24,6 +25,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
 
     int CODCLIENTE, CODBARBEARIA, CODAGENDAMENTO;
     AgendamentoController agendamentoController = new AgendamentoController();
+    Agendamento agendamento = new Agendamento();
     SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
     SimpleDateFormat horaFormatada = new SimpleDateFormat("HH:mm");
     BarbeariaDAO barbeariaDao = new BarbeariaDAO();
@@ -88,6 +90,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
             int status=0;
             int servicoSelecionado;
             int servico = selectServicos.getSelectedIndex();
+            
             if(servico>0){
                 servicoSelecionado = servicos.get(servico-1).getId();
             }else{
@@ -95,16 +98,23 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
             }
             
             SelectedDate dataCalendar = calendario.getSelectedDate(); //Selecionando DATA no CALENDARIO
-            String dataString = dataCalendar.getDay()+"-"+dataCalendar.getMonth()+"-"+dataCalendar.getYear(); //Pegando a DATA em STRING
+            String dataString = dataCalendar.getDay()+"/"+dataCalendar.getMonth()+"/"+dataCalendar.getYear(); //Pegando a DATA em STRING
             String horaString = txtHora.getText()+":"+txtMinuto.getText(); //Pegando a HORA em STRING
 
             //convertendo do tipo STRING para DATE
             Date data = new Date(dataFormatada.parse(dataString).getTime());
             Date Horario = new Date(horaFormatada.parse(horaString).getTime()); //TIME DATE
             Time hora = new Time(Horario.getTime()); //Pegando o TIME da DATE
+         
+            agendamento.setData(data);
+            agendamento.setHora(hora);
+            agendamento.setServico(servicoSelecionado);
+            agendamento.setCodagendamento(CODAGENDAMENTO);
+            agendamento.setCodbarbearia(CODBARBEARIA);
+            agendamento.setCodcliente(CODCLIENTE);
+            agendamento.setStatus(status);
             
-
-            check = agendamentoController.verificarAgendamento(servicoSelecionado, data, hora, CODBARBEARIA, CODCLIENTE, CODAGENDAMENTO, status);
+            check = agendamentoController.controller(agendamento);
             
             if(check){ // LIMPANDO OS CAMPOS EM CASO DE CADASTRO REALIZADO
                 txtHora.setText("");

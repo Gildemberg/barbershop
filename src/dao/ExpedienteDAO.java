@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -54,4 +55,35 @@ public class ExpedienteDAO {
         }
         return check;
     }
+    /*
+    public boolean definirHorarioExpediente(Time horaIni, Time horaFim){
+        
+    }
+    
+    public boolean verificarHorarioExpediente(Time horaIni, Time horaFim){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        boolean check=false;
+        
+        try {
+            stmt = con.prepareStatement("SELECT DATA, FK_CODBARBEARIA "
+                    + "FROM EXPEDIENTE  "
+                    + "WHERE DATA=? AND FK_CODBARBEARIA=?");
+                stmt.setDate(1, data);
+                stmt.setInt(2, CODBARBEARIA);
+                rs = stmt.executeQuery();
+                
+                if(rs.next()){
+                    check = true;
+                }
+        } catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex);
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return check;
+    }
+*/
 }

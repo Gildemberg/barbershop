@@ -165,7 +165,7 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
         ola2.setFont(new java.awt.Font("Impact", 0, 45)); // NOI18N
         ola2.setForeground(new java.awt.Color(255, 255, 255));
         ola2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ola2.setText("DEFINIR EXPEDIENTE");
+        ola2.setText("REMOVER EXPEDIENTE");
 
         javax.swing.GroupLayout btnDefinirExpedienteLayout = new javax.swing.GroupLayout(btnDefinirExpediente);
         btnDefinirExpediente.setLayout(btnDefinirExpedienteLayout);
