@@ -101,4 +101,8 @@ public class AgendamentoController {
     public static ImageIcon createIcon(String path) { //CRIANDO O ICONE DE CONFIRMAÇÃO PARA O JOPTIONPANE
         return new ImageIcon(Toolkit.getDefaultToolkit().createImage(AgendamentoController.class.getResource(path)));
     }
+    
+    public boolean cancelarAgendamento(Agendamento agendamento){
+        return AgendamentoDao.deleteAgendamentoCliente(agendamento);
+    }
 }

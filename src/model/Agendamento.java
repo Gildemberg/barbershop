@@ -15,6 +15,7 @@ public class Agendamento {
     private int servico;
     private String nomeservico;
     private int status;
+    private String descricao;
 
     public int getCodagendamento() {
         return codagendamento;
@@ -24,31 +25,13 @@ public class Agendamento {
         this.codagendamento = codagendamento;
     }
 
-    public int getStatus() {
-        return status;
+    public int getCodcliente() {
+        return codcliente;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setCodcliente(int codcliente) {
+        this.codcliente = codcliente;
     }
-
-    public int getServico() {
-        return servico;
-    }
-
-    public void setServico(int servico) {
-        this.servico = servico;
-    }
-
-    public String getNomeservico() {
-        return nomeservico;
-    }
-
-    public void setNomeservico(String nomeservico) {
-        this.nomeservico = nomeservico;
-    }
-    
-    
 
     public int getCodbarbearia() {
         return codbarbearia;
@@ -56,14 +39,6 @@ public class Agendamento {
 
     public void setCodbarbearia(int codbarbearia) {
         this.codbarbearia = codbarbearia;
-    }
-
-    public int getCodcliente() {
-        return codcliente;
-    }
-
-    public void setCodcliente(int codcliente) {
-        this.codcliente = codcliente;
     }
 
     public Date getData() {
@@ -96,6 +71,38 @@ public class Agendamento {
 
     public void setNomecliente(String nomecliente) {
         this.nomecliente = nomecliente;
+    }
+
+    public int getServico() {
+        return servico;
+    }
+
+    public void setServico(int servico) {
+        this.servico = servico;
+    }
+
+    public String getNomeservico() {
+        return nomeservico;
+    }
+
+    public void setNomeservico(String nomeservico) {
+        this.nomeservico = nomeservico;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
     
     

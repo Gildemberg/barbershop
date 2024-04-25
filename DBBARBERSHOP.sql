@@ -64,6 +64,13 @@ CREATE TABLE AGENDAMENTO(
     FK_CODSERVICO INT NOT NULL 
 );
 
+/*Status :
+	0 - agendado
+    1 - alterado
+    2 - cancelado
+    3 - concluido
+    */
+
 CREATE TABLE EXPEDIENTE(
 	CODEXPEDIENTE INT PRIMARY KEY AUTO_INCREMENT,
     DATA DATE NOT NULL,

@@ -59,7 +59,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
     
     public void confirmarAgendamento(int CODAGENDAMENTO){
         if(JOptionPane.showConfirmDialog(this, "Confirma a conclusão do serviço?", "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-            agendamentoDao.confirmarAgendamentoCliente(CODAGENDAMENTO, 1);
+            agendamentoDao.confirmarAgendamentoCliente(CODAGENDAMENTO, 3, "Serviço Realizado");
             consultarAgenda();
         }
     }
@@ -92,7 +92,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             labelCliente.setText(agendamento.getNomecliente());
             labelHorario.setText(dataFormat.format(agendamento.getData()) +" às "+ horaFormat.format(agendamento.getHora()) + "h");
             labelServico.setText("Serviço: "+agendamento.getNomeservico());
-            if(agendamento.getStatus()==1){
+            if(agendamento.getStatus()==3){
                 labelConfirmar.setVisible(false);
             }
 

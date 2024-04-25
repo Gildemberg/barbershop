@@ -1,5 +1,6 @@
 package view.cliente;
 
+import controller.AgendamentoController;
 import dao.AgendamentoDAO;
 import dao.BarbeariaDAO;
 import dao.ClienteDAO;
@@ -25,6 +26,7 @@ import javax.swing.JPanel;
 public final class TelaPrincipalCliente extends javax.swing.JFrame {
     //VARIAVEIS
     int CODCLIENTE;
+    int STATUS=0;
     ArrayList<Integer> AGEND_CODBARBEARIAS = new ArrayList<>();
     ArrayList<Integer> CODAGENDAMENTOS = new ArrayList<>();
     ArrayList<Integer> CODBARBEARIAS = new ArrayList<>();
@@ -35,7 +37,9 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     
     //INSTANCIAS
     TelaAgendamentoCliente TAC = new TelaAgendamentoCliente();
+    Agendamento agendamento = new Agendamento();
     AgendamentoDAO AgendamentoDao = new AgendamentoDAO();
+    AgendamentoController AgendamentoController = new AgendamentoController();
     ClienteDAO ClienteDao = new ClienteDAO();
     BarbeariaDAO BarberDao = new BarbeariaDAO();
     
@@ -131,21 +135,36 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     }
     
     public void abrirBarbearia(int CODBARBEARIA){
-        TAC.receberCodAgend(CODBARBEARIA, CODCLIENTE); // transferindo o cod da empresa
+        agendamento.setCodbarbearia(CODBARBEARIA);
+        agendamento.setCodcliente(CODCLIENTE);
+        agendamento.setDescricao("AGENDADO");
+        agendamento.setStatus(0);
+        TAC.receberCodAdicionarAgend(agendamento); // transferindo o cod da empresa
         TAC.setVisible(true);
         this.dispose();
     }
     
     public void alterarAgendamento(int CODAGENDAMENTO, int CODBARBEARIA){
-        TAC.receberCodReAgend(CODAGENDAMENTO, CODBARBEARIA, CODCLIENTE); 
+        String DESCRICAO = JOptionPane.showInputDialog("Informe o motivo:");
+        agendamento.setCodagendamento(CODAGENDAMENTO);
+        agendamento.setCodbarbearia(CODBARBEARIA);
+        agendamento.setCodcliente(CODCLIENTE);
+        agendamento.setDescricao(DESCRICAO);
+        agendamento.setStatus(1);
+        TAC.receberCodAlterarAgend(agendamento); 
         TAC.setVisible(true);
         this.dispose(); 
     }
     
     public void excluirAgendamento(int CODAGENDAMENTO){
-        if(JOptionPane.showConfirmDialog(this, "Você deseja realmente deletar o agendamento?", "Remover", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-            AgendamentoDao.deleteAgendamentoCliente(CODAGENDAMENTO);
-            consultarAgendamento();
+        if(JOptionPane.showConfirmDialog(this, "Você deseja realmente deletar o agendamento?", "Remover", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){            
+            String DESCRICAO = JOptionPane.showInputDialog("Informe o motivo:");
+            agendamento.setCodagendamento(CODAGENDAMENTO);
+            agendamento.setDescricao(DESCRICAO);
+            agendamento.setStatus(2);
+            if(AgendamentoController.cancelarAgendamento(agendamento)){
+                consultarAgendamento();
+            }
         }
     }
     

@@ -23,7 +23,8 @@ import model.Servico;
 
 public class TelaAgendamentoCliente extends javax.swing.JFrame{
 
-    int CODCLIENTE, CODBARBEARIA, CODAGENDAMENTO;
+    int CODCLIENTE, CODBARBEARIA, CODAGENDAMENTO, STATUS;
+    String DESCRICAO;
     AgendamentoController agendamentoController = new AgendamentoController();
     Agendamento agendamento = new Agendamento();
     SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
@@ -39,19 +40,23 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     }
     
     
-    public void receberCodAgend(int CODBARBEARIA, int CODCLIENTE){
-        this.CODBARBEARIA = CODBARBEARIA;
-        this.CODCLIENTE = CODCLIENTE;
-        consultarDadosBarbearia(CODBARBEARIA);
+    public void receberCodAdicionarAgend(Agendamento a){
+        this.CODBARBEARIA = a.getCodbarbearia();
+        this.CODCLIENTE = a.getCodcliente();
+        this.STATUS = a.getStatus();
+        this.DESCRICAO = a.getDescricao();
+        consultarDadosBarbearia(a.getCodbarbearia());
     }
     
-    public void receberCodReAgend(int CODAGENDAMENTO, int CODBARBEARIA, int CODCLIENTE){
+    public void receberCodAlterarAgend(Agendamento a){
         Agendamento.setText("REAGENDAMENTO");
         btnAgendar.setText("REAGENDAR");
-        this.CODAGENDAMENTO = CODAGENDAMENTO;
-        this.CODBARBEARIA = CODBARBEARIA;
-        this.CODCLIENTE = CODCLIENTE;
-        consultarDadosBarbearia(CODBARBEARIA);
+        this.CODAGENDAMENTO = a.getCodagendamento();
+        this.CODBARBEARIA = a.getCodbarbearia();
+        this.CODCLIENTE = a.getCodcliente();
+        this.STATUS = a.getStatus();
+        this.DESCRICAO = a.getDescricao();
+        consultarDadosBarbearia(a.getCodbarbearia());
     }
     
     public void consultarDadosBarbearia (int CODBARBEARIA){
@@ -84,10 +89,11 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         txtServicos.setText(textHtml.toString());
       }
     
-    public void agendar(){
+    
+    /*==========================================================================AGENDAMENTO==========================================================================*/
+    public void adicionarAgendamento(){
         try {
             boolean check;
-            int status=0;
             int servicoSelecionado;
             int servico = selectServicos.getSelectedIndex();
             
@@ -112,7 +118,8 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
             agendamento.setCodagendamento(CODAGENDAMENTO);
             agendamento.setCodbarbearia(CODBARBEARIA);
             agendamento.setCodcliente(CODCLIENTE);
-            agendamento.setStatus(status);
+            agendamento.setStatus(STATUS);
+            agendamento.setDescricao(DESCRICAO);
             
             check = agendamentoController.controller(agendamento);
             
@@ -451,7 +458,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     }//GEN-LAST:event_sairMouseClicked
 
     private void btnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarActionPerformed
-        agendar();
+        adicionarAgendamento();
     }//GEN-LAST:event_btnAgendarActionPerformed
 
     public static void main(String args[]) {
