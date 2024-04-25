@@ -1,24 +1,22 @@
 
+
 package controller;
 
 import dao.AgendamentoDAO;
-import dao.ExpedienteDAO;
 import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import model.Agendamento;
-import java.util.Calendar;
 import java.time.LocalDate;
 import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalTime;
 
 
 
 
 public class AgendamentoController {
     ImageIcon iconConfirmar = AgendamentoController.createIcon("../images/confirmar.png");
-    ExpedienteDAO ExpedienteDao = new ExpedienteDAO();
     AgendamentoDAO AgendamentoDao = new AgendamentoDAO();
     
     public boolean controller(Agendamento agendamento){
@@ -27,47 +25,63 @@ public class AgendamentoController {
     
     public boolean verificarPreenchimentoCampos(Agendamento agendamento){
         if(agendamento.getHora().getTime()!=0 && agendamento.getCodbarbearia()>0 && agendamento.getCodcliente()>0 && agendamento.getServico()!=0){
-            return verificarData(agendamento);
+            return verificarSeDataAntesDeHoje(agendamento);
         }else{
             JOptionPane.showMessageDialog(null, "Os campos não foram preenchidos corretamente", "Mensagem", JOptionPane.ERROR_MESSAGE);        
             return false;
         }
     }
     
-    public boolean verificarData(Agendamento agendamento){
+    public boolean verificarSeDataAntesDeHoje(Agendamento agendamento){
         LocalDate dataDeHoje = LocalDate.now(); //pega a data de hoje
         LocalDate dataDeOntem = dataDeHoje.minusDays(1); //transforma na data de ontem
         Date dataDeOntemSql = Date.valueOf(dataDeOntem); // converte do tipo time.LocalDate para sql.Date
+        Date dataDeHojeSql = Date.valueOf(dataDeHoje); // converte do tipo time.LocalDate para sql.Date
+
         if(agendamento.getData().after(dataDeOntemSql)){
-            return verificarHorario(agendamento);
+            if(dataDeHojeSql.equals(agendamento.getData())){
+                return verificarHoraAntesDeAgora(agendamento);
+            }else{
+                return verificarDataDaBarbearia(agendamento);
+            }
         }else{
             JOptionPane.showMessageDialog(null, "A data informada é anterior ao dia de hoje. Por favor selecione uma data correta.", "Mensagem", JOptionPane.ERROR_MESSAGE);        
             return false;
         }
     }
     
-    public boolean verificarHorario(Agendamento agendamento){
-        Time inicioExpediente = Time.valueOf("07:00:00");
-        Time fimExpediente = Time.valueOf("18:00:00");
-        if(agendamento.getHora().after(inicioExpediente) && agendamento.getHora().before(fimExpediente)){ //verificando se o horario informado está dentro do range do expediente
-            return verificarExpedienteNoBanco(agendamento);
+    public boolean verificarHoraAntesDeAgora(Agendamento agendamento){
+        //LocalDate dataDeHoje = LocalDate.now(); //pega a data de hoje
+        LocalTime agora = LocalTime.now();
+        LocalTime horario = agendamento.getHora().toLocalTime();
+        if(horario.isAfter(agora)){
+            return verificarDataDaBarbearia(agendamento);
         }else{
-            JOptionPane.showMessageDialog(null, "Informe um horário valido. O Expediente é entre 07:00h e 18:00h", "Mensagem", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "A data informada é anterior ao dia de hoje. Por favor selecione uma data correta.", "Mensagem", JOptionPane.ERROR_MESSAGE);        
             return false;
         }
     }
     
-    public boolean verificarExpedienteNoBanco(Agendamento agendamento){
-        if(ExpedienteDao.verificarHorarioBarbearia(agendamento.getData(), agendamento.getCodbarbearia())){
+    public boolean verificarDataDaBarbearia(Agendamento agendamento){
+        if(AgendamentoDao.verificarDataBarbearia(agendamento.getData(), agendamento.getCodbarbearia())){
+            return verificarHorarioDaBarbearia(agendamento);
+        }else{
             JOptionPane.showMessageDialog(null, "A Barbearia não funcionará neste dia. Selecione outro.", "Mensagem", JOptionPane.ERROR_MESSAGE);
             return false;
-        }else{
+        }
+    }
+    
+    public boolean verificarHorarioDaBarbearia(Agendamento agendamento){
+        if(AgendamentoDao.verificarHorarioBarbearia(agendamento.getData(), agendamento.getHora(), agendamento.getCodbarbearia())){ //verificando se o horario informado está dentro do range do expediente
             return compararAgendamentoNoBanco(agendamento);
+        }else{
+            JOptionPane.showMessageDialog(null, "A Barbearia não funcionará neste horário. Selecione outro", "Mensagem", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
     }
     
     public boolean compararAgendamentoNoBanco(Agendamento agendamento){
-        if(AgendamentoDao.checkInformacoes(agendamento.getData(), agendamento.getHora())){
+        if(AgendamentoDao.checkInformacoes(agendamento.getData(), agendamento.getHora(), agendamento.getCodbarbearia())){
             JOptionPane.showMessageDialog(null, "Esse horário não está disponível.", "Mensagem", JOptionPane.ERROR_MESSAGE);
             return false;
         }else{

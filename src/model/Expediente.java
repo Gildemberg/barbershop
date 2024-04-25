@@ -1,11 +1,23 @@
 package model;
-import java.sql.Date;
 import dao.ExpedienteDAO;
+import java.sql.Date;
+import java.sql.Time;
 
 public class Expediente {
     private int codexpediente;
     private int codbarbearia;
-    private Date data;
+    private Date dataInicial;
+    private Date dataFinal;
+    private Time horaInicial;
+    private Time horaFinal;
+
+    public int getCodexpediente() {
+        return codexpediente;
+    }
+
+    public void setCodexpediente(int codexpediente) {
+        this.codexpediente = codexpediente;
+    }
 
     public int getCodbarbearia() {
         return codbarbearia;
@@ -15,28 +27,53 @@ public class Expediente {
         this.codbarbearia = codbarbearia;
     }
 
-    public Date getData() {
-        return data;
+    public Date getDataInicial() {
+        return dataInicial;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setDataInicial(Date dataInicial) {
+        this.dataInicial = dataInicial;
     }
 
-    public int getId() {
-        return codexpediente;
+    public Date getDataFinal() {
+        return dataFinal;
     }
 
-    public void setId(int id) {
-        this.codexpediente = id;
+    public void setDataFinal(Date dataFinal) {
+        this.dataFinal = dataFinal;
     }
+
+    public Time getHoraInicial() {
+        return horaInicial;
+    }
+
+    public void setHoraInicial(Time horaInicial) {
+        this.horaInicial = horaInicial;
+    }
+
+    public Time getHoraFinal() {
+        return horaFinal;
+    }
+
+    public void setHoraFinal(Time horaFinal) {
+        this.horaFinal = horaFinal;
+    }
+
+    
 
     public Expediente(){
     }
     
-    public Expediente(Date data, int codbarbearia){
+    public Expediente(int codbarbearia, Date dataInicial, Date dataFinal, Time horaInicial, Time horaFinal){
         this.codbarbearia = codbarbearia;
-        this.data = data;
+        this.dataInicial = dataInicial;
+        this.dataFinal = dataFinal;
+        this.horaInicial = horaInicial;
+        this.horaFinal = horaFinal;
+    }
+    
+    public void adicionarExpediente(Expediente e){
+        
     }
     
     public void removerExpediente(Expediente e){

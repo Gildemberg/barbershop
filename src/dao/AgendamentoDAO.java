@@ -160,16 +160,68 @@ public class AgendamentoDAO {
         }
     }
     
-    public boolean checkInformacoes(Date data, Time hora){
+    /*-------------------------------------------------------------------------------------------------------*/
+    
+    public boolean verificarDataBarbearia(Date DATA, int CODBARBEARIA){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        boolean check = false;
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM expediente WHERE DATA=? AND FK_CODBARBEARIA=?");
+            stmt.setDate(1, DATA);
+            stmt.setInt(2, CODBARBEARIA);
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                check = true;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex);
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return check;  
+    }
+    
+    public boolean verificarHorarioBarbearia(Date DATA, Time hora, int CODBARBEARIA){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        boolean check = false;
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM expediente WHERE DATA=? AND FK_CODBARBEARIA=? AND ? BETWEEN HORAINICIO AND HORAFIM");
+            stmt.setDate(1, DATA);
+            stmt.setInt(2, CODBARBEARIA);
+            stmt.setTime(3, hora);
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                check = true;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex);
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return check;  
+    }
+    
+    public boolean checkInformacoes(Date data, Time hora, int CODBARBEARIA){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
             boolean check = false;
             
             try {
-                stmt = con.prepareStatement("SELECT * FROM AGENDAMENTO WHERE (DATA=? AND HORARIO=?)");
+                stmt = con.prepareStatement("SELECT * FROM AGENDAMENTO WHERE (DATA=? AND HORARIO=?) AND FK_CODBARBEARIA=?");
                 stmt.setDate(1, data);
                 stmt.setTime(2, hora);
+                stmt.setInt(3, CODBARBEARIA);
                 rs = stmt.executeQuery();
                 
                 if(rs.next()){

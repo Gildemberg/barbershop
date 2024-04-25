@@ -61,14 +61,17 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
         ola = new javax.swing.JLabel();
         nome_emp = new javax.swing.JLabel();
         btnDefinirExpediente = new css.JPanelArredondadoBarbearias(100);
-        btnDefinir = new javax.swing.JLabel();
-        ola2 = new javax.swing.JLabel();
+        iconDefinirExpediente = new javax.swing.JLabel();
+        definirexpediente = new javax.swing.JLabel();
         btnConsultarAgenda = new css.JPanelArredondadoBarbearias(100);
-        btnConsultar = new javax.swing.JLabel();
-        ola1 = new javax.swing.JLabel();
+        iconConsultar = new javax.swing.JLabel();
+        consultaragenda = new javax.swing.JLabel();
         btnDefinirServico = new css.JPanelArredondadoBarbearias(100);
-        servico = new javax.swing.JLabel();
-        ola3 = new javax.swing.JLabel();
+        iconDefinirServico = new javax.swing.JLabel();
+        defirnirservicos = new javax.swing.JLabel();
+        btnAlterarExpediente = new css.JPanelArredondadoBarbearias(100);
+        iconAlterarExpediente = new javax.swing.JLabel();
+        alterarexpediente = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Principal Barbearia");
@@ -158,36 +161,32 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
             }
         });
 
-        btnDefinir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnDefinir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/expediente.png"))); // NOI18N
-        btnDefinir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        iconDefinirExpediente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        iconDefinirExpediente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/definirExpediente.png"))); // NOI18N
+        iconDefinirExpediente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        ola2.setFont(new java.awt.Font("Impact", 0, 45)); // NOI18N
-        ola2.setForeground(new java.awt.Color(255, 255, 255));
-        ola2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ola2.setText("REMOVER EXPEDIENTE");
+        definirexpediente.setFont(new java.awt.Font("Impact", 0, 45)); // NOI18N
+        definirexpediente.setForeground(new java.awt.Color(255, 255, 255));
+        definirexpediente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        definirexpediente.setText("DEFINIR EXPEDIENTE");
 
         javax.swing.GroupLayout btnDefinirExpedienteLayout = new javax.swing.GroupLayout(btnDefinirExpediente);
         btnDefinirExpediente.setLayout(btnDefinirExpedienteLayout);
         btnDefinirExpedienteLayout.setHorizontalGroup(
             btnDefinirExpedienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnDefinir, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
-            .addGroup(btnDefinirExpedienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(btnDefinirExpedienteLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(ola2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addGroup(btnDefinirExpedienteLayout.createSequentialGroup()
+                .addGroup(btnDefinirExpedienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(definirexpediente, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                    .addComponent(iconDefinirExpediente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         btnDefinirExpedienteLayout.setVerticalGroup(
             btnDefinirExpedienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnDefinirExpedienteLayout.createSequentialGroup()
-                .addComponent(btnDefinir)
+                .addComponent(iconDefinirExpediente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(definirexpediente)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(btnDefinirExpedienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnDefinirExpedienteLayout.createSequentialGroup()
-                    .addContainerGap(534, Short.MAX_VALUE)
-                    .addComponent(ola2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
         );
 
         btnConsultarAgenda.setBackground(new java.awt.Color(25, 25, 112));
@@ -201,31 +200,31 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
             }
         });
 
-        btnConsultar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consultar.png"))); // NOI18N
-        btnConsultar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        iconConsultar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        iconConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consultarAgendamento.png"))); // NOI18N
+        iconConsultar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        ola1.setFont(new java.awt.Font("Impact", 0, 45)); // NOI18N
-        ola1.setForeground(new java.awt.Color(255, 255, 255));
-        ola1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ola1.setText("CONSULTAR AGENDA");
+        consultaragenda.setFont(new java.awt.Font("Impact", 0, 45)); // NOI18N
+        consultaragenda.setForeground(new java.awt.Color(255, 255, 255));
+        consultaragenda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        consultaragenda.setText("CONSULTAR AGENDA");
 
         javax.swing.GroupLayout btnConsultarAgendaLayout = new javax.swing.GroupLayout(btnConsultarAgenda);
         btnConsultarAgenda.setLayout(btnConsultarAgendaLayout);
         btnConsultarAgendaLayout.setHorizontalGroup(
             btnConsultarAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
             .addGroup(btnConsultarAgendaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ola1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(btnConsultarAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(consultaragenda, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                    .addComponent(iconConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         btnConsultarAgendaLayout.setVerticalGroup(
             btnConsultarAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnConsultarAgendaLayout.createSequentialGroup()
-                .addComponent(btnConsultar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ola1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(iconConsultar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(consultaragenda)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -240,33 +239,69 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
             }
         });
 
-        servico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        servico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/servico.png"))); // NOI18N
-        servico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        iconDefinirServico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        iconDefinirServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/definirServicos.png"))); // NOI18N
+        iconDefinirServico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        ola3.setFont(new java.awt.Font("Impact", 0, 45)); // NOI18N
-        ola3.setForeground(new java.awt.Color(255, 255, 255));
-        ola3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ola3.setText("DEFINIR SERVIÇOS");
+        defirnirservicos.setFont(new java.awt.Font("Impact", 0, 45)); // NOI18N
+        defirnirservicos.setForeground(new java.awt.Color(255, 255, 255));
+        defirnirservicos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        defirnirservicos.setText("DEFINIR SERVIÇOS");
 
         javax.swing.GroupLayout btnDefinirServicoLayout = new javax.swing.GroupLayout(btnDefinirServico);
         btnDefinirServico.setLayout(btnDefinirServicoLayout);
         btnDefinirServicoLayout.setHorizontalGroup(
             btnDefinirServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(servico, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
-            .addGroup(btnDefinirServicoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ola3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(defirnirservicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(iconDefinirServico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         btnDefinirServicoLayout.setVerticalGroup(
             btnDefinirServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnDefinirServicoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(servico)
+                .addComponent(iconDefinirServico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ola3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addComponent(defirnirservicos)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        btnAlterarExpediente.setBackground(new java.awt.Color(25, 25, 112));
+        btnAlterarExpediente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAlterarExpediente.setMaximumSize(new java.awt.Dimension(550, 600));
+        btnAlterarExpediente.setMinimumSize(new java.awt.Dimension(550, 600));
+        btnAlterarExpediente.setPreferredSize(new java.awt.Dimension(350, 324));
+        btnAlterarExpediente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAlterarExpedienteMouseClicked(evt);
+            }
+        });
+
+        iconAlterarExpediente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        iconAlterarExpediente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterarExpediente.png"))); // NOI18N
+        iconAlterarExpediente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        alterarexpediente.setFont(new java.awt.Font("Impact", 0, 45)); // NOI18N
+        alterarexpediente.setForeground(new java.awt.Color(255, 255, 255));
+        alterarexpediente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        alterarexpediente.setText("ALTERAR EXPEDIENTE");
+
+        javax.swing.GroupLayout btnAlterarExpedienteLayout = new javax.swing.GroupLayout(btnAlterarExpediente);
+        btnAlterarExpediente.setLayout(btnAlterarExpedienteLayout);
+        btnAlterarExpedienteLayout.setHorizontalGroup(
+            btnAlterarExpedienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(alterarexpediente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnAlterarExpedienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(iconAlterarExpediente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        btnAlterarExpedienteLayout.setVerticalGroup(
+            btnAlterarExpedienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnAlterarExpedienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(iconAlterarExpediente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(alterarexpediente)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout CentroLayout = new javax.swing.GroupLayout(Centro);
@@ -274,19 +309,21 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
         CentroLayout.setHorizontalGroup(
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CentroLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(622, Short.MAX_VALUE)
                 .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(nome_emp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ola, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE))
                 .addGap(544, 544, 544))
             .addGroup(CentroLayout.createSequentialGroup()
                 .addGap(67, 67, 67)
-                .addComponent(btnDefinirExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(btnConsultarAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(btnDefinirServico, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addComponent(btnDefinirExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnConsultarAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnDefinirServico, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(btnAlterarExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CentroLayout.setVerticalGroup(
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,11 +333,12 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nome_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnDefinirExpediente, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
-                    .addComponent(btnConsultarAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
-                    .addComponent(btnDefinirServico, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnConsultarAgenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnDefinirExpediente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDefinirServico, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnAlterarExpediente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 347, Short.MAX_VALUE))
+                .addContainerGap(426, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -333,9 +371,9 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
     }//GEN-LAST:event_editarCadastroMouseClicked
 
     private void btnDefinirExpedienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDefinirExpedienteMouseClicked
-        TelaDefinirExpedienteBarbearia TDEB = new TelaDefinirExpedienteBarbearia();
-        TDEB.receberCodBarbearia(CODBARBEARIA);
-        TDEB.setVisible(true);
+        TelaDefinirExpediente TDE = new TelaDefinirExpediente();
+        TDE.receberCodBarbearia(CODBARBEARIA);
+        TDE.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnDefinirExpedienteMouseClicked
 
@@ -352,6 +390,13 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
         TDS.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnDefinirServicoMouseClicked
+
+    private void btnAlterarExpedienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarExpedienteMouseClicked
+        TelaAlterarExpediente TAE = new TelaAlterarExpediente();
+        TAE.receberCodBarbearia(CODBARBEARIA);
+        TAE.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAlterarExpedienteMouseClicked
 
     public static void main(String args[]) {
         try {
@@ -373,21 +418,24 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Centro;
     private javax.swing.JPanel Cima;
-    private javax.swing.JLabel btnConsultar;
+    private javax.swing.JLabel alterarexpediente;
+    private javax.swing.JPanel btnAlterarExpediente;
     private javax.swing.JPanel btnConsultarAgenda;
-    private javax.swing.JLabel btnDefinir;
     private javax.swing.JPanel btnDefinirExpediente;
     private javax.swing.JPanel btnDefinirServico;
+    private javax.swing.JLabel consultaragenda;
     private javax.swing.JLabel dataAtual;
+    private javax.swing.JLabel definirexpediente;
+    private javax.swing.JLabel defirnirservicos;
     private javax.swing.JLabel editarCadastro;
+    private javax.swing.JLabel iconAlterarExpediente;
+    private javax.swing.JLabel iconConsultar;
+    private javax.swing.JLabel iconDefinirExpediente;
+    private javax.swing.JLabel iconDefinirServico;
     private javax.swing.JLabel localizacao;
     private javax.swing.JLabel nome_emp;
     private javax.swing.JLabel ola;
-    private javax.swing.JLabel ola1;
-    private javax.swing.JLabel ola2;
-    private javax.swing.JLabel ola3;
     private javax.swing.JLabel sair;
-    private javax.swing.JLabel servico;
     // End of variables declaration//GEN-END:variables
 
     private void setIcon() {

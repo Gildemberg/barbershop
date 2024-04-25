@@ -454,31 +454,6 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         agendar();
     }//GEN-LAST:event_btnAgendarActionPerformed
 
-    private void setIcon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../images/icone.png")));
-    }
-
-    public class LimitaNroCaracteres extends PlainDocument {
-        private final int iMaxLength;
-        public LimitaNroCaracteres(int maxlen) {
-            super();
-            iMaxLength = maxlen;
-        }
-
-        @Override
-        public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
-            if (iMaxLength <= 0){
-                super.insertString(offset, str.toUpperCase(), attr);
-                return;
-            }
-
-            int ilen = (getLength() + str.length());
-            if (ilen <= iMaxLength){
-                super.insertString(offset, str.toUpperCase(), attr);   // ...aceita str
-            }
-        }
-    }
-
     public static void main(String args[]) {
         
         try {
@@ -524,4 +499,29 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     private javax.swing.JLabel txtRegra5;
     private javax.swing.JLabel txtServicos;
     // End of variables declaration//GEN-END:variables
+
+private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../images/icone.png")));
+    }
+
+    public class LimitaNroCaracteres extends PlainDocument {
+        private final int iMaxLength;
+        public LimitaNroCaracteres(int maxlen) {
+            super();
+            iMaxLength = maxlen;
+        }
+
+        @Override
+        public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+            if (iMaxLength <= 0){
+                super.insertString(offset, str.toUpperCase(), attr);
+                return;
+            }
+
+            int ilen = (getLength() + str.length());
+            if (ilen <= iMaxLength){
+                super.insertString(offset, str.toUpperCase(), attr);   // ...aceita str
+            }
+        }
+    }
 }
