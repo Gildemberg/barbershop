@@ -200,7 +200,7 @@
                                               <Component id="txtSenha" alignment="0" max="32767" attributes="0"/>
                                               <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="ConfirmacaoDados" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="btnConfirmacaoDados" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                   <Component id="confirmarDados" pref="555" max="32767" attributes="0"/>
                                               </Group>
@@ -262,7 +262,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="confirmarDados" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="ConfirmacaoDados" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnConfirmacaoDados" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="cadastrar" min="-2" pref="50" max="-2" attributes="0"/>
@@ -275,7 +275,7 @@
         <Component class="javax.swing.JLabel" name="sair">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/saida.png"/>
+              <Image iconType="3" name="/images/voltar.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -446,7 +446,7 @@
             <Property name="text" type="java.lang.String" value="Confirmo que os dados fornecidos s&#xe3;o confi&#xe1;veis e verdadeiros."/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="ConfirmacaoDados">
+        <Component class="javax.swing.JRadioButton" name="btnConfirmacaoDados">
           <Properties>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>

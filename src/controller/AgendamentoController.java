@@ -1,5 +1,3 @@
-
-
 package controller;
 
 import dao.AgendamentoDAO;
@@ -12,12 +10,11 @@ import java.time.LocalDate;
 import java.sql.Date;
 import java.time.LocalTime;
 
-
-
-
 public class AgendamentoController {
     ImageIcon iconConfirmar = AgendamentoController.createIcon("../images/confirmar.png");
     AgendamentoDAO AgendamentoDao = new AgendamentoDAO();
+    
+    /*=========================================VERIFICAÇÃO DE INFORMAÇÕES DE CADASTRO DE AGENDAMENTO==============================================================*/
     
     public boolean controller(Agendamento agendamento){
         return verificarPreenchimentoCampos(agendamento);
@@ -80,6 +77,8 @@ public class AgendamentoController {
         }
     }
     
+    /*=========================================CADASTRO/ALTERAÇÃO DE AGENDAMENTO==============================================================*/
+    
     public boolean compararAgendamentoNoBanco(Agendamento agendamento){
         if(AgendamentoDao.checkInformacoes(agendamento.getData(), agendamento.getHora(), agendamento.getCodbarbearia())){
             JOptionPane.showMessageDialog(null, "Esse horário não está disponível.", "Mensagem", JOptionPane.ERROR_MESSAGE);
@@ -98,11 +97,13 @@ public class AgendamentoController {
         }
     }
     
-    public static ImageIcon createIcon(String path) { //CRIANDO O ICONE DE CONFIRMAÇÃO PARA O JOPTIONPANE
-        return new ImageIcon(Toolkit.getDefaultToolkit().createImage(AgendamentoController.class.getResource(path)));
-    }
-    
+    /*=========================================CANCELAMENTO DE AGENDAMENTO==============================================================*/
+
     public boolean cancelarAgendamento(Agendamento agendamento){
         return AgendamentoDao.deleteAgendamentoCliente(agendamento);
+    }
+    
+    public static ImageIcon createIcon(String path) { //CRIANDO O ICONE DE CONFIRMAÇÃO PARA O JOPTIONPANE
+        return new ImageIcon(Toolkit.getDefaultToolkit().createImage(AgendamentoController.class.getResource(path)));
     }
 }

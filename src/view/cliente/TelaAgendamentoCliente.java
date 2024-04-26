@@ -14,6 +14,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -37,6 +39,29 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
         setIcon();
+        
+        txtHora.getDocument().addDocumentListener(new DocumentListener() {
+            private void verificaTamanho() {
+                if (txtHora.getText().trim().length() == 2) {
+                    txtMinuto.requestFocus(); 
+                }
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                verificaTamanho();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                verificaTamanho();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                verificaTamanho();
+            }
+        });
     }
     
     
@@ -164,7 +189,6 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de Agendamento");
-        setMaximumSize(new java.awt.Dimension(1920, 1080));
         setMinimumSize(new java.awt.Dimension(1280, 960));
 
         Esquerda.setBackground(new java.awt.Color(0, 51, 102));
@@ -295,7 +319,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
 
         Direita.setBackground(new java.awt.Color(0, 153, 255));
 
-        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/saida.png"))); // NOI18N
+        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar.png"))); // NOI18N
         sair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

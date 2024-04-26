@@ -1,5 +1,6 @@
 package view.barbearia;
 
+import controller.AgendamentoController;
 import controller.BarbeariaController;
 import java.awt.Toolkit;
 import java.sql.Date;
@@ -8,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import model.Servico;
 
 public class TelaDefinirServicos extends javax.swing.JFrame {
@@ -123,7 +125,7 @@ public class TelaDefinirServicos extends javax.swing.JFrame {
         inValor.setBackground(new java.awt.Color(255, 255, 255));
         inValor.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 24)); // NOI18N
 
-        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/saida.png"))); // NOI18N
+        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar.png"))); // NOI18N
         sair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

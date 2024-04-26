@@ -282,7 +282,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             }
         });
 
-        alterarCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/definicoes.png"))); // NOI18N
+        alterarCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterar_cadastro.png"))); // NOI18N
         alterarCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         alterarCadastro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

@@ -216,7 +216,7 @@ public class AgendamentoDAO {
         return agendamentos;
     }
     
-    public List<Agendamento> consultarAgendamentosBarbearia(int codbarbearia){
+    public List<Agendamento> consultarAgendamentosAbertoBarbearia(int codbarbearia, int status){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -227,9 +227,49 @@ public class AgendamentoDAO {
                     + " FROM agendamento a"
                     + " JOIN cliente c ON a.FK_CODCLIENTE = c.CODCLIENTE"
                     + " JOIN servico s ON a.FK_CODSERVICO = s.CODSERVICO"
-                    + " WHERE a.FK_CODBARBEARIA=?"
+                    + " WHERE a.FK_CODBARBEARIA=? AND (a.STATUS=? || a.STATUS=?)"
                     + " ORDER BY a.STATUS ASC, a.DATA, a.HORARIO");
             stmt.setInt(1, codbarbearia);
+            stmt.setInt(2, status);
+            stmt.setInt(3, 0);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Agendamento agendamento = new Agendamento();
+                agendamento.setNomecliente(rs.getString("c.NOME"));
+                agendamento.setData(rs.getDate("a.DATA"));
+                agendamento.setHora(rs.getTime("a.HORARIO"));
+                agendamento.setCodcliente(rs.getInt("a.FK_CODCLIENTE"));
+                agendamento.setCodagendamento(rs.getInt("a.CODAGENDAMENTO"));
+                agendamento.setNomeservico(rs.getString("s.NOME"));
+                agendamento.setStatus(rs.getInt("a.STATUS"));
+                agendamentos.add(agendamento);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+
+        return agendamentos;
+    }
+    
+    public List<Agendamento> consultarAgendamentosBarbearia(int codbarbearia, int status){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Agendamento> agendamentos = new ArrayList();
+
+        try {
+            stmt = con.prepareStatement("SELECT a.CODAGENDAMENTO, a.FK_CODCLIENTE, a.DATA, a.HORARIO, c.NOME, s.NOME, a.STATUS"
+                    + " FROM agendamento a"
+                    + " JOIN cliente c ON a.FK_CODCLIENTE = c.CODCLIENTE"
+                    + " JOIN servico s ON a.FK_CODSERVICO = s.CODSERVICO"
+                    + " WHERE a.FK_CODBARBEARIA=? AND a.STATUS=?"
+                    + " ORDER BY a.STATUS ASC, a.DATA, a.HORARIO");
+            stmt.setInt(1, codbarbearia);
+            stmt.setInt(2, status);
             rs = stmt.executeQuery();
 
             while (rs.next()) {

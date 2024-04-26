@@ -38,7 +38,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     
     public void recadastrarCliente(){
         boolean check;
-        boolean confirmacaoDados = ConfirmacaoDados.isSelected();
+        boolean confirmacaoDados = btnConfirmacaoDados.isSelected();
         
         modelCliente.setId(cliente.get(0).getId());
         modelCliente.setCpf(txtCPF.getText());
@@ -53,7 +53,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     
     public void cadastrarCliente(){
         boolean check;
-        boolean confirmacaoDados = ConfirmacaoDados.isSelected();
+        boolean confirmacaoDados = btnConfirmacaoDados.isSelected();
         
         modelCliente.setNome(txtNome.getText());
         modelCliente.setCpf(txtCPF.getText());
@@ -75,8 +75,10 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         txtLogin.setText("");
         txtSenha.setText("");
         txtRSenha.setText("");
+        txtRSenha.setText("");
         txtTel.setText("");
         txtEmail.setText("");
+        btnConfirmacaoDados.setSelected(false);
     }
     
     @SuppressWarnings("unchecked")
@@ -106,7 +108,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         email = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         confirmarDados = new javax.swing.JLabel();
-        ConfirmacaoDados = new javax.swing.JRadioButton();
+        btnConfirmacaoDados = new javax.swing.JRadioButton();
         cadastrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -171,7 +173,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         Direita.setPreferredSize(new java.awt.Dimension(1200, 1080));
         Direita.setRequestFocusEnabled(false);
 
-        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/saida.png"))); // NOI18N
+        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar.png"))); // NOI18N
         sair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -242,7 +244,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         confirmarDados.setForeground(new java.awt.Color(255, 255, 255));
         confirmarDados.setText("Confirmo que os dados fornecidos são confiáveis e verdadeiros.");
 
-        ConfirmacaoDados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmacaoDados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         cadastrar.setBackground(new java.awt.Color(0, 51, 102));
         cadastrar.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
@@ -284,7 +286,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
                                             .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, DireitaLayout.createSequentialGroup()
-                                                .addComponent(ConfirmacaoDados)
+                                                .addComponent(btnConfirmacaoDados)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(confirmarDados, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE))
                                             .addComponent(senha, javax.swing.GroupLayout.Alignment.LEADING)))
@@ -336,7 +338,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(confirmarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ConfirmacaoDados))
+                    .addComponent(btnConfirmacaoDados))
                 .addGap(18, 18, 18)
                 .addComponent(cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(88, Short.MAX_VALUE))
@@ -402,12 +404,12 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton ConfirmacaoDados;
     private javax.swing.JPanel Direita;
     private javax.swing.JPanel Esquerda;
     private javax.swing.JLabel Logo;
     private javax.swing.JLabel Nome;
     private javax.swing.JLabel Nome1;
+    private javax.swing.JRadioButton btnConfirmacaoDados;
     private javax.swing.JButton cadastrar;
     private javax.swing.JLabel celular;
     private javax.swing.JLabel confirmarDados;

@@ -1,4 +1,3 @@
-
 package controller;
 
 import dao.ExpedienteDAO;
@@ -12,11 +11,11 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-
-
 public class ExpedienteController {
     ExpedienteDAO expedienteDao = new ExpedienteDAO();
     ImageIcon iconConfirmar = AgendamentoController.createIcon("../images/confirmar.png");
+    
+    /*=========================================CADASTRO DE EXPEDIENTE==============================================================*/
     
     public boolean controller(Expediente e){
         return verificandoFormatoData(e);
@@ -76,7 +75,7 @@ public class ExpedienteController {
         }
     }
     
-    /*-----------------------------------------------------------------------------------------------*/
+    /*=========================================ALTERAÇÃO DE CADASTRO DE EXPEDIENTE==============================================================*/
     
     public boolean controllerUpdate(Expediente e, boolean semExpediente){
         if(semExpediente){
@@ -126,23 +125,6 @@ public class ExpedienteController {
             }
         }
     }
-    
-    
-    
-    
-    /*
-    public void verificarHorarioNoBanco(Time horaIni, Time horaFim){
-        boolean verificacao;
-        verificacao = expedienteDao.definirHorarioExpediente(horaIni, horaFim);
-        if(verificacao){
-            JOptionPane.showMessageDialog(null, "Você já removeu esse dia de expediente.", "Mensagem", JOptionPane.ERROR_MESSAGE);
-        }else{
-            Expediente e = new Expediente(data, CODBARBEARIA);   
-            e.removerExpediente(e);
-            JOptionPane.showMessageDialog(null, "Expediente removido!", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
-        }
-    }
-*/
     
     public static ImageIcon createIcon(String path) { //CRIANDO O ICONE DE CONFIRMAÇÃO PARA O JOPTIONPANE
         return new ImageIcon(Toolkit.getDefaultToolkit().createImage(AgendamentoController.class.getResource(path)));

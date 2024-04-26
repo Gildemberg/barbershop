@@ -1,11 +1,16 @@
 package controller;
 
 import dao.BarbeariaDAO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import model.Barbearia;
 import model.Servico;
 
 public class BarbeariaController {
+    ImageIcon iconConfirmar = AgendamentoController.createIcon("../images/confirmar.png");
+    
+    /*=========================================CADASTRO DE BARBEARIA==============================================================*/
     public boolean verificarBarbearia(Barbearia b){
         boolean check;
         //VERIFICAR PREENCHIMENTO DOS CAMPOS
@@ -52,23 +57,13 @@ public class BarbeariaController {
         }else{
             //Barbearia b = new Barbearia(b);
             b.cadastrarBarbearia(b);
-            JOptionPane.showMessageDialog(null, "Barbearia cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Barbearia cadastrado com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
             valor = true;
         }
         return valor;
     }
     
-    public boolean validarLogin(String login, String senha){
-        BarbeariaDAO dao = new BarbeariaDAO();
-        boolean check;
-        check = dao.checkLogin(login, senha);
-        if(check){
-            return check;
-        }else{
-            JOptionPane.showMessageDialog(null, "Dados inseridos incorretamente!", "Mensagem", JOptionPane.ERROR_MESSAGE);
-            return check;
-        }
-    }
+    /*=========================================ATUALIZAR CADASTRO DE BARBEARIA==============================================================*/
     
     public boolean verificarUpdateBarbearia(Barbearia b){
         boolean check;
@@ -95,7 +90,7 @@ public class BarbeariaController {
             
             if(b.getSenha().equals(b.getRsenha())){
                 b.atualizarCadastro(b);
-                JOptionPane.showMessageDialog(null, "Cadastro atualizado com sucesso!");
+                JOptionPane.showMessageDialog(null, "Cadastro atualizado com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
                 check=true;
             }else{
                 JOptionPane.showMessageDialog(null, "As senhas estão diferentes.", "Mensagem", JOptionPane.ERROR_MESSAGE);
@@ -107,6 +102,22 @@ public class BarbeariaController {
         }
         return check;
     }
+    
+    /*==========================================VERIFICAÇÃO DE LOGIN=========================================================*/
+    
+    public boolean validarLogin(String login, String senha){
+        BarbeariaDAO dao = new BarbeariaDAO();
+        boolean check;
+        check = dao.checkLogin(login, senha);
+        if(check){
+            return check;
+        }else{
+            JOptionPane.showMessageDialog(null, "Dados inseridos incorretamente!", "Mensagem", JOptionPane.ERROR_MESSAGE);
+            return check;
+        }
+    }
+    
+    /*==========================================CADASTRO DE SERVIÇO=========================================================*/
     
     public boolean verificarServico(Servico s){
         boolean check;
@@ -133,7 +144,7 @@ public class BarbeariaController {
             valor = false;
         }else{
             s.cadastrarServico(s);
-            JOptionPane.showMessageDialog(null, "Serviço cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Serviço cadastrado com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
             valor = true;
         }
         return valor;

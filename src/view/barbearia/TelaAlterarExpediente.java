@@ -10,6 +10,8 @@ import java.sql.Time;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import model.Expediente;
 
 public class TelaAlterarExpediente extends javax.swing.JFrame {
@@ -23,6 +25,50 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
         setIcon();
+        txtHoraIni.getDocument().addDocumentListener(new DocumentListener() {
+            private void verificaTamanho() {
+                if (txtHoraIni.getText().trim().length() == 2) {
+                    txtMinutoIni.requestFocus(); 
+                }
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                verificaTamanho();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                verificaTamanho();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                verificaTamanho();
+            }
+        });
+        txtHoraFim.getDocument().addDocumentListener(new DocumentListener() {
+            private void verificaTamanho() {
+                if (txtHoraFim.getText().trim().length() == 2) {
+                    txtMinutoFim.requestFocus(); 
+                }
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                verificaTamanho();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                verificaTamanho();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                verificaTamanho();
+            }
+        });
     }
     
     public void receberCodBarbearia(int CODBARBEARIA){
@@ -133,7 +179,7 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
 
         Direita.setBackground(new java.awt.Color(0, 153, 255));
 
-        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/saida.png"))); // NOI18N
+        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar.png"))); // NOI18N
         sair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
