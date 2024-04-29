@@ -9,25 +9,27 @@ public class TelaInicial extends javax.swing.JFrame {
     public TelaInicial() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
-        setIcon();
+        //setIcon();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Esquerda = new css.FundoGradiente(0, 51, 102, 0, 0, 0, 0, 0, 1500, 100);
+        Esquerda = new javax.swing.JPanel();
         Logo = new javax.swing.JLabel();
-        Nome1 = new javax.swing.JLabel();
-        Nome = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        Direita = new css.FundoGradiente(0, 191, 255, 65, 105, 255, 0, 0, 1500, 100);
-        btnBarbearia = new css.JPanelArredondadoBarbearias(100);
-        ola2 = new javax.swing.JLabel();
-        btnBarbeiro = new javax.swing.JLabel();
-        btnCliente = new css.JPanelArredondadoBarbearias(100);
+        barber = new javax.swing.JLabel();
+        shop = new javax.swing.JLabel();
+        desc = new javax.swing.JLabel();
+        Direita = new javax.swing.JPanel();
+        btnBarbearia = new css.JPanelArredondadoBarbearias(20);
+        logoBarbearia = new javax.swing.JLabel();
+        tituloBarbearia = new javax.swing.JLabel();
+        btnCliente = new css.JPanelArredondadoBarbearias(20);
         logoCliente = new javax.swing.JLabel();
-        ola3 = new javax.swing.JLabel();
+        tituloCliente = new javax.swing.JLabel();
+        Bemvindo = new javax.swing.JLabel();
+        selecione = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Inicial");
@@ -35,101 +37,100 @@ public class TelaInicial extends javax.swing.JFrame {
 
         Esquerda.setBackground(new java.awt.Color(0, 51, 102));
         Esquerda.setMaximumSize(new java.awt.Dimension(1920, 1080));
-        Esquerda.setPreferredSize(new java.awt.Dimension(720, 1080));
+        Esquerda.setPreferredSize(new java.awt.Dimension(820, 1080));
 
+        Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon1-removebg-preview.png"))); // NOI18N
 
-        Nome1.setBackground(new java.awt.Color(255, 255, 255));
-        Nome1.setFont(new java.awt.Font("Caladea", 0, 80)); // NOI18N
-        Nome1.setForeground(new java.awt.Color(255, 255, 255));
-        Nome1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Nome1.setText("BARBER");
+        barber.setBackground(new java.awt.Color(255, 255, 255));
+        barber.setFont(new java.awt.Font("Caladea", 0, 80)); // NOI18N
+        barber.setForeground(new java.awt.Color(255, 255, 255));
+        barber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        barber.setText("BARBER");
 
-        Nome.setBackground(new java.awt.Color(255, 255, 255));
-        Nome.setFont(new java.awt.Font("Caladea", 0, 80)); // NOI18N
-        Nome.setForeground(new java.awt.Color(255, 255, 255));
-        Nome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Nome.setText("SHOP");
+        shop.setBackground(new java.awt.Color(255, 255, 255));
+        shop.setFont(new java.awt.Font("Caladea", 0, 80)); // NOI18N
+        shop.setForeground(new java.awt.Color(255, 255, 255));
+        shop.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        shop.setText("SHOP");
 
-        jLabel2.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Transformando estilo em praticidade.");
+        desc.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        desc.setForeground(new java.awt.Color(255, 255, 255));
+        desc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        desc.setText("Transformando estilo em praticidade.");
 
         javax.swing.GroupLayout EsquerdaLayout = new javax.swing.GroupLayout(Esquerda);
         Esquerda.setLayout(EsquerdaLayout);
         EsquerdaLayout.setHorizontalGroup(
             EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addContainerGap(110, Short.MAX_VALUE)
-                .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(Nome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Nome1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(110, Short.MAX_VALUE))
-            .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(desc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(shop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(barber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Logo, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE))
+                .addContainerGap())
         );
         EsquerdaLayout.setVerticalGroup(
             EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addContainerGap(161, Short.MAX_VALUE)
-                .addComponent(Logo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Nome1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addGap(56, 56, 56)
+                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(barber, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(shop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(desc, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Direita.setBackground(new java.awt.Color(0, 153, 255));
+        Direita.setBackground(new java.awt.Color(255, 255, 255));
         Direita.setMaximumSize(new java.awt.Dimension(1920, 1080));
-        Direita.setPreferredSize(new java.awt.Dimension(1200, 1080));
+        Direita.setPreferredSize(new java.awt.Dimension(1100, 1080));
         Direita.setRequestFocusEnabled(false);
 
         btnBarbearia.setBackground(new java.awt.Color(0, 51, 102));
         btnBarbearia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBarbearia.setMaximumSize(new java.awt.Dimension(550, 600));
         btnBarbearia.setMinimumSize(new java.awt.Dimension(550, 600));
+        btnBarbearia.setPreferredSize(new java.awt.Dimension(351, 408));
         btnBarbearia.setRequestFocusEnabled(false);
         btnBarbearia.setVerifyInputWhenFocusTarget(false);
 
-        ola2.setFont(new java.awt.Font("Impact", 0, 45)); // NOI18N
-        ola2.setForeground(new java.awt.Color(255, 255, 255));
-        ola2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ola2.setText("BARBEARIA");
-
-        btnBarbeiro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnBarbeiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/barbearia.png"))); // NOI18N
-        btnBarbeiro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBarbeiro.addMouseListener(new java.awt.event.MouseAdapter() {
+        logoBarbearia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logoBarbearia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/barbearia.png"))); // NOI18N
+        logoBarbearia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        logoBarbearia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBarbeiroMouseClicked(evt);
+                logoBarbeariaMouseClicked(evt);
             }
         });
+
+        tituloBarbearia.setFont(new java.awt.Font("Caladea", 0, 45)); // NOI18N
+        tituloBarbearia.setForeground(new java.awt.Color(255, 255, 255));
+        tituloBarbearia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloBarbearia.setText("Barbearia");
 
         javax.swing.GroupLayout btnBarbeariaLayout = new javax.swing.GroupLayout(btnBarbearia);
         btnBarbearia.setLayout(btnBarbeariaLayout);
         btnBarbeariaLayout.setHorizontalGroup(
             btnBarbeariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnBarbeariaLayout.createSequentialGroup()
-                .addGap(148, 148, 148)
-                .addComponent(ola2)
+                .addGap(45, 45, 45)
+                .addGroup(btnBarbeariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(logoBarbearia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tituloBarbearia, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(btnBarbeariaLayout.createSequentialGroup()
-                .addComponent(btnBarbeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         btnBarbeariaLayout.setVerticalGroup(
             btnBarbeariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnBarbeariaLayout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addComponent(btnBarbeiro)
-                .addGap(41, 41, 41)
-                .addComponent(ola2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(btnBarbeariaLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(logoBarbearia)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tituloBarbearia, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -149,10 +150,10 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        ola3.setFont(new java.awt.Font("Impact", 0, 45)); // NOI18N
-        ola3.setForeground(new java.awt.Color(255, 255, 255));
-        ola3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ola3.setText("CLIENTE");
+        tituloCliente.setFont(new java.awt.Font("Caladea", 0, 45)); // NOI18N
+        tituloCliente.setForeground(new java.awt.Color(255, 255, 255));
+        tituloCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloCliente.setText("Cliente");
 
         javax.swing.GroupLayout btnClienteLayout = new javax.swing.GroupLayout(btnCliente);
         btnCliente.setLayout(btnClienteLayout);
@@ -160,39 +161,60 @@ public class TelaInicial extends javax.swing.JFrame {
             btnClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnClienteLayout.createSequentialGroup()
                 .addGroup(btnClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ola3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE))
+                    .addComponent(logoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                    .addComponent(tituloCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         btnClienteLayout.setVerticalGroup(
             btnClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnClienteLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
+                .addGap(39, 39, 39)
                 .addComponent(logoCliente)
-                .addGap(34, 34, 34)
-                .addComponent(ola3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tituloCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        Bemvindo.setBackground(new java.awt.Color(0, 51, 102));
+        Bemvindo.setFont(new java.awt.Font("Caladea", 0, 120)); // NOI18N
+        Bemvindo.setForeground(new java.awt.Color(0, 51, 102));
+        Bemvindo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Bemvindo.setText("Bem Vindo!");
+
+        selecione.setBackground(new java.awt.Color(0, 51, 102));
+        selecione.setFont(new java.awt.Font("Caladea", 1, 43)); // NOI18N
+        selecione.setForeground(new java.awt.Color(0, 51, 102));
+        selecione.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        selecione.setText("Selecione o tipo de usuário abaixo:");
 
         javax.swing.GroupLayout DireitaLayout = new javax.swing.GroupLayout(Direita);
         Direita.setLayout(DireitaLayout);
         DireitaLayout.setHorizontalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DireitaLayout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(btnBarbearia, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(178, 178, 178)
+                .addComponent(btnBarbearia, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(178, 178, 178))
+            .addComponent(Bemvindo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(selecione, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         DireitaLayout.setVerticalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(DireitaLayout.createSequentialGroup()
+                .addGap(169, 169, 169)
+                .addComponent(Bemvindo, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(selecione, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBarbearia, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(220, 220, 220))
+                    .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBarbearia, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(173, 173, 173))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -201,7 +223,7 @@ public class TelaInicial extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Esquerda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
                 .addComponent(Direita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -219,11 +241,11 @@ public class TelaInicial extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_logoClienteMouseClicked
 
-    private void btnBarbeiroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBarbeiroMouseClicked
+    private void logoBarbeariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoBarbeariaMouseClicked
         TelaLoginBarbearia TLA = new TelaLoginBarbearia();
         TLA.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnBarbeiroMouseClicked
+    }//GEN-LAST:event_logoBarbeariaMouseClicked
 
 
     public static void main(String args[]) {
@@ -245,21 +267,21 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Bemvindo;
     private javax.swing.JPanel Direita;
     private javax.swing.JPanel Esquerda;
     private javax.swing.JLabel Logo;
-    private javax.swing.JLabel Nome;
-    private javax.swing.JLabel Nome1;
+    private javax.swing.JLabel barber;
     private javax.swing.JPanel btnBarbearia;
-    private javax.swing.JLabel btnBarbeiro;
     private javax.swing.JPanel btnCliente;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel desc;
+    private javax.swing.JLabel logoBarbearia;
     private javax.swing.JLabel logoCliente;
-    private javax.swing.JLabel ola2;
-    private javax.swing.JLabel ola3;
+    private javax.swing.JLabel selecione;
+    private javax.swing.JLabel shop;
+    private javax.swing.JLabel tituloBarbearia;
+    private javax.swing.JLabel tituloCliente;
     // End of variables declaration//GEN-END:variables
 
-    private void setIcon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/icone.png")));
-    }
+    
 }

@@ -230,10 +230,10 @@
               <Font name="Segoe UI Semibold" size="24" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="33" red="0" type="rgb"/>
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="HOR&#xc1;RIO DE IN&#xcd;CIO DO EXPEDIENTE"/>
+            <Property name="text" type="java.lang.String" value="IN&#xcd;CIO DO EXPEDIENTE"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtHoraIni">
@@ -293,10 +293,10 @@
               <Font name="Segoe UI Semibold" size="24" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="33" red="0" type="rgb"/>
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="HOR&#xc1;RIO DE FIM DO EXPEDIENTE"/>
+            <Property name="text" type="java.lang.String" value="FIM DO EXPEDIENTE"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtHoraFim">
@@ -376,7 +376,7 @@
               <Font name="DejaVu Sans" size="24" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="33" red="0" type="rgb"/>
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="SEM EXPEDIENTE NESSE DIA"/>
             <Property name="horizontalAlignment" type="int" value="0"/>

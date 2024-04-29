@@ -19,7 +19,12 @@ public class ClienteController {
                 c.getEmail()!=null && c.getEmail().length()>0 &&
                 c.getTelefone()!=null && c.getTelefone().length()>0 && 
                 c.getLogin()!=null && c.getLogin().length()>0 && 
-                c.getSenha()!=null && c.getSenha().length()>0 
+                c.getSenha()!=null && c.getSenha().length()>0 &&
+                c.getRua()!=null && c.getRua().length()>0 &&
+                c.getNumero()!=null && c.getNumero().length()>0 && 
+                c.getBairro()!=null && c.getBairro().length()>0 && 
+                c.getCidade()!=null && c.getCidade().length()>0 && 
+                c.getUf()!=null && c.getUf().length()>0 
                 ){
             if(confirmacaoDados == true){//VERIFICAR SE O CHECKBOX DE CONFIRMAR DADOS CONFIAVEIS ESTÁ SELECIONADO
                 if(c.getRsenha().equals(c.getSenha())){//VERIFICAR SE AS SENHAS ESTÃO COMPATIVEIS
@@ -66,7 +71,12 @@ public class ClienteController {
                 c.getTelefone()!=null && c.getTelefone().length()>0 && 
                 c.getLogin()!=null && c.getLogin().length()>0 && 
                 c.getSenha()!=null && c.getSenha().length()>0 && 
-                c.getRsenha()!=null && c.getRsenha().length()>0 
+                c.getRsenha()!=null && c.getRsenha().length()>0 &&
+                c.getRua()!=null && c.getRua().length()>0 &&
+                c.getNumero()!=null && c.getNumero().length()>0 && 
+                c.getBairro()!=null && c.getBairro().length()>0 && 
+                c.getCidade()!=null && c.getCidade().length()>0 && 
+                c.getUf()!=null && c.getUf().length()>0 
                 ){
             
             if(confirmacaoDados == true){//VERIFICAR SE O CHECKBOX DE CONFIRMAR DADOS CONFIAVEIS ESTÁ SELECIONADO

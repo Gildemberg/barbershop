@@ -1,9 +1,13 @@
 package view.barbearia;
 
 import controller.BarbeariaController;
+import css.BordaArredondada;
 import dao.BarbeariaDAO;
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 import view.TelaInicial;
 
 public class TelaLoginBarbearia extends javax.swing.JFrame {
@@ -36,13 +40,12 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Esquerda = new css.FundoGradiente(0, 51, 102, 0, 0, 0, 0, 0, 1500, 100);
+        Esquerda = new javax.swing.JPanel();
         Logo = new javax.swing.JLabel();
         Nome = new javax.swing.JLabel();
         Nome1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        Direita = new css.FundoGradiente(0, 191, 255, 65, 105, 255, 0, 0, 1500, 100);
-        Logo1 = new javax.swing.JLabel();
+        Direita = new javax.swing.JPanel();
         Login = new javax.swing.JLabel();
         txtLogin = new javax.swing.JTextField();
         Senha = new javax.swing.JLabel();
@@ -50,8 +53,8 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
         btnEntrar = new javax.swing.JButton();
         NaoPossuiConta = new javax.swing.JLabel();
         btnCadastro = new javax.swing.JButton();
-        sair = new javax.swing.JLabel();
         Login1 = new javax.swing.JLabel();
+        btnVoltar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Login da Barbearia");
@@ -109,38 +112,45 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
                 .addContainerGap(239, Short.MAX_VALUE))
         );
 
-        Direita.setBackground(new java.awt.Color(0, 153, 255));
+        Direita.setBackground(new java.awt.Color(255, 255, 255));
         Direita.setMaximumSize(new java.awt.Dimension(1920, 1080));
         Direita.setName(""); // NOI18N
         Direita.setPreferredSize(new java.awt.Dimension(1200, 1080));
         Direita.setRequestFocusEnabled(false);
 
-        Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon2__1_-removebg-preview.png"))); // NOI18N
-
-        Login.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
-        Login.setForeground(new java.awt.Color(255, 255, 255));
-        Login.setText("Login:");
+        Login.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        Login.setForeground(new java.awt.Color(0, 51, 102));
+        Login.setText("Login");
 
         txtLogin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtLoginKeyPressed(evt);
             }
         });
+        txtLogin.setBackground(new Color(222, 222, 222, 222));
 
-        Senha.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 36)); // NOI18N
-        Senha.setForeground(new java.awt.Color(255, 255, 255));
-        Senha.setText("Senha:");
+        BordaArredondada borda = new BordaArredondada(new Color(0, 51, 102), 3, 10);
+        Border bordaInterna = BorderFactory.createEmptyBorder(0, 10, 0, 0);
+        Border bordaComposta = BorderFactory.createCompoundBorder(borda, bordaInterna);
+
+        txtLogin.setBorder(bordaComposta);
+
+        Senha.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        Senha.setForeground(new java.awt.Color(0, 51, 102));
+        Senha.setText("Senha");
 
         txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSenhaKeyPressed(evt);
             }
         });
+        txtSenha.setBackground(new Color(222, 222, 222, 222));
+        txtSenha.setBorder(bordaComposta);
 
         btnEntrar.setBackground(new java.awt.Color(0, 51, 102));
-        btnEntrar.setFont(new java.awt.Font("Malgun Gothic Semilight", 0, 18)); // NOI18N
+        btnEntrar.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
         btnEntrar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEntrar.setText("ACESSAR");
+        btnEntrar.setText("Entrar");
         btnEntrar.setBorderPainted(false);
         btnEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -149,13 +159,13 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
             }
         });
 
-        NaoPossuiConta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        NaoPossuiConta.setForeground(new java.awt.Color(255, 255, 255));
+        NaoPossuiConta.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        NaoPossuiConta.setForeground(new java.awt.Color(0, 51, 102));
         NaoPossuiConta.setText("Ainda não possui uma conta? ");
 
         btnCadastro.setBackground(new java.awt.Color(0, 153, 255));
-        btnCadastro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnCadastro.setForeground(new java.awt.Color(204, 204, 204));
+        btnCadastro.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        btnCadastro.setForeground(new java.awt.Color(0, 153, 255));
         btnCadastro.setText("Cadastre-se aqui.");
         btnCadastro.setBorder(null);
         btnCadastro.setBorderPainted(false);
@@ -167,77 +177,75 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
             }
         });
 
-        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar.png"))); // NOI18N
-        sair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sair.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sairMouseClicked(evt);
+        Login1.setFont(new java.awt.Font("Caladea", 0, 100)); // NOI18N
+        Login1.setForeground(new java.awt.Color(0, 51, 102));
+        Login1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Login1.setText("Barbearia");
+
+        btnVoltar1.setBackground(new java.awt.Color(0, 36, 73));
+        btnVoltar1.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
+        btnVoltar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnVoltar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar.png"))); // NOI18N
+        btnVoltar1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnVoltar1.setBorderPainted(false);
+        btnVoltar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVoltar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltar1ActionPerformed(evt);
             }
         });
-
-        Login1.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 48)); // NOI18N
-        Login1.setForeground(new java.awt.Color(255, 255, 255));
-        Login1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Login1.setText("BARBEARIA");
 
         javax.swing.GroupLayout DireitaLayout = new javax.swing.GroupLayout(Direita);
         Direita.setLayout(DireitaLayout);
         DireitaLayout.setHorizontalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
             .addGroup(DireitaLayout.createSequentialGroup()
-                .addContainerGap(244, Short.MAX_VALUE)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(DireitaLayout.createSequentialGroup()
-                                    .addComponent(Senha)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(DireitaLayout.createSequentialGroup()
-                                    .addComponent(NaoPossuiConta)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(DireitaLayout.createSequentialGroup()
+                    .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(DireitaLayout.createSequentialGroup()
+                            .addComponent(NaoPossuiConta)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 968, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(DireitaLayout.createSequentialGroup()
+                            .addGap(114, 114, 114)
+                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(Login)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtLogin)))
-                        .addGap(243, 243, 243))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                        .addComponent(sair)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Login1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Logo1))
-                        .addGap(323, 323, 323))))
+                                .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 968, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Senha)
+                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 968, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(DireitaLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(Login1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
         DireitaLayout.setVerticalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DireitaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(sair)
-                .addGap(13, 13, 13)
-                .addComponent(Logo1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
+                .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
                 .addComponent(Login1)
-                .addGap(33, 33, 33)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Login)
-                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(79, 79, 79)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Senha)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(73, 73, 73)
-                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
+                .addGap(106, 106, 106)
+                .addComponent(Login)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(Senha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(85, 85, 85)
+                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NaoPossuiConta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -268,11 +276,6 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnCadastroActionPerformed
 
-    private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
-        this.setVisible(false);
-        new TelaInicial().setVisible(true);
-    }//GEN-LAST:event_sairMouseClicked
-
     private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
             login();
@@ -284,6 +287,11 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
             login();
         }
     }//GEN-LAST:event_txtLoginKeyPressed
+
+    private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
+        this.setVisible(false);
+        new TelaInicial().setVisible(true);
+    }//GEN-LAST:event_btnVoltar1ActionPerformed
 
     public static void main(String args[]) {
 
@@ -309,15 +317,15 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
     private javax.swing.JLabel Login;
     private javax.swing.JLabel Login1;
     private javax.swing.JLabel Logo;
-    private javax.swing.JLabel Logo1;
     private javax.swing.JLabel NaoPossuiConta;
     private javax.swing.JLabel Nome;
     private javax.swing.JLabel Nome1;
     private javax.swing.JLabel Senha;
     private javax.swing.JButton btnCadastro;
     private javax.swing.JButton btnEntrar;
+    private javax.swing.JButton btnVoltar;
+    private javax.swing.JButton btnVoltar1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel sair;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables

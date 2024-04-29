@@ -61,9 +61,6 @@
           <Dimension value="[1920, 130]"/>
         </Property>
       </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new css.FundoGradiente(70, 130, 180, 25, 25, 112, 0, 0, 1500, 100)"/>
-      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">

@@ -179,7 +179,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Cima = new css.FundoGradiente(70, 130, 180, 25, 25, 112, 0, 0, 1500, 100);
+        Cima = new javax.swing.JPanel();
         sair = new javax.swing.JLabel();
         alterarCadastro = new javax.swing.JLabel();
         img = new javax.swing.JLabel();

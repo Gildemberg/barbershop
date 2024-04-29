@@ -55,17 +55,6 @@ public class BarbeariaDAO {
                 stmt.setInt(6, codbarbearia); // Usar o ID da barbearia
 
                 stmt.executeUpdate();
-
-                // Inserir na tabela regra
-                sql = "INSERT INTO regra (REGRA1, REGRA2, REGRA3, REGRA4, FK_CODBARBEARIA) VALUES(?,?,?,?,?)";
-                stmt = con.prepareStatement(sql);
-                stmt.setString(1, b.getRegra1());
-                stmt.setString(2, b.getRegra2());
-                stmt.setString(3, b.getRegra3());
-                stmt.setString(4, b.getRegra4());
-                stmt.setInt(5, codbarbearia); // Usar o ID da barbearia
-
-                stmt.executeUpdate();
             } else {
                 throw new SQLException("Nenhum ID gerado para a barbearia.");
             }
@@ -113,16 +102,6 @@ public class BarbeariaDAO {
             stmt.setString(5, b.getUf());
             stmt.setInt(6, b.getId()); // Usar o ID da barbearia
             stmt.executeUpdate();
-            
-            // Inserir na tabela regra
-            String sql2 = "UPDATE regra SET REGRA1=?, REGRA2=?, REGRA3=?, REGRA4=? WHERE FK_CODBARBEARIA=?";
-            stmt = con.prepareStatement(sql2);
-            stmt.setString(1, b.getRegra1());
-            stmt.setString(2, b.getRegra2());
-            stmt.setString(3, b.getRegra3());
-            stmt.setString(4, b.getRegra4());
-            stmt.setInt(5, b.getId()); // Usar o ID da barbearia
-            stmt.executeUpdate();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: " + ex);
@@ -147,11 +126,9 @@ public class BarbeariaDAO {
             
             try {
                 stmt = con.prepareStatement("SELECT b.CODBARBEARIA, b.NOMESOCIAL, b.CNPJ, b.EMAIL, b.TELEFONE1, b.TELEFONE2, b.LOGIN, b.SENHA, b.DESCRICAO, "
-                                                + "e.RUA, e.NUMERO, e.BAIRRO, e.CIDADE, e.ESTADO, "
-                                                + "r.REGRA1, r.REGRA2, r.REGRA3, r.REGRA4 "
+                                                + "e.RUA, e.NUMERO, e.BAIRRO, e.CIDADE, e.ESTADO "
                                                 + "FROM barbearia b "
-                                                + "INNER JOIN endereco e ON b.CODBARBEARIA = e.FK_CODBARBEARIA "
-                                                + "INNER JOIN regra r ON b.CODBARBEARIA = r.FK_CODBARBEARIA");
+                                                + "INNER JOIN endereco e ON b.CODBARBEARIA = e.FK_CODBARBEARIA");
                 rs = stmt.executeQuery();
                 
                 while(rs.next()){
@@ -170,10 +147,6 @@ public class BarbeariaDAO {
                     barbearia.setBairro(rs.getString(12));
                     barbearia.setCidade(rs.getString(13));
                     barbearia.setUf(rs.getString(14));
-                    barbearia.setRegra1(rs.getString(15));
-                    barbearia.setRegra2(rs.getString(16));
-                    barbearia.setRegra3(rs.getString(17));
-                    barbearia.setRegra4(rs.getString(18));
                     barbearias.add(barbearia);
                 }
             } catch (SQLException ex) {
@@ -222,11 +195,9 @@ public class BarbeariaDAO {
             
             try {
                 stmt = con.prepareStatement("SELECT b.CODBARBEARIA, b.NOMESOCIAL, b.CNPJ, b.EMAIL, b.TELEFONE1, b.TELEFONE2, b.LOGIN, b.SENHA, b.DESCRICAO, "
-                                                + "e.RUA, e.NUMERO, e.BAIRRO, e.CIDADE, e.ESTADO, "
-                                                + "r.REGRA1, r.REGRA2, r.REGRA3, r.REGRA4 "
+                                                + "e.RUA, e.NUMERO, e.BAIRRO, e.CIDADE, e.ESTADO "
                                                 + "FROM barbearia b "
                                                 + "INNER JOIN endereco e ON b.CODBARBEARIA = e.FK_CODBARBEARIA "
-                                                + "INNER JOIN regra r ON b.CODBARBEARIA = r.FK_CODBARBEARIA "
                                                 + "WHERE b.CODBARBEARIA=?");
                 stmt.setInt(1, CODBARBEARIA);
                 rs = stmt.executeQuery();
@@ -247,10 +218,6 @@ public class BarbeariaDAO {
                     barbearia.setBairro(rs.getString(12));
                     barbearia.setCidade(rs.getString(13));
                     barbearia.setUf(rs.getString(14));
-                    barbearia.setRegra1(rs.getString(15));
-                    barbearia.setRegra2(rs.getString(16));
-                    barbearia.setRegra3(rs.getString(17));
-                    barbearia.setRegra4(rs.getString(18));
                     barbearias.add(barbearia);
                 }
             } catch (SQLException ex) {

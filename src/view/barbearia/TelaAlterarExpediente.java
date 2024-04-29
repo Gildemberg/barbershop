@@ -188,9 +188,9 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
         });
 
         horarioInicio.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
-        horarioInicio.setForeground(new java.awt.Color(0, 51, 102));
+        horarioInicio.setForeground(new java.awt.Color(255, 255, 255));
         horarioInicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        horarioInicio.setText("HORÁRIO DE INÍCIO DO EXPEDIENTE");
+        horarioInicio.setText("INÍCIO DO EXPEDIENTE");
 
         txtHoraIni.setBorder(null);
         txtHoraIni.setForeground(new java.awt.Color(0, 51, 102));
@@ -217,9 +217,9 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
         txtMinutoIni.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
 
         horarioFim.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
-        horarioFim.setForeground(new java.awt.Color(0, 51, 102));
+        horarioFim.setForeground(new java.awt.Color(255, 255, 255));
         horarioFim.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        horarioFim.setText("HORÁRIO DE FIM DO EXPEDIENTE");
+        horarioFim.setText("FIM DO EXPEDIENTE");
 
         txtHoraFim.setBorder(null);
         txtHoraFim.setForeground(new java.awt.Color(0, 51, 102));
@@ -253,7 +253,7 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
 
         btnSemExpediente.setBackground(new java.awt.Color(255, 255, 255));
         btnSemExpediente.setFont(new java.awt.Font("DejaVu Sans", 1, 24)); // NOI18N
-        btnSemExpediente.setForeground(new java.awt.Color(0, 51, 102));
+        btnSemExpediente.setForeground(new java.awt.Color(255, 255, 255));
         btnSemExpediente.setText("SEM EXPEDIENTE NESSE DIA");
         btnSemExpediente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnSemExpediente.addActionListener(new java.awt.event.ActionListener() {
