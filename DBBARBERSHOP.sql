@@ -91,3 +91,19 @@ FOREIGN KEY (FK_CODCLIENTE) REFERENCES CLIENTE(CODCLIENTE);
 
 ALTER TABLE AGENDAMENTO ADD CONSTRAINT FK_SERVICO_AGENDAMENTO
 FOREIGN KEY (FK_CODSERVICO) REFERENCES SERVICO(CODSERVICO);
+
+INSERT INTO cliente (NOME, CPF, EMAIL, TELEFONE, LOGIN, SENHA) VALUES("João da Silva Souza","082.115.657-28","joao@gmail.com","(75) 98881-0505","teste","teste");
+INSERT INTO endereco (RUA, NUMERO, BAIRRO, CIDADE, ESTADO, FK_CODCLIENTE) VALUES("Rua da Harmonia","520","Centro","Paulo Afonso","BA",1);
+
+INSERT INTO barbearia (NOMESOCIAL, CNPJ, EMAIL, TELEFONE1, TELEFONE2, LOGIN, SENHA, DESCRICAO) VALUES("Barbearia do Mário","01 203 080/1234-5","domario@gmail.com","(75) 98552-2541","(75) 98552-2545","teste","teste","Descrição da barbearia do mario, que foi criada em 1988");
+INSERT INTO endereco (RUA, NUMERO, BAIRRO, CIDADE, ESTADO, FK_CODBARBEARIA) VALUES("Rua da Harmonia","520","Centro","Paulo Afonso","BA",1);
+INSERT INTO barbearia (NOMESOCIAL, CNPJ, EMAIL, TELEFONE1, TELEFONE2, LOGIN, SENHA, DESCRICAO) VALUES("Barbearia Brutus","01 203 080/1234-6","brutus@gmail.com","(75) 98552-6541","(75) 98552-2945","brutus","brutus","Descrição da barbearia brutus, que foi criada em 1988");
+INSERT INTO endereco (RUA, NUMERO, BAIRRO, CIDADE, ESTADO, FK_CODBARBEARIA) VALUES("Rua da Alegria","250","Perpetuo Socorro","Paulo Afonso","BA",2);
+
+
+INSERT INTO servico (NOME, VALOR, TEMPO, FK_CODBARBEARIA) VALUES("Corte de cabelo","50","30","1");
+INSERT INTO servico (NOME, VALOR, TEMPO, FK_CODBARBEARIA) VALUES("Corte de barba","30","20","1");
+INSERT INTO servico (NOME, VALOR, TEMPO, FK_CODBARBEARIA) VALUES("Corte de cabelo","50","30","2");
+INSERT INTO servico (NOME, VALOR, TEMPO, FK_CODBARBEARIA) VALUES("Corte de barba","30","20","2");
+
+INSERT INTO agendamento (DATA, HORARIO, STATUS, FK_CODBARBEARIA, FK_CODCLIENTE, FK_CODSERVICO, DESCRICAO) VALUES("2024-05-16", "16:00:00", 0, 1, 1, 1, "Agendado");

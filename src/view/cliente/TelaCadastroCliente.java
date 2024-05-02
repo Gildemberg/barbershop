@@ -33,8 +33,8 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         cliente=clientedao.read(CODCLIENTE);
         this.update = true;
         
-        titulo.setText("ATUALIZAÇÃO DE CADASTRO");
-        cadastrar.setText("ATUALIZAR");
+        titulo.setText("Atualização de Cadastro");
+        cadastrar.setText("Atualizar");
         txtCPF.setText(cliente.get(0).getCpf());
         txtNome.setText(cliente.get(0).getNome());
         txtEmail.setText(cliente.get(0).getEmail());
@@ -257,9 +257,9 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         btnConfirmacaoDados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         cadastrar.setBackground(new java.awt.Color(0, 51, 102));
-        cadastrar.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
+        cadastrar.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
         cadastrar.setForeground(new java.awt.Color(255, 255, 255));
-        cadastrar.setText("CADASTRAR");
+        cadastrar.setText("Cadastrar");
         cadastrar.setBorderPainted(false);
         cadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cadastrar.addActionListener(new java.awt.event.ActionListener() {

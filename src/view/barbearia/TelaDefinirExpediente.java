@@ -2,6 +2,8 @@ package view.barbearia;
 
 import com.raven.datechooser.SelectedDate;
 import controller.ExpedienteController;
+import css.BordaArredondada;
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,7 +11,9 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import model.Expediente;
@@ -130,10 +134,11 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Esquerda = new css.FundoGradiente(0, 51, 102, 0, 0, 0, 0, 0, 1500, 100);
+        Cima = new javax.swing.JPanel();
         icon = new javax.swing.JLabel();
-        Direita = new css.FundoGradiente(0, 191, 255, 65, 105, 255, 0, 0, 1500, 100);
-        sair = new javax.swing.JLabel();
+        titulo = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
+        Centro = new javax.swing.JPanel();
         horarioInicio = new javax.swing.JLabel();
         txtHoraIni = new css.ArrendondarBordas();
         doispontos = new javax.swing.JLabel();
@@ -152,46 +157,78 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Alterar Expediente");
+        setMaximumSize(new java.awt.Dimension(1920, 1080));
         setMinimumSize(new java.awt.Dimension(1920, 1080));
+        setPreferredSize(new java.awt.Dimension(1920, 1080));
+        setResizable(false);
 
-        Esquerda.setBackground(new java.awt.Color(0, 51, 102));
-        Esquerda.setPreferredSize(new java.awt.Dimension(700, 1080));
+        Cima.setBackground(new java.awt.Color(0, 51, 102));
+        Cima.setMaximumSize(new java.awt.Dimension(1920, 150));
+        Cima.setMinimumSize(new java.awt.Dimension(1920, 150));
+        Cima.setPreferredSize(new java.awt.Dimension(1920, 150));
 
         icon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_Barbeiro_valor.png"))); // NOI18N
 
-        javax.swing.GroupLayout EsquerdaLayout = new javax.swing.GroupLayout(Esquerda);
-        Esquerda.setLayout(EsquerdaLayout);
-        EsquerdaLayout.setHorizontalGroup(
-            EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(icon, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        EsquerdaLayout.setVerticalGroup(
-            EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(icon)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        titulo.setFont(new java.awt.Font("Caladea", 1, 90)); // NOI18N
+        titulo.setForeground(new java.awt.Color(255, 255, 255));
+        titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titulo.setText("Definir Expediente");
+        titulo.setBorder(new javax.swing.border.MatteBorder(null));
 
-        Direita.setBackground(new java.awt.Color(0, 153, 255));
-        Direita.setPreferredSize(new java.awt.Dimension(1220, 1080));
-
-        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar.png"))); // NOI18N
-        sair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sair.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sairMouseClicked(evt);
+        btnVoltar.setBackground(new java.awt.Color(255, 255, 255));
+        btnVoltar.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
+        btnVoltar.setForeground(new java.awt.Color(255, 255, 255));
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar-azul.png"))); // NOI18N
+        btnVoltar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnVoltar.setBorderPainted(false);
+        btnVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
             }
         });
 
-        horarioInicio.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
-        horarioInicio.setForeground(new java.awt.Color(255, 255, 255));
+        javax.swing.GroupLayout CimaLayout = new javax.swing.GroupLayout(Cima);
+        Cima.setLayout(CimaLayout);
+        CimaLayout.setHorizontalGroup(
+            CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CimaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(icon)
+                .addGap(1604, 1604, 1604)
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
+            .addGroup(CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(CimaLayout.createSequentialGroup()
+                    .addGap(245, 245, 245)
+                    .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 1438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(243, Short.MAX_VALUE)))
+        );
+        CimaLayout.setVerticalGroup(
+            CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CimaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(icon))
+            .addGroup(CimaLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(CimaLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(18, Short.MAX_VALUE)))
+        );
+
+        Centro.setBackground(new java.awt.Color(255, 255, 255));
+        Centro.setMaximumSize(new java.awt.Dimension(1920, 960));
+        Centro.setMinimumSize(new java.awt.Dimension(1920, 960));
+        Centro.setPreferredSize(new java.awt.Dimension(1920, 960));
+
+        horarioInicio.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        horarioInicio.setForeground(new java.awt.Color(0, 51, 102));
         horarioInicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        horarioInicio.setText("INÍCIO DO EXPEDIENTE");
+        horarioInicio.setText("Início do Expediente");
 
         txtHoraIni.setBorder(null);
         txtHoraIni.setForeground(new java.awt.Color(0, 51, 102));
@@ -202,14 +239,15 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
         }
         txtHoraIni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtHoraIni.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
-        txtHoraIni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtHoraIniActionPerformed(evt);
-            }
-        });
+        BordaArredondada borda = new BordaArredondada(new Color(0, 51, 102), 3, 10);
+        Border bordaInterna = BorderFactory.createEmptyBorder(0, 10, 0, 0);
+        Border bordaComposta = BorderFactory.createCompoundBorder(borda, bordaInterna);
+        txtHoraIni.setBackground(new Color(222, 222, 222, 222));
+        txtHoraIni.setBorder(bordaComposta);
 
         doispontos.setFont(new java.awt.Font("Dialog", 0, 41)); // NOI18N
-        doispontos.setForeground(new java.awt.Color(255, 255, 255));
+        doispontos.setForeground(new java.awt.Color(0, 51, 102));
+        doispontos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         doispontos.setText(":");
 
         txtMinutoIni.setBorder(null);
@@ -221,11 +259,13 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
         }
         txtMinutoIni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtMinutoIni.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        txtMinutoIni.setBackground(new Color(222, 222, 222, 222));
+        txtMinutoIni.setBorder(bordaComposta);
 
-        horarioFim.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
-        horarioFim.setForeground(new java.awt.Color(255, 255, 255));
+        horarioFim.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        horarioFim.setForeground(new java.awt.Color(0, 51, 102));
         horarioFim.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        horarioFim.setText("FIM DO EXPEDIENTE");
+        horarioFim.setText("Fim do Expediente");
 
         txtHoraFim.setBorder(null);
         txtHoraFim.setForeground(new java.awt.Color(0, 51, 102));
@@ -236,9 +276,12 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
         }
         txtHoraFim.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtHoraFim.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        txtHoraFim.setBackground(new Color(222, 222, 222, 222));
+        txtHoraFim.setBorder(bordaComposta);
 
         doispontos1.setFont(new java.awt.Font("Dialog", 0, 41)); // NOI18N
-        doispontos1.setForeground(new java.awt.Color(255, 255, 255));
+        doispontos1.setForeground(new java.awt.Color(0, 51, 102));
+        doispontos1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         doispontos1.setText(":");
 
         txtMinutoFim.setBorder(null);
@@ -250,17 +293,19 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
         }
         txtMinutoFim.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtMinutoFim.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        txtMinutoFim.setBackground(new Color(222, 222, 222, 222));
+        txtMinutoFim.setBorder(bordaComposta);
 
-        txtRegra6.setFont(new java.awt.Font("Impact", 0, 60)); // NOI18N
+        txtRegra6.setFont(new java.awt.Font("Caladea", 1, 50)); // NOI18N
         txtRegra6.setForeground(new java.awt.Color(0, 51, 102));
         txtRegra6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtRegra6.setText("<html><div style='text-align: justify;'> DEFINA O HORÁRIO PADRÃO</div></html>");
+        txtRegra6.setText("Horário padrão");
         txtRegra6.setBorder(new javax.swing.border.MatteBorder(null));
 
         btnDefinir.setBackground(new java.awt.Color(0, 51, 102));
-        btnDefinir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDefinir.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
         btnDefinir.setForeground(new java.awt.Color(255, 255, 255));
-        btnDefinir.setText("DEFINIR ");
+        btnDefinir.setText("Concluir");
         btnDefinir.setBorderPainted(false);
         btnDefinir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,16 +313,16 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
             }
         });
 
-        txtRegra5.setFont(new java.awt.Font("Impact", 0, 60)); // NOI18N
+        txtRegra5.setFont(new java.awt.Font("Caladea", 1, 50)); // NOI18N
         txtRegra5.setForeground(new java.awt.Color(0, 51, 102));
         txtRegra5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtRegra5.setText("<html><div style='text-align: justify;'>DEFINA O PERÍODO QUE HAVERÁ EXPEDIENTE</div></html>");
+        txtRegra5.setText("Período em que haverá expediente");
         txtRegra5.setBorder(new javax.swing.border.MatteBorder(null));
 
-        Data.setFont(new java.awt.Font("Segoe UI Semibold", 1, 48)); // NOI18N
-        Data.setForeground(new java.awt.Color(255, 255, 255));
+        Data.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        Data.setForeground(new java.awt.Color(0, 51, 102));
         Data.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Data.setText("DATA INICIAL");
+        Data.setText("Data início");
 
         txtDataInicial.setForeground(new java.awt.Color(0, 51, 102));
         try {
@@ -288,6 +333,8 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
         txtDataInicial.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtDataInicial.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         txtDataInicial.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+        txtDataInicial.setBackground(new Color(222, 222, 222, 222));
+        txtDataInicial.setBorder(bordaComposta);
 
         txtDataFinal.setForeground(new java.awt.Color(0, 51, 102));
         try {
@@ -298,112 +345,112 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
         txtDataFinal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtDataFinal.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         txtDataFinal.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+        txtDataFinal.setBackground(new Color(222, 222, 222, 222));
+        txtDataFinal.setBorder(bordaComposta);
 
-        Data1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 48)); // NOI18N
-        Data1.setForeground(new java.awt.Color(255, 255, 255));
+        Data1.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        Data1.setForeground(new java.awt.Color(0, 51, 102));
         Data1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Data1.setText("DATA FINAL");
+        Data1.setText("Data fim");
 
-        javax.swing.GroupLayout DireitaLayout = new javax.swing.GroupLayout(Direita);
-        Direita.setLayout(DireitaLayout);
-        DireitaLayout.setHorizontalGroup(
-            DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DireitaLayout.createSequentialGroup()
-                .addGap(413, 413, 413)
-                .addComponent(txtHoraIni, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(doispontos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMinutoIni, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout CentroLayout = new javax.swing.GroupLayout(Centro);
+        Centro.setLayout(CentroLayout);
+        CentroLayout.setHorizontalGroup(
+            CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(txtRegra5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtRegra6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(CentroLayout.createSequentialGroup()
+                    .addGap(993, 993, 993)
+                    .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(CentroLayout.createSequentialGroup()
+                            .addComponent(txtHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(doispontos1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtMinutoFim, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(horarioFim, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(532, 532, 532)))
+            .addGroup(CentroLayout.createSequentialGroup()
+                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CentroLayout.createSequentialGroup()
+                        .addGap(567, 567, 567)
+                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Data, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(75, 75, 75)
+                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDataFinal)
+                            .addComponent(Data1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(CentroLayout.createSequentialGroup()
+                        .addGap(532, 532, 532)
+                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(horarioInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(CentroLayout.createSequentialGroup()
+                                .addComponent(txtHoraIni, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(doispontos)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtMinutoIni, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(CentroLayout.createSequentialGroup()
+                        .addGap(759, 759, 759)
+                        .addComponent(btnDefinir, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                        .addComponent(txtHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(doispontos1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMinutoFim, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(410, 410, 410))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                        .addComponent(btnDefinir, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(513, 513, 513))))
-            .addGroup(DireitaLayout.createSequentialGroup()
-                .addGap(255, 255, 255)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Data, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                    .addComponent(txtDataInicial))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Data1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(148, 148, 148))
-            .addGroup(DireitaLayout.createSequentialGroup()
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DireitaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtRegra5)
-                            .addGroup(DireitaLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(sair))
-                            .addComponent(horarioFim, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(horarioInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(DireitaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtRegra6)))
-                .addContainerGap())
         );
-        DireitaLayout.setVerticalGroup(
-            DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DireitaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(sair)
-                .addGap(34, 34, 34)
+        CentroLayout.setVerticalGroup(
+            CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CentroLayout.createSequentialGroup()
+                .addContainerGap(120, Short.MAX_VALUE)
                 .addComponent(txtRegra5, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Data)
-                    .addComponent(Data1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
-                .addComponent(txtRegra6, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(horarioInicio)
+                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(CentroLayout.createSequentialGroup()
+                        .addComponent(Data1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDataFinal))
+                    .addGroup(CentroLayout.createSequentialGroup()
+                        .addComponent(Data)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(57, 57, 57)
+                .addComponent(txtRegra6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(doispontos, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHoraIni, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMinutoIni, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
-                .addComponent(horarioFim)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(doispontos1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMinutoFim, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(79, 79, 79)
-                .addComponent(btnDefinir, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
+                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(doispontos, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtHoraIni, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMinutoIni, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CentroLayout.createSequentialGroup()
+                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(horarioFim)
+                            .addComponent(horarioInicio))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(doispontos1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMinutoFim, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(83, 83, 83)
+                .addComponent(btnDefinir, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(226, 226, 226))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Esquerda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(Direita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Centro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1926, Short.MAX_VALUE)
+                    .addComponent(Cima, javax.swing.GroupLayout.DEFAULT_SIZE, 1926, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Esquerda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Direita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Cima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(Centro, javax.swing.GroupLayout.PREFERRED_SIZE, 970, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -413,16 +460,12 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
         definirExpediente();
     }//GEN-LAST:event_btnDefinirActionPerformed
 
-    private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         TelaPrincipalBarbearia TP = new TelaPrincipalBarbearia();
         TP.receberCodBarbearia(CODBARBEARIA);
         TP.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_sairMouseClicked
-
-    private void txtHoraIniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHoraIniActionPerformed
-        
-    }//GEN-LAST:event_txtHoraIniActionPerformed
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     public static void main(String args[]) {
 
@@ -442,17 +485,18 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Centro;
+    private javax.swing.JPanel Cima;
     private javax.swing.JLabel Data;
     private javax.swing.JLabel Data1;
-    private javax.swing.JPanel Direita;
-    private javax.swing.JPanel Esquerda;
     private javax.swing.JButton btnDefinir;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel doispontos;
     private javax.swing.JLabel doispontos1;
     private javax.swing.JLabel horarioFim;
     private javax.swing.JLabel horarioInicio;
     private javax.swing.JLabel icon;
-    private javax.swing.JLabel sair;
+    private javax.swing.JLabel titulo;
     private javax.swing.JFormattedTextField txtDataFinal;
     private javax.swing.JFormattedTextField txtDataInicial;
     private javax.swing.JFormattedTextField txtHoraFim;

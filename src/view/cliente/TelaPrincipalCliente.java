@@ -72,7 +72,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     }
     
     public void exibirNomeCliente (){
-        nome_usr.setText(ClienteDao.retornoNome(CODCLIENTE));
+        nome_usr.setText("Olá, "+ClienteDao.retornoNome(CODCLIENTE));
       }
     
     public void consultarBarbearia(){
@@ -180,12 +180,11 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         Cima = new javax.swing.JPanel();
-        sair = new javax.swing.JLabel();
-        alterarCadastro = new javax.swing.JLabel();
         img = new javax.swing.JLabel();
-        ola = new javax.swing.JLabel();
         localizacao = new javax.swing.JLabel();
         nome_usr = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
+        btnAlterarCadastro = new javax.swing.JButton();
         Centro = new javax.swing.JPanel();
         barbearia1 = new css.JPanelArredondadoBarbearias(30);
         nome_barbearia1 = new javax.swing.JLabel();
@@ -270,41 +269,49 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         setTitle("Tela Principal Cliente");
         setMinimumSize(new java.awt.Dimension(1920, 1080));
 
-        Cima.setBackground(new java.awt.Color(29, 93, 183));
+        Cima.setBackground(new java.awt.Color(0, 51, 102));
         Cima.setMaximumSize(new java.awt.Dimension(1920, 100));
-        Cima.setMinimumSize(new java.awt.Dimension(1920, 130));
+        Cima.setMinimumSize(new java.awt.Dimension(1920, 150));
+        Cima.setPreferredSize(new java.awt.Dimension(1920, 150));
 
-        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/saida.png"))); // NOI18N
-        sair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sair.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sairMouseClicked(evt);
-            }
-        });
+        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/usuario.png"))); // NOI18N
 
-        alterarCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterar_cadastro.png"))); // NOI18N
-        alterarCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        alterarCadastro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                alterarCadastroMouseClicked(evt);
-            }
-        });
-
-        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
-
-        ola.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 36)); // NOI18N
-        ola.setForeground(new java.awt.Color(255, 255, 255));
-        ola.setText("Olá,");
-
-        localizacao.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 14)); // NOI18N
+        localizacao.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         localizacao.setForeground(new java.awt.Color(255, 255, 255));
         localizacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/localizacao.png"))); // NOI18N
         localizacao.setText("Paulo Afonso - BA");
         localizacao.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        nome_usr.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 36)); // NOI18N
+        nome_usr.setFont(new java.awt.Font("Caladea", 0, 48)); // NOI18N
         nome_usr.setForeground(new java.awt.Color(255, 255, 255));
+        nome_usr.setText("Olá, usuário");
         nome_usr.setBorder(new javax.swing.border.MatteBorder(null));
+
+        btnVoltar.setBackground(new java.awt.Color(255, 255, 255));
+        btnVoltar.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
+        btnVoltar.setForeground(new java.awt.Color(255, 255, 255));
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar-azul.png"))); // NOI18N
+        btnVoltar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnVoltar.setBorderPainted(false);
+        btnVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
+        btnAlterarCadastro.setBackground(new java.awt.Color(255, 255, 255));
+        btnAlterarCadastro.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
+        btnAlterarCadastro.setForeground(new java.awt.Color(255, 255, 255));
+        btnAlterarCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterar_user.png"))); // NOI18N
+        btnAlterarCadastro.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnAlterarCadastro.setBorderPainted(false);
+        btnAlterarCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAlterarCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarCadastroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout CimaLayout = new javax.swing.GroupLayout(Cima);
         Cima.setLayout(CimaLayout);
@@ -313,46 +320,41 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CimaLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(img)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CimaLayout.createSequentialGroup()
-                        .addComponent(ola)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nome_usr, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(CimaLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(localizacao)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(alterarCadastro)
                 .addGap(18, 18, 18)
-                .addComponent(sair)
-                .addGap(23, 23, 23))
+                .addGroup(CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(localizacao)
+                    .addComponent(nome_usr, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAlterarCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
         );
         CimaLayout.setVerticalGroup(
             CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(img, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(img, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CimaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(nome_usr)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(localizacao)
+                .addGap(24, 24, 24))
             .addGroup(CimaLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
                 .addGroup(CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CimaLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nome_usr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ola, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0)
-                        .addComponent(localizacao)
-                        .addGap(0, 26, Short.MAX_VALUE))
-                    .addComponent(alterarCadastro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(btnAlterarCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Centro.setBackground(new java.awt.Color(243, 249, 255));
-        Centro.setMaximumSize(new java.awt.Dimension(1320, 950));
-        Centro.setMinimumSize(new java.awt.Dimension(1320, 950));
+        Centro.setBackground(new java.awt.Color(255, 255, 255));
+        Centro.setMaximumSize(new java.awt.Dimension(1320, 960));
+        Centro.setMinimumSize(new java.awt.Dimension(1320, 960));
+        Centro.setPreferredSize(new java.awt.Dimension(1320, 960));
 
         barbearia1.setLayout(new BorderLayout());
         barbearia1.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia1.setBackground(new java.awt.Color(122, 177, 255));
+        barbearia1.setBackground(new java.awt.Color(30, 113, 218));
         barbearia1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia1.setMaximumSize(new java.awt.Dimension(1150, 55));
         barbearia1.setMinimumSize(new java.awt.Dimension(1150, 55));
@@ -363,8 +365,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             }
         });
 
-        nome_barbearia1.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia1.setForeground(new java.awt.Color(29, 93, 183));
+        nome_barbearia1.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        nome_barbearia1.setForeground(new java.awt.Color(255, 255, 255));
         nome_barbearia1.setBorder(new javax.swing.border.MatteBorder(null));
         nome_barbearia1.setMaximumSize(new java.awt.Dimension(1000, 55));
         nome_barbearia1.setMinimumSize(new java.awt.Dimension(1000, 55));
@@ -397,7 +399,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia2.setLayout(new BorderLayout());
         barbearia2.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia2.setBackground(new java.awt.Color(122, 177, 255));
+        barbearia2.setBackground(new java.awt.Color(30, 113, 218));
         barbearia2.setForeground(new java.awt.Color(0, 0, 0));
         barbearia2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia2.setMaximumSize(new java.awt.Dimension(1150, 55));
@@ -409,8 +411,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             }
         });
 
-        nome_barbearia2.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia2.setForeground(new java.awt.Color(29, 93, 183));
+        nome_barbearia2.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        nome_barbearia2.setForeground(new java.awt.Color(255, 255, 255));
         nome_barbearia2.setBorder(new javax.swing.border.MatteBorder(null));
         nome_barbearia2.setMaximumSize(new java.awt.Dimension(1000, 55));
         nome_barbearia2.setMinimumSize(new java.awt.Dimension(1000, 55));
@@ -446,7 +448,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia3.setLayout(new BorderLayout());
         barbearia3.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia3.setBackground(new java.awt.Color(122, 177, 255));
+        barbearia3.setBackground(new java.awt.Color(30, 113, 218));
         barbearia3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia3.setMaximumSize(new java.awt.Dimension(1150, 55));
         barbearia3.setMinimumSize(new java.awt.Dimension(1150, 55));
@@ -457,8 +459,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             }
         });
 
-        nome_barbearia3.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia3.setForeground(new java.awt.Color(29, 93, 183));
+        nome_barbearia3.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        nome_barbearia3.setForeground(new java.awt.Color(255, 255, 255));
         nome_barbearia3.setBorder(new javax.swing.border.MatteBorder(null));
         nome_barbearia3.setMaximumSize(new java.awt.Dimension(1000, 55));
         nome_barbearia3.setMinimumSize(new java.awt.Dimension(1000, 55));
@@ -495,7 +497,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia4.setLayout(new BorderLayout());
         barbearia4.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia4.setBackground(new java.awt.Color(122, 177, 255));
+        barbearia4.setBackground(new java.awt.Color(30, 113, 218));
         barbearia4.setForeground(new java.awt.Color(0, 0, 0));
         barbearia4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia4.setMaximumSize(new java.awt.Dimension(1150, 55));
@@ -507,8 +509,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             }
         });
 
-        nome_barbearia4.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia4.setForeground(new java.awt.Color(29, 93, 183));
+        nome_barbearia4.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        nome_barbearia4.setForeground(new java.awt.Color(255, 255, 255));
         nome_barbearia4.setBorder(new javax.swing.border.MatteBorder(null));
         nome_barbearia4.setMaximumSize(new java.awt.Dimension(1000, 55));
         nome_barbearia4.setMinimumSize(new java.awt.Dimension(1000, 55));
@@ -545,7 +547,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia5.setLayout(new BorderLayout());
         barbearia5.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia5.setBackground(new java.awt.Color(122, 177, 255));
+        barbearia5.setBackground(new java.awt.Color(30, 113, 218));
         barbearia5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia5.setMaximumSize(new java.awt.Dimension(1150, 55));
         barbearia5.setMinimumSize(new java.awt.Dimension(1150, 55));
@@ -555,8 +557,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             }
         });
 
-        nome_barbearia5.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia5.setForeground(new java.awt.Color(29, 93, 183));
+        nome_barbearia5.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        nome_barbearia5.setForeground(new java.awt.Color(255, 255, 255));
         nome_barbearia5.setBorder(new javax.swing.border.MatteBorder(null));
         nome_barbearia5.setMaximumSize(new java.awt.Dimension(1000, 55));
         nome_barbearia5.setMinimumSize(new java.awt.Dimension(1000, 55));
@@ -593,7 +595,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia6.setLayout(new BorderLayout());
         barbearia6.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia6.setBackground(new java.awt.Color(122, 177, 255));
+        barbearia6.setBackground(new java.awt.Color(30, 113, 218));
         barbearia6.setForeground(new java.awt.Color(0, 0, 0));
         barbearia6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia6.setMaximumSize(new java.awt.Dimension(1150, 55));
@@ -604,8 +606,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             }
         });
 
-        nome_barbearia6.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia6.setForeground(new java.awt.Color(29, 93, 183));
+        nome_barbearia6.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        nome_barbearia6.setForeground(new java.awt.Color(255, 255, 255));
         nome_barbearia6.setBorder(new javax.swing.border.MatteBorder(null));
         nome_barbearia6.setMaximumSize(new java.awt.Dimension(1000, 55));
         nome_barbearia6.setMinimumSize(new java.awt.Dimension(1000, 55));
@@ -642,7 +644,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia7.setLayout(new BorderLayout());
         barbearia7.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia7.setBackground(new java.awt.Color(122, 177, 255));
+        barbearia7.setBackground(new java.awt.Color(30, 113, 218));
         barbearia7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia7.setMaximumSize(new java.awt.Dimension(1150, 55));
         barbearia7.setMinimumSize(new java.awt.Dimension(1150, 55));
@@ -652,8 +654,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             }
         });
 
-        nome_barbearia7.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia7.setForeground(new java.awt.Color(29, 93, 183));
+        nome_barbearia7.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        nome_barbearia7.setForeground(new java.awt.Color(255, 255, 255));
         nome_barbearia7.setBorder(new javax.swing.border.MatteBorder(null));
         nome_barbearia7.setMaximumSize(new java.awt.Dimension(1000, 55));
         nome_barbearia7.setMinimumSize(new java.awt.Dimension(1000, 55));
@@ -690,7 +692,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia8.setLayout(new BorderLayout());
         barbearia8.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia8.setBackground(new java.awt.Color(122, 177, 255));
+        barbearia8.setBackground(new java.awt.Color(30, 113, 218));
         barbearia8.setForeground(new java.awt.Color(0, 0, 0));
         barbearia8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia8.setMaximumSize(new java.awt.Dimension(1150, 55));
@@ -701,8 +703,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             }
         });
 
-        nome_barbearia8.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia8.setForeground(new java.awt.Color(29, 93, 183));
+        nome_barbearia8.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        nome_barbearia8.setForeground(new java.awt.Color(255, 255, 255));
         nome_barbearia8.setBorder(new javax.swing.border.MatteBorder(null));
         nome_barbearia8.setMaximumSize(new java.awt.Dimension(1000, 55));
         nome_barbearia8.setMinimumSize(new java.awt.Dimension(1000, 55));
@@ -739,7 +741,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia9.setLayout(new BorderLayout());
         barbearia9.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia9.setBackground(new java.awt.Color(122, 177, 255));
+        barbearia9.setBackground(new java.awt.Color(30, 113, 218));
         barbearia9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia9.setMaximumSize(new java.awt.Dimension(1150, 55));
         barbearia9.setMinimumSize(new java.awt.Dimension(1150, 55));
@@ -749,8 +751,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             }
         });
 
-        nome_barbearia9.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia9.setForeground(new java.awt.Color(29, 93, 183));
+        nome_barbearia9.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        nome_barbearia9.setForeground(new java.awt.Color(255, 255, 255));
         nome_barbearia9.setBorder(new javax.swing.border.MatteBorder(null));
         nome_barbearia9.setMaximumSize(new java.awt.Dimension(1000, 55));
         nome_barbearia9.setMinimumSize(new java.awt.Dimension(1000, 55));
@@ -787,7 +789,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia10.setLayout(new BorderLayout());
         barbearia10.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia10.setBackground(new java.awt.Color(122, 177, 255));
+        barbearia10.setBackground(new java.awt.Color(30, 113, 218));
         barbearia10.setForeground(new java.awt.Color(0, 0, 0));
         barbearia10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia10.setMaximumSize(new java.awt.Dimension(1150, 55));
@@ -798,8 +800,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             }
         });
 
-        nome_barbearia10.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia10.setForeground(new java.awt.Color(153, 0, 0));
+        nome_barbearia10.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        nome_barbearia10.setForeground(new java.awt.Color(255, 255, 255));
         nome_barbearia10.setBorder(new javax.swing.border.MatteBorder(null));
         nome_barbearia10.setMaximumSize(new java.awt.Dimension(1000, 55));
         nome_barbearia10.setMinimumSize(new java.awt.Dimension(1000, 55));
@@ -836,7 +838,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia11.setLayout(new BorderLayout());
         barbearia11.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia11.setBackground(new java.awt.Color(122, 177, 255));
+        barbearia11.setBackground(new java.awt.Color(30, 113, 218));
         barbearia11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia11.setMaximumSize(new java.awt.Dimension(1150, 55));
         barbearia11.setMinimumSize(new java.awt.Dimension(1150, 55));
@@ -846,8 +848,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             }
         });
 
-        nome_barbearia11.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        nome_barbearia11.setForeground(new java.awt.Color(29, 93, 183));
+        nome_barbearia11.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        nome_barbearia11.setForeground(new java.awt.Color(255, 255, 255));
         nome_barbearia11.setBorder(new javax.swing.border.MatteBorder(null));
         nome_barbearia11.setMaximumSize(new java.awt.Dimension(1000, 55));
         nome_barbearia11.setMinimumSize(new java.awt.Dimension(1000, 55));
@@ -882,16 +884,16 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        Barbearias.setBackground(new java.awt.Color(30, 113, 218));
+        Barbearias.setBackground(new java.awt.Color(0, 51, 102));
         Barbearias.setMaximumSize(new java.awt.Dimension(700, 45));
         Barbearias.setMinimumSize(new java.awt.Dimension(700, 45));
         Barbearias.setPreferredSize(new java.awt.Dimension(700, 45));
 
-        jLabel14.setBackground(new java.awt.Color(30, 113, 218));
-        jLabel14.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 28)); // NOI18N
+        jLabel14.setBackground(new java.awt.Color(0, 51, 102));
+        jLabel14.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("BARBEARIAS");
+        jLabel14.setText("Barbearias");
 
         javax.swing.GroupLayout BarbeariasLayout = new javax.swing.GroupLayout(Barbearias);
         Barbearias.setLayout(BarbeariasLayout);
@@ -956,36 +958,36 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addComponent(barbearia10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(barbearia11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
-        Direita.setBackground(new java.awt.Color(122, 177, 255));
-        Direita.setMaximumSize(new java.awt.Dimension(600, 950));
-        Direita.setMinimumSize(new java.awt.Dimension(600, 950));
-        Direita.setPreferredSize(new java.awt.Dimension(600, 950));
+        Direita.setBackground(new java.awt.Color(30, 113, 218));
+        Direita.setMaximumSize(new java.awt.Dimension(600, 960));
+        Direita.setMinimumSize(new java.awt.Dimension(600, 960));
+        Direita.setPreferredSize(new java.awt.Dimension(600, 960));
 
-        MeusAgendamentos.setBackground(new java.awt.Color(225, 239, 255));
+        MeusAgendamentos.setBackground(new java.awt.Color(0, 51, 102));
         MeusAgendamentos.setMinimumSize(new java.awt.Dimension(300, 45));
         MeusAgendamentos.setPreferredSize(new java.awt.Dimension(300, 45));
 
-        jLabel1.setBackground(new java.awt.Color(29, 93, 183));
-        jLabel1.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 28)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(29, 93, 183));
+        jLabel1.setBackground(new java.awt.Color(0, 51, 102));
+        jLabel1.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("MEUS AGENDAMENTOS");
+        jLabel1.setText("Meus Agendamentos");
 
         javax.swing.GroupLayout MeusAgendamentosLayout = new javax.swing.GroupLayout(MeusAgendamentos);
         MeusAgendamentos.setLayout(MeusAgendamentosLayout);
         MeusAgendamentosLayout.setHorizontalGroup(
             MeusAgendamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         MeusAgendamentosLayout.setVerticalGroup(
             MeusAgendamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
         );
 
-        Agendamento01.setBackground(new java.awt.Color(30, 113, 218));
+        Agendamento01.setBackground(new java.awt.Color(255, 255, 255));
         Agendamento01.setForeground(new java.awt.Color(255, 255, 255));
         Agendamento01.setMaximumSize(new java.awt.Dimension(450, 70));
         Agendamento01.setMinimumSize(new java.awt.Dimension(450, 70));
@@ -994,16 +996,16 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         seta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
 
-        txtBarbearia01.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        txtBarbearia01.setForeground(new java.awt.Color(255, 255, 255));
+        txtBarbearia01.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtBarbearia01.setForeground(new java.awt.Color(0, 51, 102));
         txtBarbearia01.setToolTipText("");
         txtBarbearia01.setBorder(new javax.swing.border.MatteBorder(null));
         txtBarbearia01.setMaximumSize(new java.awt.Dimension(300, 30));
         txtBarbearia01.setMinimumSize(new java.awt.Dimension(300, 30));
         txtBarbearia01.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorario01.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        txtHorario01.setForeground(new java.awt.Color(255, 255, 255));
+        txtHorario01.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtHorario01.setForeground(new java.awt.Color(0, 51, 102));
         txtHorario01.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorario01.setMaximumSize(new java.awt.Dimension(300, 30));
         txtHorario01.setMinimumSize(new java.awt.Dimension(300, 30));
@@ -1011,14 +1013,14 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         txtHorario01.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         txtServico01.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        txtServico01.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico01.setForeground(new java.awt.Color(0, 51, 102));
         txtServico01.setBorder(new javax.swing.border.MatteBorder(null));
         txtServico01.setMaximumSize(new java.awt.Dimension(300, 30));
         txtServico01.setMinimumSize(new java.awt.Dimension(300, 30));
         txtServico01.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnAlterar1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnAlterar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterar.png"))); // NOI18N
+        btnAlterar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterarr.png"))); // NOI18N
         btnAlterar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1040,7 +1042,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         Agendamento01Layout.setHorizontalGroup(
             Agendamento01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Agendamento01Layout.createSequentialGroup()
-                .addComponent(seta, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                .addComponent(seta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Agendamento01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(Agendamento01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1068,7 +1070,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        Agendamento02.setBackground(new java.awt.Color(30, 113, 218));
+        Agendamento02.setBackground(new java.awt.Color(255, 255, 255));
         Agendamento02.setForeground(new java.awt.Color(255, 255, 255));
         Agendamento02.setMaximumSize(new java.awt.Dimension(450, 70));
         Agendamento02.setMinimumSize(new java.awt.Dimension(450, 70));
@@ -1077,29 +1079,29 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         seta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
 
-        txtBarbearia02.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        txtBarbearia02.setForeground(new java.awt.Color(255, 255, 255));
+        txtBarbearia02.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtBarbearia02.setForeground(new java.awt.Color(0, 51, 102));
         txtBarbearia02.setBorder(new javax.swing.border.MatteBorder(null));
         txtBarbearia02.setMaximumSize(new java.awt.Dimension(300, 30));
         txtBarbearia02.setMinimumSize(new java.awt.Dimension(300, 30));
         txtBarbearia02.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorario02.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        txtHorario02.setForeground(new java.awt.Color(255, 255, 255));
+        txtHorario02.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtHorario02.setForeground(new java.awt.Color(0, 51, 102));
         txtHorario02.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorario02.setMaximumSize(new java.awt.Dimension(300, 30));
         txtHorario02.setMinimumSize(new java.awt.Dimension(300, 30));
         txtHorario02.setPreferredSize(new java.awt.Dimension(300, 30));
 
         txtServico02.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        txtServico02.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico02.setForeground(new java.awt.Color(0, 51, 102));
         txtServico02.setBorder(new javax.swing.border.MatteBorder(null));
         txtServico02.setMaximumSize(new java.awt.Dimension(300, 30));
         txtServico02.setMinimumSize(new java.awt.Dimension(300, 30));
         txtServico02.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnAlterar2.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        btnAlterar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterar.png"))); // NOI18N
+        btnAlterar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterarr.png"))); // NOI18N
         btnAlterar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1149,7 +1151,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             .addComponent(seta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        Agendamento03.setBackground(new java.awt.Color(30, 113, 218));
+        Agendamento03.setBackground(new java.awt.Color(255, 255, 255));
         Agendamento03.setForeground(new java.awt.Color(255, 255, 255));
         Agendamento03.setMaximumSize(new java.awt.Dimension(450, 70));
         Agendamento03.setMinimumSize(new java.awt.Dimension(450, 70));
@@ -1159,29 +1161,29 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         seta2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
 
-        txtBarbearia03.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        txtBarbearia03.setForeground(new java.awt.Color(255, 255, 255));
+        txtBarbearia03.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtBarbearia03.setForeground(new java.awt.Color(0, 51, 102));
         txtBarbearia03.setBorder(new javax.swing.border.MatteBorder(null));
         txtBarbearia03.setMaximumSize(new java.awt.Dimension(300, 30));
         txtBarbearia03.setMinimumSize(new java.awt.Dimension(300, 30));
         txtBarbearia03.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorario03.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        txtHorario03.setForeground(new java.awt.Color(255, 255, 255));
+        txtHorario03.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtHorario03.setForeground(new java.awt.Color(0, 51, 102));
         txtHorario03.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorario03.setMaximumSize(new java.awt.Dimension(300, 30));
         txtHorario03.setMinimumSize(new java.awt.Dimension(300, 30));
         txtHorario03.setPreferredSize(new java.awt.Dimension(300, 30));
 
         txtServico03.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        txtServico03.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico03.setForeground(new java.awt.Color(0, 51, 102));
         txtServico03.setBorder(new javax.swing.border.MatteBorder(null));
         txtServico03.setMaximumSize(new java.awt.Dimension(300, 30));
         txtServico03.setMinimumSize(new java.awt.Dimension(300, 30));
         txtServico03.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnAlterar3.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        btnAlterar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterar.png"))); // NOI18N
+        btnAlterar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterarr.png"))); // NOI18N
         btnAlterar3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1203,7 +1205,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         Agendamento03Layout.setHorizontalGroup(
             Agendamento03Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Agendamento03Layout.createSequentialGroup()
-                .addComponent(seta2, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                .addComponent(seta2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Agendamento03Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Agendamento03Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1231,7 +1233,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             .addComponent(seta2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        Agendamento4.setBackground(new java.awt.Color(30, 113, 218));
+        Agendamento4.setBackground(new java.awt.Color(255, 255, 255));
         Agendamento4.setForeground(new java.awt.Color(255, 255, 255));
         Agendamento4.setMaximumSize(new java.awt.Dimension(450, 70));
         Agendamento4.setMinimumSize(new java.awt.Dimension(450, 70));
@@ -1240,29 +1242,29 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         seta3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
 
-        txtBarbearia4.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        txtBarbearia4.setForeground(new java.awt.Color(255, 255, 255));
+        txtBarbearia4.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtBarbearia4.setForeground(new java.awt.Color(0, 51, 102));
         txtBarbearia4.setBorder(new javax.swing.border.MatteBorder(null));
         txtBarbearia4.setMaximumSize(new java.awt.Dimension(300, 30));
         txtBarbearia4.setMinimumSize(new java.awt.Dimension(300, 30));
         txtBarbearia4.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorario4.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        txtHorario4.setForeground(new java.awt.Color(255, 255, 255));
+        txtHorario4.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtHorario4.setForeground(new java.awt.Color(0, 51, 102));
         txtHorario4.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorario4.setMaximumSize(new java.awt.Dimension(300, 30));
         txtHorario4.setMinimumSize(new java.awt.Dimension(300, 30));
         txtHorario4.setPreferredSize(new java.awt.Dimension(300, 30));
 
         txtServico4.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        txtServico4.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico4.setForeground(new java.awt.Color(0, 51, 102));
         txtServico4.setBorder(new javax.swing.border.MatteBorder(null));
         txtServico4.setMaximumSize(new java.awt.Dimension(300, 30));
         txtServico4.setMinimumSize(new java.awt.Dimension(300, 30));
         txtServico4.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnAlterar4.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        btnAlterar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterar.png"))); // NOI18N
+        btnAlterar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterarr.png"))); // NOI18N
         btnAlterar4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1284,7 +1286,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         Agendamento4Layout.setHorizontalGroup(
             Agendamento4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Agendamento4Layout.createSequentialGroup()
-                .addComponent(seta3, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                .addComponent(seta3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Agendamento4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Agendamento4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1314,10 +1316,14 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        dataAtual.setFont(new java.awt.Font("DejaVu Sans Light", 0, 14)); // NOI18N
-        dataAtual.setForeground(new java.awt.Color(0, 51, 204));
+        dataAtual.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        dataAtual.setForeground(new java.awt.Color(255, 255, 255));
         dataAtual.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        dataAtual.setToolTipText("");
         dataAtual.setBorder(new javax.swing.border.MatteBorder(null));
+        dataAtual.setMaximumSize(new java.awt.Dimension(300, 30));
+        dataAtual.setMinimumSize(new java.awt.Dimension(300, 30));
+        dataAtual.setPreferredSize(new java.awt.Dimension(300, 30));
 
         javax.swing.GroupLayout DireitaLayout = new javax.swing.GroupLayout(Direita);
         Direita.setLayout(DireitaLayout);
@@ -1325,18 +1331,20 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DireitaLayout.createSequentialGroup()
                 .addGap(75, 75, 75)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(Agendamento02, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Agendamento03, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Agendamento01, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(Agendamento4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 75, Short.MAX_VALUE))
+                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, DireitaLayout.createSequentialGroup()
+                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Agendamento02, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Agendamento03, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Agendamento01, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(Agendamento4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(75, 75, 75))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(MeusAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(113, 113, 113))
-            .addGroup(DireitaLayout.createSequentialGroup()
+                .addComponent(MeusAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(93, 93, 93))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(dataAtual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1355,8 +1363,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Agendamento4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(dataAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
+                .addComponent(dataAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1382,15 +1390,6 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void alterarCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alterarCadastroMouseClicked
-        alterarCadastroCliente();
-    }//GEN-LAST:event_alterarCadastroMouseClicked
-
-    private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
-        this.dispose();
-        new TelaLoginCliente().setVisible(true);
-    }//GEN-LAST:event_sairMouseClicked
 
     private void barbearia1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barbearia1MouseClicked
         abrirBarbearia(CODBARBEARIAS.get(0));
@@ -1468,6 +1467,15 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         alterarAgendamento(CODAGENDAMENTOS.get(3), AGEND_CODBARBEARIAS.get(3));
     }//GEN-LAST:event_btnAlterar4MouseClicked
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        this.dispose();
+        new TelaLoginCliente().setVisible(true);
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnAlterarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarCadastroActionPerformed
+        alterarCadastroCliente();
+    }//GEN-LAST:event_btnAlterarCadastroActionPerformed
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -1495,7 +1503,6 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private javax.swing.JPanel Cima;
     private javax.swing.JPanel Direita;
     private javax.swing.JPanel MeusAgendamentos;
-    private javax.swing.JLabel alterarCadastro;
     private javax.swing.JPanel barbearia1;
     private javax.swing.JPanel barbearia10;
     private javax.swing.JPanel barbearia11;
@@ -1511,10 +1518,12 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private javax.swing.JLabel btnAlterar2;
     private javax.swing.JLabel btnAlterar3;
     private javax.swing.JLabel btnAlterar4;
+    private javax.swing.JButton btnAlterarCadastro;
     private javax.swing.JLabel btnExcluir1;
     private javax.swing.JLabel btnExcluir2;
     private javax.swing.JLabel btnExcluir3;
     private javax.swing.JLabel btnExcluir4;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel dataAtual;
     private javax.swing.JLabel img;
     private javax.swing.JLabel jLabel1;
@@ -1554,8 +1563,6 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private javax.swing.JLabel nome_barbearia8;
     private javax.swing.JLabel nome_barbearia9;
     private javax.swing.JLabel nome_usr;
-    private javax.swing.JLabel ola;
-    private javax.swing.JLabel sair;
     private javax.swing.JLabel seta;
     private javax.swing.JLabel seta1;
     private javax.swing.JLabel seta2;
