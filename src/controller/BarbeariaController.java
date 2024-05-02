@@ -27,11 +27,7 @@ public class BarbeariaController {
                 b.getNumero()!=null && b.getNumero().length()>0 && 
                 b.getBairro()!=null && b.getBairro().length()>0 && 
                 b.getCidade()!=null && b.getCidade().length()>0 && 
-                b.getUf()!=null && b.getUf().length()>0 &&
-                b.getRegra1()!=null && b.getRegra1().length()>0 && 
-                b.getRegra2()!=null && b.getRegra2().length()>0 &&
-                b.getRegra3()!=null && b.getRegra3().length()>0 && 
-                b.getRegra4()!=null && b.getRegra4().length()>0 
+                b.getUf()!=null && b.getUf().length()>0
                 ){
             if(b.getSenha().equals(b.getRsenha())){
                 check = verificarNoBanco(b);

@@ -1388,7 +1388,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
 
         emaberto1.setBackground(new java.awt.Color(30, 113, 218));
         emaberto1.setFont(new java.awt.Font("Caladea", 1, 48)); // NOI18N
-        emaberto1.setForeground(new java.awt.Color(0, 0, 0));
+        emaberto1.setForeground(new java.awt.Color(0, 51, 102));
         emaberto1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         emaberto1.setText("Agendamentos");
 

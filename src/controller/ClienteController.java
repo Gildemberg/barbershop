@@ -35,7 +35,7 @@ public class ClienteController {
                     check = false;
                 }
             }else{
-                JOptionPane.showMessageDialog(null, "Porfavor, confirme que os dados fornecidos são confiáveis e verdadeiros.", "Mensagem", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Por favor, confirme que os dados fornecidos são confiáveis e verdadeiros.", "Mensagem", JOptionPane.ERROR_MESSAGE);
                 check = false;
             }
         }else{
@@ -89,7 +89,7 @@ public class ClienteController {
                     check = false;
                 }
             }else{
-                JOptionPane.showMessageDialog(null, "Porfavor, confirme que os dados fornecidos são confiáveis e verdadeiros.", "Mensagem", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Por favor, confirme que os dados fornecidos são confiáveis e verdadeiros.", "Mensagem", JOptionPane.ERROR_MESSAGE);
                 check = false;
             }     
         }else{

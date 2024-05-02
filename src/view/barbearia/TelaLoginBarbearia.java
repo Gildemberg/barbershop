@@ -122,6 +122,8 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
         Login.setForeground(new java.awt.Color(0, 51, 102));
         Login.setText("Login");
 
+        txtLogin.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        txtLogin.setForeground(new java.awt.Color(0, 51, 102));
         txtLogin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtLoginKeyPressed(evt);
@@ -139,6 +141,8 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
         Senha.setForeground(new java.awt.Color(0, 51, 102));
         Senha.setText("Senha");
 
+        txtSenha.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        txtSenha.setForeground(new java.awt.Color(0, 51, 102));
         txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSenhaKeyPressed(evt);
@@ -205,20 +209,20 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
                 .addGap(37, 37, 37))
             .addGroup(DireitaLayout.createSequentialGroup()
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(DireitaLayout.createSequentialGroup()
-                            .addComponent(NaoPossuiConta)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 968, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(DireitaLayout.createSequentialGroup()
-                            .addGap(114, 114, 114)
+                    .addGroup(DireitaLayout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(DireitaLayout.createSequentialGroup()
+                                .addComponent(NaoPossuiConta)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 968, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(Login)
-                                .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 968, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Senha)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 968, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 968, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(Senha)
+                                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 968, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(DireitaLayout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addComponent(Login1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -323,7 +327,6 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
     private javax.swing.JLabel Senha;
     private javax.swing.JButton btnCadastro;
     private javax.swing.JButton btnEntrar;
-    private javax.swing.JButton btnVoltar;
     private javax.swing.JButton btnVoltar1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtLogin;

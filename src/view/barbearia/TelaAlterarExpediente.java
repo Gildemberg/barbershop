@@ -1,6 +1,6 @@
 package view.barbearia;
 
-import com.raven.datechooser.SelectedDate;
+import calendario.SelectedDate;
 import controller.ExpedienteController;
 import css.BordaArredondada;
 import java.awt.Color;
@@ -132,7 +132,7 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
         Centro = new javax.swing.JPanel();
         DefinaDia = new javax.swing.JLabel();
-        calendario = new com.raven.datechooser.DateChooser();
+        calendario = new calendario.DateChooser();
         DefinaHora = new javax.swing.JLabel();
         inicioExpediente = new javax.swing.JLabel();
         txtHoraIni = new css.ArrendondarBordas();
@@ -320,46 +320,45 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
         Centro.setLayout(CentroLayout);
         CentroLayout.setHorizontalGroup(
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CentroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CentroLayout.createSequentialGroup()
-                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSemExpediente, javax.swing.GroupLayout.DEFAULT_SIZE, 1908, Short.MAX_VALUE)
-                            .addGroup(CentroLayout.createSequentialGroup()
-                                .addGap(397, 397, 397)
-                                .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(CentroLayout.createSequentialGroup()
-                                        .addGap(169, 169, 169)
-                                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(fimExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(inicioExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(CentroLayout.createSequentialGroup()
-                                        .addGap(236, 236, 236)
-                                        .addComponent(txtHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(doispontos1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtMinutoFim, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(CentroLayout.createSequentialGroup()
-                                        .addGap(236, 236, 236)
-                                        .addComponent(txtHoraIni, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(doispontos)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtMinutoIni, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap())
-                    .addGroup(CentroLayout.createSequentialGroup()
-                        .addGap(253, 253, 253)
-                        .addComponent(DefinaDia, javax.swing.GroupLayout.PREFERRED_SIZE, 795, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(DefinaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CentroLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnData, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(758, 758, 758))
+            .addGroup(CentroLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(btnSemExpediente, javax.swing.GroupLayout.DEFAULT_SIZE, 1884, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(CentroLayout.createSequentialGroup()
+                .addGap(259, 259, 259)
+                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DefinaDia, javax.swing.GroupLayout.PREFERRED_SIZE, 795, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CentroLayout.createSequentialGroup()
+                        .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(104, 104, 104)))
+                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CentroLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(DefinaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CentroLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(fimExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inicioExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(CentroLayout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(txtHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(doispontos1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMinutoFim, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CentroLayout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(txtHoraIni, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(doispontos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMinutoIni, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CentroLayout.setVerticalGroup(
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -390,10 +389,10 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
                             .addComponent(doispontos1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMinutoFim, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(99, 99, 99)
+                    .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
                 .addComponent(btnSemExpediente)
-                .addGap(81, 81, 81)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnData, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(170, Short.MAX_VALUE))
         );
@@ -477,7 +476,7 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
     private javax.swing.JButton btnData;
     private javax.swing.JRadioButton btnSemExpediente;
     private javax.swing.JButton btnVoltar;
-    private com.raven.datechooser.DateChooser calendario;
+    private calendario.DateChooser calendario;
     private javax.swing.JLabel doispontos;
     private javax.swing.JLabel doispontos1;
     private javax.swing.JLabel fimExpediente;
