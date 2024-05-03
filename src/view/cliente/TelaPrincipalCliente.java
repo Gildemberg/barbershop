@@ -145,25 +145,31 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     }
     
     public void alterarAgendamento(int CODAGENDAMENTO, int CODBARBEARIA){
-        String DESCRICAO = JOptionPane.showInputDialog("Informe o motivo:");
-        agendamento.setCodagendamento(CODAGENDAMENTO);
-        agendamento.setCodbarbearia(CODBARBEARIA);
-        agendamento.setCodcliente(CODCLIENTE);
-        agendamento.setDescricao(DESCRICAO);
-        agendamento.setStatus(1);
-        TAC.receberCodAlterarAgend(agendamento); 
-        TAC.setVisible(true);
-        this.dispose(); 
+        String DESCRICAO = JOptionPane.showInputDialog(null,"Informe o motivo:", "Reagendamento", JOptionPane.INFORMATION_MESSAGE);
+        if(DESCRICAO != null){
+            agendamento.setCodagendamento(CODAGENDAMENTO);
+            agendamento.setCodbarbearia(CODBARBEARIA);
+            agendamento.setCodcliente(CODCLIENTE);
+            agendamento.setDescricao(DESCRICAO);
+            agendamento.setStatus(1);
+            TAC.receberCodAlterarAgend(agendamento); 
+            TAC.setVisible(true);
+            this.dispose(); 
+        }
     }
     
     public void excluirAgendamento(int CODAGENDAMENTO){
         if(JOptionPane.showConfirmDialog(this, "Você deseja realmente deletar o agendamento?", "Remover", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){            
-            String DESCRICAO = JOptionPane.showInputDialog("Informe o motivo:");
-            agendamento.setCodagendamento(CODAGENDAMENTO);
-            agendamento.setDescricao(DESCRICAO);
-            agendamento.setStatus(2);
-            if(AgendamentoController.cancelarAgendamento(agendamento)){
-                consultarAgendamento();
+            String DESCRICAO = JOptionPane.showInputDialog(null,"Informe o motivo:", "Cancelar agendamento", JOptionPane.INFORMATION_MESSAGE);
+            if(DESCRICAO != null){
+                agendamento.setCodagendamento(CODAGENDAMENTO);
+                agendamento.setDescricao(DESCRICAO);
+                agendamento.setStatus(2);
+                if(AgendamentoController.cancelarAgendamento(agendamento)){
+                    consultarAgendamento();
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "É obrigatório informar o motivo.", "Mensagem", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

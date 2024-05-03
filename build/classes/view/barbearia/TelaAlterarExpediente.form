@@ -283,7 +283,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="calendario.DateChooser" name="calendario">
+        <Component class="com.raven.datechooser.DateChooser" name="calendario">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="33" red="0" type="rgb"/>

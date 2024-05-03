@@ -1,6 +1,6 @@
 package view.barbearia;
 
-import calendario.SelectedDate;
+import com.raven.datechooser.SelectedDate;
 import controller.ExpedienteController;
 import css.BordaArredondada;
 import java.awt.Color;
@@ -132,7 +132,7 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
         Centro = new javax.swing.JPanel();
         DefinaDia = new javax.swing.JLabel();
-        calendario = new calendario.DateChooser();
+        calendario = new com.raven.datechooser.DateChooser();
         DefinaHora = new javax.swing.JLabel();
         inicioExpediente = new javax.swing.JLabel();
         txtHoraIni = new css.ArrendondarBordas();
@@ -476,7 +476,7 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
     private javax.swing.JButton btnData;
     private javax.swing.JRadioButton btnSemExpediente;
     private javax.swing.JButton btnVoltar;
-    private calendario.DateChooser calendario;
+    private com.raven.datechooser.DateChooser calendario;
     private javax.swing.JLabel doispontos;
     private javax.swing.JLabel doispontos1;
     private javax.swing.JLabel fimExpediente;

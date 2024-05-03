@@ -35,9 +35,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         update=true;
         this.CODBARBEARIA = CODBARBEARIA;
         InfoBarbearia = barbeariaDao.readUpdateCadastro(CODBARBEARIA);
-        
-        btnCadastrar.setText("ATUALIZAR");
-        titulo.setText("ATUALIZAR CADASTRO");
+        btnCadastrar.setText("Alteração de Cadastro");
         txtNome.setText(InfoBarbearia.get(0).getNome());
         txtCNPJ.setText(InfoBarbearia.get(0).getCnpj());
         txtLogin.setText(InfoBarbearia.get(0).getLogin());
@@ -374,7 +372,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         btnVoltar.setBackground(new java.awt.Color(0, 36, 73));
         btnVoltar.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
         btnVoltar.setForeground(new java.awt.Color(255, 255, 255));
-        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar.png"))); // NOI18N
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar-branco.png"))); // NOI18N
         btnVoltar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnVoltar.setBorderPainted(false);
         btnVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

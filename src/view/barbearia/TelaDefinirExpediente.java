@@ -1,6 +1,6 @@
 package view.barbearia;
 
-import calendario.SelectedDate;
+import com.raven.datechooser.SelectedDate;
 import controller.ExpedienteController;
 import css.BordaArredondada;
 import java.awt.Color;

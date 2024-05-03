@@ -4,7 +4,6 @@ import controller.BarbeariaController;
 import css.BordaArredondada;
 import dao.BarbeariaDAO;
 import java.awt.Color;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
@@ -15,7 +14,6 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
     public TelaLoginBarbearia() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
-        setIcon();
     }
     
     public void login(){
@@ -189,7 +187,7 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
         btnVoltar1.setBackground(new java.awt.Color(0, 36, 73));
         btnVoltar1.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
         btnVoltar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnVoltar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar.png"))); // NOI18N
+        btnVoltar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar-branco.png"))); // NOI18N
         btnVoltar1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnVoltar1.setBorderPainted(false);
         btnVoltar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -333,7 +331,4 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 
-    private void setIcon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../images/icone.png")));
-    }
 }

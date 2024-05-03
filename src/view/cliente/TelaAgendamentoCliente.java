@@ -1,11 +1,13 @@
 
 package view.cliente;
 
-import calendario.SelectedDate;
+import com.raven.datechooser.SelectedDate;
 import controller.AgendamentoController;
 import css.BordaArredondada;
 import dao.BarbeariaDAO;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +19,15 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -38,6 +46,8 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     BarbeariaDAO barbeariaDao = new BarbeariaDAO();
     List<Servico> servicos = new ArrayList();
     List<Barbearia> barbearias = new ArrayList();
+    Icon arrowIcon = new ImageIcon("../../images/down.png");
+    
     
     public TelaAgendamentoCliente() {
         initComponents();
@@ -91,9 +101,10 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         barbearias=barbeariaDao.read();
         StringBuilder textHtml = new StringBuilder("<html><div style='text-align: justify;'>");
         StringBuilder textHtmlfim = new StringBuilder("</div></html>");
+        StringBuilder textEspaco = new StringBuilder("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
         
         txtBarbearia.setText(barbearias.get(CODBARBEARIA-1).getNome());
-        txtDescricao.setText(textHtml+barbearias.get(CODBARBEARIA-1).getDescricao()+textHtmlfim); //inserir a tag HTML server para qubrar a linha do JLabel
+        txtDescricao.setText("<html><div style='text-align: justify;'>"+textEspaco+barbearias.get(CODBARBEARIA-1).getDescricao()+"</div></html>"); //inserir a tag HTML server para qubrar a linha do JLabel
         txtEndereco.setText(textHtml+barbearias.get(CODBARBEARIA-1).getRua()+", "
                                                     +barbearias.get(CODBARBEARIA-1).getNumero()+", "
                                                     +barbearias.get(CODBARBEARIA-1).getBairro()+", "
@@ -174,10 +185,10 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         txtHora = new javax.swing.JFormattedTextField();
         txtMinuto = new javax.swing.JFormattedTextField();
         Data = new javax.swing.JLabel();
-        calendario = new calendario.DateChooser();
         btnAgendar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
+        calendario = new com.raven.datechooser.DateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de Agendamento");
@@ -199,10 +210,13 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
 
         txtDescricao.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
         txtDescricao.setForeground(new java.awt.Color(255, 255, 255));
-        txtDescricao.setText("Descrição da Barbearia");
+        txtDescricao.setText("Descricao Barbearia");
         txtDescricao.setToolTipText("");
         txtDescricao.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         txtDescricao.setBorder(new javax.swing.border.MatteBorder(null));
+        txtDescricao.setMaximumSize(new java.awt.Dimension(765, 62));
+        txtDescricao.setMinimumSize(new java.awt.Dimension(765, 62));
+        txtDescricao.setPreferredSize(new java.awt.Dimension(765, 62));
 
         txtServicos.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
         txtServicos.setForeground(new java.awt.Color(255, 255, 255));
@@ -211,6 +225,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
 
         txtEndereco.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
         txtEndereco.setForeground(new java.awt.Color(255, 255, 255));
+        txtEndereco.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtEndereco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/localizacao.png"))); // NOI18N
         txtEndereco.setText("Localização da Barbearia");
         txtEndereco.setBorder(new javax.swing.border.MatteBorder(null));
@@ -230,14 +245,14 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
                 .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(icon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EsquerdaLayout.createSequentialGroup()
-                        .addGap(129, 129, 129)
+                        .addGap(91, 91, 91)
                         .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtRegra5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(54, 54, 54))
-                    .addComponent(txtBarbearia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtServicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(91, 91, 91))
+                    .addComponent(txtBarbearia, javax.swing.GroupLayout.DEFAULT_SIZE, 948, Short.MAX_VALUE))
                 .addContainerGap())
         );
         EsquerdaLayout.setVerticalGroup(
@@ -248,14 +263,14 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
                 .addGap(47, 47, 47)
                 .addComponent(txtBarbearia, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(txtEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                .addGap(118, 118, 118)
+                .addComponent(txtEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(txtRegra5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(288, 288, 288))
+                .addGap(271, 271, 271))
         );
 
         Direita.setBackground(new java.awt.Color(255, 255, 255));
@@ -273,7 +288,36 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         Servico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Servico.setText("Serviço");
 
-        selectServicos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Serviço" }));
+        selectServicos.setFont(new java.awt.Font("Caladea", 0, 20)); // NOI18N
+        selectServicos.setForeground(new java.awt.Color(0, 51, 102));
+        selectServicos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Serviços" }));
+        selectServicos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        selectServicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectServicosActionPerformed(evt);
+            }
+        });
+        selectServicos.setBackground(new Color(220, 220, 220, 220));
+        // Definir uma borda de 3px para o JComboBox
+
+        BordaArredondada bordaa = new BordaArredondada(new Color(0, 51, 102), 3, 10);
+        Border bordaInternaa = BorderFactory.createEmptyBorder(0, 0, 0, 0);
+        Border bordaCompostaa = BorderFactory.createCompoundBorder(bordaa, bordaInternaa);
+        selectServicos.setBorder(bordaCompostaa);
+
+        //selectServicos.setBorder(new LineBorder(new Color(0, 51, 102), 3));
+        // Personalizar o Botão de Seta
+        selectServicos.setUI(new BasicComboBoxUI() {
+            @Override
+            protected JButton createArrowButton() {
+                // Personalizar o botão da seta
+                JButton button = new JButton();
+                button.setBackground(new Color(0, 51, 102));
+                button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/down.png")));
+                button.setPreferredSize(new Dimension(40, 70));
+                return button;
+            }
+        });
 
         Hora.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
         Hora.setForeground(new java.awt.Color(0, 51, 102));
@@ -312,10 +356,6 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         Data.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Data.setText("Data");
 
-        calendario.setForeground(new java.awt.Color(0, 51, 102));
-        calendario.setToolTipText("");
-        calendario.setPreferredSize(new java.awt.Dimension(500, 500));
-
         btnAgendar.setBackground(new java.awt.Color(0, 51, 102));
         btnAgendar.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
         btnAgendar.setForeground(new java.awt.Color(255, 255, 255));
@@ -334,7 +374,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         btnVoltar.setBackground(new java.awt.Color(0, 36, 73));
         btnVoltar.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
         btnVoltar.setForeground(new java.awt.Color(255, 255, 255));
-        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar.png"))); // NOI18N
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar-branco.png"))); // NOI18N
         btnVoltar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnVoltar.setBorderPainted(false);
         btnVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -344,14 +384,12 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
             }
         });
 
+        calendario.setForeground(new java.awt.Color(0, 51, 102));
+
         javax.swing.GroupLayout DireitaLayout = new javax.swing.GroupLayout(Direita);
         Direita.setLayout(DireitaLayout);
         DireitaLayout.setHorizontalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DireitaLayout.createSequentialGroup()
-                .addGap(250, 250, 250)
-                .addComponent(Data, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(228, 228, 228))
             .addGroup(DireitaLayout.createSequentialGroup()
                 .addGap(181, 181, 181)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,18 +400,32 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
                         .addGap(30, 30, 30))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(calendario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(DireitaLayout.createSequentialGroup()
-                                .addComponent(txtHora)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtMinuto))
-                            .addComponent(Hora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(selectServicos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Servico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(calendario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(btnAgendar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(169, 169, 169))))
+            .addGroup(DireitaLayout.createSequentialGroup()
+                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DireitaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Hora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(DireitaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Servico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Data, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                        .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(232, 232, 232))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                        .addComponent(selectServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(233, 233, 233))))
         );
         DireitaLayout.setVerticalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,28 +434,28 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
                     .addGroup(DireitaLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(97, 97, 97))
+                        .addGap(222, 222, 222))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(Agendamento)
-                        .addGap(18, 18, 18)))
-                .addComponent(Servico)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(selectServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(Data)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
+                        .addGap(18, 18, 18)
+                        .addComponent(Servico)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(selectServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(Hora)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtHora)
                     .addComponent(txtMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Data)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnAgendar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -436,6 +488,10 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
+    private void selectServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectServicosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectServicosActionPerformed
+
     public static void main(String args[]) {
         
         try {
@@ -463,7 +519,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     private javax.swing.JLabel Servico;
     private javax.swing.JButton btnAgendar;
     private javax.swing.JButton btnVoltar;
-    private calendario.DateChooser calendario;
+    private com.raven.datechooser.DateChooser calendario;
     private javax.swing.JLabel icon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JComboBox<String> selectServicos;
