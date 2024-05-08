@@ -120,7 +120,7 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
         Login.setForeground(new java.awt.Color(0, 51, 102));
         Login.setText("Login");
 
-        txtLogin.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        txtLogin.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         txtLogin.setForeground(new java.awt.Color(0, 51, 102));
         txtLogin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -139,7 +139,7 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
         Senha.setForeground(new java.awt.Color(0, 51, 102));
         Senha.setText("Senha");
 
-        txtSenha.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        txtSenha.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         txtSenha.setForeground(new java.awt.Color(0, 51, 102));
         txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

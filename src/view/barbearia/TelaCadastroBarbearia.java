@@ -35,7 +35,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         update=true;
         this.CODBARBEARIA = CODBARBEARIA;
         InfoBarbearia = barbeariaDao.readUpdateCadastro(CODBARBEARIA);
-        btnCadastrar.setText("Alteração de Cadastro");
+        titulo.setText("Alteração de Cadastro");
         txtNome.setText(InfoBarbearia.get(0).getNome());
         txtCNPJ.setText(InfoBarbearia.get(0).getCnpj());
         txtLogin.setText(InfoBarbearia.get(0).getLogin());
@@ -43,12 +43,12 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         txtEmail.setText(InfoBarbearia.get(0).getEmail());
         txtTelefone1.setText(InfoBarbearia.get(0).getTelefone1());
         txtTelefone2.setText(InfoBarbearia.get(0).getTelefone2());
+        txtDescricao.setText(InfoBarbearia.get(0).getDescricao());
         txtRua.setText(InfoBarbearia.get(0).getRua());
         txtNumero.setText(InfoBarbearia.get(0).getNumero());
         txtBairro.setText(InfoBarbearia.get(0).getBairro());
         txtCidade.setText(InfoBarbearia.get(0).getCidade());
         txtUf.setText(InfoBarbearia.get(0).getUf());
-        txtDescricao.setText(InfoBarbearia.get(0).getDescricao());
     }
     
     public void recadastrar(int CODBARBEARIA){
@@ -151,9 +151,9 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         uf = new javax.swing.JLabel();
         txtUf = new javax.swing.JTextField();
         descricao = new javax.swing.JLabel();
+        txtDescricao = new javax.swing.JTextArea();
         btnCadastrar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
-        txtDescricao = new javax.swing.JTextArea();
         btnConfirmarDados = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -180,7 +180,6 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
 
         txtNome.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 24)); // NOI18N
         txtNome.setForeground(new java.awt.Color(0, 51, 102));
-        txtNome.setDocument(new LimitaNroCaracteres(100));
         txtNome.setBackground(new Color(222, 222, 222, 222));
 
         BordaArredondada borda = new BordaArredondada(new Color(0, 51, 102), 3, 10);
@@ -211,7 +210,6 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
 
         txtLogin.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 24)); // NOI18N
         txtLogin.setForeground(new java.awt.Color(0, 51, 102));
-        txtDescricao.setDocument(new LimitaNroCaracteres(10));
         txtLogin.setBackground(new Color(220, 220, 220, 220));
         txtLogin.setBorder(bordaComposta);
 
@@ -357,6 +355,18 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         descricao.setForeground(new java.awt.Color(0, 51, 102));
         descricao.setText("Descrição:");
 
+        txtDescricao.setColumns(20);
+        txtDescricao.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtDescricao.setForeground(new java.awt.Color(0, 51, 102));
+        txtDescricao.setLineWrap(true);
+        txtDescricao.setRows(5);
+        txtDescricao.setWrapStyleWord(true);
+        txtDescricao.setBackground(new Color(220, 220, 220, 220));
+
+        Border bordaD = BorderFactory.createEmptyBorder(0, 10, 0, 0);
+        Border bordaCompostaD = BorderFactory.createCompoundBorder(borda, bordaD);
+        txtDescricao.setBorder(bordaCompostaD);
+
         btnCadastrar.setBackground(new java.awt.Color(0, 36, 73));
         btnCadastrar.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
         btnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
@@ -382,21 +392,6 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
             }
         });
 
-        txtDescricao.setColumns(20);
-        txtDescricao.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        txtDescricao.setForeground(new java.awt.Color(0, 51, 102));
-        txtDescricao.setRows(5);
-        txtDescricao.setWrapStyleWord(true);
-        txtDescricao.setLineWrap(true);
-
-        txtDescricao.setDocument(new LimitaNroCaracteres(300));
-        txtDescricao.setBackground(new Color(220, 220, 220, 220));
-
-        Border bordaD = BorderFactory.createEmptyBorder(0, 10, 0, 0);
-        Border bordaCompostaD = BorderFactory.createCompoundBorder(borda, bordaD);
-
-        txtDescricao.setBorder(bordaCompostaD);
-
         btnConfirmarDados.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
         btnConfirmarDados.setForeground(new java.awt.Color(0, 51, 102));
         btnConfirmarDados.setText("Confirmo que os dados fornecidos são confiáveis e verdadeiros.");
@@ -408,6 +403,11 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DireitaLayout.createSequentialGroup()
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DireitaLayout.createSequentialGroup()
+                        .addGap(129, 129, 129)
+                        .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 1661, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(DireitaLayout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -479,20 +479,11 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
                                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cnpj)
                                     .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(40, 40, 40)
                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                                .addGap(251, 251, 251)
-                                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(DireitaLayout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(descricao)
-                                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(DireitaLayout.createSequentialGroup()
-                        .addGap(129, 129, 129)
-                        .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 1661, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(descricao)
+                            .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         DireitaLayout.setVerticalGroup(
@@ -555,11 +546,13 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
                                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(rsenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(rsenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(DireitaLayout.createSequentialGroup()
+                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(69, 69, 69)))
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -640,7 +633,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../images/icone.png")));
     }
     
-    public class LimitaNroCaracteres extends PlainDocument {
+    /*public class LimitaNroCaracteres extends PlainDocument {
         private final int iMaxLength;
         public LimitaNroCaracteres(int maxlen) {
             super();
@@ -659,7 +652,7 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
                 super.insertString(offset, str, attr);   // ...aceita str
             }
         }
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Direita;

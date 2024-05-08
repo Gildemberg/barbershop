@@ -7,7 +7,6 @@ import css.BordaArredondada;
 import dao.BarbeariaDAO;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Insets;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.UIManager;
 import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.plaf.basic.BasicComboBoxUI;
@@ -33,6 +28,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import model.Agendamento;
 import model.Servico;
+
 
 
 public class TelaAgendamentoCliente extends javax.swing.JFrame{
@@ -45,8 +41,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     SimpleDateFormat horaFormatada = new SimpleDateFormat("HH:mm");
     BarbeariaDAO barbeariaDao = new BarbeariaDAO();
     List<Servico> servicos = new ArrayList();
-    List<Barbearia> barbearias = new ArrayList();
-    Icon arrowIcon = new ImageIcon("../../images/down.png");
+    List<Barbearia> barbearias = new ArrayList();    
     
     
     public TelaAgendamentoCliente() {
@@ -57,7 +52,9 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         txtHora.getDocument().addDocumentListener(new DocumentListener() {
             private void verificaTamanho() {
                 if (txtHora.getText().trim().length() == 2) {
-                    txtMinuto.requestFocus(); 
+                    if(txtMinuto.getText().trim().length()==0){
+                        txtMinuto.requestFocus();
+                    }
                 }
             }
 
@@ -77,7 +74,6 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
             }
         });
     }
-    
     
     public void receberCodAdicionarAgend(Agendamento a){
         this.CODBARBEARIA = a.getCodbarbearia();
@@ -101,7 +97,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         barbearias=barbeariaDao.read();
         StringBuilder textHtml = new StringBuilder("<html><div style='text-align: justify;'>");
         StringBuilder textHtmlfim = new StringBuilder("</div></html>");
-        StringBuilder textEspaco = new StringBuilder("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+        String textEspaco = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
         
         txtBarbearia.setText(barbearias.get(CODBARBEARIA-1).getNome());
         txtDescricao.setText("<html><div style='text-align: justify;'>"+textEspaco+barbearias.get(CODBARBEARIA-1).getDescricao()+"</div></html>"); //inserir a tag HTML server para qubrar a linha do JLabel
@@ -288,7 +284,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         Servico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Servico.setText("Serviço");
 
-        selectServicos.setFont(new java.awt.Font("Caladea", 0, 20)); // NOI18N
+        selectServicos.setFont(new java.awt.Font("DejaVu Sans Light", 0, 20)); // NOI18N
         selectServicos.setForeground(new java.awt.Color(0, 51, 102));
         selectServicos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Serviços" }));
         selectServicos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -332,7 +328,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
             ex.printStackTrace();
         }
         txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtHora.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        txtHora.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         BordaArredondada borda = new BordaArredondada(new Color(0, 51, 102), 3, 10);
         Border bordaInterna = BorderFactory.createEmptyBorder(0, 10, 0, 0);
         Border bordaComposta = BorderFactory.createCompoundBorder(borda, bordaInterna);
@@ -347,7 +343,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
             ex.printStackTrace();
         }
         txtMinuto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtMinuto.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        txtMinuto.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         txtMinuto.setBackground(new Color(220, 220, 220, 220));
         txtMinuto.setBorder(bordaComposta);
 
@@ -405,13 +401,12 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
                         .addGap(169, 169, 169))))
             .addGroup(DireitaLayout.createSequentialGroup()
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Data, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(DireitaLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(Hora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(DireitaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Servico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(Data, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Hora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Servico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

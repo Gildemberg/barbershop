@@ -18,10 +18,6 @@ public class Barbearia {
     private String senha;
     private String rsenha;
     private String descricao;
-    private String regra1;
-    private String regra2;
-    private String regra3;
-    private String regra4;
 
     public int getId() {
         return codbarbearia;
@@ -134,8 +130,8 @@ public class Barbearia {
     public void setRsenha(String rsenha) {
         this.rsenha = rsenha;
     }
-    
-    public String getDescricao(){
+
+    public String getDescricao() {
         return descricao;
     }
 
@@ -143,42 +139,10 @@ public class Barbearia {
         this.descricao = descricao;
     }
     
-    public String getRegra1(){
-        return regra1;
-    }
-
-    public void setRegra1(String regra1) {
-        this.regra1 = regra1;
-    }
-    
-    public String getRegra2(){
-        return regra2;
-    }
-
-    public void setRegra2(String regra2) {
-        this.regra2 = regra2;
-    }
-    
-    public String getRegra3(){
-        return regra3;
-    }
-
-    public void setRegra3(String regra3) {
-        this.regra3 = regra3;
-    }
-    
-    public String getRegra4(){
-        return regra4;
-    }
-
-    public void setRegra4(String regra4) {
-        this.regra4 = regra4;
-    }
-    
     public Barbearia(){
     }
 
-    public Barbearia(String nome, String cnpj, String email, String telefone1, String telefone2, String login, String senha, String descricao, String rua, String numero, String bairro, String cidade, String uf, String regra1, String regra2, String regra3, String regra4) {
+    public Barbearia(String nome, String cnpj, String email, String telefone1, String telefone2, String login, String senha, String descricao, String rua, String numero, String bairro, String cidade, String uf) {
         this.cnpj = cnpj;
         this.nome = nome;
         this.rua = rua;
@@ -192,10 +156,6 @@ public class Barbearia {
         this.login = login;
         this.senha = senha;
         this.descricao = descricao;
-        this.regra1 = regra1;
-        this.regra2 = regra2;
-        this.regra3 = regra3;
-        this.regra4 = regra4;
     }
      
     public void cadastrarBarbearia(Barbearia b){

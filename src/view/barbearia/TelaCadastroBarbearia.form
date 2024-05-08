@@ -62,7 +62,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="titulo" min="-2" pref="1661" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="btnVoltar" min="-2" pref="75" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
@@ -159,25 +165,12 @@
                                   </Group>
                               </Group>
                           </Group>
+                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="-2" pref="251" max="-2" attributes="0"/>
-                                  <Component id="btnCadastrar" min="-2" pref="242" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="descricao" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtDescricao" min="-2" pref="530" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="btnCadastrar" min="-2" pref="530" max="-2" attributes="0"/>
+                              <Component id="descricao" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtDescricao" min="-2" pref="530" max="-2" attributes="0"/>
                           </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="titulo" min="-2" pref="1661" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnVoltar" min="-2" pref="75" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="37" max="32767" attributes="0"/>
@@ -261,13 +254,16 @@
                               </Group>
                               <Component id="rsenha" alignment="1" min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="txtCNPJ" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="txtNome" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtCNPJ" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="txtNome" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtLogin" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
                       <Component id="txtSenha" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
@@ -321,7 +317,6 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="txtNome.setDocument(new LimitaNroCaracteres(100));"/>
             <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="txtNome.setBackground(new Color(222, 222, 222, 222));&#xa;&#xa;BordaArredondada borda = new BordaArredondada(new Color(0, 51, 102), 3, 10);&#xa;Border bordaInterna = BorderFactory.createEmptyBorder(0, 10, 0, 0);&#xa;Border bordaComposta = BorderFactory.createCompoundBorder(borda, bordaInterna);&#xa;&#xa;txtNome.setBorder(bordaComposta);"/>
           </AuxValues>
         </Component>
@@ -379,7 +374,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="txtDescricao.setDocument(new LimitaNroCaracteres(10));&#xa;txtLogin.setBackground(new Color(220, 220, 220, 220));&#xa;txtLogin.setBorder(bordaComposta);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="txtLogin.setBackground(new Color(220, 220, 220, 220));&#xa;txtLogin.setBorder(bordaComposta);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="senha">
@@ -725,6 +720,23 @@
             <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o:"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JTextArea" name="txtDescricao">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Caladea" size="24" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="33" red="0" type="rgb"/>
+            </Property>
+            <Property name="lineWrap" type="boolean" value="true"/>
+            <Property name="rows" type="int" value="5"/>
+            <Property name="wrapStyleWord" type="boolean" value="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="txtDescricao.setBackground(new Color(220, 220, 220, 220));&#xa;&#xa;Border bordaD = BorderFactory.createEmptyBorder(0, 10, 0, 0);&#xa;Border bordaCompostaD = BorderFactory.createCompoundBorder(borda, bordaD);&#xa;txtDescricao.setBorder(bordaCompostaD);"/>
+          </AuxValues>
+        </Component>
         <Component class="javax.swing.JButton" name="btnCadastrar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -773,22 +785,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVoltarActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JTextArea" name="txtDescricao">
-          <Properties>
-            <Property name="columns" type="int" value="20"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Caladea" size="24" style="0"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="33" red="0" type="rgb"/>
-            </Property>
-            <Property name="rows" type="int" value="5"/>
-            <Property name="wrapStyleWord" type="boolean" value="true"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="txtDescricao.setLineWrap(true);&#xa;&#xa;txtDescricao.setDocument(new LimitaNroCaracteres(300));&#xa;txtDescricao.setBackground(new Color(220, 220, 220, 220));&#xa;&#xa;Border bordaD = BorderFactory.createEmptyBorder(0, 10, 0, 0);&#xa;Border bordaCompostaD = BorderFactory.createCompoundBorder(borda, bordaD);&#xa;&#xa;&#xa;txtDescricao.setBorder(bordaCompostaD);"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="btnConfirmarDados">
           <Properties>

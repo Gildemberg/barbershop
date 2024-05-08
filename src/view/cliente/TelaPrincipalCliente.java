@@ -21,6 +21,7 @@ import java.util.Locale;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import model.Cliente;
 
 
 public final class TelaPrincipalCliente extends javax.swing.JFrame {
@@ -38,7 +39,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     //INSTANCIAS
     TelaAgendamentoCliente TAC = new TelaAgendamentoCliente();
     Agendamento agendamento = new Agendamento();
-    AgendamentoDAO AgendamentoDao = new AgendamentoDAO();
+    AgendamentoDAO agendDAO = new AgendamentoDAO();
     AgendamentoController AgendamentoController = new AgendamentoController();
     ClienteDAO ClienteDao = new ClienteDAO();
     BarbeariaDAO BarberDao = new BarbeariaDAO();
@@ -51,7 +52,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
       
     public void receberCodCliente(int CODCLIENTE){
         this.CODCLIENTE = CODCLIENTE;
-        exibirNomeCliente();
+        preencherDadosCliente();
         consultarAgendamento();
         consultarBarbearia();
         inserirDataHora();
@@ -71,8 +72,11 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         dataAtual.setText(DIA+" - "+DATA +" - "+ HORA);
     }
     
-    public void exibirNomeCliente (){
-        nome_usr.setText("Olá, "+ClienteDao.retornoNome(CODCLIENTE));
+    public void preencherDadosCliente (){
+        List<Cliente> clientes = new ArrayList();
+        clientes=ClienteDao.read(CODCLIENTE);
+        nome_usr.setText(clientes.get(CODCLIENTE-1).getNome()); //imprimendo o nome usr
+        localizacao.setText(clientes.get(CODCLIENTE-1).getCidade()+" - "+clientes.get(CODCLIENTE-1).getUf());
       }
     
     public void consultarBarbearia(){
@@ -98,8 +102,6 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     }
     
     public void consultarAgendamento(){
-    
-    AgendamentoDAO agendDAO = new AgendamentoDAO();
     List<Agendamento> agendamentos = agendDAO.consultarAgendamentosCliente(CODCLIENTE);
 
     JPanel[] paineisAgendamento = {Agendamento01, Agendamento02, Agendamento03, Agendamento4};

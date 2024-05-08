@@ -72,6 +72,7 @@ public class BarbeariaDAO {
             }
         }
     }
+    
     public void updateCadastro(Barbearia b){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -159,7 +160,7 @@ public class BarbeariaDAO {
             return barbearias;
         }
     
-            public boolean checkInformacoes(Barbearia b){
+    public boolean checkInformacoes(Barbearia b){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
@@ -187,7 +188,7 @@ public class BarbeariaDAO {
             return check;  
         }
     
-        public List<Barbearia> readUpdateCadastro(int CODBARBEARIA){
+    public List<Barbearia> readUpdateCadastro(int CODBARBEARIA){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
@@ -230,7 +231,7 @@ public class BarbeariaDAO {
             return barbearias;
         }
         
-        public boolean checkLogin(String login, String senha){
+    public boolean checkLogin(String login, String senha){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
@@ -255,8 +256,7 @@ public class BarbeariaDAO {
             return check;
         }
     
-    
-        public int retornoCod(String login, String senha){
+    public int retornoCod(String login, String senha){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
@@ -283,32 +283,6 @@ public class BarbeariaDAO {
             return 0;
         }
         
-        public String retornoNome(int codbarbearia){
-            Connection con = ConnectionFactory.getConnection();
-            PreparedStatement stmt = null;
-            ResultSet rs = null;
-            String nome;
-            
-            try {
-                stmt = con.prepareStatement("SELECT NOMESOCIAL FROM barbearia WHERE CODBARBEARIA = ?");
-                stmt.setInt(1, codbarbearia);
-                rs = stmt.executeQuery();
-                
-                if(rs.next()){
-                    nome=rs.getString(1);
-                    return nome;
-                } else{
-                    return null;
-                }
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Erro: "+ex);
-                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }finally{
-                ConnectionFactory.closeConnection(con, stmt, rs);
-            }
-            return null;
-        }
-        
     public void cadastrarServico(Servico s){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -330,6 +304,7 @@ public class BarbeariaDAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
     }
+    
     public void alterarServico(Servico s){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -352,6 +327,7 @@ public class BarbeariaDAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
     }
+    
     public boolean checkServico(Servico s){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
@@ -376,6 +352,7 @@ public class BarbeariaDAO {
             }
             return check;  
         }
+    
     public List<Servico> readServico(int CODBARBEARIA){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;

@@ -1,6 +1,5 @@
 package view.barbearia;
 
-import com.raven.datechooser.SelectedDate;
 import controller.ExpedienteController;
 import css.BordaArredondada;
 import java.awt.Color;
@@ -34,7 +33,9 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
         txtHoraIni.getDocument().addDocumentListener(new DocumentListener() {
             private void verificaTamanho() {
                 if (txtHoraIni.getText().trim().length() == 2) {
-                    txtMinutoIni.requestFocus(); 
+                    if(txtMinutoIni.getText().trim().length()==0){
+                        txtMinutoIni.requestFocus();
+                    } 
                 }
             }
 
@@ -56,7 +57,9 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
         txtHoraFim.getDocument().addDocumentListener(new DocumentListener() {
             private void verificaTamanho() {
                 if (txtHoraFim.getText().trim().length() == 2) {
-                    txtMinutoFim.requestFocus(); 
+                    if(txtMinutoFim.getText().trim().length()==0){
+                        txtMinutoFim.requestFocus();
+                    }
                 }
             }
 
@@ -238,7 +241,7 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtHoraIni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtHoraIni.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        txtHoraIni.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         BordaArredondada borda = new BordaArredondada(new Color(0, 51, 102), 3, 10);
         Border bordaInterna = BorderFactory.createEmptyBorder(0, 10, 0, 0);
         Border bordaComposta = BorderFactory.createCompoundBorder(borda, bordaInterna);
@@ -258,7 +261,7 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtMinutoIni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtMinutoIni.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        txtMinutoIni.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         txtMinutoIni.setBackground(new Color(222, 222, 222, 222));
         txtMinutoIni.setBorder(bordaComposta);
 
@@ -275,7 +278,7 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtHoraFim.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtHoraFim.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        txtHoraFim.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         txtHoraFim.setBackground(new Color(222, 222, 222, 222));
         txtHoraFim.setBorder(bordaComposta);
 
@@ -292,7 +295,7 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtMinutoFim.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtMinutoFim.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        txtMinutoFim.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         txtMinutoFim.setBackground(new Color(222, 222, 222, 222));
         txtMinutoFim.setBorder(bordaComposta);
 
@@ -331,7 +334,7 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtDataInicial.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtDataInicial.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        txtDataInicial.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         txtDataInicial.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         txtDataInicial.setBackground(new Color(222, 222, 222, 222));
         txtDataInicial.setBorder(bordaComposta);
@@ -343,7 +346,7 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtDataFinal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtDataFinal.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        txtDataFinal.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         txtDataFinal.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         txtDataFinal.setBackground(new Color(222, 222, 222, 222));
         txtDataFinal.setBorder(bordaComposta);
@@ -357,22 +360,20 @@ public class TelaDefinirExpediente extends javax.swing.JFrame {
         Centro.setLayout(CentroLayout);
         CentroLayout.setHorizontalGroup(
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(txtRegra5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtRegra6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(CentroLayout.createSequentialGroup()
-                    .addGap(993, 993, 993)
-                    .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(CentroLayout.createSequentialGroup()
-                            .addComponent(txtHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(doispontos1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtMinutoFim, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(horarioFim, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(532, 532, 532)))
+            .addComponent(txtRegra5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(txtRegra6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(CentroLayout.createSequentialGroup()
                 .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CentroLayout.createSequentialGroup()
+                        .addGap(993, 993, 993)
+                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CentroLayout.createSequentialGroup()
+                                .addComponent(txtHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(doispontos1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtMinutoFim, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(horarioFim, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(CentroLayout.createSequentialGroup()
                         .addGap(567, 567, 567)
                         .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)

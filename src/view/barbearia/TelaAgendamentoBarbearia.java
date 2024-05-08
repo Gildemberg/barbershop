@@ -368,7 +368,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         seta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
 
-        txtCliente1.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtCliente1.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtCliente1.setForeground(new java.awt.Color(255, 255, 255));
         txtCliente1.setToolTipText("");
         txtCliente1.setBorder(new javax.swing.border.MatteBorder(null));
@@ -376,7 +376,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtCliente1.setMinimumSize(new java.awt.Dimension(300, 30));
         txtCliente1.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorario1.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtHorario1.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtHorario1.setForeground(new java.awt.Color(255, 255, 255));
         txtHorario1.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorario1.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -384,7 +384,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtHorario1.setPreferredSize(new java.awt.Dimension(300, 30));
         txtHorario1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtServico1.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtServico1.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtServico1.setForeground(new java.awt.Color(255, 255, 255));
         txtServico1.setBorder(new javax.swing.border.MatteBorder(null));
         txtServico1.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -421,7 +421,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             .addGroup(AgendamentoAbe1Layout.createSequentialGroup()
                 .addGroup(AgendamentoAbe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoAbe1Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, 0)
                         .addGroup(AgendamentoAbe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnConfirmar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(AgendamentoAbe1Layout.createSequentialGroup()
@@ -443,7 +443,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         seta2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
 
-        txtCliente2.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtCliente2.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtCliente2.setForeground(new java.awt.Color(255, 255, 255));
         txtCliente2.setToolTipText("");
         txtCliente2.setBorder(new javax.swing.border.MatteBorder(null));
@@ -451,7 +451,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtCliente2.setMinimumSize(new java.awt.Dimension(300, 30));
         txtCliente2.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorario2.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtHorario2.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtHorario2.setForeground(new java.awt.Color(255, 255, 255));
         txtHorario2.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorario2.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -459,7 +459,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtHorario2.setPreferredSize(new java.awt.Dimension(300, 30));
         txtHorario2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtServico2.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtServico2.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtServico2.setForeground(new java.awt.Color(255, 255, 255));
         txtServico2.setBorder(new javax.swing.border.MatteBorder(null));
         txtServico2.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -496,7 +496,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             .addGroup(AgendamentoAbe2Layout.createSequentialGroup()
                 .addGroup(AgendamentoAbe2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoAbe2Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, 0)
                         .addGroup(AgendamentoAbe2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnConfirmar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(AgendamentoAbe2Layout.createSequentialGroup()
@@ -518,7 +518,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         seta3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
 
-        txtCliente3.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtCliente3.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtCliente3.setForeground(new java.awt.Color(255, 255, 255));
         txtCliente3.setToolTipText("");
         txtCliente3.setBorder(new javax.swing.border.MatteBorder(null));
@@ -526,7 +526,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtCliente3.setMinimumSize(new java.awt.Dimension(300, 30));
         txtCliente3.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorario3.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtHorario3.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtHorario3.setForeground(new java.awt.Color(255, 255, 255));
         txtHorario3.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorario3.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -534,7 +534,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtHorario3.setPreferredSize(new java.awt.Dimension(300, 30));
         txtHorario3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtServico3.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtServico3.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtServico3.setForeground(new java.awt.Color(255, 255, 255));
         txtServico3.setBorder(new javax.swing.border.MatteBorder(null));
         txtServico3.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -571,7 +571,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             .addGroup(AgendamentoAbe3Layout.createSequentialGroup()
                 .addGroup(AgendamentoAbe3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoAbe3Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, 0)
                         .addGroup(AgendamentoAbe3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnConfirmar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(AgendamentoAbe3Layout.createSequentialGroup()
@@ -593,7 +593,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         seta4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
 
-        txtCliente4.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtCliente4.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtCliente4.setForeground(new java.awt.Color(255, 255, 255));
         txtCliente4.setToolTipText("");
         txtCliente4.setBorder(new javax.swing.border.MatteBorder(null));
@@ -601,7 +601,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtCliente4.setMinimumSize(new java.awt.Dimension(300, 30));
         txtCliente4.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorario4.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtHorario4.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtHorario4.setForeground(new java.awt.Color(255, 255, 255));
         txtHorario4.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorario4.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -609,7 +609,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtHorario4.setPreferredSize(new java.awt.Dimension(300, 30));
         txtHorario4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtServico4.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtServico4.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtServico4.setForeground(new java.awt.Color(255, 255, 255));
         txtServico4.setBorder(new javax.swing.border.MatteBorder(null));
         txtServico4.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -646,7 +646,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             .addGroup(AgendamentoAbe4Layout.createSequentialGroup()
                 .addGroup(AgendamentoAbe4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoAbe4Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, 0)
                         .addGroup(AgendamentoAbe4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnConfirmar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(AgendamentoAbe4Layout.createSequentialGroup()
@@ -668,7 +668,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         seta5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
 
-        txtCliente5.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtCliente5.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtCliente5.setForeground(new java.awt.Color(255, 255, 255));
         txtCliente5.setToolTipText("");
         txtCliente5.setBorder(new javax.swing.border.MatteBorder(null));
@@ -676,7 +676,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtCliente5.setMinimumSize(new java.awt.Dimension(300, 30));
         txtCliente5.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorario5.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtHorario5.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtHorario5.setForeground(new java.awt.Color(255, 255, 255));
         txtHorario5.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorario5.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -684,7 +684,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtHorario5.setPreferredSize(new java.awt.Dimension(300, 30));
         txtHorario5.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtServico5.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtServico5.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtServico5.setForeground(new java.awt.Color(255, 255, 255));
         txtServico5.setBorder(new javax.swing.border.MatteBorder(null));
         txtServico5.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -721,7 +721,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             .addGroup(AgendamentoAbe5Layout.createSequentialGroup()
                 .addGroup(AgendamentoAbe5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoAbe5Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, 0)
                         .addGroup(AgendamentoAbe5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnConfirmar5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(AgendamentoAbe5Layout.createSequentialGroup()
@@ -765,7 +765,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         seta6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta2.png"))); // NOI18N
 
-        txtClienteCan1.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtClienteCan1.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtClienteCan1.setForeground(new java.awt.Color(255, 255, 255));
         txtClienteCan1.setToolTipText("");
         txtClienteCan1.setBorder(new javax.swing.border.MatteBorder(null));
@@ -773,7 +773,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtClienteCan1.setMinimumSize(new java.awt.Dimension(300, 30));
         txtClienteCan1.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorarioCan1.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtHorarioCan1.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtHorarioCan1.setForeground(new java.awt.Color(255, 255, 255));
         txtHorarioCan1.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorarioCan1.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -781,7 +781,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtHorarioCan1.setPreferredSize(new java.awt.Dimension(300, 30));
         txtHorarioCan1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtServicoCan1.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtServicoCan1.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtServicoCan1.setForeground(new java.awt.Color(255, 255, 255));
         txtServicoCan1.setBorder(new javax.swing.border.MatteBorder(null));
         txtServicoCan1.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -806,7 +806,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             .addGroup(AgendamentoCan1Layout.createSequentialGroup()
                 .addGroup(AgendamentoCan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoCan1Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, 0)
                         .addComponent(txtClienteCan1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtHorarioCan1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -825,7 +825,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         seta7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta2.png"))); // NOI18N
 
-        txtClienteCan3.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtClienteCan3.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtClienteCan3.setForeground(new java.awt.Color(255, 255, 255));
         txtClienteCan3.setToolTipText("");
         txtClienteCan3.setBorder(new javax.swing.border.MatteBorder(null));
@@ -833,7 +833,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtClienteCan3.setMinimumSize(new java.awt.Dimension(300, 30));
         txtClienteCan3.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorarioCan3.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtHorarioCan3.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtHorarioCan3.setForeground(new java.awt.Color(255, 255, 255));
         txtHorarioCan3.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorarioCan3.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -841,7 +841,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtHorarioCan3.setPreferredSize(new java.awt.Dimension(300, 30));
         txtHorarioCan3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtServicoCan3.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtServicoCan3.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtServicoCan3.setForeground(new java.awt.Color(255, 255, 255));
         txtServicoCan3.setBorder(new javax.swing.border.MatteBorder(null));
         txtServicoCan3.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -866,7 +866,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             .addGroup(AgendamentoCan3Layout.createSequentialGroup()
                 .addGroup(AgendamentoCan3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoCan3Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, 0)
                         .addComponent(txtClienteCan3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtHorarioCan3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -885,7 +885,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         seta8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta2.png"))); // NOI18N
 
-        txtClienteCan2.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtClienteCan2.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtClienteCan2.setForeground(new java.awt.Color(255, 255, 255));
         txtClienteCan2.setToolTipText("");
         txtClienteCan2.setBorder(new javax.swing.border.MatteBorder(null));
@@ -893,7 +893,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtClienteCan2.setMinimumSize(new java.awt.Dimension(300, 30));
         txtClienteCan2.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorarioCan2.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtHorarioCan2.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtHorarioCan2.setForeground(new java.awt.Color(255, 255, 255));
         txtHorarioCan2.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorarioCan2.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -901,7 +901,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtHorarioCan2.setPreferredSize(new java.awt.Dimension(300, 30));
         txtHorarioCan2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtServicoCan2.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtServicoCan2.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtServicoCan2.setForeground(new java.awt.Color(255, 255, 255));
         txtServicoCan2.setBorder(new javax.swing.border.MatteBorder(null));
         txtServicoCan2.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -926,7 +926,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             .addGroup(AgendamentoCan2Layout.createSequentialGroup()
                 .addGroup(AgendamentoCan2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoCan2Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, 0)
                         .addComponent(txtClienteCan2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtHorarioCan2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -945,7 +945,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         seta9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta2.png"))); // NOI18N
 
-        txtClienteCan4.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtClienteCan4.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtClienteCan4.setForeground(new java.awt.Color(255, 255, 255));
         txtClienteCan4.setToolTipText("");
         txtClienteCan4.setBorder(new javax.swing.border.MatteBorder(null));
@@ -953,7 +953,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtClienteCan4.setMinimumSize(new java.awt.Dimension(300, 30));
         txtClienteCan4.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorarioCan4.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtHorarioCan4.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtHorarioCan4.setForeground(new java.awt.Color(255, 255, 255));
         txtHorarioCan4.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorarioCan4.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -961,7 +961,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtHorarioCan4.setPreferredSize(new java.awt.Dimension(300, 30));
         txtHorarioCan4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtServicoCan4.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtServicoCan4.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtServicoCan4.setForeground(new java.awt.Color(255, 255, 255));
         txtServicoCan4.setBorder(new javax.swing.border.MatteBorder(null));
         txtServicoCan4.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -986,7 +986,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             .addGroup(AgendamentoCan4Layout.createSequentialGroup()
                 .addGroup(AgendamentoCan4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoCan4Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, 0)
                         .addComponent(txtClienteCan4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtHorarioCan4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1005,7 +1005,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         seta10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta2.png"))); // NOI18N
 
-        txtClienteCan5.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtClienteCan5.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtClienteCan5.setForeground(new java.awt.Color(255, 255, 255));
         txtClienteCan5.setToolTipText("");
         txtClienteCan5.setBorder(new javax.swing.border.MatteBorder(null));
@@ -1013,7 +1013,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtClienteCan5.setMinimumSize(new java.awt.Dimension(300, 30));
         txtClienteCan5.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorarioCan5.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtHorarioCan5.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtHorarioCan5.setForeground(new java.awt.Color(255, 255, 255));
         txtHorarioCan5.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorarioCan5.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -1021,7 +1021,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtHorarioCan5.setPreferredSize(new java.awt.Dimension(300, 30));
         txtHorarioCan5.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtServicoCan5.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtServicoCan5.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtServicoCan5.setForeground(new java.awt.Color(255, 255, 255));
         txtServicoCan5.setBorder(new javax.swing.border.MatteBorder(null));
         txtServicoCan5.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -1046,7 +1046,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             .addGroup(AgendamentoCan5Layout.createSequentialGroup()
                 .addGroup(AgendamentoCan5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoCan5Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, 0)
                         .addComponent(txtClienteCan5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtHorarioCan5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1087,7 +1087,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         seta11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta3.png"))); // NOI18N
 
-        txtClienteCon1.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtClienteCon1.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtClienteCon1.setForeground(new java.awt.Color(255, 255, 255));
         txtClienteCon1.setToolTipText("");
         txtClienteCon1.setBorder(new javax.swing.border.MatteBorder(null));
@@ -1095,7 +1095,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtClienteCon1.setMinimumSize(new java.awt.Dimension(300, 30));
         txtClienteCon1.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorarioCon1.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtHorarioCon1.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtHorarioCon1.setForeground(new java.awt.Color(255, 255, 255));
         txtHorarioCon1.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorarioCon1.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -1103,7 +1103,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtHorarioCon1.setPreferredSize(new java.awt.Dimension(300, 30));
         txtHorarioCon1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtServicoCon1.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtServicoCon1.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtServicoCon1.setForeground(new java.awt.Color(255, 255, 255));
         txtServicoCon1.setBorder(new javax.swing.border.MatteBorder(null));
         txtServicoCon1.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -1128,7 +1128,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             .addGroup(AgendamentoCon1Layout.createSequentialGroup()
                 .addGroup(AgendamentoCon1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoCon1Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, 0)
                         .addComponent(txtClienteCon1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtHorarioCon1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1147,7 +1147,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         seta12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta3.png"))); // NOI18N
 
-        txtClienteCon4.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtClienteCon4.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtClienteCon4.setForeground(new java.awt.Color(255, 255, 255));
         txtClienteCon4.setToolTipText("");
         txtClienteCon4.setBorder(new javax.swing.border.MatteBorder(null));
@@ -1155,7 +1155,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtClienteCon4.setMinimumSize(new java.awt.Dimension(300, 30));
         txtClienteCon4.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorarioCon4.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtHorarioCon4.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtHorarioCon4.setForeground(new java.awt.Color(255, 255, 255));
         txtHorarioCon4.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorarioCon4.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -1163,7 +1163,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtHorarioCon4.setPreferredSize(new java.awt.Dimension(300, 30));
         txtHorarioCon4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtServicoCon4.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtServicoCon4.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtServicoCon4.setForeground(new java.awt.Color(255, 255, 255));
         txtServicoCon4.setBorder(new javax.swing.border.MatteBorder(null));
         txtServicoCon4.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -1188,7 +1188,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             .addGroup(AgendamentoCon4Layout.createSequentialGroup()
                 .addGroup(AgendamentoCon4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoCon4Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, 0)
                         .addComponent(txtClienteCon4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtHorarioCon4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1207,7 +1207,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         seta13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta3.png"))); // NOI18N
 
-        txtClienteCon2.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtClienteCon2.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtClienteCon2.setForeground(new java.awt.Color(255, 255, 255));
         txtClienteCon2.setToolTipText("");
         txtClienteCon2.setBorder(new javax.swing.border.MatteBorder(null));
@@ -1215,7 +1215,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtClienteCon2.setMinimumSize(new java.awt.Dimension(300, 30));
         txtClienteCon2.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorarioCon2.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtHorarioCon2.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtHorarioCon2.setForeground(new java.awt.Color(255, 255, 255));
         txtHorarioCon2.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorarioCon2.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -1223,7 +1223,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtHorarioCon2.setPreferredSize(new java.awt.Dimension(300, 30));
         txtHorarioCon2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtServicoCon2.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtServicoCon2.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtServicoCon2.setForeground(new java.awt.Color(255, 255, 255));
         txtServicoCon2.setBorder(new javax.swing.border.MatteBorder(null));
         txtServicoCon2.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -1248,7 +1248,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             .addGroup(AgendamentoCon2Layout.createSequentialGroup()
                 .addGroup(AgendamentoCon2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoCon2Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, 0)
                         .addComponent(txtClienteCon2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtHorarioCon2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1267,7 +1267,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         seta14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta3.png"))); // NOI18N
 
-        txtClienteCon5.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtClienteCon5.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtClienteCon5.setForeground(new java.awt.Color(255, 255, 255));
         txtClienteCon5.setToolTipText("");
         txtClienteCon5.setBorder(new javax.swing.border.MatteBorder(null));
@@ -1275,7 +1275,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtClienteCon5.setMinimumSize(new java.awt.Dimension(300, 30));
         txtClienteCon5.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorarioCon5.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtHorarioCon5.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtHorarioCon5.setForeground(new java.awt.Color(255, 255, 255));
         txtHorarioCon5.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorarioCon5.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -1283,7 +1283,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtHorarioCon5.setPreferredSize(new java.awt.Dimension(300, 30));
         txtHorarioCon5.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtServicoCon5.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtServicoCon5.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtServicoCon5.setForeground(new java.awt.Color(255, 255, 255));
         txtServicoCon5.setBorder(new javax.swing.border.MatteBorder(null));
         txtServicoCon5.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -1308,7 +1308,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             .addGroup(AgendamentoCon5Layout.createSequentialGroup()
                 .addGroup(AgendamentoCon5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoCon5Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, 0)
                         .addComponent(txtClienteCon5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtHorarioCon5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1327,7 +1327,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         seta15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seta15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta3.png"))); // NOI18N
 
-        txtClienteCon3.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtClienteCon3.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtClienteCon3.setForeground(new java.awt.Color(255, 255, 255));
         txtClienteCon3.setToolTipText("");
         txtClienteCon3.setBorder(new javax.swing.border.MatteBorder(null));
@@ -1335,7 +1335,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtClienteCon3.setMinimumSize(new java.awt.Dimension(300, 30));
         txtClienteCon3.setPreferredSize(new java.awt.Dimension(300, 30));
 
-        txtHorarioCon3.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtHorarioCon3.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtHorarioCon3.setForeground(new java.awt.Color(255, 255, 255));
         txtHorarioCon3.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorarioCon3.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -1343,7 +1343,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
         txtHorarioCon3.setPreferredSize(new java.awt.Dimension(300, 30));
         txtHorarioCon3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtServicoCon3.setFont(new java.awt.Font("Caladea", 0, 18)); // NOI18N
+        txtServicoCon3.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtServicoCon3.setForeground(new java.awt.Color(255, 255, 255));
         txtServicoCon3.setBorder(new javax.swing.border.MatteBorder(null));
         txtServicoCon3.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -1368,7 +1368,7 @@ public class TelaAgendamentoBarbearia extends javax.swing.JFrame {
             .addGroup(AgendamentoCon3Layout.createSequentialGroup()
                 .addGroup(AgendamentoCon3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoCon3Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, 0)
                         .addComponent(txtClienteCon3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtHorarioCon3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)

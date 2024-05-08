@@ -32,7 +32,9 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
         txtHoraIni.getDocument().addDocumentListener(new DocumentListener() {
             private void verificaTamanho() {
                 if (txtHoraIni.getText().trim().length() == 2) {
-                    txtMinutoIni.requestFocus(); 
+                    if(txtMinutoIni.getText().trim().length()==0){
+                        txtMinutoIni.requestFocus();
+                    }
                 }
             }
 
@@ -54,7 +56,9 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
         txtHoraFim.getDocument().addDocumentListener(new DocumentListener() {
             private void verificaTamanho() {
                 if (txtHoraFim.getText().trim().length() == 2) {
-                    txtMinutoFim.requestFocus(); 
+                    if(txtMinutoFim.getText().trim().length()==0){
+                        txtMinutoFim.requestFocus();
+                    }
                 }
             }
 
@@ -236,7 +240,7 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtHoraIni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtHoraIni.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        txtHoraIni.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         BordaArredondada borda = new BordaArredondada(new Color(0, 51, 102), 3, 10);
         Border bordaInterna = BorderFactory.createEmptyBorder(0, 10, 0, 0);
         Border bordaComposta = BorderFactory.createCompoundBorder(borda, bordaInterna);
@@ -255,7 +259,7 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtMinutoIni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtMinutoIni.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        txtMinutoIni.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         txtMinutoIni.setBackground(new Color(222, 222, 222, 222));
         txtMinutoIni.setBorder(bordaComposta);
 
@@ -272,7 +276,7 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtHoraFim.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtHoraFim.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        txtHoraFim.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         txtHoraFim.setBackground(new Color(222, 222, 222, 222));
         txtHoraFim.setBorder(bordaComposta);
 
@@ -288,7 +292,7 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtMinutoFim.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtMinutoFim.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        txtMinutoFim.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         txtMinutoFim.setBackground(new Color(222, 222, 222, 222));
         txtMinutoFim.setBorder(bordaComposta);
 
@@ -336,9 +340,7 @@ public class TelaAlterarExpediente extends javax.swing.JFrame {
                         .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(104, 104, 104)))
                 .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CentroLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(DefinaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DefinaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(CentroLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)

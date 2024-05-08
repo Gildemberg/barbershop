@@ -3,12 +3,9 @@ package view.barbearia;
 
 import dao.BarbeariaDAO;
 import java.awt.Toolkit;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.TextStyle;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
+import model.Barbearia;
 
 public class TelaPrincipalBarbearia extends javax.swing.JFrame {
     
@@ -22,15 +19,17 @@ public class TelaPrincipalBarbearia extends javax.swing.JFrame {
         setIcon();
     }
     
-    public void receberCodBarbearia(int CODBARBEARIA){//receber o cod EMPRESA
-        this.CODBARBEARIA = CODBARBEARIA; //recebendo o cod emp
-        consultarNomeEmp(CODBARBEARIA);
+    public void receberCodBarbearia(int CODBARBEARIA){
+        this.CODBARBEARIA = CODBARBEARIA; 
+        preencherCamposBarber(CODBARBEARIA);
     }
     
-    public void consultarNomeEmp (int CODBARBEARIA){//consultando o nome USUÁRIO
+    public void preencherCamposBarber (int CODBARBEARIA){
+        List<Barbearia> barbearias = new ArrayList(); 
         BarbeariaDAO BarberDao = new BarbeariaDAO();
-        NOMEBARBEARIA = BarberDao.retornoNome(CODBARBEARIA); //consultando o nome usr
-        nome_emp.setText(NOMEBARBEARIA); //imprimendo o nome usr
+        barbearias=BarberDao.read();
+        nome_emp.setText(barbearias.get(CODBARBEARIA-1).getNome()); //imprimendo o nome usr
+        localizacao.setText(barbearias.get(CODBARBEARIA-1).getCidade()+" - "+barbearias.get(CODBARBEARIA-1).getUf());
       }
 
     @SuppressWarnings("unchecked")

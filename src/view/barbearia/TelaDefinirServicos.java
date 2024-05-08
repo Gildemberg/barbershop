@@ -140,7 +140,7 @@ public class TelaDefinirServicos extends javax.swing.JFrame {
         txtServico.setText("Serviço");
 
         inServico.setBackground(new java.awt.Color(255, 255, 255));
-        inServico.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        inServico.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         inServico.setForeground(new java.awt.Color(0, 51, 102));
         BordaArredondada borda = new BordaArredondada(new Color(0, 51, 102), 3, 10);
         Border bordaInterna = BorderFactory.createEmptyBorder(0, 10, 0, 0);
@@ -157,7 +157,7 @@ public class TelaDefinirServicos extends javax.swing.JFrame {
         txtTempo.setText("Tempo (minutos)");
 
         inTempo.setBackground(new java.awt.Color(255, 255, 255));
-        inTempo.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        inTempo.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         inTempo.setForeground(new java.awt.Color(0, 51, 102));
         inTempo.setBackground(new Color(222, 222, 222, 222));
         inTempo.setBorder(bordaComposta);
@@ -173,7 +173,7 @@ public class TelaDefinirServicos extends javax.swing.JFrame {
         });
 
         inValor.setBackground(new java.awt.Color(255, 255, 255));
-        inValor.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        inValor.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         inValor.setForeground(new java.awt.Color(0, 51, 102));
         inValor.setBackground(new Color(222, 222, 222, 222));
         inValor.setBorder(bordaComposta);

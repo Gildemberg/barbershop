@@ -125,6 +125,7 @@ public class TelaLoginCliente extends javax.swing.JFrame {
         Login.setText("Login:");
 
         txtLogin.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
+        txtLogin.setForeground(new java.awt.Color(0, 51, 102));
         txtLogin.setAlignmentX(3.0F);
         txtLogin.setPreferredSize(new java.awt.Dimension(15, 24));
         txtLogin.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -145,6 +146,7 @@ public class TelaLoginCliente extends javax.swing.JFrame {
         Senha.setText("Senha:");
 
         txtSenha.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
+        txtSenha.setForeground(new java.awt.Color(0, 51, 102));
         txtSenha.setAlignmentX(1.5F);
         txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
