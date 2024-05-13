@@ -282,19 +282,48 @@ public class BarbeariaDAO {
             }
             return 0;
         }
-        
+    
+    
+    /*======================================SERVICOS========================================*/
+    public List<Servico> readServico(int CODBARBEARIA){
+            Connection con = ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            List<Servico> servicos = new ArrayList();
+            
+            try {
+                stmt = con.prepareStatement("SELECT CODSERVICO, NOME, VALOR FROM servico WHERE FK_CODBARBEARIA=?");
+                stmt.setInt(1, CODBARBEARIA);
+                rs = stmt.executeQuery();
+                
+                while(rs.next()){
+                    Servico modelServico = new Servico();
+                    modelServico.setCodservico(rs.getInt(1));
+                    modelServico.setNome(rs.getString(2));
+                    modelServico.setValor(rs.getFloat(3));
+                    servicos.add(modelServico);
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro: "+ex);
+                Logger.getLogger(BarbeariaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+            
+            return servicos;
+        }
+    
     public void cadastrarServico(Servico s){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
         try {
-            String sql = "INSERT INTO servico (NOME, VALOR, TEMPO, FK_CODBARBEARIA) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO servico (NOME, VALOR, FK_CODBARBEARIA) VALUES(?,?,?)";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, s.getNome());
             stmt.setFloat(2, s.getValor());
-            stmt.setTime(3, s.getTempo());
-            stmt.setInt(4, s.getCODBARBEARIA());
+            stmt.setInt(3, s.getCODBARBEARIA());
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
@@ -308,23 +337,39 @@ public class BarbeariaDAO {
     public void alterarServico(Servico s){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-        ResultSet rs = null;
 
         try {
-            String sql = "UPDATE servico SET NOME=?, VALOR=?, TEMPO=? WHERE CODSERVICO=?";
+            String sql = "UPDATE servico SET NOME=?, VALOR=? WHERE CODSERVICO=?";
             stmt = con.prepareStatement(sql);
             
             stmt.setString(1, s.getNome());
             stmt.setFloat(2, s.getValor());
-            stmt.setTime(3, s.getTempo());
-            stmt.setInt(4, s.getId());
+            stmt.setInt(3, s.getCodservico());
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: " + ex);
             Logger.getLogger(BarbeariaDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            ConnectionFactory.closeConnection(con, stmt, rs);
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    
+    public void deletarServico(Servico s){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            String sql = "DELETE FROM servico WHERE CODSERVICO=?";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, s.getCodservico());
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
+            Logger.getLogger(BarbeariaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
         }
     }
     
@@ -335,9 +380,10 @@ public class BarbeariaDAO {
             boolean check = false;
             
             try {
-                stmt = con.prepareStatement("SELECT NOME, FK_CODBARBEARIA FROM servico WHERE NOME=? AND FK_CODBARBEARIA = ?");
+                stmt = con.prepareStatement("SELECT NOME, FK_CODBARBEARIA FROM servico WHERE NOME=? AND VALOR=? AND FK_CODBARBEARIA = ?");
                 stmt.setString(1, s.getNome());
-                stmt.setInt(2, s.getCODBARBEARIA());
+                stmt.setFloat(2, s.getValor());
+                stmt.setInt(3, s.getCODBARBEARIA());
                 rs = stmt.executeQuery();
                 
                 if(rs.next()){
@@ -351,34 +397,5 @@ public class BarbeariaDAO {
                 ConnectionFactory.closeConnection(con, stmt, rs);
             }
             return check;  
-        }
-    
-    public List<Servico> readServico(int CODBARBEARIA){
-            Connection con = ConnectionFactory.getConnection();
-            PreparedStatement stmt = null;
-            ResultSet rs = null;
-            List<Servico> servicos = new ArrayList();
-            
-            try {
-                stmt = con.prepareStatement("SELECT CODSERVICO, NOME, VALOR, TEMPO FROM servico WHERE FK_CODBARBEARIA=?");
-                stmt.setInt(1, CODBARBEARIA);
-                rs = stmt.executeQuery();
-                
-                while(rs.next()){
-                    Servico modelServico = new Servico();
-                    modelServico.setId(rs.getInt(1));
-                    modelServico.setNome(rs.getString(2));
-                    modelServico.setValor(rs.getFloat(3));
-                    modelServico.setTempo(rs.getTime(4));
-                    servicos.add(modelServico);
-                }
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Erro: "+ex);
-                Logger.getLogger(BarbeariaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }finally{
-                ConnectionFactory.closeConnection(con, stmt, rs);
-            }
-            
-            return servicos;
         }
 }

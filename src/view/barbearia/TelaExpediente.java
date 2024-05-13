@@ -1,8 +1,5 @@
 package view.barbearia;
 
-import com.raven.datechooser.EventDateChooser;
-import com.raven.datechooser.SelectedAction;
-import com.raven.datechooser.SelectedDate;
 import controller.ExpedienteController;
 import css.BordaArredondada;
 import dao.ExpedienteDAO;
@@ -14,7 +11,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -252,6 +248,7 @@ public class TelaExpediente extends javax.swing.JFrame {
         labelExpedientes = new javax.swing.JLabel();
         btnAlterar = new javax.swing.JButton();
         btnDeletar = new javax.swing.JButton();
+        btnAdicionar = new javax.swing.JButton();
         labelFunExpediente = new javax.swing.JLabel();
         labelDataIni = new javax.swing.JLabel();
         txtDataInicial = new javax.swing.JFormattedTextField();
@@ -404,6 +401,17 @@ public class TelaExpediente extends javax.swing.JFrame {
             }
         });
 
+        btnAdicionar.setBackground(new java.awt.Color(51, 153, 0));
+        btnAdicionar.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        btnAdicionar.setForeground(new java.awt.Color(0, 0, 0));
+        btnAdicionar.setText("Cadastrar");
+        btnAdicionar.setBorderPainted(false);
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -415,7 +423,8 @@ public class TelaExpediente extends javax.swing.JFrame {
                         .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAdicionar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1014, Short.MAX_VALUE)
                     .addComponent(labelExpedientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -430,7 +439,8 @@ public class TelaExpediente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(190, Short.MAX_VALUE))
         );
 
@@ -682,6 +692,23 @@ public class TelaExpediente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCadastrarPeriodoActionPerformed
 
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        labelFunExpediente.setText("Cadastrar Expediente");
+        btnCadastrar.setText("Cadastrar");
+        opcao=1;
+        labelDataFim.setVisible(false);
+        txtDataFinal.setVisible(false);
+        btnCadastrarPeriodo.setVisible(true);
+        labelDataIni.setText("Data");
+        txtDataInicial.setText("");
+        txtDataInicial.setEditable(true);
+        txtHoraIni.setText("");
+        txtHoraIni.setEditable(true);
+        txtHoraFim.setText("");
+        txtHoraFim.setEditable(true);
+        txtDataInicial.setEditable(true);
+    }//GEN-LAST:event_btnAdicionarActionPerformed
+
 
     public static void main(String args[]) {
 
@@ -703,6 +730,7 @@ public class TelaExpediente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Centro;
     private javax.swing.JPanel Cima;
+    private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JRadioButton btnCadastrarPeriodo;

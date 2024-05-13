@@ -7,14 +7,14 @@ public class Servico {
     private int CODBARBEARIA;
     private String nome;
     private Float valor;
-    private Time tempo;
+    private int opcao;
 
-    public int getId() {
+    public int getCodservico() {
         return codservico;
     }
 
-    public void setId(int id) {
-        this.codservico = id;
+    public void setCodservico(int codservico) {
+        this.codservico = codservico;
     }
 
     public int getCODBARBEARIA() {
@@ -33,14 +33,6 @@ public class Servico {
         this.nome = nome;
     }
 
-    public Time getTempo() {
-        return tempo;
-    }
-
-    public void setTempo(Time tempo) {
-        this.tempo = tempo;
-    }
-
     public Float getValor() {
         return valor;
     }
@@ -48,15 +40,22 @@ public class Servico {
     public void setValor(Float valor) {
         this.valor = valor;
     }
+
+    public int getOpcao() {
+        return opcao;
+    }
+
+    public void setOpcao(int opcao) {
+        this.opcao = opcao;
+    }
     
     public Servico(){
     }
     
-    public Servico(int CODBARBEARIA, String nome, Float valor, Time tempo){
+    public Servico(int CODBARBEARIA, String nome, Float valor){
         this.CODBARBEARIA = CODBARBEARIA;
         this.nome = nome;
         this.valor = valor;
-        this.tempo = tempo;
     }
     
     public void alterarServico(Servico s){
@@ -67,5 +66,10 @@ public class Servico {
     public void cadastrarServico(Servico s){
         BarbeariaDAO dao = new BarbeariaDAO();
         dao.cadastrarServico(s);
+    }
+    
+    public void deletarServico(Servico s){
+        BarbeariaDAO dao = new BarbeariaDAO();
+        dao.deletarServico(s);
     }
 }

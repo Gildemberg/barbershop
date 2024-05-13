@@ -107,7 +107,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
             int servico = selectServicos.getSelectedIndex();
             
             if(servico>0){
-                servicoSelecionado = servicos.get(servico-1).getId();
+                servicoSelecionado = servicos.get(servico-1).getCodservico();
             }else{
                 servicoSelecionado=0;
             }

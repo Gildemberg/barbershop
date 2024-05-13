@@ -131,13 +131,35 @@ public class BarbeariaController {
         BarbeariaDAO dao = new BarbeariaDAO();
         boolean check, valor;
         check = dao.checkServico(s);
-        if(check){
-            JOptionPane.showMessageDialog(null, "Esse serviço já foi cadastrado", "Mensagem", JOptionPane.ERROR_MESSAGE);
-            valor = false;
-        }else{
-            s.cadastrarServico(s);
-            JOptionPane.showMessageDialog(null, "Serviço cadastrado com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
-            valor = true;
+        
+        switch (s.getOpcao()) {
+            case 1 -> {
+                if(check){
+                    JOptionPane.showMessageDialog(null, "Esse serviço já foi cadastrado", "Mensagem", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    s.cadastrarServico(s);
+                    JOptionPane.showMessageDialog(null, "Serviço cadastrado com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
+                }
+                valor = true;
+            }
+            case 2 -> {
+                if(check){
+                    JOptionPane.showMessageDialog(null, "Esse serviço já foi cadastrado", "Mensagem", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    s.alterarServico(s);
+                    JOptionPane.showMessageDialog(null, "Serviço alterado com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
+                }
+                valor = true;
+            }
+            default -> {
+                if(check){
+                    s.deletarServico(s);
+                    JOptionPane.showMessageDialog(null, "Serviço deletado com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Esse serviço já foi deletado", "Mensagem", JOptionPane.ERROR_MESSAGE);
+                }
+                valor = true;
+            }
         }
         return valor;
     }
