@@ -54,7 +54,7 @@ public class AgendamentoController {
         if(horario.isAfter(agora)){
             return verificarDataDaBarbearia(agendamento);
         }else{
-            JOptionPane.showMessageDialog(null, "A data informada é anterior ao dia de hoje. Por favor selecione uma data correta.", "Mensagem", JOptionPane.ERROR_MESSAGE);        
+            JOptionPane.showMessageDialog(null, "O horário informado é anterior ao horario atual. Por favor selecione um horario correto.", "Mensagem", JOptionPane.ERROR_MESSAGE);        
             return false;
         }
     }

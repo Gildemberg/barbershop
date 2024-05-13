@@ -23,18 +23,31 @@ public class ExpedienteController {
     
     public boolean verificandoFormatoData(Expediente e){
         LocalDate dataInicial = e.getDataInicial().toLocalDate();
-        LocalDate dataFinal = e.getDataFinal().toLocalDate();
-        if(dataInicial.getDayOfMonth()>=01 && dataInicial.getDayOfMonth()<=31 
+        
+        if(e.getPeriodo()==2){
+            LocalDate dataFinal = e.getDataFinal().toLocalDate();
+           if(dataInicial.getDayOfMonth()>=01 && dataInicial.getDayOfMonth()<=31 
                                             && dataFinal.getDayOfMonth()>=01 && dataFinal.getDayOfMonth()<=31
                                             && dataInicial.getMonthValue()>=01 && dataInicial.getMonthValue()<=12
                                             && dataFinal.getMonthValue()>=01 && dataFinal.getMonthValue()<=12
-                                            && dataInicial.getYear()>=2024 
-                                            && dataFinal.getYear()>=124)
-        {
-            return verificarDiferencaEntreDatas(e);
+                                            && dataInicial.getYear()>=2020 
+                                            && dataFinal.getYear()>=2020)
+            {
+                return verificarDiferencaEntreDatas(e);
+            }else{
+                JOptionPane.showMessageDialog(null, "Data informada está fora do padrão", "Mensagem", JOptionPane.ERROR_MESSAGE); 
+                return false;
+            } 
         }else{
-            JOptionPane.showMessageDialog(null, "Data informada está fora do padrão", "Mensagem", JOptionPane.ERROR_MESSAGE); 
-            return false;
+            if(dataInicial.getDayOfMonth()>=01 && dataInicial.getDayOfMonth()<=31 
+                                            && dataInicial.getMonthValue()>=01 && dataInicial.getMonthValue()<=12
+                                            && dataInicial.getYear()>=2020)
+            {
+                return verificarDiferencaEntreHoras(e);
+            }else{
+                JOptionPane.showMessageDialog(null, "Data informada está fora do padrão", "Mensagem", JOptionPane.ERROR_MESSAGE); 
+                return false;
+            }
         }
     }
     
@@ -48,7 +61,7 @@ public class ExpedienteController {
     }
     
     public boolean verificarDiferencaEntreHoras(Expediente e){
-        if(e.getHoraInicial().before(e.getDataFinal())){
+        if(e.getHoraInicial().before(e.getHoraFinal())){
             return consultarNoBanco(e);
         }else{
             JOptionPane.showMessageDialog(null, "Hora Inicial maior que a Hora Final", "Mensagem", JOptionPane.ERROR_MESSAGE); 
@@ -57,65 +70,73 @@ public class ExpedienteController {
     }
     
     public boolean consultarNoBanco(Expediente e){
-        if(expedienteDao.consultarDataExpediente(e)){
-            return adicionarExpediente(e);
+        if(e.getPeriodo()==2){
+            if(expedienteDao.consultarPeriodoExpediente(e)){
+                return adicionarExpediente(e);
+            }else{
+                JOptionPane.showMessageDialog(null, "Expediente já cadastrado", "Mensagem", JOptionPane.ERROR_MESSAGE);        
+                return false;
+            }
         }else{
-            JOptionPane.showMessageDialog(null, "O periodo já foi cadastrado", "Mensagem", JOptionPane.ERROR_MESSAGE);        
-            return false;
+            if(expedienteDao.consultarDataExpediente(e)){
+                return adicionarExpediente(e);
+            }else{
+                JOptionPane.showMessageDialog(null, "Expediente já cadastrado", "Mensagem", JOptionPane.ERROR_MESSAGE);        
+                return false;
+            }
         }
+        
     }
     
     public boolean adicionarExpediente(Expediente e){
-        if(expedienteDao.adicionarDataExpediente(e)){
-            JOptionPane.showMessageDialog(null, "O periodo cadastrado com sucesso", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
-            return true;
+        if(e.getPeriodo()==2){
+            if(expedienteDao.adicionarPeriodoExpediente(e)){
+                JOptionPane.showMessageDialog(null, "Período de expediente cadastrado com sucesso", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
+                return true;
+            }else{
+                JOptionPane.showMessageDialog(null, "Erro ao tentar cadastrar periodo de expediente", "Mensagem", JOptionPane.ERROR_MESSAGE);   
+                return false;
+            }
         }else{
-            JOptionPane.showMessageDialog(null, "Erro ao tentar cadastrar período", "Mensagem", JOptionPane.ERROR_MESSAGE);   
-            return false;
+            if(expedienteDao.adicionarDataExpediente(e)){
+                JOptionPane.showMessageDialog(null, "Expediente cadastrado com sucesso", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
+                return true;
+            }else{
+                JOptionPane.showMessageDialog(null, "Erro ao tentar cadastrar expediente", "Mensagem", JOptionPane.ERROR_MESSAGE);   
+                return false;
+            }
         }
     }
     
     /*=========================================ALTERAÇÃO DE CADASTRO DE EXPEDIENTE==============================================================*/
     
-    public boolean controllerUpdate(Expediente e, boolean semExpediente){
-        if(semExpediente){
-            return consultarNoBancoUpdate(e, semExpediente);
-        }else{
-            return verificarDiferencaEntreHorasUpdate(e, semExpediente);
-        }
+    public boolean controllerUpdate(Expediente e){
+        return verificarDiferencaEntreHorasUpdate(e);
     }
     
-    public boolean verificarDiferencaEntreHorasUpdate(Expediente e, boolean semExpediente){
+    public boolean verificarDiferencaEntreHorasUpdate(Expediente e){
         LocalTime horaInicial = e.getHoraInicial().toLocalTime();
         LocalTime horaFinal = e.getHoraFinal().toLocalTime();
         
         if(horaInicial.isBefore(horaFinal)){
-            return consultarNoBancoUpdate(e, semExpediente);
+            return consultarNoBancoUpdate(e);
         }else{
             JOptionPane.showMessageDialog(null, "Hora Inicial maior que a Hora Final", "Mensagem", JOptionPane.ERROR_MESSAGE); 
             return false;
         }
     }
     
-    public boolean consultarNoBancoUpdate(Expediente e, boolean semExpediente){
+    public boolean consultarNoBancoUpdate(Expediente e){
         if(expedienteDao.verificarDataBarbearia(e)){
-            return alterarExpediente(e, semExpediente);
+            return alterarExpediente(e);
         }else{
             JOptionPane.showMessageDialog(null, "Esse dia não está cadastrado", "Mensagem", JOptionPane.ERROR_MESSAGE); 
             return false;
         }
     }
     
-    public boolean alterarExpediente(Expediente e, boolean semExpediente){
-        if(semExpediente){
-            if(expedienteDao.removeExpediente(e)){
-                JOptionPane.showMessageDialog(null, "Expediente removido com sucesso", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
-                return true;
-            }else{
-                JOptionPane.showMessageDialog(null, "Erro ao tentar remover o expediente", "Mensagem", JOptionPane.ERROR_MESSAGE);   
-                return false;
-            }   
-        }else{
+    public boolean alterarExpediente(Expediente e){
+
             if(expedienteDao.alterarExpediente(e)){
                 JOptionPane.showMessageDialog(null, "Expediente alterado com sucesso", "Mensagem", JOptionPane.PLAIN_MESSAGE, (Icon) iconConfirmar);
                 return true;
@@ -123,7 +144,6 @@ public class ExpedienteController {
                 JOptionPane.showMessageDialog(null, "Erro ao tentar alterar o expediente", "Mensagem", JOptionPane.ERROR_MESSAGE);   
                 return false;
             }
-        }
     }
     
     public static ImageIcon createIcon(String path) { //CRIANDO O ICONE DE CONFIRMAÇÃO PARA O JOPTIONPANE

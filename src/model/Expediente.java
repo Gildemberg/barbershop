@@ -10,6 +10,7 @@ public class Expediente {
     private Date dataFinal;
     private Time horaInicial;
     private Time horaFinal;
+    private int periodo;
 
     public int getCodexpediente() {
         return codexpediente;
@@ -59,7 +60,13 @@ public class Expediente {
         this.horaFinal = horaFinal;
     }
 
-    
+    public int getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(int periodo) {
+        this.periodo = periodo;
+    }
 
     public Expediente(){
     }

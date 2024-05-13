@@ -5,9 +5,12 @@ import com.raven.datechooser.SelectedDate;
 import controller.AgendamentoController;
 import css.BordaArredondada;
 import dao.BarbeariaDAO;
+import dao.ExpedienteDAO;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import model.Barbearia;
@@ -19,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -27,6 +31,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import model.Agendamento;
+import model.Expediente;
 import model.Servico;
 
 
@@ -41,38 +46,14 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     SimpleDateFormat horaFormatada = new SimpleDateFormat("HH:mm");
     BarbeariaDAO barbeariaDao = new BarbeariaDAO();
     List<Servico> servicos = new ArrayList();
-    List<Barbearia> barbearias = new ArrayList();    
+    List<Barbearia> barbearias = new ArrayList();  
+    
     
     
     public TelaAgendamentoCliente() {
         initComponents();
         setExtendedState (MAXIMIZED_BOTH);
         setIcon();
-        
-        txtHora.getDocument().addDocumentListener(new DocumentListener() {
-            private void verificaTamanho() {
-                if (txtHora.getText().trim().length() == 2) {
-                    if(txtMinuto.getText().trim().length()==0){
-                        txtMinuto.requestFocus();
-                    }
-                }
-            }
-
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                verificaTamanho();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                verificaTamanho();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                verificaTamanho();
-            }
-        });
     }
     
     public void receberCodAdicionarAgend(Agendamento a){
@@ -108,13 +89,11 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
                                                     +barbearias.get(CODBARBEARIA-1).getUf()+textHtmlfim);     
         
         servicos = barbeariaDao.readServico(CODBARBEARIA);
-        for (Servico servico : servicos) { //adicionando os serviços á JComboBox
-            selectServicos.addItem(servico.getNome());
+        for (Servico servico : servicos) { 
+            selectServicos.addItem(servico.getNome()); //adicionando os serviços á JComboBox
+            textHtml.append(servico.getNome()).append(" | R$").append(servico.getValor().toString()).append("<br>"); //adicionando os serviços á descricao
         }
-        
-        for (Servico servico : servicos) {
-            textHtml.append(servico.getNome()).append(" | R$").append(servico.getValor().toString()).append("<br>");
-        }
+     
         textHtml.append("</div></html>");
         txtServicos.setText(textHtml.toString());
       }
@@ -135,27 +114,33 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
             
             SelectedDate dataCalendar = calendario.getSelectedDate(); //Selecionando DATA no CALENDARIO
             String dataString = dataCalendar.getDay()+"/"+dataCalendar.getMonth()+"/"+dataCalendar.getYear(); //Pegando a DATA em STRING
-            String horaString = txtHora.getText()+":"+txtMinuto.getText(); //Pegando a HORA em STRING
+            String horaString = selectHorario.getItemAt(selectHorario.getSelectedIndex());
+            
+            if(horaString.equals("Sem horário") || horaString.equals("Selecione")){
+                JOptionPane.showMessageDialog(null, "Selecione um horário valido", "Mensagem", JOptionPane.ERROR_MESSAGE);
+            }else{
+                //convertendo do tipo STRING para DATE
+                Date data = new Date(dataFormatada.parse(dataString).getTime());
+                Date Horario = new Date(horaFormatada.parse(horaString).getTime()); //TIME DATE
+                Time hora = new Time(Horario.getTime()); //Pegando o TIME da DATE
 
-            //convertendo do tipo STRING para DATE
-            Date data = new Date(dataFormatada.parse(dataString).getTime());
-            Date Horario = new Date(horaFormatada.parse(horaString).getTime()); //TIME DATE
-            Time hora = new Time(Horario.getTime()); //Pegando o TIME da DATE
-         
-            agendamento.setData(data);
-            agendamento.setHora(hora);
-            agendamento.setServico(servicoSelecionado);
-            agendamento.setCodagendamento(CODAGENDAMENTO);
-            agendamento.setCodbarbearia(CODBARBEARIA);
-            agendamento.setCodcliente(CODCLIENTE);
-            agendamento.setStatus(STATUS);
-            agendamento.setDescricao(DESCRICAO);
-            
-            check = agendamentoController.controller(agendamento);
-            
-            if(check){ // LIMPANDO OS CAMPOS EM CASO DE CADASTRO REALIZADO
-                txtHora.setText("");
-                txtMinuto.setText("");
+                agendamento.setData(data);
+                agendamento.setHora(hora);
+                agendamento.setServico(servicoSelecionado);
+                agendamento.setCodagendamento(CODAGENDAMENTO);
+                agendamento.setCodbarbearia(CODBARBEARIA);
+                agendamento.setCodcliente(CODCLIENTE);
+                agendamento.setStatus(STATUS);
+                agendamento.setDescricao(DESCRICAO);
+
+                check = agendamentoController.controller(agendamento);
+
+                if(check){ // LIMPANDO OS CAMPOS EM CASO DE CADASTRO REALIZADO
+                    TelaPrincipalCliente TP = new TelaPrincipalCliente();
+                    TP.receberCodCliente(CODCLIENTE); 
+                    TP.setVisible(true);
+                    this.setVisible(false);
+                }
             }
         } catch (ParseException ex) {
             Logger.getLogger(TelaAgendamentoCliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -178,11 +163,9 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         Servico = new javax.swing.JLabel();
         selectServicos = new javax.swing.JComboBox<>();
         Hora = new javax.swing.JLabel();
-        txtHora = new javax.swing.JFormattedTextField();
-        txtMinuto = new javax.swing.JFormattedTextField();
+        selectHorario = new javax.swing.JComboBox<>();
         Data = new javax.swing.JLabel();
         btnAgendar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
         calendario = new com.raven.datechooser.DateChooser();
 
@@ -286,13 +269,8 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
 
         selectServicos.setFont(new java.awt.Font("DejaVu Sans Light", 0, 20)); // NOI18N
         selectServicos.setForeground(new java.awt.Color(0, 51, 102));
-        selectServicos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Serviços" }));
+        selectServicos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
         selectServicos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        selectServicos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectServicosActionPerformed(evt);
-            }
-        });
         selectServicos.setBackground(new Color(220, 220, 220, 220));
         // Definir uma borda de 3px para o JComboBox
 
@@ -320,32 +298,27 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         Hora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Hora.setText("Horário");
 
-        txtHora.setBorder(null);
-        txtHora.setForeground(new java.awt.Color(0, 51, 102));
-        try {
-            txtHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtHora.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
-        BordaArredondada borda = new BordaArredondada(new Color(0, 51, 102), 3, 10);
-        Border bordaInterna = BorderFactory.createEmptyBorder(0, 10, 0, 0);
-        Border bordaComposta = BorderFactory.createCompoundBorder(borda, bordaInterna);
-        txtHora.setBackground(new Color(220, 220, 220, 220));
-        txtHora.setBorder(bordaComposta);
+        selectHorario.setFont(new java.awt.Font("DejaVu Sans Light", 0, 20)); // NOI18N
+        selectHorario.setForeground(new java.awt.Color(0, 51, 102));
+        selectHorario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+        selectHorario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        selectHorario.setBackground(new Color(220, 220, 220, 220));
+        // Definir uma borda de 3px para o JComboBox
 
-        txtMinuto.setBorder(null);
-        txtMinuto.setForeground(new java.awt.Color(0, 51, 102));
-        try {
-            txtMinuto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtMinuto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtMinuto.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
-        txtMinuto.setBackground(new Color(220, 220, 220, 220));
-        txtMinuto.setBorder(bordaComposta);
+        selectHorario.setBorder(bordaCompostaa);
+
+        // Personalizar o Botão de Seta
+        selectHorario.setUI(new BasicComboBoxUI() {
+            @Override
+            protected JButton createArrowButton() {
+                // Personalizar o botão da seta
+                JButton buttonHorario = new JButton();
+                buttonHorario.setBackground(new Color(0, 51, 102));
+                buttonHorario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/down.png")));
+                buttonHorario.setPreferredSize(new Dimension(40, 70));
+                return buttonHorario;
+            }
+        });
 
         Data.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
         Data.setForeground(new java.awt.Color(0, 51, 102));
@@ -363,10 +336,6 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 51, 102));
-        jLabel1.setText(":");
-
         btnVoltar.setBackground(new java.awt.Color(0, 36, 73));
         btnVoltar.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
         btnVoltar.setForeground(new java.awt.Color(255, 255, 255));
@@ -381,6 +350,11 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         });
 
         calendario.setForeground(new java.awt.Color(0, 51, 102));
+        calendario.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                calendarioMouseMoved(evt);
+            }
+        });
 
         javax.swing.GroupLayout DireitaLayout = new javax.swing.GroupLayout(Direita);
         Direita.setLayout(DireitaLayout);
@@ -390,67 +364,60 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
                 .addGap(181, 181, 181)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DireitaLayout.createSequentialGroup()
-                        .addComponent(Agendamento, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addGap(5, 5, 5)
+                        .addComponent(Agendamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(71, 71, 71)
                         .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(calendario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(btnAgendar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnAgendar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(169, 169, 169))))
             .addGroup(DireitaLayout.createSequentialGroup()
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Data, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(DireitaLayout.createSequentialGroup()
+                    .addComponent(Hora, javax.swing.GroupLayout.DEFAULT_SIZE, 954, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Hora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Servico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(Data, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
+                        .addContainerGap(222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(selectServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(227, 227, 227))
+                    .addComponent(Servico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                        .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(232, 232, 232))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                        .addComponent(selectServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(233, 233, 233))))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(selectHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(333, 333, 333))
+            .addGroup(DireitaLayout.createSequentialGroup()
+                .addGap(123, 123, 123)
+                .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         DireitaLayout.setVerticalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DireitaLayout.createSequentialGroup()
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DireitaLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(222, 222, 222))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Agendamento)
                         .addGap(18, 18, 18)
-                        .addComponent(Servico)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(selectServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(Agendamento))
+                    .addGroup(DireitaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Servico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(selectServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Data)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Hora)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHora)
-                    .addComponent(txtMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Data)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(selectHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102)
                 .addComponent(btnAgendar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -483,9 +450,30 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void selectServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectServicosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_selectServicosActionPerformed
+    private void calendarioMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calendarioMouseMoved
+        try {
+                    SelectedDate dataCalendar = calendario.getSelectedDate(); //Selecionando DATA no CALENDARIO
+                    String dataString = dataCalendar.getDay()+"/"+dataCalendar.getMonth()+"/"+dataCalendar.getYear(); //Pegando a DATA em STRING
+                    Date data = new Date(dataFormatada.parse(dataString).getTime());
+                    List<Expediente> horarios = new ArrayList();
+                    ExpedienteDAO expedDao = new ExpedienteDAO();
+
+                    if(dataCalendar!=null){
+                        horarios = expedDao.readHorarios(CODBARBEARIA, data);
+                        selectHorario.removeAllItems();
+                        selectHorario.addItem("Selecione");
+                        if(horarios.isEmpty()){
+                            selectHorario.addItem("Sem horário");
+                        }else{
+                            for (Expediente h : horarios) {
+                                selectHorario.addItem(h.getHoraInicial().toString()); //adicionando os serviços á JComboBox
+                            }
+                        }
+                    }
+                } catch (ParseException ex) {
+                    Logger.getLogger(TelaAgendamentoCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+    }//GEN-LAST:event_calendarioMouseMoved
 
     public static void main(String args[]) {
         
@@ -516,13 +504,11 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     private javax.swing.JButton btnVoltar;
     private com.raven.datechooser.DateChooser calendario;
     private javax.swing.JLabel icon;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> selectHorario;
     private javax.swing.JComboBox<String> selectServicos;
     private javax.swing.JLabel txtBarbearia;
     private javax.swing.JLabel txtDescricao;
     private javax.swing.JLabel txtEndereco;
-    private javax.swing.JFormattedTextField txtHora;
-    private javax.swing.JFormattedTextField txtMinuto;
     private javax.swing.JLabel txtRegra5;
     private javax.swing.JLabel txtServicos;
     // End of variables declaration//GEN-END:variables
