@@ -246,9 +246,9 @@ public class TelaExpediente extends javax.swing.JFrame {
         jScrollPane1 = new css.ScrollPaneWin11();
         jTable1 = new css.TableDark();
         labelExpedientes = new javax.swing.JLabel();
-        btnAlterar = new javax.swing.JButton();
-        btnDeletar = new javax.swing.JButton();
-        btnAdicionar = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JLabel();
+        btnDeletar = new javax.swing.JLabel();
+        btnAdicionar = new javax.swing.JLabel();
         labelFunExpediente = new javax.swing.JLabel();
         labelDataIni = new javax.swing.JLabel();
         txtDataInicial = new javax.swing.JFormattedTextField();
@@ -318,12 +318,12 @@ public class TelaExpediente extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        Centro.setBackground(new java.awt.Color(255, 255, 255));
+        Centro.setBackground(new java.awt.Color(0, 102, 153));
         Centro.setMaximumSize(new java.awt.Dimension(1920, 930));
         Centro.setMinimumSize(new java.awt.Dimension(1920, 930));
         Centro.setPreferredSize(new java.awt.Dimension(1920, 930));
 
-        jPanel1.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jTable1.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 24)); // NOI18N
         jTable1.setForeground(new java.awt.Color(255, 255, 255));
@@ -374,41 +374,29 @@ public class TelaExpediente extends javax.swing.JFrame {
         }
 
         labelExpedientes.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
-        labelExpedientes.setForeground(new java.awt.Color(255, 255, 255));
+        labelExpedientes.setForeground(new java.awt.Color(0, 51, 102));
         labelExpedientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelExpedientes.setText("Expedientes cadastrados");
+        labelExpedientes.setText("Meus Expedientes");
         labelExpedientes.setBorder(new javax.swing.border.MatteBorder(null));
 
-        btnAlterar.setBackground(new java.awt.Color(255, 204, 0));
-        btnAlterar.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
-        btnAlterar.setForeground(new java.awt.Color(0, 0, 0));
-        btnAlterar.setText("Alterar");
-        btnAlterar.setBorderPainted(false);
-        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlterarActionPerformed(evt);
+        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/modificar.png"))); // NOI18N
+        btnAlterar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAlterarMouseClicked(evt);
             }
         });
 
-        btnDeletar.setBackground(new java.awt.Color(153, 0, 51));
-        btnDeletar.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
-        btnDeletar.setForeground(new java.awt.Color(0, 0, 0));
-        btnDeletar.setText("Deletar");
-        btnDeletar.setBorderPainted(false);
-        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeletarActionPerformed(evt);
+        btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/deletar.png"))); // NOI18N
+        btnDeletar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeletarMouseClicked(evt);
             }
         });
 
-        btnAdicionar.setBackground(new java.awt.Color(51, 153, 0));
-        btnAdicionar.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
-        btnAdicionar.setForeground(new java.awt.Color(0, 0, 0));
-        btnAdicionar.setText("Cadastrar");
-        btnAdicionar.setBorderPainted(false);
-        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdicionarActionPerformed(evt);
+        btnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/adicionar.png"))); // NOI18N
+        btnAdicionar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAdicionarMouseClicked(evt);
             }
         });
 
@@ -418,16 +406,19 @@ public class TelaExpediente extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(labelExpedientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAlterar)
                         .addGap(18, 18, 18)
-                        .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDeletar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAdicionar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1014, Short.MAX_VALUE)
-                    .addComponent(labelExpedientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 906, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,23 +428,23 @@ public class TelaExpediente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAlterar)
+                    .addComponent(btnDeletar)
+                    .addComponent(btnAdicionar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane1.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
 
         labelFunExpediente.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
-        labelFunExpediente.setForeground(new java.awt.Color(0, 51, 102));
+        labelFunExpediente.setForeground(new java.awt.Color(255, 255, 255));
         labelFunExpediente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelFunExpediente.setText("Cadastre aqui um novo expediente");
+        labelFunExpediente.setText("Novo Expediente");
         labelFunExpediente.setBorder(new javax.swing.border.MatteBorder(null));
 
         labelDataIni.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
-        labelDataIni.setForeground(new java.awt.Color(0, 51, 102));
+        labelDataIni.setForeground(new java.awt.Color(255, 255, 255));
         labelDataIni.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelDataIni.setText("Data");
 
@@ -466,7 +457,7 @@ public class TelaExpediente extends javax.swing.JFrame {
         txtDataInicial.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtDataInicial.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         txtDataInicial.setSelectedTextColor(new java.awt.Color(255, 255, 255));
-        BordaArredondada borda = new BordaArredondada(new Color(0, 51, 102), 3, 10);
+        BordaArredondada borda = new BordaArredondada(new Color(222, 222, 222, 222), 3, 10);
         Border bordaInterna = BorderFactory.createEmptyBorder(0, 10, 0, 0);
         Border bordaComposta = BorderFactory.createCompoundBorder(borda, bordaInterna);
 
@@ -474,7 +465,7 @@ public class TelaExpediente extends javax.swing.JFrame {
         txtDataInicial.setBorder(bordaComposta);
 
         labelDataFim.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
-        labelDataFim.setForeground(new java.awt.Color(0, 51, 102));
+        labelDataFim.setForeground(new java.awt.Color(255, 255, 255));
         labelDataFim.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelDataFim.setText("Data fim");
 
@@ -491,7 +482,7 @@ public class TelaExpediente extends javax.swing.JFrame {
         txtDataFinal.setBorder(bordaComposta);
 
         horarioInicio.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
-        horarioInicio.setForeground(new java.awt.Color(0, 51, 102));
+        horarioInicio.setForeground(new java.awt.Color(255, 255, 255));
         horarioInicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         horarioInicio.setText("Início do Expediente");
 
@@ -508,7 +499,7 @@ public class TelaExpediente extends javax.swing.JFrame {
         txtHoraIni.setBorder(bordaComposta);
 
         horarioFim.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
-        horarioFim.setForeground(new java.awt.Color(0, 51, 102));
+        horarioFim.setForeground(new java.awt.Color(255, 255, 255));
         horarioFim.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         horarioFim.setText("Fim do Expediente");
 
@@ -524,9 +515,9 @@ public class TelaExpediente extends javax.swing.JFrame {
         txtHoraFim.setBackground(new Color(222, 222, 222, 222));
         txtHoraFim.setBorder(bordaComposta);
 
-        btnCadastrar.setBackground(new java.awt.Color(0, 51, 102));
+        btnCadastrar.setBackground(new java.awt.Color(255, 255, 255));
         btnCadastrar.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
-        btnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCadastrar.setForeground(new java.awt.Color(0, 51, 102));
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.setBorderPainted(false);
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -536,7 +527,7 @@ public class TelaExpediente extends javax.swing.JFrame {
         });
 
         btnCadastrarPeriodo.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        btnCadastrarPeriodo.setForeground(new java.awt.Color(0, 51, 102));
+        btnCadastrarPeriodo.setForeground(new java.awt.Color(255, 255, 255));
         btnCadastrarPeriodo.setText("Cadastrar um período");
         btnCadastrarPeriodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -552,11 +543,11 @@ public class TelaExpediente extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CentroLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 306, Short.MAX_VALUE)
                         .addComponent(labelFunExpediente)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(310, Short.MAX_VALUE))
                     .addGroup(CentroLayout.createSequentialGroup()
-                        .addGap(198, 198, 198)
+                        .addGap(189, 189, 189)
                         .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(CentroLayout.createSequentialGroup()
                                 .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -572,7 +563,7 @@ public class TelaExpediente extends javax.swing.JFrame {
                             .addComponent(labelDataIni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCadastrarPeriodo, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addContainerGap(196, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         CentroLayout.setVerticalGroup(
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -621,24 +612,6 @@ public class TelaExpediente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        int linhaSelecionada = jTable1.getSelectedRow();
-        if(linhaSelecionada==-1){
-            JOptionPane.showMessageDialog(null, "Selecione um expediente.");
-        }else{
-            labelFunExpediente.setText("Alterar expediente");
-            btnCadastrar.setText("Alterar");
-            opcao=2;
-            labelDataFim.setVisible(false);
-            txtDataFinal.setVisible(false);
-            btnCadastrarPeriodo.setVisible(false);
-            labelDataIni.setText("Data");
-            txtDataInicial.setText(dataString);
-            txtHoraIni.setText(horaIniString);
-            txtHoraFim.setText(horaFimString);
-        }
-    }//GEN-LAST:event_btnAlterarActionPerformed
-
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         TelaPrincipalBarbearia TP = new TelaPrincipalBarbearia();
         TP.receberCodBarbearia(CODBARBEARIA);
@@ -654,12 +627,44 @@ public class TelaExpediente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+    private void btnCadastrarPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarPeriodoActionPerformed
+        if(btnCadastrarPeriodo.isSelected()){
+            txtDataFinal.setVisible(true);
+            labelDataFim.setVisible(true);
+            labelDataIni.setText("Data Inicio");
+            periodo = 2;
+        }else{
+            txtDataFinal.setVisible(false);
+            labelDataFim.setVisible(false);
+            labelDataIni.setText("Data");
+            periodo = 1;
+        }
+    }//GEN-LAST:event_btnCadastrarPeriodoActionPerformed
+
+    private void btnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarMouseClicked
+        int linhaSelecionada = jTable1.getSelectedRow();
+        if(linhaSelecionada==-1){
+            JOptionPane.showMessageDialog(null, "Selecione um expediente.");
+        }else{
+            labelFunExpediente.setText("Alterar Expediente");
+            btnCadastrar.setText("Alterar");
+            opcao=2;
+            labelDataFim.setVisible(false);
+            txtDataFinal.setVisible(false);
+            btnCadastrarPeriodo.setVisible(false);
+            labelDataIni.setText("Data");
+            txtDataInicial.setText(dataString);
+            txtHoraIni.setText(horaIniString);
+            txtHoraFim.setText(horaFimString);
+        }
+    }//GEN-LAST:event_btnAlterarMouseClicked
+
+    private void btnDeletarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletarMouseClicked
         int linhaSelecionada = jTable1.getSelectedRow();
         if(linhaSelecionada==-1){
             JOptionPane.showMessageDialog(null, "Selecione um expediente.");
         }else{  
-            labelFunExpediente.setText("Realmente deseja deletar o expediente?");
+            labelFunExpediente.setText("Deletar Expediente");
             btnCadastrar.setText("Deletar");
             opcao=3;
             labelDataFim.setVisible(false);
@@ -676,24 +681,10 @@ public class TelaExpediente extends javax.swing.JFrame {
             txtHoraIni.setEditable(false);
             txtHoraFim.setEditable(false);
         }
-    }//GEN-LAST:event_btnDeletarActionPerformed
+    }//GEN-LAST:event_btnDeletarMouseClicked
 
-    private void btnCadastrarPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarPeriodoActionPerformed
-        if(btnCadastrarPeriodo.isSelected()){
-            txtDataFinal.setVisible(true);
-            labelDataFim.setVisible(true);
-            labelDataIni.setText("Data Inicio");
-            periodo = 2;
-        }else{
-            txtDataFinal.setVisible(false);
-            labelDataFim.setVisible(false);
-            labelDataIni.setText("Data");
-            periodo = 1;
-        }
-    }//GEN-LAST:event_btnCadastrarPeriodoActionPerformed
-
-    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        labelFunExpediente.setText("Cadastrar Expediente");
+    private void btnAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarMouseClicked
+        labelFunExpediente.setText("Novo Expediente");
         btnCadastrar.setText("Cadastrar");
         opcao=1;
         labelDataFim.setVisible(false);
@@ -707,7 +698,7 @@ public class TelaExpediente extends javax.swing.JFrame {
         txtHoraFim.setText("");
         txtHoraFim.setEditable(true);
         txtDataInicial.setEditable(true);
-    }//GEN-LAST:event_btnAdicionarActionPerformed
+    }//GEN-LAST:event_btnAdicionarMouseClicked
 
 
     public static void main(String args[]) {
@@ -730,11 +721,11 @@ public class TelaExpediente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Centro;
     private javax.swing.JPanel Cima;
-    private javax.swing.JButton btnAdicionar;
-    private javax.swing.JButton btnAlterar;
+    private javax.swing.JLabel btnAdicionar;
+    private javax.swing.JLabel btnAlterar;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JRadioButton btnCadastrarPeriodo;
-    private javax.swing.JButton btnDeletar;
+    private javax.swing.JLabel btnDeletar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel horarioFim;
     private javax.swing.JLabel horarioInicio;

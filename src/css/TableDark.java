@@ -8,10 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class TableDark extends JTable {
@@ -23,9 +22,10 @@ public class TableDark extends JTable {
         header = new TableDarkHeader();
         cell = new TableDarkCell();
         getTableHeader().setDefaultRenderer(header);
-        getTableHeader().setPreferredSize(new Dimension(0, 35));
+        getTableHeader().setPreferredSize(new Dimension(0, 60));
         setDefaultRenderer(Object.class, cell);
-        setRowHeight(30);
+        setRowHeight(60);
+        setBackground(new Color(255, 255, 255));
     }
 
     public void setColumnAlignment(int column, int align) {
@@ -44,17 +44,9 @@ public class TableDark extends JTable {
         getColumnModel().getColumn(column).setMaxWidth(10000);
     }
 
-    public void fixTable(JScrollPane scroll) {
-        JPanel panel = new JPanel();
-        panel.setBackground(new Color(30, 30, 30));
-        scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, panel);
-        scroll.getViewport().setBackground(new Color(30, 30, 30));
-        scroll.setBorder(BorderFactory.createLineBorder(new Color(60, 60, 60), 2));
-    }
-
     private class TableDarkHeader extends DefaultTableCellRenderer {
 
-        private Map<Integer, Integer> alignment = new HashMap<>();
+        private final Map<Integer, Integer> alignment = new HashMap<>();
 
         public void setAlignment(int column, int align) {
             alignment.put(column, align);
@@ -62,22 +54,21 @@ public class TableDark extends JTable {
 
         @Override
         public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
-            Component com = super.getTableCellRendererComponent(jtable, o, bln, bln1, i, i1);
-            com.setBackground(new Color(0,51,102));
-            com.setForeground(new Color(200, 200, 200));
-            com.setFont(com.getFont().deriveFont(Font.BOLD, 12));
-            if (alignment.containsKey(i1)) {
-                setHorizontalAlignment(alignment.get(i1));
-            } else {
-                setHorizontalAlignment(JLabel.LEFT);
-            }
+            JLabel com = (JLabel) super.getTableCellRendererComponent(jtable, o, bln, bln1, i, i1);
+            com.setBackground(new Color(135,206,235));
+            com.setForeground(new Color(255, 255, 255));
+            com.setFont(com.getFont().deriveFont(Font.BOLD, 24));
+            setHorizontalAlignment(JLabel.CENTER);
+            com.setBorder(BorderFactory.createCompoundBorder(
+                    new MatteBorder(10, 5, 10, 5, new Color(255, 255, 255)), 
+                    new EmptyBorder(10, 10, 10, 10)));
             return com;
         }
     }
 
     private class TableDarkCell extends DefaultTableCellRenderer {
 
-        private Map<Integer, Integer> alignment = new HashMap<>();
+        private final Map<Integer, Integer> alignment = new HashMap<>();
 
         public void setAlignment(int column, int align) {
             alignment.put(column, align);
@@ -85,26 +76,27 @@ public class TableDark extends JTable {
 
         @Override
         public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int row, int column) {
-            Component com = super.getTableCellRendererComponent(jtable, o, bln, bln1, row, column);
+            JLabel com = (JLabel) super.getTableCellRendererComponent(jtable, o, bln, bln1, row, column);
             if (isCellSelected(row, column)) {
                 if (row % 2 == 0) {
-                    com.setBackground(new Color(33, 103, 153));
+                    com.setBackground(new Color(0, 51, 102, 80));
                 } else {
-                    com.setBackground(new Color(29, 86, 127));
+                    com.setBackground(new Color(70,130,180, 80 ));
                 }
             } else {
                 if (row % 2 == 0) {
-                    com.setBackground(new Color(0,0,128));
+                    com.setBackground(new Color(0, 51, 102));
                 } else {
-                    com.setBackground(new Color(30,113,218));
+                    com.setBackground(new Color(70,130,180));
                 }
             }
-            com.setForeground(new Color(200, 200, 200));
-            setBorder(new EmptyBorder(0, 5, 0, 5));
+            com.setForeground(new Color(255, 255, 255));
+            com.setBorder(BorderFactory.createMatteBorder(
+                    0, 5, 10, 5, new Color(255, 255, 255))); 
             if (alignment.containsKey(column)) {
                 setHorizontalAlignment(alignment.get(column));
             } else {
-                setHorizontalAlignment(JLabel.LEFT);
+                setHorizontalAlignment(JLabel.CENTER);
             }
             return com;
         }

@@ -328,26 +328,27 @@ public class TelaCaixa extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        Centro.setBackground(new java.awt.Color(255, 255, 255));
+        Centro.setBackground(new java.awt.Color(0, 102, 153));
         Centro.setMaximumSize(new java.awt.Dimension(1920, 930));
         Centro.setMinimumSize(new java.awt.Dimension(1920, 930));
 
-        Esquerda.setBackground(new java.awt.Color(102, 153, 255));
+        Esquerda.setBackground(new java.awt.Color(255, 255, 255));
 
         labelExtratos.setFont(new java.awt.Font("Caladea", 1, 48)); // NOI18N
-        labelExtratos.setForeground(new java.awt.Color(255, 255, 255));
+        labelExtratos.setForeground(new java.awt.Color(0, 51, 102));
         labelExtratos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelExtratos.setText("Extratos");
         labelExtratos.setBorder(new javax.swing.border.MatteBorder(null));
 
         labelOpcao.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
-        labelOpcao.setForeground(new java.awt.Color(255, 255, 255));
+        labelOpcao.setForeground(new java.awt.Color(0, 51, 102));
         labelOpcao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelOpcao.setText("Diario");
         labelOpcao.setBorder(new javax.swing.border.MatteBorder(null));
 
-        jScrollPaneDiario.setBackground(new java.awt.Color(102, 153, 255));
+        jScrollPaneDiario.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTableDiario.setBackground(new java.awt.Color(255, 255, 255));
         jTableDiario.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 24)); // NOI18N
         jTableDiario.setForeground(new java.awt.Color(255, 255, 255));
         jTableDiario.setModel(new javax.swing.table.DefaultTableModel(
@@ -391,6 +392,8 @@ public class TelaCaixa extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableDiario.setGridColor(new java.awt.Color(102, 102, 102));
+        jTableDiario.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPaneDiario.setViewportView(jTableDiario);
         if (jTableDiario.getColumnModel().getColumnCount() > 0) {
             jTableDiario.getColumnModel().getColumn(0).setResizable(false);
@@ -406,16 +409,17 @@ public class TelaCaixa extends javax.swing.JFrame {
             jTableDiario.getColumnModel().getColumn(5).setResizable(false);
             jTableDiario.getColumnModel().getColumn(5).setPreferredWidth(20);
         }
+        jTableDiario.doLayout();
 
-        labelTotal.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
-        labelTotal.setForeground(new java.awt.Color(255, 255, 255));
+        labelTotal.setFont(new java.awt.Font("Caladea", 1, 48)); // NOI18N
+        labelTotal.setForeground(new java.awt.Color(0, 51, 102));
         labelTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTotal.setText("Total: R$");
         labelTotal.setBorder(new javax.swing.border.MatteBorder(null));
 
-        btnDiario.setBackground(new java.awt.Color(0, 51, 102));
+        btnDiario.setBackground(new java.awt.Color(255, 255, 255));
         btnDiario.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        btnDiario.setForeground(new java.awt.Color(255, 255, 255));
+        btnDiario.setForeground(new java.awt.Color(0, 51, 102));
         btnDiario.setText("Diario");
         btnDiario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -423,9 +427,9 @@ public class TelaCaixa extends javax.swing.JFrame {
             }
         });
 
-        btnSemanal.setBackground(new java.awt.Color(0, 51, 102));
+        btnSemanal.setBackground(new java.awt.Color(255, 255, 255));
         btnSemanal.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        btnSemanal.setForeground(new java.awt.Color(255, 255, 255));
+        btnSemanal.setForeground(new java.awt.Color(0, 51, 102));
         btnSemanal.setText("Semanal");
         btnSemanal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -433,9 +437,9 @@ public class TelaCaixa extends javax.swing.JFrame {
             }
         });
 
-        btnMenal.setBackground(new java.awt.Color(0, 51, 102));
+        btnMenal.setBackground(new java.awt.Color(255, 255, 255));
         btnMenal.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        btnMenal.setForeground(new java.awt.Color(255, 255, 255));
+        btnMenal.setForeground(new java.awt.Color(0, 51, 102));
         btnMenal.setText("Mensal");
         btnMenal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -494,7 +498,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         jScrollPaneDiario.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
 
         labelConfirmacao.setFont(new java.awt.Font("Caladea", 1, 48)); // NOI18N
-        labelConfirmacao.setForeground(new java.awt.Color(0, 51, 102));
+        labelConfirmacao.setForeground(new java.awt.Color(255, 255, 255));
         labelConfirmacao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelConfirmacao.setText("Agendamentos");
         labelConfirmacao.setBorder(new javax.swing.border.MatteBorder(null));
@@ -523,7 +527,7 @@ public class TelaCaixa extends javax.swing.JFrame {
 
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 153));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(630, 1050));
 
@@ -1424,7 +1428,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         iconConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         labelConfirmar.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
-        labelConfirmar.setForeground(new java.awt.Color(0, 51, 102));
+        labelConfirmar.setForeground(new java.awt.Color(255, 255, 255));
         labelConfirmar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelConfirmar.setText("Confirmar atendimento");
         labelConfirmar.setBorder(new javax.swing.border.MatteBorder(null));
@@ -1435,7 +1439,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         iconExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         labelExcluir.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
-        labelExcluir.setForeground(new java.awt.Color(0, 51, 102));
+        labelExcluir.setForeground(new java.awt.Color(255, 255, 255));
         labelExcluir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelExcluir.setText("Confirmar NÃO atendimento");
         labelExcluir.setBorder(new javax.swing.border.MatteBorder(null));

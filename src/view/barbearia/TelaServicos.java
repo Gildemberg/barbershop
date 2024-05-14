@@ -130,9 +130,9 @@ public class TelaServicos extends javax.swing.JFrame {
         labelExtratos = new javax.swing.JLabel();
         jScrollPaneDiario = new css.ScrollPaneWin11();
         jTableDiario = new css.TableDark();
-        btnAlterar = new javax.swing.JButton();
-        btnDeletar = new javax.swing.JButton();
-        btnAdicionar = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JLabel();
+        btnAdicionar = new javax.swing.JLabel();
+        btnDeletar = new javax.swing.JLabel();
         labelFunServico = new javax.swing.JLabel();
         labelServico = new javax.swing.JLabel();
         txtServico = new javax.swing.JTextField();
@@ -180,7 +180,7 @@ public class TelaServicos extends javax.swing.JFrame {
                 .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 1556, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         CimaLayout.setVerticalGroup(
             CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,16 +198,16 @@ public class TelaServicos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Centro.setBackground(new java.awt.Color(255, 255, 255));
+        Centro.setBackground(new java.awt.Color(0, 102, 153));
         Centro.setMaximumSize(new java.awt.Dimension(1920, 930));
         Centro.setMinimumSize(new java.awt.Dimension(1920, 930));
 
-        Esquerda.setBackground(new java.awt.Color(102, 153, 255));
+        Esquerda.setBackground(new java.awt.Color(255, 255, 255));
 
         labelExtratos.setFont(new java.awt.Font("Caladea", 1, 48)); // NOI18N
-        labelExtratos.setForeground(new java.awt.Color(255, 255, 255));
+        labelExtratos.setForeground(new java.awt.Color(0, 51, 102));
         labelExtratos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelExtratos.setText("Serviços Cadastrados");
+        labelExtratos.setText("Meus Serviços");
         labelExtratos.setBorder(new javax.swing.border.MatteBorder(null));
 
         jScrollPaneDiario.setBackground(new java.awt.Color(102, 153, 255));
@@ -257,33 +257,24 @@ public class TelaServicos extends javax.swing.JFrame {
         });
         jScrollPaneDiario.setViewportView(jTableDiario);
 
-        btnAlterar.setBackground(new java.awt.Color(255, 153, 0));
-        btnAlterar.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        btnAlterar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAlterar.setText("Alterar");
-        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlterarActionPerformed(evt);
+        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/modificar.png"))); // NOI18N
+        btnAlterar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAlterarMouseClicked(evt);
             }
         });
 
-        btnDeletar.setBackground(new java.awt.Color(204, 0, 51));
-        btnDeletar.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        btnDeletar.setForeground(new java.awt.Color(255, 255, 255));
-        btnDeletar.setText("Deletar");
-        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeletarActionPerformed(evt);
+        btnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/adicionar.png"))); // NOI18N
+        btnAdicionar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAdicionarMouseClicked(evt);
             }
         });
 
-        btnAdicionar.setBackground(new java.awt.Color(51, 153, 0));
-        btnAdicionar.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        btnAdicionar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdicionar.setText("Cadastrar");
-        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdicionarActionPerformed(evt);
+        btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/deletar.png"))); // NOI18N
+        btnDeletar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeletarMouseClicked(evt);
             }
         });
 
@@ -292,43 +283,47 @@ public class TelaServicos extends javax.swing.JFrame {
         EsquerdaLayout.setHorizontalGroup(
             EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPaneDiario)
+                .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EsquerdaLayout.createSequentialGroup()
-                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
-                        .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(labelExtratos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                        .addGap(26, 26, 26)
+                        .addComponent(labelExtratos, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(EsquerdaLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(EsquerdaLayout.createSequentialGroup()
+                                .addComponent(btnAlterar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDeletar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAdicionar))
+                            .addComponent(jScrollPaneDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         EsquerdaLayout.setVerticalGroup(
             EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EsquerdaLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(labelExtratos, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
+                .addGap(52, 52, 52)
                 .addComponent(jScrollPaneDiario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAlterar)
+                    .addComponent(btnDeletar)
+                    .addComponent(btnAdicionar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPaneDiario.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
 
         labelFunServico.setFont(new java.awt.Font("Caladea", 1, 48)); // NOI18N
-        labelFunServico.setForeground(new java.awt.Color(0, 51, 102));
+        labelFunServico.setForeground(new java.awt.Color(255, 255, 255));
         labelFunServico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelFunServico.setText("Cadastrar");
         labelFunServico.setBorder(new javax.swing.border.MatteBorder(null));
 
         labelServico.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
-        labelServico.setForeground(new java.awt.Color(0, 51, 102));
+        labelServico.setForeground(new java.awt.Color(255, 255, 255));
         labelServico.setText("Serviço");
 
         txtServico.setBackground(new java.awt.Color(255, 255, 255));
@@ -341,7 +336,7 @@ public class TelaServicos extends javax.swing.JFrame {
         txtServico.setBorder(bordaComposta);
 
         labelValor.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
-        labelValor.setForeground(new java.awt.Color(0, 51, 102));
+        labelValor.setForeground(new java.awt.Color(255, 255, 255));
         labelValor.setText("Valor (R$)");
 
         txtValor.setBackground(new java.awt.Color(255, 255, 255));
@@ -350,10 +345,10 @@ public class TelaServicos extends javax.swing.JFrame {
         txtValor.setBackground(new Color(222, 222, 222, 222));
         txtValor.setBorder(bordaComposta);
 
-        btnCadastrar.setBackground(new java.awt.Color(0, 51, 102));
+        btnCadastrar.setBackground(new java.awt.Color(255, 255, 255));
         btnCadastrar.setFont(new java.awt.Font("Caladea", 0, 36)); // NOI18N
-        btnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
-        btnCadastrar.setText("Concluir");
+        btnCadastrar.setForeground(new java.awt.Color(0, 51, 102));
+        btnCadastrar.setText("Cadastrar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
@@ -366,30 +361,33 @@ public class TelaServicos extends javax.swing.JFrame {
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CentroLayout.createSequentialGroup()
                 .addComponent(Esquerda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CentroLayout.createSequentialGroup()
-                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(labelServico, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(labelValor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtServico, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtValor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CentroLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(CentroLayout.createSequentialGroup()
-                                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(87, 87, 87)))
-                        .addGap(112, 112, 112))
+                                .addComponent(labelFunServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CentroLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(labelServico, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(labelValor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtServico, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtValor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(231, 231, 231))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CentroLayout.createSequentialGroup()
-                        .addComponent(labelFunServico, javax.swing.GroupLayout.PREFERRED_SIZE, 853, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(316, 316, 316))))
         );
         CentroLayout.setVerticalGroup(
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Esquerda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(CentroLayout.createSequentialGroup()
-                .addGap(162, 162, 162)
+                .addGap(120, 120, 120)
                 .addComponent(labelFunServico, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(52, 52, 52)
                 .addComponent(labelServico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtServico, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -397,9 +395,9 @@ public class TelaServicos extends javax.swing.JFrame {
                 .addComponent(labelValor)
                 .addGap(18, 18, 18)
                 .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97)
+                .addGap(73, 73, 73)
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(263, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -436,13 +434,13 @@ public class TelaServicos extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-    int linhaSelecionada = jTableDiario.getSelectedRow();
+    private void btnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarMouseClicked
+        int linhaSelecionada = jTableDiario.getSelectedRow();
         if(linhaSelecionada==-1){
             JOptionPane.showMessageDialog(null, "Selecione um serviço.");
         }else{
             opcao=2;
-            labelFunServico.setText("Alterar serviço");
+            labelFunServico.setText("Alterar Serviço");
             btnCadastrar.setText("Alterar");
             txtServico.setText(Servico);
             String valor = String.valueOf(Valor);
@@ -450,15 +448,15 @@ public class TelaServicos extends javax.swing.JFrame {
             txtServico.setEditable(true);
             txtValor.setEditable(true);
         }
-    }//GEN-LAST:event_btnAlterarActionPerformed
+    }//GEN-LAST:event_btnAlterarMouseClicked
 
-    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+    private void btnDeletarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletarMouseClicked
         int linhaSelecionada = jTableDiario.getSelectedRow();
         if(linhaSelecionada==-1){
             JOptionPane.showMessageDialog(null, "Selecione um serviço.");
         }else{
             opcao=3;
-            labelFunServico.setText("Confirme que deseja deletar");
+            labelFunServico.setText("Deletar Serviço");
             btnCadastrar.setText("Deletar");
             txtServico.setText(Servico);
             String valor = String.valueOf(Valor);
@@ -466,17 +464,17 @@ public class TelaServicos extends javax.swing.JFrame {
             txtServico.setEditable(false);
             txtValor.setEditable(false);
         }
-    }//GEN-LAST:event_btnDeletarActionPerformed
+    }//GEN-LAST:event_btnDeletarMouseClicked
 
-    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        labelFunServico.setText("Cadastrar");
-        btnCadastrar.setText("Concluir");
+    private void btnAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarMouseClicked
+        labelFunServico.setText("Cadastrar Serviço");
+        btnCadastrar.setText("Cadastrar");
         opcao=1;
         txtServico.setText("");
         txtValor.setText("");
         txtServico.setEditable(true);
         txtValor.setEditable(true);
-    }//GEN-LAST:event_btnAdicionarActionPerformed
+    }//GEN-LAST:event_btnAdicionarMouseClicked
 
     public static void main(String args[]) {
         
@@ -500,10 +498,10 @@ public class TelaServicos extends javax.swing.JFrame {
     private javax.swing.JPanel Centro;
     private javax.swing.JPanel Cima;
     private javax.swing.JPanel Esquerda;
-    private javax.swing.JButton btnAdicionar;
-    private javax.swing.JButton btnAlterar;
+    private javax.swing.JLabel btnAdicionar;
+    private javax.swing.JLabel btnAlterar;
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JButton btnDeletar;
+    private javax.swing.JLabel btnDeletar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel icon;
     private javax.swing.JScrollPane jScrollPaneDiario;
