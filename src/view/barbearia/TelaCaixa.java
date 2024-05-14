@@ -67,14 +67,27 @@ public class TelaCaixa extends javax.swing.JFrame {
         }
     }
     
+    public void confirmarNaoAtendimento(int CODAGENDAMENTO){     
+        if(JOptionPane.showConfirmDialog(this, "Confirma a NÃO conclusão do serviço?", "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){            
+            String DESCRICAO = JOptionPane.showInputDialog(null,"Informe o motivo:", "Cancelar agendamento", JOptionPane.INFORMATION_MESSAGE);
+            if(DESCRICAO != null){
+                agendDAO.confirmarAgendamentoCliente(CODAGENDAMENTO, 2, DESCRICAO);
+                consultarAgendamentosPendentes();
+            }else{
+                JOptionPane.showMessageDialog(null, "É obrigatório informar o motivo.", "Mensagem", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
     public void consultarAgendamentosPendentes(){
         agendamentosPendentes = agendDAO.consultarAgendamentosPendentes(CODBARBEARIA);
         
-        JPanel[] paineisAgendamento = {AgendamentoPen1, AgendamentoPen2, AgendamentoPen3, AgendamentoPen4, AgendamentoPen5};
-        JLabel[] labelsCliente = {txtCliente1, txtCliente2, txtCliente3, txtCliente4, txtCliente5};
-        JLabel[] labelsHorario = {txtHorario1, txtHorario2, txtHorario3, txtHorario4, txtHorario5};
-        JLabel[] labelsServico = {txtServico1, txtServico2, txtServico3, txtServico4, txtServico5};
-        JLabel[] labelsConfirmar = {btnConfirmar1, btnConfirmar2, btnConfirmar3, btnConfirmar4, btnConfirmar5};
+        JPanel[] paineisAgendamento = {AgendamentoPen1, AgendamentoPen2, AgendamentoPen3, AgendamentoPen4, AgendamentoPen5, AgendamentoPen6, AgendamentoPen7, AgendamentoPen8, AgendamentoPen9, AgendamentoPen10};
+        JLabel[] labelsCliente = {txtCliente1, txtCliente2, txtCliente3, txtCliente4, txtCliente5, txtCliente6, txtCliente7, txtCliente8, txtCliente9, txtCliente10};
+        JLabel[] labelsHorario = {txtHorario1, txtHorario2, txtHorario3, txtHorario4, txtHorario5, txtHorario6, txtHorario7, txtHorario8, txtHorario9, txtHorario10};
+        JLabel[] labelsServico = {txtServico1, txtServico2, txtServico3, txtServico4, txtServico5, txtServico6, txtServico7, txtServico8, txtServico9, txtServico10};
+        JLabel[] labelsConfirmar = {btnConfirmar1, btnConfirmar2, btnConfirmar3, btnConfirmar4, btnConfirmar5, btnConfirmar6, btnConfirmar7, btnConfirmar8, btnConfirmar9, btnConfirmar10};
+        JLabel[] labelsExcluir = {btnExcluir1, btnExcluir2, btnExcluir3, btnExcluir4, btnExcluir5, btnExcluir6, btnExcluir7, btnExcluir8, btnExcluir9, btnExcluir10};
 
         // Loop pelos agendamentosAbertos e configuração dos componentes
         for (int i = 0; i < agendamentosPendentes.size() && i < paineisAgendamento.length; i++) {
@@ -84,6 +97,7 @@ public class TelaCaixa extends javax.swing.JFrame {
             JLabel labelHorario = labelsHorario[i];
             JLabel labelServico = labelsServico[i];
             JLabel labelConfirmar = labelsConfirmar[i];
+            JLabel labelExcluir = labelsExcluir[i];
 
             // Exibir o painel de agendamento correspondente
             painelAgendamento.setVisible(true);
@@ -92,6 +106,7 @@ public class TelaCaixa extends javax.swing.JFrame {
             labelCliente.setText(agendamento.getNomecliente());
             labelHorario.setText(dataFormat.format(agendamento.getData()) +" às "+ horaFormat.format(agendamento.getHora()) + "h");
             labelServico.setText("Serviço: "+agendamento.getNomeservico());
+            labelExcluir.setVisible(true);
             if(agendamento.getStatus()==3){
                 labelConfirmar.setVisible(false);
             }
@@ -177,42 +192,84 @@ public class TelaCaixa extends javax.swing.JFrame {
         btnSemanal = new javax.swing.JButton();
         btnMenal = new javax.swing.JButton();
         labelConfirmacao = new javax.swing.JLabel();
-        jScrollPane2 = new css.ScrollPaneWin11();
-        jPanel2 = new javax.swing.JPanel();
         Pendentes = new css.JPanelArredondadoBarbearias(20);
         pendentes = new javax.swing.JLabel();
+        jScrollPane2 = new css.ScrollPaneWin11();
+        jPanel2 = new javax.swing.JPanel();
         AgendamentoPen1 = new css.JPanelArredondadoAgendamentos(30);
         seta1 = new javax.swing.JLabel();
         txtCliente1 = new javax.swing.JLabel();
         txtHorario1 = new javax.swing.JLabel();
         txtServico1 = new javax.swing.JLabel();
         btnConfirmar1 = new javax.swing.JLabel();
+        btnExcluir1 = new javax.swing.JLabel();
         AgendamentoPen2 = new css.JPanelArredondadoAgendamentos(30);
         seta2 = new javax.swing.JLabel();
         txtCliente2 = new javax.swing.JLabel();
         txtHorario2 = new javax.swing.JLabel();
         txtServico2 = new javax.swing.JLabel();
         btnConfirmar2 = new javax.swing.JLabel();
+        btnExcluir2 = new javax.swing.JLabel();
         AgendamentoPen3 = new css.JPanelArredondadoAgendamentos(30);
         seta3 = new javax.swing.JLabel();
         txtCliente3 = new javax.swing.JLabel();
         txtHorario3 = new javax.swing.JLabel();
         txtServico3 = new javax.swing.JLabel();
         btnConfirmar3 = new javax.swing.JLabel();
+        btnExcluir3 = new javax.swing.JLabel();
         AgendamentoPen4 = new css.JPanelArredondadoAgendamentos(30);
         seta4 = new javax.swing.JLabel();
         txtCliente4 = new javax.swing.JLabel();
         txtHorario4 = new javax.swing.JLabel();
         txtServico4 = new javax.swing.JLabel();
         btnConfirmar4 = new javax.swing.JLabel();
+        btnExcluir4 = new javax.swing.JLabel();
         AgendamentoPen5 = new css.JPanelArredondadoAgendamentos(30);
         seta5 = new javax.swing.JLabel();
         txtCliente5 = new javax.swing.JLabel();
         txtHorario5 = new javax.swing.JLabel();
         txtServico5 = new javax.swing.JLabel();
         btnConfirmar5 = new javax.swing.JLabel();
+        btnExcluir5 = new javax.swing.JLabel();
+        AgendamentoPen6 = new css.JPanelArredondadoAgendamentos(30);
+        seta6 = new javax.swing.JLabel();
+        txtCliente6 = new javax.swing.JLabel();
+        txtHorario6 = new javax.swing.JLabel();
+        txtServico6 = new javax.swing.JLabel();
         btnConfirmar6 = new javax.swing.JLabel();
-        labelTotal1 = new javax.swing.JLabel();
+        btnExcluir6 = new javax.swing.JLabel();
+        AgendamentoPen7 = new css.JPanelArredondadoAgendamentos(30);
+        seta7 = new javax.swing.JLabel();
+        txtCliente7 = new javax.swing.JLabel();
+        txtHorario7 = new javax.swing.JLabel();
+        txtServico7 = new javax.swing.JLabel();
+        btnConfirmar7 = new javax.swing.JLabel();
+        btnExcluir8 = new javax.swing.JLabel();
+        AgendamentoPen8 = new css.JPanelArredondadoAgendamentos(30);
+        seta8 = new javax.swing.JLabel();
+        txtCliente8 = new javax.swing.JLabel();
+        txtHorario8 = new javax.swing.JLabel();
+        txtServico8 = new javax.swing.JLabel();
+        btnConfirmar8 = new javax.swing.JLabel();
+        btnExcluir7 = new javax.swing.JLabel();
+        AgendamentoPen9 = new css.JPanelArredondadoAgendamentos(30);
+        seta9 = new javax.swing.JLabel();
+        txtCliente9 = new javax.swing.JLabel();
+        txtHorario9 = new javax.swing.JLabel();
+        txtServico9 = new javax.swing.JLabel();
+        btnConfirmar9 = new javax.swing.JLabel();
+        btnExcluir9 = new javax.swing.JLabel();
+        AgendamentoPen10 = new css.JPanelArredondadoAgendamentos(30);
+        seta10 = new javax.swing.JLabel();
+        txtCliente10 = new javax.swing.JLabel();
+        txtHorario10 = new javax.swing.JLabel();
+        txtServico10 = new javax.swing.JLabel();
+        btnConfirmar10 = new javax.swing.JLabel();
+        btnExcluir10 = new javax.swing.JLabel();
+        iconConfirmar = new javax.swing.JLabel();
+        labelConfirmar = new javax.swing.JLabel();
+        iconExcluir = new javax.swing.JLabel();
+        labelExcluir = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1920, 1080));
@@ -253,7 +310,7 @@ public class TelaCaixa extends javax.swing.JFrame {
                 .addComponent(icon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 1503, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39))
         );
@@ -442,9 +499,6 @@ public class TelaCaixa extends javax.swing.JFrame {
         labelConfirmacao.setText("Agendamentos");
         labelConfirmacao.setBorder(new javax.swing.border.MatteBorder(null));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
-
         Pendentes.setBackground(new java.awt.Color(255, 153, 0));
         Pendentes.setMaximumSize(new java.awt.Dimension(500, 45));
         Pendentes.setMinimumSize(new java.awt.Dimension(500, 45));
@@ -466,6 +520,12 @@ public class TelaCaixa extends javax.swing.JFrame {
             PendentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pendentes, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
         );
+
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.setPreferredSize(new java.awt.Dimension(630, 1050));
 
         AgendamentoPen1.setBackground(new java.awt.Color(255, 153, 0));
         AgendamentoPen1.setForeground(new java.awt.Color(255, 255, 255));
@@ -509,6 +569,15 @@ public class TelaCaixa extends javax.swing.JFrame {
             }
         });
 
+        btnExcluir1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnExcluir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExcluir1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExcluir1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout AgendamentoPen1Layout = new javax.swing.GroupLayout(AgendamentoPen1);
         AgendamentoPen1.setLayout(AgendamentoPen1Layout);
         AgendamentoPen1Layout.setHorizontalGroup(
@@ -520,7 +589,9 @@ public class TelaCaixa extends javax.swing.JFrame {
                     .addComponent(txtHorario1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(txtCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtServico1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(66, 66, 66)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExcluir1)
+                .addGap(12, 12, 12)
                 .addComponent(btnConfirmar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -537,6 +608,7 @@ public class TelaCaixa extends javax.swing.JFrame {
                     .addComponent(seta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(btnConfirmar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnExcluir1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         AgendamentoPen2.setBackground(new java.awt.Color(255, 153, 0));
@@ -581,6 +653,15 @@ public class TelaCaixa extends javax.swing.JFrame {
             }
         });
 
+        btnExcluir2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnExcluir2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExcluir2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExcluir2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout AgendamentoPen2Layout = new javax.swing.GroupLayout(AgendamentoPen2);
         AgendamentoPen2.setLayout(AgendamentoPen2Layout);
         AgendamentoPen2Layout.setHorizontalGroup(
@@ -592,7 +673,9 @@ public class TelaCaixa extends javax.swing.JFrame {
                     .addComponent(txtHorario2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(txtCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtServico2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(67, 67, 67)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExcluir2)
+                .addGap(13, 13, 13)
                 .addComponent(btnConfirmar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -609,6 +692,7 @@ public class TelaCaixa extends javax.swing.JFrame {
                     .addComponent(seta2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnConfirmar2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addComponent(btnExcluir2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         AgendamentoPen3.setBackground(new java.awt.Color(255, 153, 0));
@@ -653,6 +737,15 @@ public class TelaCaixa extends javax.swing.JFrame {
             }
         });
 
+        btnExcluir3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnExcluir3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExcluir3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExcluir3MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout AgendamentoPen3Layout = new javax.swing.GroupLayout(AgendamentoPen3);
         AgendamentoPen3.setLayout(AgendamentoPen3Layout);
         AgendamentoPen3Layout.setHorizontalGroup(
@@ -664,7 +757,9 @@ public class TelaCaixa extends javax.swing.JFrame {
                     .addComponent(txtHorario3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(txtCliente3, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtServico3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(67, 67, 67)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExcluir3)
+                .addGap(13, 13, 13)
                 .addComponent(btnConfirmar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -681,6 +776,7 @@ public class TelaCaixa extends javax.swing.JFrame {
                     .addComponent(seta3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(btnConfirmar3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnExcluir3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         AgendamentoPen4.setBackground(new java.awt.Color(255, 153, 0));
@@ -725,6 +821,15 @@ public class TelaCaixa extends javax.swing.JFrame {
             }
         });
 
+        btnExcluir4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnExcluir4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExcluir4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExcluir4MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout AgendamentoPen4Layout = new javax.swing.GroupLayout(AgendamentoPen4);
         AgendamentoPen4.setLayout(AgendamentoPen4Layout);
         AgendamentoPen4Layout.setHorizontalGroup(
@@ -736,7 +841,9 @@ public class TelaCaixa extends javax.swing.JFrame {
                     .addComponent(txtHorario4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(txtCliente4, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtServico4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(67, 67, 67)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExcluir4)
+                .addGap(13, 13, 13)
                 .addComponent(btnConfirmar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -753,6 +860,7 @@ public class TelaCaixa extends javax.swing.JFrame {
                     .addComponent(seta4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnConfirmar4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addComponent(btnExcluir4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         AgendamentoPen5.setBackground(new java.awt.Color(255, 153, 0));
@@ -797,6 +905,15 @@ public class TelaCaixa extends javax.swing.JFrame {
             }
         });
 
+        btnExcluir5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnExcluir5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExcluir5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExcluir5MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout AgendamentoPen5Layout = new javax.swing.GroupLayout(AgendamentoPen5);
         AgendamentoPen5.setLayout(AgendamentoPen5Layout);
         AgendamentoPen5Layout.setHorizontalGroup(
@@ -808,7 +925,9 @@ public class TelaCaixa extends javax.swing.JFrame {
                     .addComponent(txtHorario5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(txtCliente5, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtServico5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(67, 67, 67)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExcluir5)
+                .addGap(13, 13, 13)
                 .addComponent(btnConfirmar5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -825,43 +944,40 @@ public class TelaCaixa extends javax.swing.JFrame {
                     .addComponent(seta5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnConfirmar5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addComponent(btnExcluir5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AgendamentoPen5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(AgendamentoPen1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Pendentes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(AgendamentoPen2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(AgendamentoPen3, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(AgendamentoPen4, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(65, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(Pendentes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(AgendamentoPen1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(AgendamentoPen2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(AgendamentoPen3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(AgendamentoPen4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(AgendamentoPen5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
-        );
+        AgendamentoPen6.setBackground(new java.awt.Color(255, 153, 0));
+        AgendamentoPen6.setForeground(new java.awt.Color(255, 255, 255));
+        AgendamentoPen6.setMaximumSize(new java.awt.Dimension(450, 70));
+        AgendamentoPen6.setMinimumSize(new java.awt.Dimension(450, 70));
+        AgendamentoPen6.setPreferredSize(new java.awt.Dimension(400, 100));
 
-        jScrollPane2.setViewportView(jPanel2);
+        seta6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        seta6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta4.png"))); // NOI18N
+
+        txtCliente6.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtCliente6.setForeground(new java.awt.Color(255, 255, 255));
+        txtCliente6.setToolTipText("");
+        txtCliente6.setBorder(new javax.swing.border.MatteBorder(null));
+        txtCliente6.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtCliente6.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtCliente6.setPreferredSize(new java.awt.Dimension(300, 30));
+
+        txtHorario6.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtHorario6.setForeground(new java.awt.Color(255, 255, 255));
+        txtHorario6.setBorder(new javax.swing.border.MatteBorder(null));
+        txtHorario6.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtHorario6.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtHorario6.setPreferredSize(new java.awt.Dimension(300, 30));
+        txtHorario6.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        txtServico6.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtServico6.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico6.setBorder(new javax.swing.border.MatteBorder(null));
+        txtServico6.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtServico6.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtServico6.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnConfirmar6.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
         btnConfirmar6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -873,12 +989,457 @@ public class TelaCaixa extends javax.swing.JFrame {
             }
         });
 
-        labelTotal1.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
-        labelTotal1.setForeground(new java.awt.Color(0, 51, 102));
-        labelTotal1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelTotal1.setText("Confirmar atendimento");
-        labelTotal1.setBorder(new javax.swing.border.MatteBorder(null));
-        labelTotal1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnExcluir6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnExcluir6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExcluir6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExcluir6MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AgendamentoPen6Layout = new javax.swing.GroupLayout(AgendamentoPen6);
+        AgendamentoPen6.setLayout(AgendamentoPen6Layout);
+        AgendamentoPen6Layout.setHorizontalGroup(
+            AgendamentoPen6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AgendamentoPen6Layout.createSequentialGroup()
+                .addComponent(seta6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(AgendamentoPen6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtHorario6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtCliente6, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtServico6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExcluir6)
+                .addGap(12, 12, 12)
+                .addComponent(btnConfirmar6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        AgendamentoPen6Layout.setVerticalGroup(
+            AgendamentoPen6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AgendamentoPen6Layout.createSequentialGroup()
+                .addGroup(AgendamentoPen6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoPen6Layout.createSequentialGroup()
+                        .addComponent(txtCliente6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtHorario6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtServico6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(seta6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addComponent(btnConfirmar6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnExcluir6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        AgendamentoPen7.setBackground(new java.awt.Color(255, 153, 0));
+        AgendamentoPen7.setForeground(new java.awt.Color(255, 255, 255));
+        AgendamentoPen7.setMaximumSize(new java.awt.Dimension(450, 70));
+        AgendamentoPen7.setMinimumSize(new java.awt.Dimension(450, 70));
+        AgendamentoPen7.setPreferredSize(new java.awt.Dimension(400, 100));
+
+        seta7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        seta7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta4.png"))); // NOI18N
+
+        txtCliente7.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtCliente7.setForeground(new java.awt.Color(255, 255, 255));
+        txtCliente7.setToolTipText("");
+        txtCliente7.setBorder(new javax.swing.border.MatteBorder(null));
+        txtCliente7.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtCliente7.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtCliente7.setPreferredSize(new java.awt.Dimension(300, 30));
+
+        txtHorario7.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtHorario7.setForeground(new java.awt.Color(255, 255, 255));
+        txtHorario7.setBorder(new javax.swing.border.MatteBorder(null));
+        txtHorario7.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtHorario7.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtHorario7.setPreferredSize(new java.awt.Dimension(300, 30));
+        txtHorario7.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        txtServico7.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtServico7.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico7.setBorder(new javax.swing.border.MatteBorder(null));
+        txtServico7.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtServico7.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtServico7.setPreferredSize(new java.awt.Dimension(300, 30));
+
+        btnConfirmar7.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
+        btnConfirmar7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnConfirmar7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
+        btnConfirmar7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmar7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnConfirmar7MouseClicked(evt);
+            }
+        });
+
+        btnExcluir8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnExcluir8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExcluir8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExcluir8MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AgendamentoPen7Layout = new javax.swing.GroupLayout(AgendamentoPen7);
+        AgendamentoPen7.setLayout(AgendamentoPen7Layout);
+        AgendamentoPen7Layout.setHorizontalGroup(
+            AgendamentoPen7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AgendamentoPen7Layout.createSequentialGroup()
+                .addComponent(seta7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(AgendamentoPen7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtHorario7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtCliente7, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtServico7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExcluir8)
+                .addGap(13, 13, 13)
+                .addComponent(btnConfirmar7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        AgendamentoPen7Layout.setVerticalGroup(
+            AgendamentoPen7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AgendamentoPen7Layout.createSequentialGroup()
+                .addGroup(AgendamentoPen7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoPen7Layout.createSequentialGroup()
+                        .addComponent(txtCliente7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtHorario7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtServico7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(seta7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addComponent(btnConfirmar7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnExcluir8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        AgendamentoPen8.setBackground(new java.awt.Color(255, 153, 0));
+        AgendamentoPen8.setForeground(new java.awt.Color(255, 255, 255));
+        AgendamentoPen8.setMaximumSize(new java.awt.Dimension(450, 70));
+        AgendamentoPen8.setMinimumSize(new java.awt.Dimension(450, 70));
+        AgendamentoPen8.setPreferredSize(new java.awt.Dimension(400, 100));
+
+        seta8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        seta8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta4.png"))); // NOI18N
+
+        txtCliente8.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtCliente8.setForeground(new java.awt.Color(255, 255, 255));
+        txtCliente8.setToolTipText("");
+        txtCliente8.setBorder(new javax.swing.border.MatteBorder(null));
+        txtCliente8.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtCliente8.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtCliente8.setPreferredSize(new java.awt.Dimension(300, 30));
+
+        txtHorario8.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtHorario8.setForeground(new java.awt.Color(255, 255, 255));
+        txtHorario8.setBorder(new javax.swing.border.MatteBorder(null));
+        txtHorario8.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtHorario8.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtHorario8.setPreferredSize(new java.awt.Dimension(300, 30));
+        txtHorario8.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        txtServico8.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtServico8.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico8.setBorder(new javax.swing.border.MatteBorder(null));
+        txtServico8.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtServico8.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtServico8.setPreferredSize(new java.awt.Dimension(300, 30));
+
+        btnConfirmar8.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
+        btnConfirmar8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnConfirmar8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
+        btnConfirmar8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmar8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnConfirmar8MouseClicked(evt);
+            }
+        });
+
+        btnExcluir7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnExcluir7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExcluir7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExcluir7MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AgendamentoPen8Layout = new javax.swing.GroupLayout(AgendamentoPen8);
+        AgendamentoPen8.setLayout(AgendamentoPen8Layout);
+        AgendamentoPen8Layout.setHorizontalGroup(
+            AgendamentoPen8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AgendamentoPen8Layout.createSequentialGroup()
+                .addComponent(seta8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(AgendamentoPen8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtHorario8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtCliente8, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtServico8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExcluir7)
+                .addGap(13, 13, 13)
+                .addComponent(btnConfirmar8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        AgendamentoPen8Layout.setVerticalGroup(
+            AgendamentoPen8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AgendamentoPen8Layout.createSequentialGroup()
+                .addGroup(AgendamentoPen8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoPen8Layout.createSequentialGroup()
+                        .addComponent(txtCliente8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtHorario8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtServico8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(seta8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnConfirmar8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addComponent(btnExcluir7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        AgendamentoPen9.setBackground(new java.awt.Color(255, 153, 0));
+        AgendamentoPen9.setForeground(new java.awt.Color(255, 255, 255));
+        AgendamentoPen9.setMaximumSize(new java.awt.Dimension(450, 70));
+        AgendamentoPen9.setMinimumSize(new java.awt.Dimension(450, 70));
+        AgendamentoPen9.setPreferredSize(new java.awt.Dimension(400, 100));
+
+        seta9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        seta9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta4.png"))); // NOI18N
+
+        txtCliente9.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtCliente9.setForeground(new java.awt.Color(255, 255, 255));
+        txtCliente9.setToolTipText("");
+        txtCliente9.setBorder(new javax.swing.border.MatteBorder(null));
+        txtCliente9.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtCliente9.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtCliente9.setPreferredSize(new java.awt.Dimension(300, 30));
+
+        txtHorario9.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtHorario9.setForeground(new java.awt.Color(255, 255, 255));
+        txtHorario9.setBorder(new javax.swing.border.MatteBorder(null));
+        txtHorario9.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtHorario9.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtHorario9.setPreferredSize(new java.awt.Dimension(300, 30));
+        txtHorario9.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        txtServico9.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtServico9.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico9.setBorder(new javax.swing.border.MatteBorder(null));
+        txtServico9.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtServico9.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtServico9.setPreferredSize(new java.awt.Dimension(300, 30));
+
+        btnConfirmar9.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
+        btnConfirmar9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnConfirmar9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
+        btnConfirmar9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmar9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnConfirmar9MouseClicked(evt);
+            }
+        });
+
+        btnExcluir9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnExcluir9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExcluir9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExcluir9MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AgendamentoPen9Layout = new javax.swing.GroupLayout(AgendamentoPen9);
+        AgendamentoPen9.setLayout(AgendamentoPen9Layout);
+        AgendamentoPen9Layout.setHorizontalGroup(
+            AgendamentoPen9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AgendamentoPen9Layout.createSequentialGroup()
+                .addComponent(seta9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(AgendamentoPen9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtHorario9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtCliente9, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtServico9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExcluir9)
+                .addGap(13, 13, 13)
+                .addComponent(btnConfirmar9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        AgendamentoPen9Layout.setVerticalGroup(
+            AgendamentoPen9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AgendamentoPen9Layout.createSequentialGroup()
+                .addGroup(AgendamentoPen9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoPen9Layout.createSequentialGroup()
+                        .addComponent(txtCliente9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtHorario9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtServico9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(seta9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnConfirmar9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addComponent(btnExcluir9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        AgendamentoPen10.setBackground(new java.awt.Color(255, 153, 0));
+        AgendamentoPen10.setForeground(new java.awt.Color(255, 255, 255));
+        AgendamentoPen10.setMaximumSize(new java.awt.Dimension(450, 70));
+        AgendamentoPen10.setMinimumSize(new java.awt.Dimension(450, 70));
+        AgendamentoPen10.setPreferredSize(new java.awt.Dimension(400, 100));
+
+        seta10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        seta10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta4.png"))); // NOI18N
+
+        txtCliente10.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtCliente10.setForeground(new java.awt.Color(255, 255, 255));
+        txtCliente10.setToolTipText("");
+        txtCliente10.setBorder(new javax.swing.border.MatteBorder(null));
+        txtCliente10.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtCliente10.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtCliente10.setPreferredSize(new java.awt.Dimension(300, 30));
+
+        txtHorario10.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtHorario10.setForeground(new java.awt.Color(255, 255, 255));
+        txtHorario10.setBorder(new javax.swing.border.MatteBorder(null));
+        txtHorario10.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtHorario10.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtHorario10.setPreferredSize(new java.awt.Dimension(300, 30));
+        txtHorario10.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        txtServico10.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
+        txtServico10.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico10.setBorder(new javax.swing.border.MatteBorder(null));
+        txtServico10.setMaximumSize(new java.awt.Dimension(300, 30));
+        txtServico10.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtServico10.setPreferredSize(new java.awt.Dimension(300, 30));
+
+        btnConfirmar10.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
+        btnConfirmar10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnConfirmar10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
+        btnConfirmar10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmar10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnConfirmar10MouseClicked(evt);
+            }
+        });
+
+        btnExcluir10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnExcluir10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExcluir10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExcluir10MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AgendamentoPen10Layout = new javax.swing.GroupLayout(AgendamentoPen10);
+        AgendamentoPen10.setLayout(AgendamentoPen10Layout);
+        AgendamentoPen10Layout.setHorizontalGroup(
+            AgendamentoPen10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AgendamentoPen10Layout.createSequentialGroup()
+                .addComponent(seta10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(AgendamentoPen10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtHorario10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtCliente10, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtServico10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExcluir10)
+                .addGap(13, 13, 13)
+                .addComponent(btnConfirmar10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        AgendamentoPen10Layout.setVerticalGroup(
+            AgendamentoPen10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AgendamentoPen10Layout.createSequentialGroup()
+                .addGroup(AgendamentoPen10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgendamentoPen10Layout.createSequentialGroup()
+                        .addComponent(txtCliente10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtHorario10, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtServico10, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(seta10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnConfirmar10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addComponent(btnExcluir10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(AgendamentoPen10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(AgendamentoPen6, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AgendamentoPen8, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AgendamentoPen7, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AgendamentoPen9, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(AgendamentoPen5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(AgendamentoPen1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AgendamentoPen2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AgendamentoPen3, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AgendamentoPen4, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(67, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(AgendamentoPen1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(AgendamentoPen2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(AgendamentoPen3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(AgendamentoPen4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(AgendamentoPen5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(AgendamentoPen6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(AgendamentoPen8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(AgendamentoPen7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(AgendamentoPen9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(AgendamentoPen10, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+
+        jScrollPane2.setViewportView(jPanel2);
+
+        iconConfirmar.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
+        iconConfirmar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        iconConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
+        iconConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        labelConfirmar.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
+        labelConfirmar.setForeground(new java.awt.Color(0, 51, 102));
+        labelConfirmar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelConfirmar.setText("Confirmar atendimento");
+        labelConfirmar.setBorder(new javax.swing.border.MatteBorder(null));
+        labelConfirmar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        iconExcluir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        iconExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        iconExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        labelExcluir.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
+        labelExcluir.setForeground(new java.awt.Color(0, 51, 102));
+        labelExcluir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelExcluir.setText("Confirmar NÃO atendimento");
+        labelExcluir.setBorder(new javax.swing.border.MatteBorder(null));
+        labelExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout CentroLayout = new javax.swing.GroupLayout(Centro);
         Centro.setLayout(CentroLayout);
@@ -886,28 +1447,46 @@ public class TelaCaixa extends javax.swing.JFrame {
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CentroLayout.createSequentialGroup()
                 .addComponent(Esquerda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelConfirmacao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CentroLayout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(btnConfirmar6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTotal1)))
-                .addContainerGap(7, Short.MAX_VALUE))
+                        .addGap(6, 6, 6)
+                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(labelConfirmacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)))
+                    .addGroup(CentroLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(Pendentes, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CentroLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CentroLayout.createSequentialGroup()
+                                .addComponent(iconExcluir)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelExcluir))
+                            .addGroup(CentroLayout.createSequentialGroup()
+                                .addComponent(iconConfirmar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelConfirmar)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CentroLayout.setVerticalGroup(
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Esquerda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(CentroLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(labelConfirmacao, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelConfirmacao)
+                .addGap(61, 61, 61)
+                .addComponent(Pendentes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnConfirmar6)
-                    .addComponent(labelTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(iconExcluir)
+                    .addComponent(labelExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(iconConfirmar)
+                    .addComponent(labelConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -977,8 +1556,64 @@ public class TelaCaixa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenalActionPerformed
 
     private void btnConfirmar6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar6MouseClicked
-        // TODO add your handling code here:
+        confirmarAtendimento(CODAGENDAMENTOSPENDENTE.get(5));
     }//GEN-LAST:event_btnConfirmar6MouseClicked
+
+    private void btnConfirmar7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar7MouseClicked
+        confirmarAtendimento(CODAGENDAMENTOSPENDENTE.get(6));
+    }//GEN-LAST:event_btnConfirmar7MouseClicked
+
+    private void btnConfirmar8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar8MouseClicked
+        confirmarAtendimento(CODAGENDAMENTOSPENDENTE.get(7));
+    }//GEN-LAST:event_btnConfirmar8MouseClicked
+
+    private void btnConfirmar9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar9MouseClicked
+        confirmarAtendimento(CODAGENDAMENTOSPENDENTE.get(8));
+    }//GEN-LAST:event_btnConfirmar9MouseClicked
+
+    private void btnConfirmar10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar10MouseClicked
+        confirmarAtendimento(CODAGENDAMENTOSPENDENTE.get(9));
+    }//GEN-LAST:event_btnConfirmar10MouseClicked
+
+    private void btnExcluir1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir1MouseClicked
+        confirmarNaoAtendimento(CODAGENDAMENTOSPENDENTE.get(0));
+    }//GEN-LAST:event_btnExcluir1MouseClicked
+
+    private void btnExcluir2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir2MouseClicked
+        confirmarNaoAtendimento(CODAGENDAMENTOSPENDENTE.get(1));
+    }//GEN-LAST:event_btnExcluir2MouseClicked
+
+    private void btnExcluir3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir3MouseClicked
+        confirmarNaoAtendimento(CODAGENDAMENTOSPENDENTE.get(2));
+    }//GEN-LAST:event_btnExcluir3MouseClicked
+
+    private void btnExcluir4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir4MouseClicked
+        confirmarNaoAtendimento(CODAGENDAMENTOSPENDENTE.get(3));
+    }//GEN-LAST:event_btnExcluir4MouseClicked
+
+    private void btnExcluir5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir5MouseClicked
+        confirmarNaoAtendimento(CODAGENDAMENTOSPENDENTE.get(4));
+    }//GEN-LAST:event_btnExcluir5MouseClicked
+
+    private void btnExcluir6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir6MouseClicked
+        confirmarNaoAtendimento(CODAGENDAMENTOSPENDENTE.get(5));
+    }//GEN-LAST:event_btnExcluir6MouseClicked
+
+    private void btnExcluir7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir7MouseClicked
+        confirmarNaoAtendimento(CODAGENDAMENTOSPENDENTE.get(6));
+    }//GEN-LAST:event_btnExcluir7MouseClicked
+
+    private void btnExcluir8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir8MouseClicked
+        confirmarNaoAtendimento(CODAGENDAMENTOSPENDENTE.get(7));
+    }//GEN-LAST:event_btnExcluir8MouseClicked
+
+    private void btnExcluir9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir9MouseClicked
+        confirmarNaoAtendimento(CODAGENDAMENTOSPENDENTE.get(8));
+    }//GEN-LAST:event_btnExcluir9MouseClicked
+
+    private void btnExcluir10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir10MouseClicked
+        confirmarNaoAtendimento(CODAGENDAMENTOSPENDENTE.get(9));
+    }//GEN-LAST:event_btnExcluir10MouseClicked
 
     public static void main(String args[]) {
 
@@ -999,55 +1634,97 @@ public class TelaCaixa extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AgendamentoPen1;
+    private javax.swing.JPanel AgendamentoPen10;
     private javax.swing.JPanel AgendamentoPen2;
     private javax.swing.JPanel AgendamentoPen3;
     private javax.swing.JPanel AgendamentoPen4;
     private javax.swing.JPanel AgendamentoPen5;
+    private javax.swing.JPanel AgendamentoPen6;
+    private javax.swing.JPanel AgendamentoPen7;
+    private javax.swing.JPanel AgendamentoPen8;
+    private javax.swing.JPanel AgendamentoPen9;
     private javax.swing.JPanel Centro;
     private javax.swing.JPanel Cima;
     private javax.swing.JPanel Esquerda;
     private javax.swing.JPanel Pendentes;
     private javax.swing.JLabel btnConfirmar1;
+    private javax.swing.JLabel btnConfirmar10;
     private javax.swing.JLabel btnConfirmar2;
     private javax.swing.JLabel btnConfirmar3;
     private javax.swing.JLabel btnConfirmar4;
     private javax.swing.JLabel btnConfirmar5;
     private javax.swing.JLabel btnConfirmar6;
+    private javax.swing.JLabel btnConfirmar7;
+    private javax.swing.JLabel btnConfirmar8;
+    private javax.swing.JLabel btnConfirmar9;
     private javax.swing.JButton btnDiario;
+    private javax.swing.JLabel btnExcluir1;
+    private javax.swing.JLabel btnExcluir10;
+    private javax.swing.JLabel btnExcluir2;
+    private javax.swing.JLabel btnExcluir3;
+    private javax.swing.JLabel btnExcluir4;
+    private javax.swing.JLabel btnExcluir5;
+    private javax.swing.JLabel btnExcluir6;
+    private javax.swing.JLabel btnExcluir7;
+    private javax.swing.JLabel btnExcluir8;
+    private javax.swing.JLabel btnExcluir9;
     private javax.swing.JButton btnMenal;
     private javax.swing.JButton btnSemanal;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel icon;
+    private javax.swing.JLabel iconConfirmar;
+    private javax.swing.JLabel iconExcluir;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPaneDiario;
     private javax.swing.JTable jTableDiario;
     private javax.swing.JLabel labelConfirmacao;
+    private javax.swing.JLabel labelConfirmar;
+    private javax.swing.JLabel labelExcluir;
     private javax.swing.JLabel labelExtratos;
     private javax.swing.JLabel labelOpcao;
     private javax.swing.JLabel labelTotal;
-    private javax.swing.JLabel labelTotal1;
     private javax.swing.JLabel pendentes;
     private javax.swing.JLabel seta1;
+    private javax.swing.JLabel seta10;
     private javax.swing.JLabel seta2;
     private javax.swing.JLabel seta3;
     private javax.swing.JLabel seta4;
     private javax.swing.JLabel seta5;
+    private javax.swing.JLabel seta6;
+    private javax.swing.JLabel seta7;
+    private javax.swing.JLabel seta8;
+    private javax.swing.JLabel seta9;
     private javax.swing.JLabel titulo;
     private javax.swing.JLabel txtCliente1;
+    private javax.swing.JLabel txtCliente10;
     private javax.swing.JLabel txtCliente2;
     private javax.swing.JLabel txtCliente3;
     private javax.swing.JLabel txtCliente4;
     private javax.swing.JLabel txtCliente5;
+    private javax.swing.JLabel txtCliente6;
+    private javax.swing.JLabel txtCliente7;
+    private javax.swing.JLabel txtCliente8;
+    private javax.swing.JLabel txtCliente9;
     private javax.swing.JLabel txtHorario1;
+    private javax.swing.JLabel txtHorario10;
     private javax.swing.JLabel txtHorario2;
     private javax.swing.JLabel txtHorario3;
     private javax.swing.JLabel txtHorario4;
     private javax.swing.JLabel txtHorario5;
+    private javax.swing.JLabel txtHorario6;
+    private javax.swing.JLabel txtHorario7;
+    private javax.swing.JLabel txtHorario8;
+    private javax.swing.JLabel txtHorario9;
     private javax.swing.JLabel txtServico1;
+    private javax.swing.JLabel txtServico10;
     private javax.swing.JLabel txtServico2;
     private javax.swing.JLabel txtServico3;
     private javax.swing.JLabel txtServico4;
     private javax.swing.JLabel txtServico5;
+    private javax.swing.JLabel txtServico6;
+    private javax.swing.JLabel txtServico7;
+    private javax.swing.JLabel txtServico8;
+    private javax.swing.JLabel txtServico9;
     // End of variables declaration//GEN-END:variables
 }

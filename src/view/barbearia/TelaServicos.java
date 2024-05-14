@@ -152,7 +152,7 @@ public class TelaServicos extends javax.swing.JFrame {
         titulo.setFont(new java.awt.Font("Caladea", 1, 90)); // NOI18N
         titulo.setForeground(new java.awt.Color(255, 255, 255));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("Cadastrar Serviço");
+        titulo.setText("Serviço");
 
         icon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_Barbeiro_valor.png"))); // NOI18N
@@ -439,7 +439,7 @@ public class TelaServicos extends javax.swing.JFrame {
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
     int linhaSelecionada = jTableDiario.getSelectedRow();
         if(linhaSelecionada==-1){
-            JOptionPane.showMessageDialog(null, "Selecione um expediente.");
+            JOptionPane.showMessageDialog(null, "Selecione um serviço.");
         }else{
             opcao=2;
             labelFunServico.setText("Alterar serviço");
@@ -455,7 +455,7 @@ public class TelaServicos extends javax.swing.JFrame {
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         int linhaSelecionada = jTableDiario.getSelectedRow();
         if(linhaSelecionada==-1){
-            JOptionPane.showMessageDialog(null, "Selecione um expediente.");
+            JOptionPane.showMessageDialog(null, "Selecione um serviço.");
         }else{
             opcao=3;
             labelFunServico.setText("Confirme que deseja deletar");

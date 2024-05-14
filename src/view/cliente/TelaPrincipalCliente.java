@@ -164,7 +164,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     }
     
     public void excluirAgendamento(int CODAGENDAMENTO){
-        if(JOptionPane.showConfirmDialog(this, "Você deseja realmente deletar o agendamento?", "Remover", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){            
+        if(JOptionPane.showConfirmDialog(this, "Você deseja realmente cancelar o agendamento?", "Remover", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){            
             String DESCRICAO = JOptionPane.showInputDialog(null,"Informe o motivo:", "Cancelar agendamento", JOptionPane.INFORMATION_MESSAGE);
             if(DESCRICAO != null){
                 agendamento.setCodagendamento(CODAGENDAMENTO);

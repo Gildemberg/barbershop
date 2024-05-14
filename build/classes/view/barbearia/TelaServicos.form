@@ -104,7 +104,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Cadastrar Servi&#xe7;o"/>
+            <Property name="text" type="java.lang.String" value="Servi&#xe7;o"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="icon">
