@@ -141,7 +141,7 @@ public class TelaServicos extends javax.swing.JFrame {
         btnCadastrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Tela Cadastro de Serviços");
+        setTitle("Tela Serviços");
         setMinimumSize(new java.awt.Dimension(1920, 1080));
 
         Cima.setBackground(new java.awt.Color(0, 51, 102));
@@ -210,7 +210,7 @@ public class TelaServicos extends javax.swing.JFrame {
         labelExtratos.setText("Meus Serviços");
         labelExtratos.setBorder(new javax.swing.border.MatteBorder(null));
 
-        jScrollPaneDiario.setBackground(new java.awt.Color(102, 153, 255));
+        jScrollPaneDiario.setBackground(new java.awt.Color(255, 255, 255));
 
         jTableDiario.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 18)); // NOI18N
         jTableDiario.setForeground(new java.awt.Color(255, 255, 255));
@@ -255,6 +255,7 @@ public class TelaServicos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableDiario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jScrollPaneDiario.setViewportView(jTableDiario);
 
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/modificar.png"))); // NOI18N
@@ -315,6 +316,7 @@ public class TelaServicos extends javax.swing.JFrame {
         );
 
         jScrollPaneDiario.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
+        jScrollPaneDiario.getViewport().setBackground(Color.WHITE);
 
         labelFunServico.setFont(new java.awt.Font("Caladea", 1, 48)); // NOI18N
         labelFunServico.setForeground(new java.awt.Color(255, 255, 255));
@@ -329,7 +331,7 @@ public class TelaServicos extends javax.swing.JFrame {
         txtServico.setBackground(new java.awt.Color(255, 255, 255));
         txtServico.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         txtServico.setForeground(new java.awt.Color(0, 51, 102));
-        BordaArredondada borda = new BordaArredondada(new Color(0, 51, 102), 3, 10);
+        BordaArredondada borda = new BordaArredondada(new Color(222, 222, 222, 222), 3, 10);
         Border bordaInterna = BorderFactory.createEmptyBorder(0, 10, 0, 0);
         Border bordaComposta = BorderFactory.createCompoundBorder(borda, bordaInterna);
         txtServico.setBackground(new Color(222, 222, 222, 222));

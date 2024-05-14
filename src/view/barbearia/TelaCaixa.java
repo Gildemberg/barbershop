@@ -48,22 +48,29 @@ public class TelaCaixa extends javax.swing.JFrame {
     
     public void confirmarAtendimento(int CODAGENDAMENTO){
         if(JOptionPane.showConfirmDialog(this, "Confirma a conclusão do serviço?", "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-            agendDAO.confirmarAgendamentoCliente(CODAGENDAMENTO, 3, "Serviço Realizado");
-            consultarAgendamentosPendentes();
-            LocalDate today = LocalDate.now();
-            LocalTime hour = LocalTime.now();
-            Date hoje = Date.valueOf(today);
+            String valorPago = JOptionPane.showInputDialog(null,"Informe o valor pago:", "Valor Pago", JOptionPane.INFORMATION_MESSAGE);
+            if(valorPago!=null){
+                float valorpago = Float.parseFloat(valorPago);
+                agendDAO.confirmarAgendamentoCliente(CODAGENDAMENTO, 3, "Serviço Realizado");
+                consultarAgendamentosPendentes();
+                LocalDate today = LocalDate.now();
+                LocalTime hour = LocalTime.now();
+                Date hoje = Date.valueOf(today);
+
+                Time hora = Time.valueOf(hour);
+
+                Extrato e = new Extrato();
+                e.setCodbarbearia(CODBARBEARIA);
+                e.setCodagendamento(CODAGENDAMENTO);
+                e.setData(hoje);
+                e.setHora(hora);
+                e.setValorPago(valorpago);
+                extratoDAO.create(e);
+                listarExtrato();
+            }else{
+                JOptionPane.showMessageDialog(null, "Informe um valor pago.", "Mensagem", JOptionPane.ERROR_MESSAGE);
+            }
             
-            Time hora = Time.valueOf(hour);
-            
-            Extrato e = new Extrato();
-            e.setCodbarbearia(CODBARBEARIA);
-            e.setCodagendamento(CODAGENDAMENTO);
-            e.setData(hoje);
-            e.setHora(hora);
-            e.setValorPago(50);
-            extratoDAO.create(e);
-            listarExtrato();
         }
     }
     
@@ -155,11 +162,10 @@ public class TelaCaixa extends javax.swing.JFrame {
             }
         }
         
-        String[] colunas = {"Cliente", "Serviço", "Valor do Serviço", "Data", "Hora", "Valor Pago"};
+        String[] colunas = { "Serviço", "Valor R$", "Data", "Hora", "Pago R$"};
         DefaultTableModel tableModel = new DefaultTableModel(colunas, 0);
         for (Extrato e : extrato) {
             Object[] row = {
-                e.getCliente(),
                 e.getServico(),
                 e.getValorServico(),
                 e.getData(),
@@ -183,8 +189,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
         Centro = new javax.swing.JPanel();
         Esquerda = new javax.swing.JPanel();
-        labelExtratos = new javax.swing.JLabel();
-        labelOpcao = new javax.swing.JLabel();
+        labelExtrato = new javax.swing.JLabel();
         jScrollPaneDiario = new css.ScrollPaneWin11();
         jTableDiario = new css.TableDark();
         labelTotal = new javax.swing.JLabel();
@@ -272,6 +277,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         labelExcluir = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela de Caixa");
         setMaximumSize(new java.awt.Dimension(1920, 1080));
         setMinimumSize(new java.awt.Dimension(1920, 1080));
         setPreferredSize(new java.awt.Dimension(1920, 1080));
@@ -334,17 +340,11 @@ public class TelaCaixa extends javax.swing.JFrame {
 
         Esquerda.setBackground(new java.awt.Color(255, 255, 255));
 
-        labelExtratos.setFont(new java.awt.Font("Caladea", 1, 48)); // NOI18N
-        labelExtratos.setForeground(new java.awt.Color(0, 51, 102));
-        labelExtratos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelExtratos.setText("Extratos");
-        labelExtratos.setBorder(new javax.swing.border.MatteBorder(null));
-
-        labelOpcao.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
-        labelOpcao.setForeground(new java.awt.Color(0, 51, 102));
-        labelOpcao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelOpcao.setText("Diario");
-        labelOpcao.setBorder(new javax.swing.border.MatteBorder(null));
+        labelExtrato.setFont(new java.awt.Font("Caladea", 1, 48)); // NOI18N
+        labelExtrato.setForeground(new java.awt.Color(0, 51, 102));
+        labelExtrato.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelExtrato.setText("Extrato Diario");
+        labelExtrato.setBorder(new javax.swing.border.MatteBorder(null));
 
         jScrollPaneDiario.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -353,39 +353,39 @@ public class TelaCaixa extends javax.swing.JFrame {
         jTableDiario.setForeground(new java.awt.Color(255, 255, 255));
         jTableDiario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Cliente", "Serviço", "Valor do Serviço", "Data", "Hora", "Valor Pago"
+                "Serviço", "Valor do Serviço", "Data", "Hora", "Valor Pago"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -397,7 +397,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         jScrollPaneDiario.setViewportView(jTableDiario);
         if (jTableDiario.getColumnModel().getColumnCount() > 0) {
             jTableDiario.getColumnModel().getColumn(0).setResizable(false);
-            jTableDiario.getColumnModel().getColumn(0).setPreferredWidth(100);
+            jTableDiario.getColumnModel().getColumn(0).setPreferredWidth(20);
             jTableDiario.getColumnModel().getColumn(1).setResizable(false);
             jTableDiario.getColumnModel().getColumn(1).setPreferredWidth(20);
             jTableDiario.getColumnModel().getColumn(2).setResizable(false);
@@ -406,8 +406,6 @@ public class TelaCaixa extends javax.swing.JFrame {
             jTableDiario.getColumnModel().getColumn(3).setPreferredWidth(20);
             jTableDiario.getColumnModel().getColumn(4).setResizable(false);
             jTableDiario.getColumnModel().getColumn(4).setPreferredWidth(20);
-            jTableDiario.getColumnModel().getColumn(5).setResizable(false);
-            jTableDiario.getColumnModel().getColumn(5).setPreferredWidth(20);
         }
         jTableDiario.doLayout();
 
@@ -417,9 +415,9 @@ public class TelaCaixa extends javax.swing.JFrame {
         labelTotal.setText("Total: R$");
         labelTotal.setBorder(new javax.swing.border.MatteBorder(null));
 
-        btnDiario.setBackground(new java.awt.Color(255, 255, 255));
+        btnDiario.setBackground(new java.awt.Color(0, 51, 102));
         btnDiario.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        btnDiario.setForeground(new java.awt.Color(0, 51, 102));
+        btnDiario.setForeground(new java.awt.Color(255, 255, 255));
         btnDiario.setText("Diario");
         btnDiario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -427,9 +425,9 @@ public class TelaCaixa extends javax.swing.JFrame {
             }
         });
 
-        btnSemanal.setBackground(new java.awt.Color(255, 255, 255));
+        btnSemanal.setBackground(new java.awt.Color(0, 51, 102));
         btnSemanal.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        btnSemanal.setForeground(new java.awt.Color(0, 51, 102));
+        btnSemanal.setForeground(new java.awt.Color(255, 255, 255));
         btnSemanal.setText("Semanal");
         btnSemanal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -437,9 +435,9 @@ public class TelaCaixa extends javax.swing.JFrame {
             }
         });
 
-        btnMenal.setBackground(new java.awt.Color(255, 255, 255));
+        btnMenal.setBackground(new java.awt.Color(0, 51, 102));
         btnMenal.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        btnMenal.setForeground(new java.awt.Color(0, 51, 102));
+        btnMenal.setForeground(new java.awt.Color(255, 255, 255));
         btnMenal.setText("Mensal");
         btnMenal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -455,35 +453,27 @@ public class TelaCaixa extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EsquerdaLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(EsquerdaLayout.createSequentialGroup()
-                                    .addGap(446, 446, 446)
-                                    .addComponent(labelOpcao, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EsquerdaLayout.createSequentialGroup()
-                                    .addGap(20, 20, 20)
-                                    .addComponent(btnDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnSemanal, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnMenal, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(EsquerdaLayout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jScrollPaneDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 1219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSemanal, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnMenal, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPaneDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 1219, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 29, Short.MAX_VALUE))
-                    .addComponent(labelExtratos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(labelExtrato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         EsquerdaLayout.setVerticalGroup(
             EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EsquerdaLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(labelExtratos, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelOpcao, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
                 .addComponent(jScrollPaneDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -496,6 +486,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         );
 
         jScrollPaneDiario.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
+        jScrollPaneDiario.getViewport().setBackground(Color.WHITE);
 
         labelConfirmacao.setFont(new java.awt.Font("Caladea", 1, 48)); // NOI18N
         labelConfirmacao.setForeground(new java.awt.Color(255, 255, 255));
@@ -1543,19 +1534,19 @@ public class TelaCaixa extends javax.swing.JFrame {
 
     private void btnDiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiarioActionPerformed
         extratoOp=1;
-        labelOpcao.setText("Diario");
+        labelExtrato.setText("Extrato Diario");
         listarExtrato();
     }//GEN-LAST:event_btnDiarioActionPerformed
 
     private void btnSemanalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSemanalActionPerformed
         extratoOp=2;
-        labelOpcao.setText("Semanal");
+        labelExtrato.setText("Extrato Semanal");
         listarExtrato();
     }//GEN-LAST:event_btnSemanalActionPerformed
 
     private void btnMenalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenalActionPerformed
         extratoOp=3;
-        labelOpcao.setText("Mensal");
+        labelExtrato.setText("Extrato Mensal");
         listarExtrato();
     }//GEN-LAST:event_btnMenalActionPerformed
 
@@ -1685,8 +1676,7 @@ public class TelaCaixa extends javax.swing.JFrame {
     private javax.swing.JLabel labelConfirmacao;
     private javax.swing.JLabel labelConfirmar;
     private javax.swing.JLabel labelExcluir;
-    private javax.swing.JLabel labelExtratos;
-    private javax.swing.JLabel labelOpcao;
+    private javax.swing.JLabel labelExtrato;
     private javax.swing.JLabel labelTotal;
     private javax.swing.JLabel pendentes;
     private javax.swing.JLabel seta1;

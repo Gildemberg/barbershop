@@ -1565,11 +1565,11 @@
                               </Group>
                               <Component id="Agendamento4" alignment="0" max="32767" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="Agendamento8" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="Agendamento7" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="Agendamento8" alignment="0" pref="450" max="32767" attributes="0"/>
+                                  <Component id="Agendamento7" alignment="0" pref="450" max="32767" attributes="0"/>
                                   <Component id="Agendamento5" alignment="0" min="-2" pref="450" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="Agendamento6" alignment="0" max="32767" attributes="0"/>
+                              <Component id="Agendamento6" alignment="0" pref="450" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                       </Group>
@@ -1589,12 +1589,12 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="Agendamento5" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="Agendamento8" min="-2" max="-2" attributes="0"/>
+                          <Component id="Agendamento8" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="Agendamento7" min="-2" max="-2" attributes="0"/>
+                          <Component id="Agendamento7" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="Agendamento6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="30" max="32767" attributes="0"/>
+                          <Component id="Agendamento6" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace pref="28" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2498,6 +2498,9 @@
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[450, 70]"/>
                     </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[429, 70]"/>
+                    </Property>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new css.JPanelArredondadoAgendamentos(30)"/>
@@ -2535,7 +2538,7 @@
                                       <Component id="txtBarbearia6" min="-2" pref="30" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="txtHorario6" min="-2" pref="22" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace pref="8" max="32767" attributes="0"/>
                                       <Component id="txtServico6" min="-2" pref="22" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="seta5" alignment="1" max="32767" attributes="0"/>
@@ -2673,6 +2676,9 @@
                     </Property>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[450, 70]"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[429, 70]"/>
                     </Property>
                     <Property name="requestFocusEnabled" type="boolean" value="false"/>
                   </Properties>
@@ -2846,6 +2852,9 @@
                     </Property>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[450, 70]"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[429, 70]"/>
                     </Property>
                   </Properties>
                   <AuxValues>

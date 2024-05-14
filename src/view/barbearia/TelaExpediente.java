@@ -262,7 +262,7 @@ public class TelaExpediente extends javax.swing.JFrame {
         btnCadastrarPeriodo = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Tela Definir Expediente");
+        setTitle("Tela Expediente");
         setMinimumSize(new java.awt.Dimension(1920, 1080));
 
         Cima.setBackground(new java.awt.Color(0, 51, 102));
@@ -436,6 +436,7 @@ public class TelaExpediente extends javax.swing.JFrame {
         );
 
         jScrollPane1.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
+        jScrollPane1.getViewport().setBackground(Color.WHITE);
 
         labelFunExpediente.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
         labelFunExpediente.setForeground(new java.awt.Color(255, 255, 255));

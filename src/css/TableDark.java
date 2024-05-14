@@ -55,8 +55,8 @@ public class TableDark extends JTable {
         @Override
         public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
             JLabel com = (JLabel) super.getTableCellRendererComponent(jtable, o, bln, bln1, i, i1);
-            com.setBackground(new Color(135,206,235));
-            com.setForeground(new Color(255, 255, 255));
+            com.setBackground(new Color(176,224,230));
+            com.setForeground(new Color(0, 51, 102));
             com.setFont(com.getFont().deriveFont(Font.BOLD, 24));
             setHorizontalAlignment(JLabel.CENTER);
             com.setBorder(BorderFactory.createCompoundBorder(
