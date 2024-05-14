@@ -297,7 +297,7 @@
         </Container>
         <Container class="javax.swing.JScrollPane" name="jScrollPaneBarbearia">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jScrollPaneBarbearia.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jScrollPaneBarbearia.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));&#xa;jScrollPaneBarbearia.getVerticalScrollBar().setUnitIncrement(20);"/>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new css.ScrollPaneWin11()"/>
           </AuxValues>
 
@@ -1539,7 +1539,7 @@
             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jScrollPaneAgendamentos.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jScrollPaneAgendamentos.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));&#xa;jScrollPaneAgendamentos.getVerticalScrollBar().setUnitIncrement(20);"/>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new css.ScrollPaneWin11()"/>
           </AuxValues>
 

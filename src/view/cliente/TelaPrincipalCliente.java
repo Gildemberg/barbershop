@@ -1025,6 +1025,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         );
 
         jScrollPaneBarbearia.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
+        jScrollPaneBarbearia.getVerticalScrollBar().setUnitIncrement(20);
 
         Direita.setBackground(new java.awt.Color(30, 113, 218));
         Direita.setMaximumSize(new java.awt.Dimension(600, 960));
@@ -1794,6 +1795,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         );
 
         jScrollPaneAgendamentos.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
+        jScrollPaneAgendamentos.getVerticalScrollBar().setUnitIncrement(20);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

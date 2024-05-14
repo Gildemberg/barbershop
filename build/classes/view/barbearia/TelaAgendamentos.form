@@ -35,7 +35,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Component id="Cima" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Component id="Centro" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -275,7 +275,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jScrollPaneAbe.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jScrollPaneAbe.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));&#xa;jScrollPaneAbe.getVerticalScrollBar().setUnitIncrement(20);"/>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new css.ScrollPaneWin11()"/>
           </AuxValues>
 
@@ -1834,7 +1834,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jScrollPaneCan.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jScrollPaneCan.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));&#xa;jScrollPaneCan.getVerticalScrollBar().setUnitIncrement(20);"/>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new css.ScrollPaneWin11()"/>
           </AuxValues>
 
@@ -3384,7 +3384,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jScrollPaneRea.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jScrollPaneRea.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));&#xa;jScrollPaneRea.getVerticalScrollBar().setUnitIncrement(20);"/>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new css.ScrollPaneWin11()"/>
           </AuxValues>
 

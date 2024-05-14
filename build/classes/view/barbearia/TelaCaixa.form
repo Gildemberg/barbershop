@@ -519,7 +519,7 @@
             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jScrollPane2.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jScrollPane2.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));&#xa;jScrollPane2.getVerticalScrollBar().setUnitIncrement(20);"/>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new css.ScrollPaneWin11()"/>
           </AuxValues>
 

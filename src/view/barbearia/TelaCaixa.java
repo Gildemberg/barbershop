@@ -1486,6 +1486,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         );
 
         jScrollPane2.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
+        jScrollPane2.getVerticalScrollBar().setUnitIncrement(20);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
