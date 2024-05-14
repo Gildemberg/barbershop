@@ -25,9 +25,9 @@ public class TelaLoginCliente extends javax.swing.JFrame {
         String login = txtLogin.getText();
         String senha = txtSenha.getText();
         boolean check = clienteController.validarLogin(login, senha);
-        int CODCLIENTE = ClienteDao.retornoCod(login, senha);
         
         if(check){
+            int CODCLIENTE = ClienteDao.retornoCod(login, senha);
             TPC.receberCodCliente(CODCLIENTE);
             TPC.setVisible(true);
             this.setVisible(false);

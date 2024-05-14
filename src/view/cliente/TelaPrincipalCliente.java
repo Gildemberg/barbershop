@@ -78,8 +78,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     public void preencherDadosCliente (){
         List<Cliente> clientes = new ArrayList();
         clientes=ClienteDao.read(CODCLIENTE);
-        nome_usr.setText(clientes.get(CODCLIENTE-1).getNome()); //imprimendo o nome usr
-        localizacao.setText(clientes.get(CODCLIENTE-1).getCidade()+" - "+clientes.get(CODCLIENTE-1).getUf());
+        nome_usr.setText(clientes.get(0).getNome()); //imprimendo o nome usr
+        localizacao.setText(clientes.get(0).getCidade()+" - "+clientes.get(0).getUf());
       }
     
     public void consultarBarbearia(){
