@@ -192,10 +192,11 @@ public class TelaCaixa extends javax.swing.JFrame {
         labelExtrato = new javax.swing.JLabel();
         jScrollPaneDiario = new css.ScrollPaneWin11();
         jTableDiario = new css.TableDark();
-        labelTotal = new javax.swing.JLabel();
         btnDiario = new javax.swing.JButton();
         btnSemanal = new javax.swing.JButton();
         btnMenal = new javax.swing.JButton();
+        panelTotal = new css.JPanelArredondadoAgendamentos(10);
+        labelTotal = new javax.swing.JLabel();
         labelConfirmacao = new javax.swing.JLabel();
         Pendentes = new css.JPanelArredondadoBarbearias(20);
         pendentes = new javax.swing.JLabel();
@@ -409,12 +410,6 @@ public class TelaCaixa extends javax.swing.JFrame {
         }
         jTableDiario.doLayout();
 
-        labelTotal.setFont(new java.awt.Font("Caladea", 1, 48)); // NOI18N
-        labelTotal.setForeground(new java.awt.Color(0, 51, 102));
-        labelTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelTotal.setText("Total: R$");
-        labelTotal.setBorder(new javax.swing.border.MatteBorder(null));
-
         btnDiario.setBackground(new java.awt.Color(0, 51, 102));
         btnDiario.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         btnDiario.setForeground(new java.awt.Color(255, 255, 255));
@@ -445,6 +440,29 @@ public class TelaCaixa extends javax.swing.JFrame {
             }
         });
 
+        panelTotal.setBackground(new java.awt.Color(0, 153, 51));
+
+        labelTotal.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        labelTotal.setForeground(new java.awt.Color(255, 255, 255));
+        labelTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelTotal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cash.png"))); // NOI18N
+        labelTotal.setText("Total: R$");
+        labelTotal.setBorder(new javax.swing.border.MatteBorder(null));
+
+        javax.swing.GroupLayout panelTotalLayout = new javax.swing.GroupLayout(panelTotal);
+        panelTotal.setLayout(panelTotalLayout);
+        panelTotalLayout.setHorizontalGroup(
+            panelTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTotalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelTotal)
+                .addContainerGap(146, Short.MAX_VALUE))
+        );
+        panelTotalLayout.setVerticalGroup(
+            panelTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labelTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout EsquerdaLayout = new javax.swing.GroupLayout(Esquerda);
         Esquerda.setLayout(EsquerdaLayout);
         EsquerdaLayout.setHorizontalGroup(
@@ -456,13 +474,13 @@ public class TelaCaixa extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(EsquerdaLayout.createSequentialGroup()
-                                .addComponent(btnDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnSemanal, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSemanal, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnMenal, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnMenal, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(panelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPaneDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 1219, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 29, Short.MAX_VALUE))
                     .addComponent(labelExtrato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -476,12 +494,12 @@ public class TelaCaixa extends javax.swing.JFrame {
                 .addGap(66, 66, 66)
                 .addComponent(jScrollPaneDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnSemanal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnMenal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnMenal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
                 .addContainerGap(143, Short.MAX_VALUE))
         );
 
@@ -494,14 +512,14 @@ public class TelaCaixa extends javax.swing.JFrame {
         labelConfirmacao.setText("Agendamentos");
         labelConfirmacao.setBorder(new javax.swing.border.MatteBorder(null));
 
-        Pendentes.setBackground(new java.awt.Color(255, 153, 0));
+        Pendentes.setBackground(new java.awt.Color(176, 224, 230));
         Pendentes.setMaximumSize(new java.awt.Dimension(500, 45));
         Pendentes.setMinimumSize(new java.awt.Dimension(500, 45));
         Pendentes.setPreferredSize(new java.awt.Dimension(550, 45));
 
         pendentes.setBackground(new java.awt.Color(30, 113, 218));
         pendentes.setFont(new java.awt.Font("Caladea", 1, 28)); // NOI18N
-        pendentes.setForeground(new java.awt.Color(255, 255, 255));
+        pendentes.setForeground(new java.awt.Color(0, 51, 102));
         pendentes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         pendentes.setText("Pendentes");
 
@@ -522,17 +540,17 @@ public class TelaCaixa extends javax.swing.JFrame {
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(630, 1050));
 
-        AgendamentoPen1.setBackground(new java.awt.Color(255, 153, 0));
+        AgendamentoPen1.setBackground(new java.awt.Color(176, 224, 230));
         AgendamentoPen1.setForeground(new java.awt.Color(255, 255, 255));
         AgendamentoPen1.setMaximumSize(new java.awt.Dimension(450, 70));
         AgendamentoPen1.setMinimumSize(new java.awt.Dimension(450, 70));
         AgendamentoPen1.setPreferredSize(new java.awt.Dimension(400, 100));
 
         seta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        seta1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta4.png"))); // NOI18N
+        seta1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta5.png"))); // NOI18N
 
         txtCliente1.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        txtCliente1.setForeground(new java.awt.Color(255, 255, 255));
+        txtCliente1.setForeground(new java.awt.Color(0, 51, 102));
         txtCliente1.setToolTipText("");
         txtCliente1.setBorder(new javax.swing.border.MatteBorder(null));
         txtCliente1.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -540,7 +558,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         txtCliente1.setPreferredSize(new java.awt.Dimension(300, 30));
 
         txtHorario1.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        txtHorario1.setForeground(new java.awt.Color(255, 255, 255));
+        txtHorario1.setForeground(new java.awt.Color(0, 51, 102));
         txtHorario1.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorario1.setMaximumSize(new java.awt.Dimension(300, 30));
         txtHorario1.setMinimumSize(new java.awt.Dimension(300, 30));
@@ -548,7 +566,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         txtHorario1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         txtServico1.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        txtServico1.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico1.setForeground(new java.awt.Color(0, 51, 102));
         txtServico1.setBorder(new javax.swing.border.MatteBorder(null));
         txtServico1.setMaximumSize(new java.awt.Dimension(300, 30));
         txtServico1.setMinimumSize(new java.awt.Dimension(300, 30));
@@ -556,7 +574,7 @@ public class TelaCaixa extends javax.swing.JFrame {
 
         btnConfirmar1.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
         btnConfirmar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnConfirmar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
+        btnConfirmar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/aceitar.png"))); // NOI18N
         btnConfirmar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirmar1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -565,7 +583,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         });
 
         btnExcluir1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnExcluir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar.png"))); // NOI18N
         btnExcluir1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluir1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -606,17 +624,17 @@ public class TelaCaixa extends javax.swing.JFrame {
             .addComponent(btnExcluir1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        AgendamentoPen2.setBackground(new java.awt.Color(255, 153, 0));
+        AgendamentoPen2.setBackground(new java.awt.Color(176, 224, 230));
         AgendamentoPen2.setForeground(new java.awt.Color(255, 255, 255));
         AgendamentoPen2.setMaximumSize(new java.awt.Dimension(450, 70));
         AgendamentoPen2.setMinimumSize(new java.awt.Dimension(450, 70));
         AgendamentoPen2.setPreferredSize(new java.awt.Dimension(400, 100));
 
         seta2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        seta2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta4.png"))); // NOI18N
+        seta2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta5.png"))); // NOI18N
 
         txtCliente2.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        txtCliente2.setForeground(new java.awt.Color(255, 255, 255));
+        txtCliente2.setForeground(new java.awt.Color(0, 51, 102));
         txtCliente2.setToolTipText("");
         txtCliente2.setBorder(new javax.swing.border.MatteBorder(null));
         txtCliente2.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -624,7 +642,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         txtCliente2.setPreferredSize(new java.awt.Dimension(300, 30));
 
         txtHorario2.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        txtHorario2.setForeground(new java.awt.Color(255, 255, 255));
+        txtHorario2.setForeground(new java.awt.Color(0, 51, 102));
         txtHorario2.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorario2.setMaximumSize(new java.awt.Dimension(300, 30));
         txtHorario2.setMinimumSize(new java.awt.Dimension(300, 30));
@@ -632,7 +650,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         txtHorario2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         txtServico2.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        txtServico2.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico2.setForeground(new java.awt.Color(0, 51, 102));
         txtServico2.setBorder(new javax.swing.border.MatteBorder(null));
         txtServico2.setMaximumSize(new java.awt.Dimension(300, 30));
         txtServico2.setMinimumSize(new java.awt.Dimension(300, 30));
@@ -640,7 +658,7 @@ public class TelaCaixa extends javax.swing.JFrame {
 
         btnConfirmar2.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
         btnConfirmar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnConfirmar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
+        btnConfirmar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/aceitar.png"))); // NOI18N
         btnConfirmar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirmar2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -649,7 +667,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         });
 
         btnExcluir2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnExcluir2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar.png"))); // NOI18N
         btnExcluir2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluir2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -690,17 +708,17 @@ public class TelaCaixa extends javax.swing.JFrame {
             .addComponent(btnExcluir2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        AgendamentoPen3.setBackground(new java.awt.Color(255, 153, 0));
+        AgendamentoPen3.setBackground(new java.awt.Color(176, 224, 230));
         AgendamentoPen3.setForeground(new java.awt.Color(255, 255, 255));
         AgendamentoPen3.setMaximumSize(new java.awt.Dimension(450, 70));
         AgendamentoPen3.setMinimumSize(new java.awt.Dimension(450, 70));
         AgendamentoPen3.setPreferredSize(new java.awt.Dimension(400, 100));
 
         seta3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        seta3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta4.png"))); // NOI18N
+        seta3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta5.png"))); // NOI18N
 
         txtCliente3.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        txtCliente3.setForeground(new java.awt.Color(255, 255, 255));
+        txtCliente3.setForeground(new java.awt.Color(0, 51, 102));
         txtCliente3.setToolTipText("");
         txtCliente3.setBorder(new javax.swing.border.MatteBorder(null));
         txtCliente3.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -708,7 +726,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         txtCliente3.setPreferredSize(new java.awt.Dimension(300, 30));
 
         txtHorario3.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        txtHorario3.setForeground(new java.awt.Color(255, 255, 255));
+        txtHorario3.setForeground(new java.awt.Color(0, 51, 102));
         txtHorario3.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorario3.setMaximumSize(new java.awt.Dimension(300, 30));
         txtHorario3.setMinimumSize(new java.awt.Dimension(300, 30));
@@ -716,7 +734,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         txtHorario3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         txtServico3.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        txtServico3.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico3.setForeground(new java.awt.Color(0, 51, 102));
         txtServico3.setBorder(new javax.swing.border.MatteBorder(null));
         txtServico3.setMaximumSize(new java.awt.Dimension(300, 30));
         txtServico3.setMinimumSize(new java.awt.Dimension(300, 30));
@@ -724,7 +742,7 @@ public class TelaCaixa extends javax.swing.JFrame {
 
         btnConfirmar3.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
         btnConfirmar3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnConfirmar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
+        btnConfirmar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/aceitar.png"))); // NOI18N
         btnConfirmar3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirmar3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -733,7 +751,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         });
 
         btnExcluir3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnExcluir3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar.png"))); // NOI18N
         btnExcluir3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluir3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -774,17 +792,17 @@ public class TelaCaixa extends javax.swing.JFrame {
             .addComponent(btnExcluir3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        AgendamentoPen4.setBackground(new java.awt.Color(255, 153, 0));
+        AgendamentoPen4.setBackground(new java.awt.Color(176, 224, 230));
         AgendamentoPen4.setForeground(new java.awt.Color(255, 255, 255));
         AgendamentoPen4.setMaximumSize(new java.awt.Dimension(450, 70));
         AgendamentoPen4.setMinimumSize(new java.awt.Dimension(450, 70));
         AgendamentoPen4.setPreferredSize(new java.awt.Dimension(400, 100));
 
         seta4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        seta4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta4.png"))); // NOI18N
+        seta4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta5.png"))); // NOI18N
 
         txtCliente4.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        txtCliente4.setForeground(new java.awt.Color(255, 255, 255));
+        txtCliente4.setForeground(new java.awt.Color(0, 51, 102));
         txtCliente4.setToolTipText("");
         txtCliente4.setBorder(new javax.swing.border.MatteBorder(null));
         txtCliente4.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -792,7 +810,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         txtCliente4.setPreferredSize(new java.awt.Dimension(300, 30));
 
         txtHorario4.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        txtHorario4.setForeground(new java.awt.Color(255, 255, 255));
+        txtHorario4.setForeground(new java.awt.Color(0, 51, 102));
         txtHorario4.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorario4.setMaximumSize(new java.awt.Dimension(300, 30));
         txtHorario4.setMinimumSize(new java.awt.Dimension(300, 30));
@@ -800,7 +818,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         txtHorario4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         txtServico4.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        txtServico4.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico4.setForeground(new java.awt.Color(0, 51, 102));
         txtServico4.setBorder(new javax.swing.border.MatteBorder(null));
         txtServico4.setMaximumSize(new java.awt.Dimension(300, 30));
         txtServico4.setMinimumSize(new java.awt.Dimension(300, 30));
@@ -808,7 +826,7 @@ public class TelaCaixa extends javax.swing.JFrame {
 
         btnConfirmar4.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
         btnConfirmar4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnConfirmar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
+        btnConfirmar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/aceitar.png"))); // NOI18N
         btnConfirmar4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirmar4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -817,7 +835,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         });
 
         btnExcluir4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnExcluir4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar.png"))); // NOI18N
         btnExcluir4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluir4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -858,17 +876,17 @@ public class TelaCaixa extends javax.swing.JFrame {
             .addComponent(btnExcluir4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        AgendamentoPen5.setBackground(new java.awt.Color(255, 153, 0));
+        AgendamentoPen5.setBackground(new java.awt.Color(176, 224, 230));
         AgendamentoPen5.setForeground(new java.awt.Color(255, 255, 255));
         AgendamentoPen5.setMaximumSize(new java.awt.Dimension(450, 70));
         AgendamentoPen5.setMinimumSize(new java.awt.Dimension(450, 70));
         AgendamentoPen5.setPreferredSize(new java.awt.Dimension(400, 100));
 
         seta5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        seta5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta4.png"))); // NOI18N
+        seta5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta5.png"))); // NOI18N
 
         txtCliente5.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        txtCliente5.setForeground(new java.awt.Color(255, 255, 255));
+        txtCliente5.setForeground(new java.awt.Color(0, 51, 102));
         txtCliente5.setToolTipText("");
         txtCliente5.setBorder(new javax.swing.border.MatteBorder(null));
         txtCliente5.setMaximumSize(new java.awt.Dimension(300, 30));
@@ -876,7 +894,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         txtCliente5.setPreferredSize(new java.awt.Dimension(300, 30));
 
         txtHorario5.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        txtHorario5.setForeground(new java.awt.Color(255, 255, 255));
+        txtHorario5.setForeground(new java.awt.Color(0, 51, 102));
         txtHorario5.setBorder(new javax.swing.border.MatteBorder(null));
         txtHorario5.setMaximumSize(new java.awt.Dimension(300, 30));
         txtHorario5.setMinimumSize(new java.awt.Dimension(300, 30));
@@ -884,7 +902,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         txtHorario5.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         txtServico5.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
-        txtServico5.setForeground(new java.awt.Color(255, 255, 255));
+        txtServico5.setForeground(new java.awt.Color(0, 51, 102));
         txtServico5.setBorder(new javax.swing.border.MatteBorder(null));
         txtServico5.setMaximumSize(new java.awt.Dimension(300, 30));
         txtServico5.setMinimumSize(new java.awt.Dimension(300, 30));
@@ -892,7 +910,7 @@ public class TelaCaixa extends javax.swing.JFrame {
 
         btnConfirmar5.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
         btnConfirmar5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnConfirmar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
+        btnConfirmar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/aceitar.png"))); // NOI18N
         btnConfirmar5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirmar5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -901,7 +919,7 @@ public class TelaCaixa extends javax.swing.JFrame {
         });
 
         btnExcluir5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnExcluir5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar.png"))); // NOI18N
         btnExcluir5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluir5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -942,7 +960,7 @@ public class TelaCaixa extends javax.swing.JFrame {
             .addComponent(btnExcluir5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        AgendamentoPen6.setBackground(new java.awt.Color(255, 153, 0));
+        AgendamentoPen6.setBackground(new java.awt.Color(176, 224, 230));
         AgendamentoPen6.setForeground(new java.awt.Color(255, 255, 255));
         AgendamentoPen6.setMaximumSize(new java.awt.Dimension(450, 70));
         AgendamentoPen6.setMinimumSize(new java.awt.Dimension(450, 70));
@@ -1026,7 +1044,7 @@ public class TelaCaixa extends javax.swing.JFrame {
             .addComponent(btnExcluir6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        AgendamentoPen7.setBackground(new java.awt.Color(255, 153, 0));
+        AgendamentoPen7.setBackground(new java.awt.Color(176, 224, 230));
         AgendamentoPen7.setForeground(new java.awt.Color(255, 255, 255));
         AgendamentoPen7.setMaximumSize(new java.awt.Dimension(450, 70));
         AgendamentoPen7.setMinimumSize(new java.awt.Dimension(450, 70));
@@ -1110,7 +1128,7 @@ public class TelaCaixa extends javax.swing.JFrame {
             .addComponent(btnExcluir8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        AgendamentoPen8.setBackground(new java.awt.Color(255, 153, 0));
+        AgendamentoPen8.setBackground(new java.awt.Color(176, 224, 230));
         AgendamentoPen8.setForeground(new java.awt.Color(255, 255, 255));
         AgendamentoPen8.setMaximumSize(new java.awt.Dimension(450, 70));
         AgendamentoPen8.setMinimumSize(new java.awt.Dimension(450, 70));
@@ -1194,7 +1212,7 @@ public class TelaCaixa extends javax.swing.JFrame {
             .addComponent(btnExcluir7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        AgendamentoPen9.setBackground(new java.awt.Color(255, 153, 0));
+        AgendamentoPen9.setBackground(new java.awt.Color(176, 224, 230));
         AgendamentoPen9.setForeground(new java.awt.Color(255, 255, 255));
         AgendamentoPen9.setMaximumSize(new java.awt.Dimension(450, 70));
         AgendamentoPen9.setMinimumSize(new java.awt.Dimension(450, 70));
@@ -1278,7 +1296,7 @@ public class TelaCaixa extends javax.swing.JFrame {
             .addComponent(btnExcluir9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        AgendamentoPen10.setBackground(new java.awt.Color(255, 153, 0));
+        AgendamentoPen10.setBackground(new java.awt.Color(176, 224, 230));
         AgendamentoPen10.setForeground(new java.awt.Color(255, 255, 255));
         AgendamentoPen10.setMaximumSize(new java.awt.Dimension(450, 70));
         AgendamentoPen10.setMinimumSize(new java.awt.Dimension(450, 70));
@@ -1415,24 +1433,24 @@ public class TelaCaixa extends javax.swing.JFrame {
 
         iconConfirmar.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
         iconConfirmar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        iconConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
+        iconConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/aceitar.png"))); // NOI18N
         iconConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         labelConfirmar.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
         labelConfirmar.setForeground(new java.awt.Color(255, 255, 255));
         labelConfirmar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelConfirmar.setText("Confirmar atendimento");
+        labelConfirmar.setText("Atendimento realizado");
         labelConfirmar.setBorder(new javax.swing.border.MatteBorder(null));
         labelConfirmar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         iconExcluir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        iconExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        iconExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar.png"))); // NOI18N
         iconExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         labelExcluir.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
         labelExcluir.setForeground(new java.awt.Color(255, 255, 255));
         labelExcluir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelExcluir.setText("Confirmar NÃO atendimento");
+        labelExcluir.setText("Atendimento não realizado");
         labelExcluir.setBorder(new javax.swing.border.MatteBorder(null));
         labelExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
@@ -1442,27 +1460,27 @@ public class TelaCaixa extends javax.swing.JFrame {
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CentroLayout.createSequentialGroup()
                 .addComponent(Esquerda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
                 .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
                     .addGroup(CentroLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(labelConfirmacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)))
-                    .addGroup(CentroLayout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(Pendentes, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(CentroLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelConfirmacao, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(CentroLayout.createSequentialGroup()
-                                .addComponent(iconExcluir)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labelExcluir))
-                            .addGroup(CentroLayout.createSequentialGroup()
-                                .addComponent(iconConfirmar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labelConfirmar)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(64, 64, 64)
+                                .addComponent(Pendentes, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(CentroLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelExcluir)
+                            .addComponent(labelConfirmar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(iconExcluir)
+                            .addComponent(iconConfirmar))
+                        .addGap(66, 66, 66)))
+                .addContainerGap())
         );
         CentroLayout.setVerticalGroup(
             CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1470,18 +1488,20 @@ public class TelaCaixa extends javax.swing.JFrame {
             .addGroup(CentroLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(labelConfirmacao)
-                .addGap(61, 61, 61)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Pendentes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(iconExcluir)
-                    .addComponent(labelExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(iconConfirmar)
-                    .addComponent(labelConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(CentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CentroLayout.createSequentialGroup()
+                        .addComponent(labelExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CentroLayout.createSequentialGroup()
+                        .addComponent(iconExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(iconConfirmar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1679,6 +1699,7 @@ public class TelaCaixa extends javax.swing.JFrame {
     private javax.swing.JLabel labelExcluir;
     private javax.swing.JLabel labelExtrato;
     private javax.swing.JLabel labelTotal;
+    private javax.swing.JPanel panelTotal;
     private javax.swing.JLabel pendentes;
     private javax.swing.JLabel seta1;
     private javax.swing.JLabel seta10;

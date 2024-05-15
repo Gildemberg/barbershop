@@ -6,9 +6,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import model.Expediente;
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class ExpedienteController {
@@ -18,36 +15,10 @@ public class ExpedienteController {
     /*=========================================CADASTRO DE EXPEDIENTE==============================================================*/
     
     public boolean controller(Expediente e){
-        return verificandoFormatoData(e);
-    }
-    
-    public boolean verificandoFormatoData(Expediente e){
-        LocalDate dataInicial = e.getDataInicial().toLocalDate();
-        
         if(e.getPeriodo()==2){
-            LocalDate dataFinal = e.getDataFinal().toLocalDate();
-           if(dataInicial.getDayOfMonth()>=01 && dataInicial.getDayOfMonth()<=31 
-                                            && dataFinal.getDayOfMonth()>=01 && dataFinal.getDayOfMonth()<=31
-                                            && dataInicial.getMonthValue()>=01 && dataInicial.getMonthValue()<=12
-                                            && dataFinal.getMonthValue()>=01 && dataFinal.getMonthValue()<=12
-                                            && dataInicial.getYear()>=2020 
-                                            && dataFinal.getYear()>=2020)
-            {
-                return verificarDiferencaEntreDatas(e);
-            }else{
-                JOptionPane.showMessageDialog(null, "Data informada está fora do padrão", "Mensagem", JOptionPane.ERROR_MESSAGE); 
-                return false;
-            } 
+            return verificarDiferencaEntreDatas(e);
         }else{
-            if(dataInicial.getDayOfMonth()>=01 && dataInicial.getDayOfMonth()<=31 
-                                            && dataInicial.getMonthValue()>=01 && dataInicial.getMonthValue()<=12
-                                            && dataInicial.getYear()>=2020)
-            {
-                return verificarDiferencaEntreHoras(e);
-            }else{
-                JOptionPane.showMessageDialog(null, "Data informada está fora do padrão", "Mensagem", JOptionPane.ERROR_MESSAGE); 
-                return false;
-            }
+            return verificarDiferencaEntreHoras(e);
         }
     }
     

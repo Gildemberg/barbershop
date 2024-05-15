@@ -402,6 +402,18 @@ public class TelaServicos extends javax.swing.JFrame {
                 .addContainerGap(263, Short.MAX_VALUE))
         );
 
+        txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                // Obtém o caractere digitado
+                char c = evt.getKeyChar();
+                // Aplica a lógica de filtro
+                if (!Character.isDigit(c)) {
+                    // Se o caractere não for um número, consome o evento, impedindo que ele seja inserido no campo de texto
+                    evt.consume();
+                }
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

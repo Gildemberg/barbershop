@@ -445,6 +445,7 @@
             </Property>
           </Properties>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="txtValor.addKeyListener(new java.awt.event.KeyAdapter() {&#xa;            public void keyTyped(java.awt.event.KeyEvent evt) {&#xa;                // Obt&#xe9;m o caractere digitado&#xa;                char c = evt.getKeyChar();&#xa;                // Aplica a l&#xf3;gica de filtro&#xa;                if (!Character.isDigit(c)) {&#xa;                    // Se o caractere n&#xe3;o for um n&#xfa;mero, consome o evento, impedindo que ele seja inserido no campo de texto&#xa;                    evt.consume();&#xa;                }&#xa;            }&#xa;        });"/>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="txtValor.setBackground(new Color(222, 222, 222, 222));&#xa;txtValor.setBorder(bordaComposta);"/>
           </AuxValues>
         </Component>

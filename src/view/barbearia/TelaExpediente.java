@@ -23,22 +23,23 @@ import javax.swing.table.DefaultTableModel;
 import model.Expediente;
 
 public class TelaExpediente extends javax.swing.JFrame {
-    String dataString;
-    String horaIniString;
-    String horaFimString;
-    int opcao=1, periodo=1;
-    int CODBARBEARIA;
+
+    /* ------  VARIAVEIS -------- */
+    int opcao = 1, periodo = 1, CODBARBEARIA;
+    String dataString, horaIniString, horaFimString;
+    String dateFormat = "dd/MM/yyyy", horaFormat = "HH:mm";
+    /* ------  INSTÂNCIA -------- */
     Expediente modelExpediente = new Expediente();
     ExpedienteDAO expedienteDao = new ExpedienteDAO();
     ExpedienteController expedienteController = new ExpedienteController();
     SimpleDateFormat horaFormatada = new SimpleDateFormat("HH:mm");
     SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
-    
+
     public TelaExpediente() {
         initComponents();
-        setExtendedState (MAXIMIZED_BOTH);
+        setExtendedState(MAXIMIZED_BOTH);
         setIcon();
-        
+
         jTable1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -47,51 +48,50 @@ public class TelaExpediente extends javax.swing.JFrame {
                     txtDataInicial.setText("");
                     txtHoraIni.setText("");
                     txtHoraFim.setText("");
-                    
+
                     int row = jTable1.getSelectedRow(); // Índice da linha selecionada
 
                     // Obter os dados da linha selecionada
                     Date data = (Date) jTable1.getValueAt(row, 0);
                     Time horaIni = (Time) jTable1.getValueAt(row, 1);
                     Time horaFim = (Time) jTable1.getValueAt(row, 2);
-                    
+
                     SimpleDateFormat dataS = new SimpleDateFormat("dd/MM/yyyy");
                     SimpleDateFormat horaS = new SimpleDateFormat("HH:mm:ss");
                     String dataStringg = dataS.format(data);
                     String horaIniStringg = horaS.format(horaIni);
                     String horaFimStringg = horaS.format(horaFim);
-                    
+
                     dataString = dataStringg;
                     horaIniString = horaIniStringg;
                     horaFimString = horaFimStringg;
                 }
             }
         });
-        
+
         txtDataFinal.setVisible(false);
         labelDataFim.setVisible(false);
     }
-    
-    public void receberCodBarbearia(int CODBARBEARIA){
+
+    public void receberCodBarbearia(int CODBARBEARIA) {
         this.CODBARBEARIA = CODBARBEARIA;
         listarExpedientes();
     }
-    
-    public void listarExpedientes(){
-        ExpedienteDAO expedienteDao = new ExpedienteDAO();
+
+    public void listarExpedientes() {
         List<Expediente> expedientes = expedienteDao.read(CODBARBEARIA);
-        
+
         String[] colunas = {"Data", "Inicio do Expediente", "Fim do Expediente"};
         DefaultTableModel tableModel = new DefaultTableModel(colunas, 0);
-        
+
         Set<Date> datasAdicionadas = new HashSet<>();
-        
+
         for (Expediente e : expedientes) {
             Date data = e.getDataInicial();
-        
+
             if (!datasAdicionadas.contains(data)) {
                 datasAdicionadas.add(data);
-                
+
                 Object[] row = {
                     data,
                     e.getHoraInicial(),
@@ -102,137 +102,117 @@ public class TelaExpediente extends javax.swing.JFrame {
         }
         jTable1.setModel(tableModel);
     }
-   
-    public void cadastrarExpediente(){
+
+    public void cadastrarExpediente() {
         try {
-            if(periodo==2){ //2 é por periodo
-                String dataFinalString = txtDataFinal.getText(); 
-                if ("  /  /    ".equals(dataFinalString)) {
-                JOptionPane.showMessageDialog(null, "Preencha a data", "Mensagem", JOptionPane.ERROR_MESSAGE);
+            modelExpediente.setPeriodo(1);
+            modelExpediente.setCodbarbearia(CODBARBEARIA);
+
+            String dataInicialString = txtDataInicial.getText();
+            String dataFinalString = txtDataFinal.getText();
+            String horaInicialString = txtHoraIni.getText();
+            String horaFinalString = txtHoraFim.getText();
+
+            if (!validarData(dataInicialString, dateFormat)) {
+                JOptionPane.showMessageDialog(null, "Data informada está fora do padrão", "Mensagem", JOptionPane.ERROR_MESSAGE);
                 return;
+            }
+            if (periodo == 2) {
+                if (!validarData(dataFinalString, dateFormat)) {
+                    JOptionPane.showMessageDialog(null, "Data informada está fora do padrão", "Mensagem", JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
                 Date dataFinal = new Date(dataFormatada.parse(dataFinalString).getTime());
                 modelExpediente.setDataFinal(dataFinal);
                 modelExpediente.setPeriodo(2);
-            }else{                
-                modelExpediente.setPeriodo(1);
             }
-            String dataInicialString = txtDataInicial.getText(); 
-            
-            String horaInicialString = txtHoraIni.getText(); 
-            String horaFinalString = txtHoraFim.getText(); 
-            
-            if ("  :  ".equals(horaInicialString) || "  :  ".equals(horaFinalString)) {
-                JOptionPane.showMessageDialog(null, "Preencha o horário", "Mensagem", JOptionPane.ERROR_MESSAGE);
-            return;
+
+            if (!validarHora(horaInicialString, horaFormat) || !validarHora(horaFinalString, horaFormat)) {
+                JOptionPane.showMessageDialog(null, "Preencha o horário corretamente", "Mensagem", JOptionPane.ERROR_MESSAGE);
+                return;
             }
-            if ("  /  /    ".equals(dataInicialString)) {
-                JOptionPane.showMessageDialog(null, "Preencha a data", "Mensagem", JOptionPane.ERROR_MESSAGE);
-            return;
-            }
-            //convertendo a String data para DATE
+
             Date dataInicial = new Date(dataFormatada.parse(dataInicialString).getTime());
-            
-            
-            Date HorarioInicial = new Date(horaFormatada.parse(horaInicialString).getTime()); //TIME DATE
-            Time horaInicial = new Time(HorarioInicial.getTime()); //Pegando o TIME da DATE
-            
-            Date HorarioFinal = new Date(horaFormatada.parse(horaFinalString).getTime()); //TIME DATE
-            Time horaFinal = new Time(HorarioFinal.getTime()); //Pegando o TIME da DATE
-            
-            modelExpediente.setCodbarbearia(CODBARBEARIA);
             modelExpediente.setDataInicial(dataInicial);
+
+            Date HorarioInicial = new Date(horaFormatada.parse(horaInicialString).getTime());
+            Time horaInicial = new Time(HorarioInicial.getTime());
             modelExpediente.setHoraInicial(horaInicial);
+
+            Date HorarioFinal = new Date(horaFormatada.parse(horaFinalString).getTime());
+            Time horaFinal = new Time(HorarioFinal.getTime());
             modelExpediente.setHoraFinal(horaFinal);
-            
-            
-            if(expedienteController.controller(modelExpediente)){
+
+            if (expedienteController.controller(modelExpediente)) {
                 txtDataInicial.setText("");
                 txtDataFinal.setText("");
                 txtHoraIni.setText("");
                 txtHoraFim.setText("");
                 listarExpedientes();
             }
-            
         } catch (ParseException ex) {
             Logger.getLogger(TelaExpediente.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
-    
-    public void alterarExpediente(){
+
+    public void alterarExpediente() {
         try {
-            Date dataInicial = new Date(dataFormatada.parse(dataString).getTime());
-            Date HorarioInicial = new Date(horaFormatada.parse(horaIniString).getTime()); //TIME DATE
-            Date HorarioFinal = new Date(horaFormatada.parse(horaFimString).getTime()); //TIME DATE
-            Time horaInicial = new Time(HorarioInicial.getTime()); //Pegando o TIME da DATE
-            Time horaFinal = new Time(HorarioFinal.getTime()); //Pegando o TIME da DATE
-            
             modelExpediente.setCodbarbearia(CODBARBEARIA);
+
+            Date dataInicial = new Date(dataFormatada.parse(dataString).getTime());
             modelExpediente.setDataInicial(dataInicial);
+
+            Date HorarioInicial = new Date(horaFormatada.parse(horaIniString).getTime());
+            Time horaInicial = new Time(HorarioInicial.getTime());
             modelExpediente.setHoraInicial(horaInicial);
+
+            Date HorarioFinal = new Date(horaFormatada.parse(horaFimString).getTime());
+            Time horaFinal = new Time(HorarioFinal.getTime());
             modelExpediente.setHoraFinal(horaFinal);
-            
-            if(expedienteDao.removeExpediente(modelExpediente)){
+
+            if (expedienteDao.removeExpediente(modelExpediente)) {
                 txtDataInicial.setEditable(true);
                 txtHoraIni.setEditable(true);
                 txtHoraFim.setEditable(true);
                 cadastrarExpediente();
-                txtDataInicial.setText("");
-                txtDataFinal.setText("");
-                txtHoraIni.setText("");
-                txtHoraFim.setText("");             
             }
-                    listarExpedientes();
         } catch (ParseException ex) {
             Logger.getLogger(TelaExpediente.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
-    
-    public void deletarExpediente(){
+
+    public void deletarExpediente() {
         try {
-            String dataInicialString = txtDataInicial.getText(); 
-            
-            if ("  /  /    ".equals(dataInicialString)) {
-                JOptionPane.showMessageDialog(null, "Preencha a data", "Mensagem", JOptionPane.ERROR_MESSAGE);
-            return;
-            }
-            
-            //convertendo a String data para DATE
-            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
-            Date dataInicial = new Date(dataFormatada.parse(dataInicialString).getTime());
-            
-            
-                String horaInicialString = txtHoraIni.getText(); 
-                String horaFinalString = txtHoraFim.getText();
-                if ("  :  ".equals(horaInicialString) || "  :  ".equals(horaFinalString)) {
-                    JOptionPane.showMessageDialog(null, "Preencha o horário", "Mensagem", JOptionPane.ERROR_MESSAGE);
-                return;
-                }
-                Date HorarioInicial = new Date(horaFormatada.parse(horaInicialString).getTime()); //TIME DATE
-                Time horaInicial = new Time(HorarioInicial.getTime()); //Pegando o TIME da DATE
-
-                Date HorarioFinal = new Date(horaFormatada.parse(horaFinalString).getTime()); //TIME DATE
-                Time horaFinal = new Time(HorarioFinal.getTime()); //Pegando o TIME da DATE
-                modelExpediente.setHoraInicial(horaInicial);
-                modelExpediente.setHoraFinal(horaFinal);
-
-            
-            
-            modelExpediente.setDataInicial(dataInicial);
             modelExpediente.setCodbarbearia(CODBARBEARIA);
-            
-            if(expedienteDao.removeExpediente(modelExpediente)){
-                txtDataInicial.setText("");
-                txtDataFinal.setText("");
-                txtHoraIni.setText("");
-                txtHoraFim.setText("");
-                listarExpedientes();
+
+            String dataInicialString = txtDataInicial.getText();
+            Date dataInicial = new Date(dataFormatada.parse(dataInicialString).getTime());
+            modelExpediente.setDataInicial(dataInicial);
+
+            String horaInicialString = txtHoraIni.getText();
+            Date HorarioInicial = new Date(horaFormatada.parse(horaInicialString).getTime());
+            Time horaInicial = new Time(HorarioInicial.getTime());
+            modelExpediente.setHoraInicial(horaInicial);
+
+            String horaFinalString = txtHoraFim.getText();
+            Date HorarioFinal = new Date(horaFormatada.parse(horaFinalString).getTime());
+            Time horaFinal = new Time(HorarioFinal.getTime());
+            modelExpediente.setHoraFinal(horaFinal);
+
+            if(JOptionPane.showConfirmDialog(this, "Você deseja realmente deletar o expediente?", "Deletar Expediente", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                if (expedienteDao.removeExpediente(modelExpediente)) {
+                    txtDataInicial.setText("");
+                    txtDataFinal.setText("");
+                    txtHoraIni.setText("");
+                    txtHoraFim.setText("");
+                    listarExpedientes();
+                }
             }
         } catch (ParseException ex) {
             Logger.getLogger(TelaExpediente.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -595,6 +575,51 @@ public class TelaExpediente extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        txtDataInicial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                // Obtém o caractere digitado
+                char c = evt.getKeyChar();
+                // Aplica a lógica de filtro
+                if (!Character.isDigit(c)) {
+                    // Se o caractere não for um número, consome o evento, impedindo que ele seja inserido no campo de texto
+                    evt.consume();
+                }
+            }
+        });
+        txtDataFinal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                // Obtém o caractere digitado
+                char c = evt.getKeyChar();
+                // Aplica a lógica de filtro
+                if (!Character.isDigit(c)) {
+                    // Se o caractere não for um número, consome o evento, impedindo que ele seja inserido no campo de texto
+                    evt.consume();
+                }
+            }
+        });
+        txtHoraIni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                // Obtém o caractere digitado
+                char c = evt.getKeyChar();
+                // Aplica a lógica de filtro
+                if (!Character.isDigit(c)) {
+                    // Se o caractere não for um número, consome o evento, impedindo que ele seja inserido no campo de texto
+                    evt.consume();
+                }
+            }
+        });
+        txtHoraFim.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                // Obtém o caractere digitado
+                char c = evt.getKeyChar();
+                // Aplica a lógica de filtro
+                if (!Character.isDigit(c)) {
+                    // Se o caractere não for um número, consome o evento, impedindo que ele seja inserido no campo de texto
+                    evt.consume();
+                }
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -622,19 +647,22 @@ public class TelaExpediente extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         switch (opcao) {
-            case 1 -> cadastrarExpediente();
-            case 2 -> alterarExpediente();
-            default -> deletarExpediente();
+            case 1 ->
+                cadastrarExpediente();
+            case 2 ->
+                alterarExpediente();
+            default ->
+                deletarExpediente();
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnCadastrarPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarPeriodoActionPerformed
-        if(btnCadastrarPeriodo.isSelected()){
+        if (btnCadastrarPeriodo.isSelected()) {
             txtDataFinal.setVisible(true);
             labelDataFim.setVisible(true);
             labelDataIni.setText("Data Inicio");
             periodo = 2;
-        }else{
+        } else {
             txtDataFinal.setVisible(false);
             labelDataFim.setVisible(false);
             labelDataIni.setText("Data");
@@ -644,12 +672,12 @@ public class TelaExpediente extends javax.swing.JFrame {
 
     private void btnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarMouseClicked
         int linhaSelecionada = jTable1.getSelectedRow();
-        if(linhaSelecionada==-1){
+        if (linhaSelecionada == -1) {
             JOptionPane.showMessageDialog(null, "Selecione um expediente.");
-        }else{
+        } else {
             labelFunExpediente.setText("Alterar Expediente");
             btnCadastrar.setText("Alterar");
-            opcao=2;
+            opcao = 2;
             labelDataFim.setVisible(false);
             txtDataFinal.setVisible(false);
             btnCadastrarPeriodo.setVisible(false);
@@ -657,17 +685,21 @@ public class TelaExpediente extends javax.swing.JFrame {
             txtDataInicial.setText(dataString);
             txtHoraIni.setText(horaIniString);
             txtHoraFim.setText(horaFimString);
+            txtHoraFim.setEditable(true);
+            txtDataInicial.setEditable(true);
+            txtHoraIni.setEditable(true);
+            txtHoraFim.setEditable(true);
         }
     }//GEN-LAST:event_btnAlterarMouseClicked
 
     private void btnDeletarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletarMouseClicked
         int linhaSelecionada = jTable1.getSelectedRow();
-        if(linhaSelecionada==-1){
+        if (linhaSelecionada == -1) {
             JOptionPane.showMessageDialog(null, "Selecione um expediente.");
-        }else{  
+        } else {
             labelFunExpediente.setText("Deletar Expediente");
             btnCadastrar.setText("Deletar");
-            opcao=3;
+            opcao = 3;
             labelDataFim.setVisible(false);
             txtDataFinal.setVisible(false);
             btnCadastrarPeriodo.setVisible(false);
@@ -687,7 +719,7 @@ public class TelaExpediente extends javax.swing.JFrame {
     private void btnAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarMouseClicked
         labelFunExpediente.setText("Novo Expediente");
         btnCadastrar.setText("Cadastrar");
-        opcao=1;
+        opcao = 1;
         labelDataFim.setVisible(false);
         txtDataFinal.setVisible(false);
         btnCadastrarPeriodo.setVisible(true);
@@ -700,7 +732,6 @@ public class TelaExpediente extends javax.swing.JFrame {
         txtHoraFim.setEditable(true);
         txtDataInicial.setEditable(true);
     }//GEN-LAST:event_btnAdicionarMouseClicked
-
 
     public static void main(String args[]) {
 
@@ -746,6 +777,30 @@ public class TelaExpediente extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void setIcon() {
-       setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../images/icone.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../images/icone.png")));
+    }
+
+    public static boolean validarData(String dateString, String dateFormat) {
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        sdf.setLenient(false); // Configura para não aceitar datas inválidas (ex: 31 de fevereiro)
+
+        try {
+            sdf.parse(dateString); // Tenta fazer o parsing da data
+            return true; // Se não lançar exceção, a data é válida
+        } catch (ParseException e) {
+            return false; // Se lançar uma exceção, a data é inválida
+        }
+    }
+
+    public static boolean validarHora(String horaString, String horaFormat) {
+        SimpleDateFormat sdf = new SimpleDateFormat(horaFormat);
+        sdf.setLenient(false); // Configura para não aceitar datas inválidas (ex: 31 de fevereiro)
+
+        try {
+            sdf.parse(horaString); // Tenta fazer o parsing da data
+            return true; // Se não lançar exceção, a data é válida
+        } catch (ParseException e) {
+            return false; // Se lançar uma exceção, a data é inválida
+        }
     }
 }

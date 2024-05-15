@@ -254,16 +254,13 @@
                               </Group>
                               <Component id="rsenha" alignment="1" min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtCNPJ" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
-                              <Component id="txtNome" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                          <Component id="txtCNPJ" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                          <Component id="txtNome" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtLogin" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
                       <Component id="txtSenha" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>

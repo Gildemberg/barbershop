@@ -434,7 +434,7 @@ public class TelaAgendamentos extends javax.swing.JFrame {
 
         jScrollPaneAbe.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPaneAbe.setMaximumSize(new java.awt.Dimension(600, 500));
-        jScrollPaneAbe.setMinimumSize(new java.awt.Dimension(600, 500));
+        jScrollPaneAbe.setMinimumSize(new java.awt.Dimension(600, 650));
         jScrollPaneAbe.setPreferredSize(new java.awt.Dimension(600, 650));
 
         jPanelAbe.setBackground(new java.awt.Color(255, 255, 255));

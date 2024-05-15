@@ -432,6 +432,7 @@
             </Property>
           </Properties>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="txtDataInicial.addKeyListener(new java.awt.event.KeyAdapter() {&#xa;            public void keyTyped(java.awt.event.KeyEvent evt) {&#xa;                // Obt&#xe9;m o caractere digitado&#xa;                char c = evt.getKeyChar();&#xa;                // Aplica a l&#xf3;gica de filtro&#xa;                if (!Character.isDigit(c)) {&#xa;                    // Se o caractere n&#xe3;o for um n&#xfa;mero, consome o evento, impedindo que ele seja inserido no campo de texto&#xa;                    evt.consume();&#xa;                }&#xa;            }&#xa;        });"/>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="BordaArredondada borda = new BordaArredondada(new Color(222, 222, 222, 222), 3, 10);&#xa;Border bordaInterna = BorderFactory.createEmptyBorder(0, 10, 0, 0);&#xa;Border bordaComposta = BorderFactory.createCompoundBorder(borda, bordaInterna);&#xa;&#xa;txtDataInicial.setBackground(new Color(222, 222, 222, 222));&#xa;txtDataInicial.setBorder(bordaComposta);"/>
           </AuxValues>
         </Component>
@@ -464,6 +465,7 @@
             </Property>
           </Properties>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="txtDataFinal.addKeyListener(new java.awt.event.KeyAdapter() {&#xa;            public void keyTyped(java.awt.event.KeyEvent evt) {&#xa;                // Obt&#xe9;m o caractere digitado&#xa;                char c = evt.getKeyChar();&#xa;                // Aplica a l&#xf3;gica de filtro&#xa;                if (!Character.isDigit(c)) {&#xa;                    // Se o caractere n&#xe3;o for um n&#xfa;mero, consome o evento, impedindo que ele seja inserido no campo de texto&#xa;                    evt.consume();&#xa;                }&#xa;            }&#xa;        });"/>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="txtDataFinal.setBackground(new Color(222, 222, 222, 222));&#xa;txtDataFinal.setBorder(bordaComposta);"/>
           </AuxValues>
         </Component>
@@ -496,6 +498,7 @@
             </Property>
           </Properties>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="txtHoraIni.addKeyListener(new java.awt.event.KeyAdapter() {&#xa;            public void keyTyped(java.awt.event.KeyEvent evt) {&#xa;                // Obt&#xe9;m o caractere digitado&#xa;                char c = evt.getKeyChar();&#xa;                // Aplica a l&#xf3;gica de filtro&#xa;                if (!Character.isDigit(c)) {&#xa;                    // Se o caractere n&#xe3;o for um n&#xfa;mero, consome o evento, impedindo que ele seja inserido no campo de texto&#xa;                    evt.consume();&#xa;                }&#xa;            }&#xa;        });"/>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new css.ArrendondarBordas()"/>
             <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="txtHoraIni.setBackground(new Color(222, 222, 222, 222));&#xa;txtHoraIni.setBorder(bordaComposta);"/>
           </AuxValues>
@@ -529,6 +532,7 @@
             </Property>
           </Properties>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="txtHoraFim.addKeyListener(new java.awt.event.KeyAdapter() {&#xa;            public void keyTyped(java.awt.event.KeyEvent evt) {&#xa;                // Obt&#xe9;m o caractere digitado&#xa;                char c = evt.getKeyChar();&#xa;                // Aplica a l&#xf3;gica de filtro&#xa;                if (!Character.isDigit(c)) {&#xa;                    // Se o caractere n&#xe3;o for um n&#xfa;mero, consome o evento, impedindo que ele seja inserido no campo de texto&#xa;                    evt.consume();&#xa;                }&#xa;            }&#xa;        });"/>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new css.ArrendondarBordas()"/>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="txtHoraFim.setBackground(new Color(222, 222, 222, 222));&#xa;txtHoraFim.setBorder(bordaComposta);"/>
           </AuxValues>

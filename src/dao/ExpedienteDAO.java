@@ -1,4 +1,3 @@
-
 package dao;
 
 import java.sql.Connection;
@@ -17,97 +16,98 @@ import javax.swing.JOptionPane;
 import model.Expediente;
 
 public class ExpedienteDAO {
-    public List<Expediente> read(int CODBARBEARIA){
+
+    public List<Expediente> read(int CODBARBEARIA) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         List<Expediente> expedientes = new ArrayList();
-        
+
         try {
             stmt = con.prepareStatement("SELECT * "
-                                        + "FROM EXPEDIENTE  "
-                                        + "WHERE FK_CODBARBEARIA=? "
-                                        + "ORDER BY 2");
+                    + "FROM EXPEDIENTE  "
+                    + "WHERE FK_CODBARBEARIA=? "
+                    + "ORDER BY 2");
             stmt.setInt(1, CODBARBEARIA);
             rs = stmt.executeQuery();
-            
-            while(rs.next()){
-                    Expediente expediente = new Expediente();
-                    expediente.setCodexpediente(rs.getInt(1));
-                    expediente.setDataInicial(rs.getDate(2));
-                    expediente.setHoraInicial(rs.getTime(3));
-                    expediente.setHoraFinal(rs.getTime(4));
-                    expedientes.add(expediente);
+
+            while (rs.next()) {
+                Expediente expediente = new Expediente();
+                expediente.setCodexpediente(rs.getInt(1));
+                expediente.setDataInicial(rs.getDate(2));
+                expediente.setHoraInicial(rs.getTime(3));
+                expediente.setHoraFinal(rs.getTime(4));
+                expedientes.add(expediente);
             }
-        } catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: "+ex);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
             Logger.getLogger(ExpedienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
+        } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return expedientes;
     }
-    
-    public boolean consultarPeriodoExpediente(Expediente e){
+
+    public boolean consultarPeriodoExpediente(Expediente e) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        boolean check=true;
-        
+        boolean check = true;
+
         try {
             stmt = con.prepareStatement("SELECT DATA, FK_CODBARBEARIA "
-                                        + "FROM EXPEDIENTE "
-                                        + "WHERE FK_CODBARBEARIA=? "
-                                        + "AND DATA BETWEEN ? AND ? ");
+                    + "FROM EXPEDIENTE "
+                    + "WHERE FK_CODBARBEARIA=? "
+                    + "AND DATA BETWEEN ? AND ? ");
             stmt.setInt(1, e.getCodbarbearia());
             stmt.setDate(2, e.getDataInicial());
             stmt.setDate(3, e.getDataFinal());
             rs = stmt.executeQuery();
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 check = false;
             }
-        } catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: "+ex);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
             Logger.getLogger(ExpedienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
+        } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return check;
     }
-    
-    public boolean consultarDataExpediente(Expediente e){
+
+    public boolean consultarDataExpediente(Expediente e) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        boolean check=true;
-        
+        boolean check = true;
+
         try {
             stmt = con.prepareStatement("SELECT DATA, FK_CODBARBEARIA "
-                                        + "FROM EXPEDIENTE "
-                                        + "WHERE FK_CODBARBEARIA=? "
-                                        + "AND DATA = ? ");
+                    + "FROM EXPEDIENTE "
+                    + "WHERE FK_CODBARBEARIA=? "
+                    + "AND DATA = ? ");
             stmt.setInt(1, e.getCodbarbearia());
             stmt.setDate(2, e.getDataInicial());
             rs = stmt.executeQuery();
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 check = false;
             }
-        } catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: "+ex);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
             Logger.getLogger(ExpedienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
+        } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return check;
     }
-    
+
     public boolean adicionarPeriodoExpediente(Expediente e) {
         Connection con = null;
         PreparedStatement stmt = null;
         boolean check = false;
-        
+
         try {
             con = ConnectionFactory.getConnection();
 
@@ -116,7 +116,7 @@ public class ExpedienteDAO {
 
             LocalDate localDate = e.getDataInicial().toLocalDate();
             LocalDate localDateFim = e.getDataFinal().toLocalDate();
-            
+
             LocalTime localTime = e.getHoraInicial().toLocalTime();
             LocalTime localTimeFim = e.getHoraFinal().toLocalTime();
 
@@ -127,7 +127,7 @@ public class ExpedienteDAO {
                 LocalTime horaTemp = localTime; // Armazena a hora inicial original
                 while (!horaTemp.isAfter(localTimeFim)) {
                     stmt.setDate(1, Date.valueOf(localDate));
-                    stmt.setTime(2, e.getHoraInicial()); 
+                    stmt.setTime(2, e.getHoraInicial());
                     stmt.setTime(3, e.getHoraFinal());
                     stmt.setTime(4, Time.valueOf(horaTemp)); // Utiliza a hora temporária
                     stmt.setInt(5, e.getCodbarbearia());
@@ -138,7 +138,6 @@ public class ExpedienteDAO {
                 localDate = localDate.plusDays(1); // Avança para o próximo dia
             }
 
-
             stmt.executeBatch(); // Executa todas as operações em lote
             con.commit(); // Comita a transação
             check = true;
@@ -155,39 +154,39 @@ public class ExpedienteDAO {
         } finally {
             ConnectionFactory.closeConnection(con, stmt, null);
         }
-        
+
         return check;
     }
-    
+
     public boolean adicionarDataExpediente(Expediente e) {
         Connection con = null;
         PreparedStatement stmt = null;
         boolean check = false;
-        
+
         try {
             con = ConnectionFactory.getConnection();
             con.setAutoCommit(false); // desativa auto-commit para garantir atomicidade
 
             LocalDate localDate = e.getDataInicial().toLocalDate();
-            
+
             LocalTime localTime = e.getHoraInicial().toLocalTime();
             LocalTime localTimeFim = e.getHoraFinal().toLocalTime();
 
             String insertSQL = "INSERT INTO expediente (DATA, HORAINICIO, HORAFIM, HORA, FK_CODBARBEARIA) VALUES (?,?,?,?,?)";
             stmt = con.prepareStatement(insertSQL);
 
-                LocalTime horaTemp = localTime; // Armazena a hora inicial original
-                while (!horaTemp.isAfter(localTimeFim)) {
-                    stmt.setDate(1, Date.valueOf(localDate));
-                    stmt.setTime(2, e.getHoraInicial()); 
-                    stmt.setTime(3, e.getHoraFinal());
-                    stmt.setTime(4, Time.valueOf(horaTemp)); // Utiliza a hora temporária
-                    stmt.setInt(5, e.getCodbarbearia());
+            LocalTime horaTemp = localTime; // Armazena a hora inicial original
+            while (!horaTemp.isAfter(localTimeFim)) {
+                stmt.setDate(1, Date.valueOf(localDate));
+                stmt.setTime(2, e.getHoraInicial());
+                stmt.setTime(3, e.getHoraFinal());
+                stmt.setTime(4, Time.valueOf(horaTemp)); // Utiliza a hora temporária
+                stmt.setInt(5, e.getCodbarbearia());
 
-                    stmt.addBatch(); // Acumula as operações para processamento em lote
-                    horaTemp = horaTemp.plusHours(1); // Avança para a próxima hora
-                }
-            
+                stmt.addBatch(); // Acumula as operações para processamento em lote
+                horaTemp = horaTemp.plusHours(1); // Avança para a próxima hora
+            }
+
             stmt.executeBatch(); // Executa todas as operações em lote
             con.commit(); // Comita a transação
             check = true;
@@ -204,13 +203,12 @@ public class ExpedienteDAO {
         } finally {
             ConnectionFactory.closeConnection(con, stmt, null);
         }
-        
+
         return check;
     }
-    
+
     /*------------------------------------------------------------------------------------*/
-    
-    public boolean verificarDataBarbearia(Expediente e){
+    public boolean verificarDataBarbearia(Expediente e) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -218,23 +216,23 @@ public class ExpedienteDAO {
             stmt = con.prepareStatement("SELECT DATA, FK_CODBARBEARIA "
                     + "FROM EXPEDIENTE  "
                     + "WHERE DATA=? AND FK_CODBARBEARIA=?");
-                stmt.setDate(1, e.getDataInicial());
-                stmt.setInt(2, e.getCodbarbearia());
-                rs = stmt.executeQuery();
-                
-                if(rs.next()){
-                    return true;
-                }
-        } catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: "+ex);
+            stmt.setDate(1, e.getDataInicial());
+            stmt.setInt(2, e.getCodbarbearia());
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
             Logger.getLogger(ExpedienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
+        } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return false;
     }
-    
-    public boolean removeExpediente(Expediente e){
+
+    public boolean removeExpediente(Expediente e) {
         Connection con = null;
         PreparedStatement stmt = null;
         boolean check = false;
@@ -281,11 +279,11 @@ public class ExpedienteDAO {
 
         return check;
     }
-    
-    public boolean alterarExpediente(Expediente e){
+
+    public boolean alterarExpediente(Expediente e) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-        
+
         try {
             stmt = con.prepareStatement("UPDATE expediente SET HORAINICIO=?, HORAFIM=? WHERE DATA=? AND FK_CODBARBEARIA=?");
             stmt.setTime(1, e.getHoraInicial());
@@ -295,50 +293,39 @@ public class ExpedienteDAO {
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: "+ex);
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
             Logger.getLogger(ExpedienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
+        } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
         return false;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public List<Expediente> readHorarios(int CODBARBEARIA, Date data){
+
+    public List<Expediente> readHorarios(int CODBARBEARIA, Date data) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         List<Expediente> expedientes = new ArrayList();
-        
+
         try {
             stmt = con.prepareStatement("SELECT HORA "
-                                        + "FROM EXPEDIENTE  "
-                                        + "WHERE FK_CODBARBEARIA=? AND DATA=?");
+                    + "FROM EXPEDIENTE  "
+                    + "WHERE FK_CODBARBEARIA=? AND DATA=?");
             stmt.setInt(1, CODBARBEARIA);
             stmt.setDate(2, data);
             rs = stmt.executeQuery();
-            
-            while(rs.next()){
-                    Expediente expediente = new Expediente();
-                    expediente.setHoraInicial(rs.getTime(1));
-                    expedientes.add(expediente);
+
+            while (rs.next()) {
+                Expediente expediente = new Expediente();
+                expediente.setHoraInicial(rs.getTime(1));
+                expedientes.add(expediente);
             }
-        } catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: "+ex);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
             Logger.getLogger(ExpedienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
+        } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return expedientes;
     }
-    
-    
 }
