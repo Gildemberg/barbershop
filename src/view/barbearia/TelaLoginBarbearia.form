@@ -173,7 +173,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="NaoPossuiConta" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnCadastro" min="-2" pref="179" max="-2" attributes="0"/>
+                                  <Component id="btnCadastro" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="btnEntrar" alignment="1" min="-2" pref="968" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">

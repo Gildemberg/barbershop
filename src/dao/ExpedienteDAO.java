@@ -120,7 +120,7 @@ public class ExpedienteDAO {
             LocalTime localTime = e.getHoraInicial().toLocalTime();
             LocalTime localTimeFim = e.getHoraFinal().toLocalTime();
 
-            String insertSQL = "INSERT INTO expediente (DATA, HORAINICIO, HORAFIM, HORA, FK_CODBARBEARIA) VALUES (?,?,?,?,?)";
+            String insertSQL = "INSERT INTO expediente (DATA, HORAINICIO, HORAFIM, HORA, FK_CODBARBEARIA, STATUS) VALUES (?,?,?,?,?,0)";
             stmt = con.prepareStatement(insertSQL);
 
             while (!localDate.isAfter(localDateFim)) {
@@ -172,7 +172,7 @@ public class ExpedienteDAO {
             LocalTime localTime = e.getHoraInicial().toLocalTime();
             LocalTime localTimeFim = e.getHoraFinal().toLocalTime();
 
-            String insertSQL = "INSERT INTO expediente (DATA, HORAINICIO, HORAFIM, HORA, FK_CODBARBEARIA) VALUES (?,?,?,?,?)";
+            String insertSQL = "INSERT INTO expediente (DATA, HORAINICIO, HORAFIM, HORA, FK_CODBARBEARIA, STATUS) VALUES (?,?,?,?,?,0)";
             stmt = con.prepareStatement(insertSQL);
 
             LocalTime horaTemp = localTime; // Armazena a hora inicial original
@@ -310,7 +310,7 @@ public class ExpedienteDAO {
         try {
             stmt = con.prepareStatement("SELECT HORA "
                     + "FROM EXPEDIENTE  "
-                    + "WHERE FK_CODBARBEARIA=? AND DATA=?");
+                    + "WHERE FK_CODBARBEARIA=? AND DATA=? AND STATUS=0");
             stmt.setInt(1, CODBARBEARIA);
             stmt.setDate(2, data);
             rs = stmt.executeQuery();

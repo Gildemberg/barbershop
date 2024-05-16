@@ -28,7 +28,8 @@ public class AgendamentoDAO {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("INSERT INTO agendamento (DATA, HORARIO, STATUS, FK_CODBARBEARIA, FK_CODCLIENTE, FK_CODSERVICO, DESCRICAO) VALUES(?,?,?,?,?,?,?)");
+            String sql = "INSERT INTO agendamento (DATA, HORARIO, STATUS, FK_CODBARBEARIA, FK_CODCLIENTE, FK_CODSERVICO, DESCRICAO) VALUES(?,?,?,?,?,?,?)";
+            stmt = con.prepareStatement(sql);
             stmt.setDate(1, a.getData());
             stmt.setTime(2, a.getHora());
             stmt.setInt(3, a.getStatus());
@@ -37,6 +38,14 @@ public class AgendamentoDAO {
             stmt.setInt(6, a.getServico());
             stmt.setString(7, "Agendado");
             stmt.executeUpdate();
+            
+            sql = "UPDATE expediente SET STATUS=1 WHERE HORA=? AND FK_CODBARBEARIA=? AND DATA=?";
+            stmt = con.prepareStatement(sql);
+            stmt.setTime(1, a.getHora());
+            stmt.setInt(2, a.getCodbarbearia());
+            stmt.setDate(3, a.getData());
+            stmt.executeUpdate();
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: "+ex);
             Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,10 +80,18 @@ public class AgendamentoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE agendamento SET STATUS=?, DESCRICAO=? WHERE CODAGENDAMENTO=?");
+            System.out.println(a.getHora());
+            String sql = "UPDATE agendamento SET STATUS=?, DESCRICAO=? WHERE CODAGENDAMENTO=?";
+            stmt = con.prepareStatement(sql);
             stmt.setInt(1, a.getStatus()); 
-            stmt.setString(2, a.getDescricao()); 
+            stmt.setString(2, a.getDescricao());
             stmt.setInt(3, a.getCodagendamento()); 
+            stmt.executeUpdate();
+            sql = "UPDATE expediente SET STATUS=0 WHERE FK_CODBARBEARIA=? AND HORA=? AND DATA=?";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, a.getCodbarbearia()); 
+            stmt.setTime(2, a.getHora());
+            stmt.setDate(3, a.getData());
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {

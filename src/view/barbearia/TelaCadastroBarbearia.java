@@ -91,27 +91,10 @@ public class TelaCadastroBarbearia extends javax.swing.JFrame {
 
         check = barbeariaController.verificarBarbearia(b);
         if(check){ 
-            limparCampos();
+            TelaLoginBarbearia TLB = new TelaLoginBarbearia();
+            TLB.setVisible(true);
+            this.dispose();
         }
-    }
-    
-    public void limparCampos(){
-        txtNome.setText("");
-        txtCNPJ.setText("");
-        txtLogin.setText("");
-        txtSenha.setText("");
-        txtRSenha.setText("");
-        txtTelefone1.setText("");
-        txtTelefone2.setText("");
-        txtEmail.setText("");
-        txtCep.setText("");
-        txtRua.setText("");
-        txtNumero.setText("");
-        txtBairro.setText("");
-        txtCidade.setText("");
-        txtUf.setText("");
-        txtDescricao.setText("");
-        btnConfirmarDados.setSelected(false);
     }
     
     

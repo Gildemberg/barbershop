@@ -262,7 +262,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
         Agendamento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Agendamento.setText("Agendamento");
 
-        Servico.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        Servico.setFont(new java.awt.Font("Caladea", 1, 30)); // NOI18N
         Servico.setForeground(new java.awt.Color(0, 51, 102));
         Servico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Servico.setText("Serviço");
@@ -293,7 +293,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
             }
         });
 
-        Hora.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        Hora.setFont(new java.awt.Font("Caladea", 1, 30)); // NOI18N
         Hora.setForeground(new java.awt.Color(0, 51, 102));
         Hora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Hora.setText("Horário");
@@ -320,7 +320,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
             }
         });
 
-        Data.setFont(new java.awt.Font("Caladea", 1, 36)); // NOI18N
+        Data.setFont(new java.awt.Font("Caladea", 1, 30)); // NOI18N
         Data.setForeground(new java.awt.Color(0, 51, 102));
         Data.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Data.setText("Data");
@@ -406,7 +406,7 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Servico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(selectServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(selectServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Data)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -414,10 +414,10 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Hora)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(selectHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102)
+                .addComponent(selectHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(144, 144, 144)
                 .addComponent(btnAgendar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

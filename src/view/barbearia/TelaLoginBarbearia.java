@@ -213,7 +213,7 @@ public class TelaLoginBarbearia extends javax.swing.JFrame {
                             .addGroup(DireitaLayout.createSequentialGroup()
                                 .addComponent(NaoPossuiConta)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnCadastro))
                             .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 968, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(Login)
