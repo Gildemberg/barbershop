@@ -75,18 +75,18 @@ public class TelaAgendamentoCliente extends javax.swing.JFrame{
     }
     
     public void consultarDadosBarbearia (int CODBARBEARIA){
-        barbearias=barbeariaDao.read();
+        barbearias=barbeariaDao.readDados(CODBARBEARIA);
         StringBuilder textHtml = new StringBuilder("<html><div style='text-align: justify;'>");
         StringBuilder textHtmlfim = new StringBuilder("</div></html>");
         String textEspaco = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
         
-        txtBarbearia.setText(barbearias.get(CODBARBEARIA-1).getNome());
-        txtDescricao.setText("<html><div style='text-align: justify;'>"+textEspaco+barbearias.get(CODBARBEARIA-1).getDescricao()+"</div></html>"); //inserir a tag HTML server para qubrar a linha do JLabel
-        txtEndereco.setText(textHtml+barbearias.get(CODBARBEARIA-1).getRua()+", "
-                                                    +barbearias.get(CODBARBEARIA-1).getNumero()+", "
-                                                    +barbearias.get(CODBARBEARIA-1).getBairro()+", "
-                                                    +barbearias.get(CODBARBEARIA-1).getCidade()+"/"
-                                                    +barbearias.get(CODBARBEARIA-1).getUf()+textHtmlfim);     
+        txtBarbearia.setText(barbearias.get(0).getNome());
+        txtDescricao.setText("<html><div style='text-align: justify;'>"+textEspaco+barbearias.get(0).getDescricao()+"</div></html>"); //inserir a tag HTML server para qubrar a linha do JLabel
+        txtEndereco.setText(textHtml+barbearias.get(0).getRua()+", "
+                                                    +barbearias.get(0).getNumero()+", "
+                                                    +barbearias.get(0).getBairro()+", "
+                                                    +barbearias.get(0).getCidade()+"/"
+                                                    +barbearias.get(0).getUf()+textHtmlfim);     
         
         servicos = barbeariaDao.readServico(CODBARBEARIA);
         for (Servico servico : servicos) { 

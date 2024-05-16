@@ -196,6 +196,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         nome_usr = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
         btnAlterarCadastro = new javax.swing.JButton();
+        btnAjuda = new javax.swing.JButton();
         Centro = new javax.swing.JPanel();
         Barbearias = new css.JPanelArredondadoBarbearias(60);
         jLabel14 = new javax.swing.JLabel();
@@ -356,6 +357,19 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             }
         });
 
+        btnAjuda.setBackground(new java.awt.Color(255, 255, 255));
+        btnAjuda.setFont(new java.awt.Font("Caladea", 1, 24)); // NOI18N
+        btnAjuda.setForeground(new java.awt.Color(255, 255, 255));
+        btnAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/help.png"))); // NOI18N
+        btnAjuda.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnAjuda.setBorderPainted(false);
+        btnAjuda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAjuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAjudaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout CimaLayout = new javax.swing.GroupLayout(Cima);
         Cima.setLayout(CimaLayout);
         CimaLayout.setHorizontalGroup(
@@ -368,6 +382,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                     .addComponent(localizacao)
                     .addComponent(nome_usr, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAjuda, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnAlterarCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -385,6 +401,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             .addGroup(CimaLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(CimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAjuda, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAlterarCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1938,6 +1955,13 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnExcluir8MouseClicked
 
+    private void btnAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjudaActionPerformed
+        TelaAjudaCliente TAB = new TelaAjudaCliente();
+        TAB.receberCodBarbearia(CODCLIENTE);
+        TAB.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAjudaActionPerformed
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -1980,6 +2004,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     private javax.swing.JPanel barbearia7;
     private javax.swing.JPanel barbearia8;
     private javax.swing.JPanel barbearia9;
+    private javax.swing.JButton btnAjuda;
     private javax.swing.JLabel btnAlterar1;
     private javax.swing.JLabel btnAlterar2;
     private javax.swing.JLabel btnAlterar3;

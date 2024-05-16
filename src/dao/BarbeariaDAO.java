@@ -160,6 +160,49 @@ public class BarbeariaDAO {
             return barbearias;
         }
     
+    public List<Barbearia> readDados(int CODBARBEARIA){
+            Connection con = ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            List<Barbearia> barbearias = new ArrayList();
+            
+            try {
+                stmt = con.prepareStatement("SELECT b.CODBARBEARIA, b.NOMESOCIAL, b.CNPJ, b.EMAIL, b.TELEFONE1, b.TELEFONE2, b.LOGIN, b.SENHA, b.DESCRICAO, "
+                                                + "e.RUA, e.NUMERO, e.BAIRRO, e.CIDADE, e.ESTADO "
+                                                + "FROM barbearia b "
+                                                + "INNER JOIN endereco e ON b.CODBARBEARIA = e.FK_CODBARBEARIA "
+                                                + "WHERE b.CODBARBEARIA=?");
+                stmt.setInt(1, CODBARBEARIA);
+                rs = stmt.executeQuery();
+                
+                while(rs.next()){
+                    Barbearia barbearia = new Barbearia();
+                    barbearia.setId(rs.getInt(1));
+                    barbearia.setNome(rs.getString(2));
+                    barbearia.setCnpj(rs.getString(3));
+                    barbearia.setEmail(rs.getString(4));
+                    barbearia.setTelefone1(rs.getString(5));
+                    barbearia.setTelefone2(rs.getString(6));
+                    barbearia.setLogin(rs.getString(7));
+                    barbearia.setSenha(rs.getString(8));
+                    barbearia.setDescricao(rs.getString(9));
+                    barbearia.setRua(rs.getString(10));
+                    barbearia.setNumero(rs.getString(11));
+                    barbearia.setBairro(rs.getString(12));
+                    barbearia.setCidade(rs.getString(13));
+                    barbearia.setUf(rs.getString(14));
+                    barbearias.add(barbearia);
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro: "+ex);
+                Logger.getLogger(BarbeariaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+            
+            return barbearias;
+        }
+    
     public boolean checkInformacoes(Barbearia b){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
