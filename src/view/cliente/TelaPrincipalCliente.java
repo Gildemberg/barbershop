@@ -10,6 +10,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Time;
+import java.sql.Date;
 import javax.swing.JOptionPane;
 import model.Agendamento;
 import model.Barbearia;
@@ -31,9 +33,11 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     //VARIAVEIS
     int CODCLIENTE;
     int STATUS=0;
-    ArrayList<Integer> AGEND_CODBARBEARIAS = new ArrayList<>();
     ArrayList<Integer> CODAGENDAMENTOS = new ArrayList<>();
     ArrayList<Integer> CODBARBEARIAS = new ArrayList<>();
+    ArrayList<Integer> AGEND_CODBARBEARIAS = new ArrayList<>();
+    ArrayList<Time> AGEND_HORARIO = new ArrayList<>();
+    ArrayList<Date> AGEND_DATA = new ArrayList<>();
     
     //FORMATOS
     SimpleDateFormat dataFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -131,6 +135,8 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         // Adicionar os códigos de barbearia e agendamento às listas correspondentes
         AGEND_CODBARBEARIAS.add(agendamento.getCodbarbearia());
         CODAGENDAMENTOS.add(agendamento.getCodagendamento());
+        AGEND_HORARIO.add(agendamento.getHora());
+        AGEND_DATA.add(agendamento.getData());
     }
     
     // Ocultar os painéis de agendamento restantes (caso o número de agendamentos seja menor que 4)
@@ -163,13 +169,16 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         }
     }
     
-    public void excluirAgendamento(int CODAGENDAMENTO){
+    public void excluirAgendamento(int CODAGENDAMENTO, Time HORA, int CODBARBEARIA, Date DATA){
         if(JOptionPane.showConfirmDialog(this, "Você deseja realmente cancelar o agendamento?", "Remover", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){            
             String DESCRICAO = JOptionPane.showInputDialog(null,"Informe o motivo:", "Cancelar agendamento", JOptionPane.INFORMATION_MESSAGE);
             if(DESCRICAO != null){
                 agendamento.setCodagendamento(CODAGENDAMENTO);
+                agendamento.setCodbarbearia(CODBARBEARIA);
                 agendamento.setDescricao(DESCRICAO);
                 agendamento.setStatus(2);
+                agendamento.setHora(HORA);
+                agendamento.setData(DATA);
                 if(AgendamentoController.cancelarAgendamento(agendamento)){
                     consultarAgendamento();
                 }
@@ -431,14 +440,14 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         );
         BarbeariasLayout.setVerticalGroup(
             BarbeariasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
         );
 
         jPanelBarbearia.setBackground(new java.awt.Color(255, 255, 255));
 
         barbearia1.setLayout(new BorderLayout());
         barbearia1.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia1.setBackground(new java.awt.Color(30, 113, 218));
+        barbearia1.setBackground(new java.awt.Color(0, 102, 153));
         barbearia1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia1.setMaximumSize(new java.awt.Dimension(1150, 55));
         barbearia1.setMinimumSize(new java.awt.Dimension(1150, 55));
@@ -483,7 +492,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia4.setLayout(new BorderLayout());
         barbearia4.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia4.setBackground(new java.awt.Color(30, 113, 218));
+        barbearia4.setBackground(new java.awt.Color(0, 102, 153));
         barbearia4.setForeground(new java.awt.Color(0, 0, 0));
         barbearia4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia4.setMaximumSize(new java.awt.Dimension(1150, 55));
@@ -533,7 +542,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia5.setLayout(new BorderLayout());
         barbearia5.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia5.setBackground(new java.awt.Color(30, 113, 218));
+        barbearia5.setBackground(new java.awt.Color(0, 102, 153));
         barbearia5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia5.setMaximumSize(new java.awt.Dimension(1150, 55));
         barbearia5.setMinimumSize(new java.awt.Dimension(1150, 55));
@@ -581,7 +590,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia8.setLayout(new BorderLayout());
         barbearia8.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia8.setBackground(new java.awt.Color(30, 113, 218));
+        barbearia8.setBackground(new java.awt.Color(0, 102, 153));
         barbearia8.setForeground(new java.awt.Color(0, 0, 0));
         barbearia8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia8.setMaximumSize(new java.awt.Dimension(1150, 55));
@@ -630,7 +639,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia3.setLayout(new BorderLayout());
         barbearia3.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia3.setBackground(new java.awt.Color(30, 113, 218));
+        barbearia3.setBackground(new java.awt.Color(0, 102, 153));
         barbearia3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia3.setMaximumSize(new java.awt.Dimension(1150, 55));
         barbearia3.setMinimumSize(new java.awt.Dimension(1150, 55));
@@ -679,7 +688,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia7.setLayout(new BorderLayout());
         barbearia7.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia7.setBackground(new java.awt.Color(30, 113, 218));
+        barbearia7.setBackground(new java.awt.Color(0, 102, 153));
         barbearia7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia7.setMaximumSize(new java.awt.Dimension(1150, 55));
         barbearia7.setMinimumSize(new java.awt.Dimension(1150, 55));
@@ -727,7 +736,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia2.setLayout(new BorderLayout());
         barbearia2.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia2.setBackground(new java.awt.Color(30, 113, 218));
+        barbearia2.setBackground(new java.awt.Color(0, 102, 153));
         barbearia2.setForeground(new java.awt.Color(0, 0, 0));
         barbearia2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia2.setMaximumSize(new java.awt.Dimension(1150, 55));
@@ -776,7 +785,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia11.setLayout(new BorderLayout());
         barbearia11.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia11.setBackground(new java.awt.Color(30, 113, 218));
+        barbearia11.setBackground(new java.awt.Color(0, 102, 153));
         barbearia11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia11.setMaximumSize(new java.awt.Dimension(1150, 55));
         barbearia11.setMinimumSize(new java.awt.Dimension(1150, 55));
@@ -824,7 +833,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia10.setLayout(new BorderLayout());
         barbearia10.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia10.setBackground(new java.awt.Color(30, 113, 218));
+        barbearia10.setBackground(new java.awt.Color(0, 102, 153));
         barbearia10.setForeground(new java.awt.Color(0, 0, 0));
         barbearia10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia10.setMaximumSize(new java.awt.Dimension(1150, 55));
@@ -873,7 +882,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia6.setLayout(new BorderLayout());
         barbearia6.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia6.setBackground(new java.awt.Color(30, 113, 218));
+        barbearia6.setBackground(new java.awt.Color(0, 102, 153));
         barbearia6.setForeground(new java.awt.Color(0, 0, 0));
         barbearia6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia6.setMaximumSize(new java.awt.Dimension(1150, 55));
@@ -922,7 +931,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         barbearia9.setLayout(new BorderLayout());
         barbearia9.add(new JButton("Meu Botão"), BorderLayout.CENTER);
-        barbearia9.setBackground(new java.awt.Color(30, 113, 218));
+        barbearia9.setBackground(new java.awt.Color(0, 102, 153));
         barbearia9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         barbearia9.setMaximumSize(new java.awt.Dimension(1150, 55));
         barbearia9.setMinimumSize(new java.awt.Dimension(1150, 55));
@@ -1044,7 +1053,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         jScrollPaneBarbearia.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
         jScrollPaneBarbearia.getVerticalScrollBar().setUnitIncrement(20);
 
-        Direita.setBackground(new java.awt.Color(30, 113, 218));
+        Direita.setBackground(new java.awt.Color(0, 102, 153));
         Direita.setMaximumSize(new java.awt.Dimension(600, 960));
         Direita.setMinimumSize(new java.awt.Dimension(600, 960));
         Direita.setPreferredSize(new java.awt.Dimension(600, 960));
@@ -1067,7 +1076,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         );
         MeusAgendamentosLayout.setVerticalGroup(
             MeusAgendamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
         );
 
         dataAtual.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
@@ -1081,16 +1090,16 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
 
         jScrollPaneAgendamentos.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        jPanelAgendamentos.setBackground(new java.awt.Color(30, 113, 218));
+        jPanelAgendamentos.setBackground(new java.awt.Color(0, 102, 153));
 
-        Agendamento1.setBackground(new java.awt.Color(255, 255, 255));
+        Agendamento1.setBackground(new java.awt.Color(176, 224, 230));
         Agendamento1.setForeground(new java.awt.Color(255, 255, 255));
         Agendamento1.setMaximumSize(new java.awt.Dimension(450, 70));
         Agendamento1.setMinimumSize(new java.awt.Dimension(450, 70));
         Agendamento1.setPreferredSize(new java.awt.Dimension(400, 70));
 
         seta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        seta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
+        seta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta5.png"))); // NOI18N
 
         txtBarbearia1.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtBarbearia1.setForeground(new java.awt.Color(0, 51, 102));
@@ -1116,7 +1125,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         txtServico1.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnAlterar1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnAlterar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterarr.png"))); // NOI18N
+        btnAlterar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lapis.png"))); // NOI18N
         btnAlterar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1166,14 +1175,14 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        Agendamento2.setBackground(new java.awt.Color(255, 255, 255));
+        Agendamento2.setBackground(new java.awt.Color(176, 224, 230));
         Agendamento2.setForeground(new java.awt.Color(255, 255, 255));
         Agendamento2.setMaximumSize(new java.awt.Dimension(450, 70));
         Agendamento2.setMinimumSize(new java.awt.Dimension(450, 70));
         Agendamento2.setPreferredSize(new java.awt.Dimension(450, 70));
 
         seta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        seta1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
+        seta1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta5.png"))); // NOI18N
 
         txtBarbearia2.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtBarbearia2.setForeground(new java.awt.Color(0, 51, 102));
@@ -1197,7 +1206,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         txtServico2.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnAlterar2.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        btnAlterar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterarr.png"))); // NOI18N
+        btnAlterar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lapis.png"))); // NOI18N
         btnAlterar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1247,7 +1256,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             .addComponent(seta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        Agendamento3.setBackground(new java.awt.Color(255, 255, 255));
+        Agendamento3.setBackground(new java.awt.Color(176, 224, 230));
         Agendamento3.setForeground(new java.awt.Color(255, 255, 255));
         Agendamento3.setMaximumSize(new java.awt.Dimension(450, 70));
         Agendamento3.setMinimumSize(new java.awt.Dimension(450, 70));
@@ -1255,7 +1264,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         Agendamento3.setRequestFocusEnabled(false);
 
         seta2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        seta2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
+        seta2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta5.png"))); // NOI18N
 
         txtBarbearia3.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtBarbearia3.setForeground(new java.awt.Color(0, 51, 102));
@@ -1279,7 +1288,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         txtServico3.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnAlterar3.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        btnAlterar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterarr.png"))); // NOI18N
+        btnAlterar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lapis.png"))); // NOI18N
         btnAlterar3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1329,14 +1338,14 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             .addComponent(seta2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        Agendamento4.setBackground(new java.awt.Color(255, 255, 255));
+        Agendamento4.setBackground(new java.awt.Color(176, 224, 230));
         Agendamento4.setForeground(new java.awt.Color(255, 255, 255));
         Agendamento4.setMaximumSize(new java.awt.Dimension(450, 70));
         Agendamento4.setMinimumSize(new java.awt.Dimension(450, 70));
         Agendamento4.setPreferredSize(new java.awt.Dimension(450, 70));
 
         seta3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        seta3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
+        seta3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta5.png"))); // NOI18N
 
         txtBarbearia4.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtBarbearia4.setForeground(new java.awt.Color(0, 51, 102));
@@ -1360,7 +1369,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         txtServico4.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnAlterar4.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        btnAlterar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterarr.png"))); // NOI18N
+        btnAlterar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lapis.png"))); // NOI18N
         btnAlterar4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1412,14 +1421,14 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        Agendamento5.setBackground(new java.awt.Color(255, 255, 255));
+        Agendamento5.setBackground(new java.awt.Color(176, 224, 230));
         Agendamento5.setForeground(new java.awt.Color(255, 255, 255));
         Agendamento5.setMaximumSize(new java.awt.Dimension(450, 70));
         Agendamento5.setMinimumSize(new java.awt.Dimension(450, 70));
         Agendamento5.setPreferredSize(new java.awt.Dimension(400, 70));
 
         seta4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        seta4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
+        seta4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta5.png"))); // NOI18N
 
         txtBarbearia5.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtBarbearia5.setForeground(new java.awt.Color(0, 51, 102));
@@ -1445,7 +1454,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         txtServico5.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnAlterar5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnAlterar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterarr.png"))); // NOI18N
+        btnAlterar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lapis.png"))); // NOI18N
         btnAlterar5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1495,14 +1504,14 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        Agendamento6.setBackground(new java.awt.Color(255, 255, 255));
+        Agendamento6.setBackground(new java.awt.Color(176, 224, 230));
         Agendamento6.setForeground(new java.awt.Color(255, 255, 255));
         Agendamento6.setMaximumSize(new java.awt.Dimension(450, 70));
         Agendamento6.setMinimumSize(new java.awt.Dimension(450, 70));
         Agendamento6.setPreferredSize(new java.awt.Dimension(429, 70));
 
         seta5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        seta5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
+        seta5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta5.png"))); // NOI18N
 
         txtBarbearia6.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtBarbearia6.setForeground(new java.awt.Color(0, 51, 102));
@@ -1526,7 +1535,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         txtServico6.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnAlterar6.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        btnAlterar6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterarr.png"))); // NOI18N
+        btnAlterar6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lapis.png"))); // NOI18N
         btnAlterar6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1578,7 +1587,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        Agendamento7.setBackground(new java.awt.Color(255, 255, 255));
+        Agendamento7.setBackground(new java.awt.Color(176, 224, 230));
         Agendamento7.setForeground(new java.awt.Color(255, 255, 255));
         Agendamento7.setMaximumSize(new java.awt.Dimension(450, 70));
         Agendamento7.setMinimumSize(new java.awt.Dimension(450, 70));
@@ -1586,7 +1595,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         Agendamento7.setRequestFocusEnabled(false);
 
         seta6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        seta6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
+        seta6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta5.png"))); // NOI18N
 
         txtBarbearia7.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtBarbearia7.setForeground(new java.awt.Color(0, 51, 102));
@@ -1610,7 +1619,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         txtServico7.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnAlterar7.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        btnAlterar7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterarr.png"))); // NOI18N
+        btnAlterar7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lapis.png"))); // NOI18N
         btnAlterar7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1660,14 +1669,14 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
             .addComponent(seta6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        Agendamento8.setBackground(new java.awt.Color(255, 255, 255));
+        Agendamento8.setBackground(new java.awt.Color(176, 224, 230));
         Agendamento8.setForeground(new java.awt.Color(255, 255, 255));
         Agendamento8.setMaximumSize(new java.awt.Dimension(450, 70));
         Agendamento8.setMinimumSize(new java.awt.Dimension(450, 70));
         Agendamento8.setPreferredSize(new java.awt.Dimension(429, 70));
 
         seta7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        seta7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta.png"))); // NOI18N
+        seta7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/setta5.png"))); // NOI18N
 
         txtBarbearia8.setFont(new java.awt.Font("Caladea", 0, 24)); // NOI18N
         txtBarbearia8.setForeground(new java.awt.Color(0, 51, 102));
@@ -1691,7 +1700,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
         txtServico8.setPreferredSize(new java.awt.Dimension(300, 30));
 
         btnAlterar8.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
-        btnAlterar8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alterarr.png"))); // NOI18N
+        btnAlterar8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lapis.png"))); // NOI18N
         btnAlterar8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1796,7 +1805,7 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(dataAtual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPaneAgendamentos))
+                    .addComponent(jScrollPaneAgendamentos, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE))
                 .addContainerGap())
         );
         DireitaLayout.setVerticalGroup(
@@ -1895,19 +1904,19 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAlterar3MouseClicked
 
     private void btnExcluir1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir1MouseClicked
-        excluirAgendamento(CODAGENDAMENTOS.get(0));
+        excluirAgendamento(CODAGENDAMENTOS.get(0), AGEND_HORARIO.get(0), AGEND_CODBARBEARIAS.get(0), AGEND_DATA.get(0));
     }//GEN-LAST:event_btnExcluir1MouseClicked
 
     private void btnExcluir2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir2MouseClicked
-        excluirAgendamento(CODAGENDAMENTOS.get(1));
+        excluirAgendamento(CODAGENDAMENTOS.get(1), AGEND_HORARIO.get(1), AGEND_CODBARBEARIAS.get(1), AGEND_DATA.get(1));
     }//GEN-LAST:event_btnExcluir2MouseClicked
 
     private void btnExcluir3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir3MouseClicked
-        excluirAgendamento(CODAGENDAMENTOS.get(2));
+        excluirAgendamento(CODAGENDAMENTOS.get(2), AGEND_HORARIO.get(2), AGEND_CODBARBEARIAS.get(2), AGEND_DATA.get(2));
     }//GEN-LAST:event_btnExcluir3MouseClicked
 
     private void btnExcluir4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir4MouseClicked
-        excluirAgendamento(CODAGENDAMENTOS.get(3));
+        excluirAgendamento(CODAGENDAMENTOS.get(3), AGEND_HORARIO.get(3), AGEND_CODBARBEARIAS.get(3), AGEND_DATA.get(3));
     }//GEN-LAST:event_btnExcluir4MouseClicked
 
     private void btnAlterar4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterar4MouseClicked
@@ -1924,35 +1933,35 @@ public final class TelaPrincipalCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAlterarCadastroActionPerformed
 
     private void btnAlterar5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterar5MouseClicked
-        // TODO add your handling code here:
+        alterarAgendamento(CODAGENDAMENTOS.get(4), AGEND_CODBARBEARIAS.get(4));
     }//GEN-LAST:event_btnAlterar5MouseClicked
 
     private void btnExcluir5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir5MouseClicked
-        // TODO add your handling code here:
+        excluirAgendamento(CODAGENDAMENTOS.get(4), AGEND_HORARIO.get(4), AGEND_CODBARBEARIAS.get(4), AGEND_DATA.get(4));
     }//GEN-LAST:event_btnExcluir5MouseClicked
 
     private void btnAlterar6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterar6MouseClicked
-        // TODO add your handling code here:
+        alterarAgendamento(CODAGENDAMENTOS.get(5), AGEND_CODBARBEARIAS.get(5));
     }//GEN-LAST:event_btnAlterar6MouseClicked
 
     private void btnExcluir6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir6MouseClicked
-        // TODO add your handling code here:
+        excluirAgendamento(CODAGENDAMENTOS.get(5), AGEND_HORARIO.get(5), AGEND_CODBARBEARIAS.get(5), AGEND_DATA.get(5));
     }//GEN-LAST:event_btnExcluir6MouseClicked
 
     private void btnAlterar7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterar7MouseClicked
-        // TODO add your handling code here:
+        alterarAgendamento(CODAGENDAMENTOS.get(6), AGEND_CODBARBEARIAS.get(6));
     }//GEN-LAST:event_btnAlterar7MouseClicked
 
     private void btnExcluir7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir7MouseClicked
-        // TODO add your handling code here:
+        excluirAgendamento(CODAGENDAMENTOS.get(6), AGEND_HORARIO.get(6), AGEND_CODBARBEARIAS.get(6), AGEND_DATA.get(6));
     }//GEN-LAST:event_btnExcluir7MouseClicked
 
     private void btnAlterar8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterar8MouseClicked
-        // TODO add your handling code here:
+        alterarAgendamento(CODAGENDAMENTOS.get(7), AGEND_CODBARBEARIAS.get(7));
     }//GEN-LAST:event_btnAlterar8MouseClicked
 
     private void btnExcluir8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluir8MouseClicked
-        // TODO add your handling code here:
+        excluirAgendamento(CODAGENDAMENTOS.get(7), AGEND_HORARIO.get(7), AGEND_CODBARBEARIAS.get(7), AGEND_DATA.get(7));
     }//GEN-LAST:event_btnExcluir8MouseClicked
 
     private void btnAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjudaActionPerformed

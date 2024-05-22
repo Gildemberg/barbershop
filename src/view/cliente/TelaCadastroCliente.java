@@ -88,26 +88,10 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
 
         check = clienteController.verificarCliente(modelCliente, confirmacaoDados);
         if(check){
-            limparCampos();
+            TelaLoginCliente TLC = new TelaLoginCliente();
+            TLC.setVisible(true);
+            this.dispose();
         }
-    }
-    
-    public void limparCampos(){
-        txtNome.setText("");
-        txtCPF.setText("");
-        txtLogin.setText("");
-        txtSenha.setText("");
-        txtRSenha.setText("");
-        txtRSenha.setText("");
-        txtTel.setText("");
-        txtEmail.setText("");
-        txtCep.setText("");
-        txtRua.setText("");
-        txtNumero.setText("");
-        txtBairro.setText("");
-        txtCidade.setText("");
-        txtUf.setText("");
-        btnConfirmacaoDados.setSelected(false);
     }
     
     @SuppressWarnings("unchecked")
